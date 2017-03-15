@@ -1,0 +1,157 @@
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$frm = $this->frm_search;
+$month = array("01"=>"មករា","02"=>"កុម្ភៈ","03"=>"មីនា","04"=>"មេសា","05"=>"ឧសភា","06"=>"មិថុនា","07"=>"កក្កដា","08"=>"សីហា","09"=>"កញ្ញា","10"=>"តុលា","11"=>"វិច្ឆិកា","12"=>"ធ្នូ",);
+$db  = new Report_Model_DbTable_DbParamater();
+?>
+<script>
+dojo.require("dijit.form.DateTextBox");
+</script>
+<meta charset="utf-8">
+<title><?php echo $tr->translate("របាយការណ៍ចំនូលចំណាយ");?></title>
+<form name="frm_rptstaff" action="<?php echo $this->url(array('module'=>'report','controller'=>'paramater','action'=>'rpt-revenue-expense')); ?>" dojoType="dijit.form.Form" method="post">
+	<table style="width:30cm; margin: 0 auto;">
+		<tr>  
+	        <!-- <td><?php //echo $frm->getElement("adv_search");?></td>
+	        <td><?php //echo $frm->getElement('branch_id');?></td>
+	        <td><?php //echo $frm->getElement('category_id');?></td>
+	   		<td><?php //echo $frm->getElement('currency_type');?></td> -->
+	   		<td><?php echo $frm->getElement('start_date');?></td>
+	   		<td><?php echo $frm->getElement('end_date');?></td>
+	   		<td><button iconclass="dijitIconSearch" dojoType="dijit.form.Button" showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button></td>
+	   </tr>
+	</table>
+ </form> 
+<div style=" width:29cm;min-height:22cm; margin:0 auto; border: 1px dotted #ccc; padding:0px 0.5cm">
+<table style="font-family: 'Khmer OS Content'; width:100%;"  >
+	<tr>
+    	<td align="center">
+    	 <div id="divPrint">
+    	 	<style>
+					tr td.border_bottom{border-bottom: solid 1px #000;}
+					tr td.border_double{border-bottom: double #000;}
+					.style{
+						line-height: 20px;font-size: 14px !important;
+						font-family: 'Khmer OS Battambang';
+						}
+						th{padding: 5px;}
+					</style>
+        	<table width="100%" style="font-family:'Khmer OS Battambang';" style="margin:0; padding:0;border:none;" >
+        	<tr>
+                <td width="20%"><img src="<?php echo $this->baseUrl();?>/images/logo.jpg" height="85px"></td>
+                <td width="60%" valign="top">
+                <h2 style="text-align:center; font-size:18px; font-family:'Khmer MEF2'"><label><?php echo $tr->translate("BRAND_TITLE");?></label></h2>
+                <h2 style="text-align:center; font-size:16px; font-family:'Khmer MEF2'"><label><?php echo $tr->translate("របាយការណ៍ចំនូលចំណាយ (គិតជាដុល្លាអាមេរិក)");?></label></h2>
+                <p style="text-align:center; font-size:14px; font-family:'Khmer MEF2'"><?php echo $tr->translate("ប្រចាំខែ ");?> <?php if (!empty($this->list_end_date['end_date'])) echo  $month[date("m",strtotime($this->list_end_date['end_date']))]." ".date("Y",strtotime($this->list_end_date['end_date']));?></p>
+                </td>
+                <td width="20%"></td>
+             </tr> 
+             <?php $total_income = 0; $total_expense = 0; $net_income =0;?>
+             <tr>
+             	<td colspan="3">
+             		<table  width="100%" style="border-collapse:collapse; font-size: 14px; line-height: 18px;" >  
+             			<tr>
+             				<td colspan="3" style=" font-size:16px; font-family:'Khmer MEF2'"> <?php echo $tr->translate("ចំនូលពីការលក់ដីឡូតិ៍");?> </td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td class="border_bottom" align="right">&nbsp;<?php echo number_format($this->saleicome['recieve_amount'],2);?>&nbsp;</td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td >&nbsp;</td>
+             			</tr>
+             			<tr>
+             				<td colspan="3" style=" font-size:16px; font-family:'Khmer MEF2'"> <?php echo $tr->translate("ចំនូលផ្សេងៗ");?> </td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td align="right">&nbsp;</td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td >&nbsp;</td>
+             			</tr>
+             			<?php $total_other_income=0; if (!empty($this->income)) foreach ($this->income as $income_cate){ $incomcategory = $db->geOtherIncome($income_cate['category_id']); $total_other_income = $total_other_income+$incomcategory;?>
+             			<tr>
+             				<td style="width: 20%;">&nbsp;</td>
+             				<td >&nbsp;<?php echo $income_cate['category_name'];?>&nbsp;</td>
+             				<td class="border_bottom" align="right">&nbsp;<?php echo  number_format($incomcategory,2);?>&nbsp;</td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td>&nbsp;</td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td >&nbsp;</td>
+             			</tr>
+             			<?php } $total_income = $total_other_income+$this->saleicome['recieve_amount'];?>
+             			<tr>
+             				<td style="width: 20%;">&nbsp;</td>
+             				<td >&nbsp;</td>
+             				<td style=" font-size:16px; font-family:'Khmer MEF2'"> <?php echo $tr->translate("ចំនូលសរុប");?>  </td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td class="border_bottom" align="right">&nbsp;<?php echo number_format($total_income,2);;?>&nbsp;</td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td >&nbsp;</td>
+             			</tr>
+             			<tr>
+             				<td colspan="3" style=" font-size:16px; font-family:'Khmer MEF2'"> <?php echo $tr->translate("ចំណាយក្នុងផ្សេងៗ");?> </td>
+             				<td align="right">&nbsp;&nbsp;</td>
+             			</tr>
+             			<?php if (!empty($this->expense)) foreach ($this->expense as $expense_cate){ $total_expense = $total_expense +$db->geOtherExpense($expense_cate['category_id']);?>
+             			<tr>
+             				<td style="width: 20%;">&nbsp;</td>
+             				<td >&nbsp;<?php echo $expense_cate['category_name'];?>&nbsp;</td>
+             				<td class="border_bottom" align="right">&nbsp;<?php echo number_format($db->geOtherExpense($expense_cate['category_id']),2);?>&nbsp;</td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td>&nbsp;</td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td >&nbsp;</td>
+             			</tr>
+             			<?php }?>
+             			<tr>
+             				<td style="width: 20%;">&nbsp;</td>
+             				<td >&nbsp;</td>
+             				<td style=" font-size:16px; font-family:'Khmer MEF2'"> <?php echo $tr->translate("ចំណាយសរុប");?> </td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td class="border_bottom" align="right">&nbsp;<?php echo number_format($total_expense,2);?>&nbsp;</td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td >&nbsp;</td>
+             			</tr>
+             			<?php $net_income = $total_income-$total_expense;
+             			?>
+             			<tr>
+             				<td style="width: 20%;">&nbsp;</td>
+             				<td >&nbsp;</td>
+             				<td style=" font-size:16px; font-family:'Khmer MEF2'"> <?php echo $tr->translate("ប្រាក់ចំណេញសរុប");?> </td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td >&nbsp;</td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td class="border_bottom" align="right">&nbsp;<?php if ($net_income<0){echo "(".number_format(abs($net_income),2).")";}else{ echo number_format($net_income,2);}?>&nbsp;</td>
+             			</tr>
+             			<tr>
+             				<td colspan="3" style=" font-size:16px; font-family:'Times New Roman','Khmer MEF2'"> <?php echo $tr->translate("សមតុល្យថ្ងៃទី")." ".date("d",strtotime($this->list_end_date['end_date']))." ខែ  ".$month[date("m",strtotime($this->list_end_date['end_date']))]." ឆ្នាំ ".date("Y",strtotime($this->list_end_date['end_date']));?> </td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td align="right">&nbsp;</td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td class="border_bottom" align="right">&nbsp;300</td>
+             			</tr>
+             			<tr>
+             				<td colspan="3" style=" font-size:16px; font-family:'Times New Roman','Khmer MEF2'"> <?php echo $tr->translate("សមតុល្យចុងក្រោយ")?> </td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td align="right">&nbsp;</td>
+             				<td style="width:10px;">&nbsp;</td>
+             				<td class="border_double" align="right">&nbsp;300</td>
+             			</tr>
+             		</table>
+             	</td>
+             </tr>
+         
+            </table>
+			
+    	</td>
+    </tr>
+</table>
+		<br />
+		   <table align="center" width="100%">
+				   <tr style="font-size: 14px;">
+				        <th style="width:20%;text-align:center;  font-family:'Khmer MEF2'"><?php echo $tr->translate('APPROVED BY');?></th>
+				        <th></th>
+				        <th style="width:20%;text-align:center; font-family:'Khmer MEF2'"><?php echo $tr->translate('VERIFYED BY');?></th>
+				        <th></th>
+				        <th style="width:20%;text-align:center;font-family:'Khmer MEF2'"><?php echo $tr->translate('PREPARE BY');?></th>
+				   </tr>
+			</table>
+</div>
+
+

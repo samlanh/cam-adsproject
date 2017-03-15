@@ -1,0 +1,269 @@
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$frm = $this->frm_search;
+ $frmbuy = $this->frm_buy;
+?>
+<script>
+dojo.require("dijit.form.DateTextBox");
+</script>
+<meta charset="utf-8">
+<title><?php echo $tr->translate("REPORT_RENT_SALE_INCOME");?></title>
+<form name="frm_rptstaff" action="<?php echo $this->url(array('module'=>'report','controller'=>'paramater','action'=>'rpt-income-rent-sale')); ?>" dojoType="dijit.form.Form" method="post">
+	<table style="width:28cm; margin: 0 auto;">
+		<tr>  
+	      <td><?php echo $frm->getElement('adv_search');?></td>
+			<td><?php echo $frmbuy->getElement('land_blog');?></td>
+			<td><?php echo $frm->getElement('start_date');?></td>
+			<td><?php echo $frm->getElement('end_date');?></td>
+	   		<td><button iconclass="dijitIconSearch" dojoType="dijit.form.Button" showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button></td>
+	   		<td><input type="submit" onClick="resetForm();" value="show_all" label="<?php echo $tr->translate('SHOW_ALL');?>" id="show_all" dojoType="dijit.form.Button" name="show_all" /></td>
+	   </tr>
+	</table>
+ </form> 
+ <script>
+	function  resetForm(){
+	var datenow = '<?php echo date("Y-m-d");?>';
+	dijit.byId('adv_search').attr('value','');
+	//dijit.byId('start_date').attr('value',datenow);
+	dijit.byId('end_date').attr('value',datenow);
+}
+</script>
+<div style=" width:28cm;min-height:22cm; margin:0 auto; border: 1px dotted #ccc; padding:0px 0.5cm">
+<table style="font-family: 'Times New Roman','Khmer OS Battambang'; width:100%;"  >
+	<tr>
+    	<td align="center">
+    	 <div id="divPrint">
+    	 	<style>
+					.style{
+						line-height: 20px;font-size: 11px !important;
+						font-family: 'Times New Roman','Khmer OS Battambang';
+						}
+						th{padding: 5px;}
+					</style>
+        	<table id="exportExcel" width="100%" style="font-family:'Times New Roman','Khmer OS Battambang';" style="margin:0; padding:0;border:none;" >
+        	<tr>
+                <td width="20%"><img src="<?php echo $this->baseUrl();?>/images/logo.jpg" height="85px"></td>
+                <td width="60%" valign="top">
+                <h2 style="text-align:center; font-size:16px; font-family:'Times New Roman','Khmer MEF2'"><label><?php echo $tr->translate("BRAND_TITLE");?></label></h2>
+                <h2 style="text-align:center; font-size:14px; font-family:'Times New Roman','Khmer MEF2'"><label><?php echo $tr->translate("REPORT_RENT_SALE_INCOME");?></label></h2>
+                <p style="text-align:center; font-size:13px; font-family:'Times New Roman','Khmer MEF2'"><?php if (empty($this->list_end_date['show_all'])) {echo date("d-M-Y",strtotime($this->list_end_date['start_date'])).' '.$tr->translate('TO').' ';echo date("d-M-Y",strtotime($this->list_end_date['end_date']));}?></p>
+                </td>
+                <td width="20%"></td>
+             </tr>
+             <tr>
+             	<td colspan="3">
+	             	<h2 style="text-align:left; font-size:14px; font-family:'Times New Roman','Khmer OS Battambang'">
+	             	<label><?php echo $tr->translate("SOLD_INCOME");?></label>
+	             	</h2>
+             	</td>
+             </tr>
+             <?php  if(!empty($this->saleincome)){?>
+            <tr >
+            	<td colspan="3">
+            		<table  border="1" width="100%" style="border-collapse:collapse; line-height: 20px; font-size: 12px; border:solid 1px #000;" >  
+				    	<tr bgcolor="#c1d0f3" class="style" align="center" style="padding:0px 2px;white-space: nowrap;">
+							<td ><?php echo $tr->translate("NUM");?></td>
+							<td><?php echo $tr->translate("LAND_BLOG");?></td>
+						    <td><?php echo $tr->translate("SALE_NO");?></td>
+						    <td><?php echo $tr->translate("CUSTOMER_NAME");?></td>
+						    <td ><?php echo $tr->translate("PROPERTY");?></td>
+						    <td><?php echo $tr->translate("LAND_PRICE");?></td>
+						     <td><?php echo $tr->translate("SOLD_PRICE");?></td>
+						    <!-- <td ><?php //echo $tr->translate("TOTAL_PAYMENT");?></td> -->
+						    <td><?php echo $tr->translate("PAID");?></td>
+						    <td><?php echo $tr->translate("BALANCE");?></td>
+						    <td><?php echo $tr->translate("BUY_DATE");?></td>
+						</tr>
+				       <?php $land_price=0; $total_sale=0; $totalpaid=0; $i=0; $total_balance=0;
+				        if(!empty($this->saleincome))foreach($this->saleincome as $key =>$row){ $i++;?>
+						<?php 
+							$total_sale = $total_sale+$row['price_sold'];
+							$land_price = $land_price +$row['price_before'];
+							$totalpaid = $totalpaid +$row['paid_amount'];
+							$total_balance = $total_balance +$row['balance'];
+							$db = new Property_Model_DbTable_DbSale();
+							if (!empty($row['land_name'])){
+								$land_name = $row['land_name'];
+							}else{
+								$row_detail = $db->getSalePropertyDetail($row['id']);
+								$land_name='';
+								foreach ($row_detail  as $rs){
+									if (!empty($land_name)){
+										$land_name = $land_name." , (".$rs['sale_name_before']." , ".$rs['sale_relevent_name'].")";
+									}else{
+										$land_name = '('.$rs['sale_name_before'].' , '.$rs['sale_relevent_name'].')';
+									}
+								}
+							}
+						?>
+						<tr style="font-size: 12px; line-height:20px; white-space: nowrap;" align="left">
+						   <td align="center">&nbsp;<?php echo $i; ?></td>
+						   <td align="center">&nbsp;<?php echo $row['land_blog'];?>&nbsp;</td>
+						    <td align="center">&nbsp;<?php echo $row['sale_number'];?>&nbsp;</td>
+						   <td align="center">&nbsp;<?php echo $row['customer_name'];?>&nbsp;</td>
+						   <td align="center">&nbsp;<?php echo $land_name;?>&nbsp;</td>
+						   <td>&nbsp;<?php echo number_format($row['price_before'],2);?>&nbsp;</td>
+						   <!-- <td>&nbsp;<?php //echo number_format($row['land_price_after'],2);?>&nbsp;</td> -->
+						   <td align="center">&nbsp;<?php echo number_format($row['price_sold'],2);?>&nbsp;</td>
+						   <td align="center">&nbsp;<?php echo number_format($row['paid_amount'],2);?>&nbsp;</td>
+						   <td align="center">&nbsp;<?php echo number_format($row['balance'],2);?>&nbsp;</td>
+						   <td align="center">&nbsp;<?php echo date("d-M-Y",strtotime($row['buy_date']));?>&nbsp;</td>
+						</tr>
+						<?php }?>
+				    </table>
+            	</td>
+            </tr>
+            <tr><td>&nbsp;</td></tr> 
+            <tr>
+            	<td colspan="3">
+            	<table border="1"​ style="border-collapse:collapse;border:1px solid #000; font-size:9px;" width="50%" cellspacing="0">
+	                 <tr bgcolor="#c1d0f3" class="style" align="center" style="padding:0px 2px;white-space: nowrap;">
+	                     <td><?php echo $tr->translate("CURRENT_TYPE");?></td>
+	                    <td><?php echo $tr->translate("TOTAL")." ".$tr->translate("LAND_PRICE");?></td>                    
+	                    <td><?php echo $tr->translate("TOTAL")." ".$tr->translate("SOLD_PRICE");?></td>
+	                    <td><?php echo $tr->translate("TOTAL_PAID");?></td>
+	                    <td><?php echo $tr->translate("TOTAL_BALANCE");?></td>
+	                </tr>
+	                 <tr class="style" style=" line-height: 24px; font-size:9px; font-family: 'Times New Roman','Khmer OS Battambang';">
+	                  	<td>&nbsp;<?php echo $tr->translate("DOLLAR");?>&nbsp;</td>
+	                  	<td align="right">&nbsp;<?php echo number_format($land_price,2);?></td>
+	                    <td align="right">&nbsp;&nbsp;<?php echo number_format($total_sale,2);?>&nbsp;</td>
+	                    <td align="right">&nbsp;&nbsp;<?php echo number_format($totalpaid,2);?>&nbsp;</td>
+	                    <td align="right">&nbsp;&nbsp;<?php echo number_format($total_balance,2);?>&nbsp;</td>
+	                </tr>
+	              </table>
+            	</td>
+            </tr>
+             <tr><td>&nbsp;</td></tr>
+            <tr>
+             	<td colspan="3">
+             		<h2 style="text-align:left; font-size:14px; font-family:'Times New Roman','Khmer OS Battambang'">
+	             	<label><?php echo $tr->translate("RENT_INCOME");?></label>
+	             	</h2>
+             	</td>
+             </tr>
+             <?php }?>
+             <?php if(!empty($this->rentincome)){?>
+            <tr>
+            	<td colspan="3">
+            			<table width="100%" border="1" style="border-collapse:collapse; border:1px solid #000; " cellspacing="0">
+			                <tr bgcolor="#c1d0f3" class="style" align="center" style="padding:0px 2px;white-space: nowrap;">
+			                    <td ><?php echo $tr->translate("NUM");?></td>
+			                    <td ><?php echo $tr->translate("LAND_BLOG");?></td>
+			                    <td ><?php echo $tr->translate("RENT_CODE");?></td>
+			                    <td ><?php echo $tr->translate("CUSTOMER_NAME");?></td>	
+			                    <td ><?php echo $tr->translate("PROPERTY");?></td>
+			                    <td ><?php echo $tr->translate("RENT_DURATION_M");?></td>	
+			                    <td ><?php echo $tr->translate("START_DATE");?></td>
+			                    <td><?php echo $tr->translate("END_DATE");?></td>    
+			                    <td ><?php echo $tr->translate("RENT_PRICE_PER_MONTH");?></td>
+			                    <td ><?php echo $tr->translate("TOTAL_RENT_PRICE");?></td>
+			                    <td ><?php echo $tr->translate("PAY_FIRST");?></td>
+			                    <td ><?php echo $tr->translate("REMAIN");?></td>
+			                    <td ><?php echo $tr->translate("DATE_RENT");?></td>
+			                   <th ><?php echo $tr->translate("");?></th>
+			                </tr>
+		                <?php $i=0; $total_rent=0; $total_rent_balance=0; $total_rent_paid=0; $is_set =0; 
+		                if(!empty($this->rentincome)) foreach ($this->rentincome as $index => $rs){ $i++;?>
+		                <?php 
+		               		 $total_rent = $total_rent +$rs['total_price'];
+		               		 $total_rent_paid = $total_rent_paid +$rs['pay_first'];
+		               		 $total_rent_balance = $total_rent_balance +$rs['balance'];
+		                	$db = new Property_Model_DbTable_DbRent();
+						  	if (!empty($rs['land_name'])){
+						  		$land_name = $rs['land_name'];
+						  	}else{
+						  		$row_detail = $db->getRentPropertyDetail($rs['id']);
+						  		$land_name='';
+						  		foreach ($row_detail  as $ros){
+						  			if (!empty($land_name)){
+										$land_name = $land_name." , (".$ros['sale_name_before']." , ".$ros['sale_relevent_name'].")";
+									}else{
+										$land_name = '('.$ros['sale_name_before'].' , '.$ros['sale_relevent_name'].')';
+									}
+						  		}
+						  	}?>
+		                <tr class="style style1" style="font-family: 'Times New Roman','Khmer OS Battambang'; white-space:nowrap; ">
+		               		<td style="text-align: center;">&nbsp;<?php echo $i; ?>&nbsp;</td>
+		               		<td>&nbsp;<?php echo $rs["land_blog"];?>&nbsp;</td>
+		               		<td>&nbsp;<?php echo $rs["rent_no"];?>&nbsp;</td>
+		               		<td>&nbsp;<?php echo $rs["customer_name"];?>&nbsp;</td>
+		               		<td>&nbsp;<?php echo $land_name;?>&nbsp;</td>                 		
+		               		<td align="center">&nbsp;<?php echo $rs["rent_duration"];?>&nbsp;</td>
+		               		<td align="center">&nbsp;<?php echo date("d-M-Y",strtotime($rs['date_start']));?>&nbsp;</td>
+		               		<td align="center">&nbsp;<?php echo date("d-M-Y",strtotime($rs['date_end']));?>&nbsp;</td>               		
+		               		<td align="center" >&nbsp;<?php echo number_format($rs['price_permont'],2);?>&nbsp;</td>
+		               		<td align="center">&nbsp;<?php echo number_format($rs['total_price'],2);?>&nbsp;</td>
+		               		<td align="center">&nbsp;<?php echo number_format($rs['pay_first'],2);?>&nbsp;</td>
+		               		<td style="font:bolder 11px Arial;">&nbsp;<?php echo number_format($rs['balance'],2);?>&nbsp;</td>
+		               		<td style="white-space:nowrap; ">&nbsp;<?php echo date("d-m-Y",strtotime($rs["date_rent"]));?>&nbsp;</td>
+		               		<td>&nbsp;<?php if($rs['is_complete']==1){echo  "បានផុតកំណត់";} else{echo "មិនទាន់ផុតកំណត់";};?>&nbsp;</td>
+		                </tr>
+		                <?php }?>
+		            </table>
+            	</td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+            	<td colspan="3">
+            	<table border="1"​ style="border-collapse:collapse;border:1px solid #000; font-size:9px;" width="50%" cellspacing="0">
+	                 <tr bgcolor="#c1d0f3" class="style" align="center" style="padding:0px 2px;white-space: nowrap;">
+	                     <td><?php echo $tr->translate("CURRENT_TYPE");?></td>
+	                    <td><?php echo $tr->translate("TOTAL_RENT_PRICE");?></td>                    
+	                    <td><?php echo $tr->translate("TOTAL_PAID");?></td>
+	                    <td><?php echo $tr->translate("TOTAL_BALANCE");?></td>
+	                </tr>
+	                 <tr class="style" style=" line-height: 24px; font-size:9px; font-family: 'Times New Roman','Khmer OS Battambang';">
+	                  	<td>&nbsp;<?php echo $tr->translate("DOLLAR");?>&nbsp;</td>
+	                  	<td align="right">&nbsp;<?php echo number_format($total_rent,2);?></td>
+	                    <td align="right">&nbsp;&nbsp;<?php echo number_format($total_rent_paid,2);?>&nbsp;</td>
+	                    <td align="right">&nbsp;&nbsp;<?php echo number_format($total_rent_balance,2);?>&nbsp;</td>
+	                </tr>
+	              </table>
+            	</td>
+            </tr>
+            <?php }?>
+           <!-- <tr>
+            	<td colspan="3">
+            		<table border="1"​ style="border-collapse:collapse;border:1px solid #000; font-size:9px;" width="100%" cellspacing="0">
+	                 <tr bgcolor="#c1d0f3" class="style" align="center" style="padding:0px 2px;white-space: nowrap;">
+	                 	<td colspan="4">&nbsp;<?php echo $tr->translate("SOLD_INCOME");?>&nbsp;</td>
+	                 	<td rowspan="2">&nbsp;<?php echo $tr->translate("OTHER_INCOME");?>&nbsp;</td>
+	                 	<td rowspan="2">&nbsp;<?php echo $tr->translate("OTHER_EXPENSE");?>&nbsp;</td>
+	                 	<td rowspan="2">&nbsp;<?php echo $tr->translate("TOTAL");?>&nbsp;</td>
+	                 </tr>
+	                 <tr bgcolor="#c1d0f3" class="style" align="center" style="padding:0px 2px;white-space: nowrap;">
+	                    <td><?php echo $tr->translate("TOTAL")." ".$tr->translate("LAND_PRICE");?></td>                    
+	                    <td><?php echo $tr->translate("TOTAL_PAYMENT");?></td>
+	                    <td><?php echo $tr->translate("TOTAL_PAID");?></td>
+	                    <td><?php echo $tr->translate("TOTAL_BALANCE");?></td>
+	                </tr>
+	                 <tr class="style" style=" line-height: 24px; font-size:9px; font-family: 'Times New Roman','Khmer OS Battambang';">
+	                  	<td align="right">&nbsp;<?php echo number_format($land_price,2);?></td>
+	                    <td align="right">&nbsp;&nbsp;<?php echo number_format($total_sale,2);?>&nbsp;</td>
+	                    <td align="right">&nbsp;&nbsp;<?php echo number_format($totalpaid,2);?>&nbsp;</td>
+	                    <td align="right">&nbsp;&nbsp;<?php echo number_format($total_balance,2);?>&nbsp;</td>
+	                    <td>&nbsp;&nbsp;<?php //echo number_format($amt_d5,2);?>&nbsp;</td>
+	                    <td>&nbsp;&nbsp;<?php //echo number_format($total_d,2);?>&nbsp;</td>
+	                    <td>&nbsp;<?php //echo number_format($total_other_income,2);?></td>
+	                    <td>&nbsp;<?php //echo number_format($total_expese,2);?></td>
+	                    <td>&nbsp;<?php //echo number_format($total,2);?></td>
+	                </tr>
+	              </table>
+            	</td>
+            </tr> --> 
+            </table>
+    	</td>
+    </tr>
+</table>
+		<br />
+		   <table align="center" width="100%">
+				   <tr style="font-size: 12px;">
+				        <th style="width:20%;text-align:center;  font-family:'Khmer MEF2'"><?php echo $tr->translate('APPROVED BY');?></th>
+				        <th></th>
+				        <th style="width:20%;text-align:center; font-family:'Khmer MEF2'"><?php echo $tr->translate('VERIFYED BY');?></th>
+				        <th></th>
+				        <th style="width:20%;text-align:center;font-family:'Khmer MEF2'"><?php echo $tr->translate('PREPARE BY');?></th>
+				   </tr>
+			</table>
+</div>

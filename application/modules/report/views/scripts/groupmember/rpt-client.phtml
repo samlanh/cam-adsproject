@@ -1,0 +1,159 @@
+<script type="text/javascript">
+dojo.require("dojo.data.ObjectStore");
+dojo.require("dijit.form.DateTextBox");
+dojo.ready(function(){
+
+	
+});
+
+</script>
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$frm = $this->frm_village;
+?>
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$frm = $this->frm_search;
+$frms=$this->frm_client;
+?>
+<meta charset="utf-8">
+<title><?php echo $tr->translate("REPORT_CLIENT");?></title>
+<form method="post">
+<table style="font-family: 'Khmer OS Content';margin:0 auto ; width:28.5cm; " >
+	<tr>  
+      <td><?php echo $frm->getElement("adv_search");?></td>
+      <td><?php echo $frm->getElement('branch_id');?></td>
+      <td><?php echo $frm->getElement('status');?></td>
+      <!-- <td><?php //echo $frms->getElement('province');?></td>
+      <td><input id="district" ></td>
+      <td><input id="commune" ></td> -->
+    </tr>
+	<tr>
+      <!-- <td><input id="village" ></td>-->	
+      <td><?php echo $frm->getElement('start_date');?></td>
+      <td><?php echo $frm->getElement('end_date');?></td>
+      <td><?php echo $frm->getElement("btn_search");?>
+      <input type="submit" onClick="resetForm();" value="show_all" label="<?php echo $tr->translate('SHOW_ALL');?>" id="show_all" dojoType="dijit.form.Button" name="show_all" /></td>
+	</tr>
+</table>
+</form>
+<script>
+	function  resetForm(){
+	var datenow = '<?php echo date("Y-m-d");?>';
+	dijit.byId('adv_search').attr('value','');
+	//dijit.byId('start_date').attr('value',datenow);
+	dijit.byId('end_date').attr('value',datenow);
+	dijit.byId('status').set('value','-1');
+	dijit.byId('branch_id').set('value','-1');
+}
+</script>
+<div style="clear: both;"></div>
+<div style=" width:98%; margin:0 auto; ">
+<br />
+<div style=" width:28cm;min-height:28cm; margin:0 auto; border: 1px dotted #ccc; padding:0px 0.2cm">
+<div id="divPrint">
+<style>
+.style{
+	line-height: 20px;font-size: 12px !important;
+	font-family: 'Times New Roman','Khmer OS Battambang';
+}
+th{padding: 3px 5px;}
+</style>
+<table style="font-family: 'Times New Roman','Khmer OS Battambang'; width:100%;"  >
+	<tr>
+    	<td align="center">
+        	<table width="100%" style="font-family:'Times New Roman','Khmer OS Battambang';" style="margin:0; padding:0;border:none;" >
+            	<tr>
+                	<td width="20%"><img src="<?php echo $this->baseUrl();?>/images/logo.jpg" height="70px"></td>
+                	<td width="60%" valign="top">
+                	<h2 style="text-align:center; font-size:16px; font-family:'Times New Roman','Khmer OS Muol'"><label><?php echo $tr->translate("BRAND_TITLE");?></label></h2>
+                	<h2 style="text-align:center; font-size:13px; font-family:'Times New Roman','Khmer OS Muol'"><?php echo $tr->translate("REPORT_CLIENT");?></h2>
+                	<?php if(!empty($this->result['start_date'])){?><h2 style="text-align:center; font-size:13px;"><?php echo date("d-M-Y",strtotime($this->result['start_date'])).' '.$tr->translate('TO').' ';echo date("D-d-M-Y",strtotime($this->result['end_date']));?></h2><?php }?>
+                	</td>
+                    <td width="20%"></td>
+                </tr> 
+                <tr>
+                	<td colspan="3">
+                		<table width="100%">
+                			<tr >
+                				<td width="45%" style="font-size: 11px;">
+                					<?php echo $this->data['footer_branch'];?>
+									<br /><?php echo $this->data['tel-client'];?>
+                				</td>
+                				<td></td>
+                				
+                				<td></td>
+                			</tr>
+			               
+		                </table>
+		              </td>
+		        </tr>   
+            </table>
+</td>
+</tr>
+</table>
+<body>
+	<table id="exportExcel"  width="100%" border="1" style="border-collapse:collapse;font-size: 12px;" bordercolor="black">   
+    	<tr bgcolor="#c1d0f3" align="center">
+    		<td colspan="9"><?php echo $tr->translate("CLIENT_INFO");?></td>
+    		<td colspan="6"><?php echo $tr->translate("RELEVANT_STAKEHOLDER");?></td>
+    		<td rowspan="2" ><?php echo $tr->translate("ADDRESS");?></td>
+    		<td rowspan="2"><?php echo $tr->translate("DATE");?></td>
+    	</tr>
+    	<tr bgcolor="#c1d0f3" class="style" align="center" style="floafont-weight:bold; font-size:12px; padding:5px 0px; ">
+	       <td><?php echo $tr->translate("NUM");?></td>
+	       <td><?php echo $tr->translate("BRANCH_NAME");?></td>
+	       <td><?php echo $tr->translate("CLIENT_NUM");?></td>
+	       <td><?php echo $tr->translate("NAMEKH");?></td>
+	       <td><?php echo $tr->translate("SEX");?></td>
+	       <td><?php echo $tr->translate("AGE");?></td>
+	       <td><?php echo $tr->translate("NATIONALITY");?></td>
+	       <td style="white-space: nowrap;"><?php echo $tr->translate("NATIONAL_ID");?></td>
+	       <td><?php echo $tr->translate("PHONE");?></td>
+	       <td><?php echo $tr->translate("NAMEKH");?></td>
+	       <td><?php echo $tr->translate("SEX");?></td>
+	       <td><?php echo $tr->translate("AGE");?></td>
+	       <td><?php echo $tr->translate("NATIONALITY");?></td>
+	       <td style="white-space: nowrap;"><?php echo $tr->translate("NATIONAL_ID");?></td>
+	        <td><?php echo $tr->translate("IS");?></td>
+          </tr>
+          <?php if(!empty($this->client_list)) foreach($this->client_list as $key =>$row){?>
+           <!-- <a href="" title="ចុចទីនេះដើម្បីបោះពុម្ពបង្កានដៃតម្កល់ទ្រព្យធធានា">-->
+		   <tr style="font-size: 12px;" align="center">
+			   <td>&nbsp;<?php echo $key+1; ?>&nbsp;</td>
+		       <td style="white-space: nowrap; text-align:left" >&nbsp;<?php echo $row['branch_name']?>&nbsp;</td>
+		       <td style="white-space: nowrap;" >&nbsp;<?php echo $row['client_number']?>&nbsp;</td>
+			   <td align="left" style="white-space: nowrap;"><?php echo $row['client_name_kh'];?></td>
+			   <td >&nbsp;<?php echo $row['sex']?>&nbsp;</td>
+			   <td style="white-space: nowrap;">&nbsp;<?php if (!empty($row['client_age'])) { echo $row['client_age']." ឆ្នាំ";}?> </td>
+			   <td>&nbsp;<?php echo $row['nationality']?></td>
+	           <td>&nbsp;<?php echo $row['nation_id']?>&nbsp;</td>
+			   <td style="white-space: nowrap;">&nbsp;<?php echo $row['phone']?>&nbsp;</td>
+			   <td style="white-space: nowrap;">&nbsp;<?php echo empty($row['client_relevent_name'])?" ":$row['client_relevent_name']?>&nbsp;</td>
+			   <td>&nbsp;<?php echo $row['client_relevent_sex'];?>&nbsp;</td>
+			   <td style="white-space: nowrap;">&nbsp;<?php  if (!empty($row['client_relevent_age'])) {  echo $row['client_relevent_age']." ឆ្នាំ";}?>&nbsp;</td>
+			   <td>&nbsp;<?php echo empty($row['client_relevent_nationality'])?" ":$row['client_relevent_nationality']?>&nbsp;</td>
+			   <td>&nbsp;<?php echo empty($row['client_relevent_nationa_id'])?" ":$row['client_relevent_nationa_id']?>&nbsp;</td>
+			  	<td style="white-space: nowrap;">&nbsp;<?php echo $row['client_is_relevant_type'];?>&nbsp;</td>
+			  	 <td style="text-align: left; white-space: nowrap;">&nbsp;<?php echo $row['client_current_address'];?>&nbsp;</td>
+			   <td>&nbsp;<?php echo date("d/m/Y",strtotime($row['create_date']))?>&nbsp;</td>
+		   </tr>
+		   </a>
+		  <?php }?>
+
+    </table>
+    <br />
+		   <table align="center" width="100%">
+				   <tr style="font-size: 12px;">
+				        <th style="width:20%;text-align:center;  font-family:'Khmer MEF2'"><?php echo $tr->translate('APPROVED BY');?></th>
+				        <th></th>
+				        <th style="width:20%;text-align:center; font-family:'Khmer MEF2'"><?php echo $tr->translate('VERIFYED BY');?></th>
+				        <th></th>
+				        <th style="width:20%;text-align:center;font-family:'Khmer MEF2'"><?php echo $tr->translate('PREPARE BY');?></th>
+				   </tr>
+			</table>	
+</body>
+</div>
+</div>
+</div>
+</html>

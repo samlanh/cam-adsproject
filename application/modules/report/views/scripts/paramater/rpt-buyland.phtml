@@ -1,0 +1,145 @@
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+ $frm = $this->frm_search;
+ $frmbuy = $this->frm_buy;
+?>
+<script>
+dojo.require("dijit.form.DateTextBox");
+</script>
+<meta charset="utf-8">
+<title><?php echo $tr->translate("REPORT_SALE_HISTORY");?></title>
+<form name="frm_rptstaff" action="<?php echo $this->url(array('module'=>'report','controller'=>'paramater','action'=>'rpt-buyland')); ?>" dojoType="dijit.form.Form" method="post">
+	<table style="width:28cm; margin: 0 auto;">
+		 <tr>
+			<td><?php echo $frm->getElement('adv_search');?> <input type="hidden" name="recorddelete" id="recorddelete" dojoType="dijit.form.TextBox" /></td>
+			<td><?php echo $frmbuy->getElement('property_type_search');?></td>
+			<td><?php echo $frm->getElement('start_date');?></td>
+			<td><?php echo $frm->getElement('end_date');?></td>
+			<td><button iconclass="dijitIconSearch" dojoType="dijit.form.Button" showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button></td>
+			<td><input type="submit" onClick="resetForm();" value="show_all" label="<?php echo $tr->translate('SHOW_ALL');?>" id="show_all" dojoType="dijit.form.Button" name="show_all" /></td>
+		</tr>
+	</table>
+ </form> 
+ <script>
+	function  resetForm(){
+	var datenow = '<?php echo date("Y-m-d");?>';
+	dijit.byId('adv_search').attr('value','');
+	dijit.byId('start_date').attr('value',datenow);
+	dijit.byId('end_date').attr('value',datenow);
+	dijit.byId('property_type_search').set('value','0');
+}
+</script>
+<div style=" width:28cm;min-height:22cm; margin:0 auto; border: 1px dotted #ccc; padding:0px 0.5cm">
+<table style="font-family: 'Khmer OS Content'; width:100%;"  >
+	<tr>
+    	<td align="center">
+    	 <div id="divPrint">
+    	 	<style>
+					.style{
+						line-height: 20px;font-size: 11px !important;
+						font-family: 'Times New Roman','Khmer OS Battambang';
+						}
+						th{padding: 5px;}
+					</style>
+        	<table id="exportExcel"  width="100%" style="font-family:'Times New Roman','Khmer OS Battambang';" style="margin:0; padding:0; border:none;" >
+        	<tr>
+                <td width="20%"><img src="<?php echo $this->baseUrl();?>/images/logo.jpg" height="85px"></td>
+                <td width="60%" valign="top">
+                <h2 style="text-align:center; font-size:16px; font-family:'Times New Roman','Khmer MEF2'"><label><?php echo $tr->translate("BRAND_TITLE");?></label></h2>
+                <h2 style="text-align:center; font-size:14px; font-family:'Times New Roman','Khmer MEF2'"><label><?php echo $tr->translate("REPORT_BUY_LAND");?></label></h2>
+                <p style="text-align:center; font-size:14px; font-family:'Times New Roman','Khmer MEF2'"><?php if(empty($this->search['show_all'])){ echo date("d-M-Y",strtotime($this->search['start_date'])).' '.$tr->translate('TO').' ';echo date("D-d-M-Y",strtotime($this->search['end_date']));}?></p>
+                <td width="20%"></td>
+             </tr> 
+             <tr>
+            	<td colspan="3">
+            		<table width="100%" style="border-collapse:collapse;font-size: 14px;" >  
+				       <?php $property_id=0; $is_cancel=""; $i=0; $total=0; if(!empty($this->row))foreach($this->row as $key =>$row){ $i++;?>
+				      	<?php  
+						if($row['land_type']!=$property_id){	
+							if($key>0 ){
+						?>
+							
+							<?php $i=1;}?>
+					</table>
+						</td>
+					</tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr>
+						<td colspan="3">
+							<table  width="100%" border="1" style="border-collapse:collapse;font-size: 14px;     line-height: 24px;" bordercolor="black">
+								<tr style=" border-top: solid 1px #fff; border-left: solid 1px #fff;  border-right: solid 1px #fff;">
+									<td colspan="7">
+									<strong style="font-weight:bold;font-family:'Times New Roman','Khmer OS Battambang';color:#000; font-size: 14px; padding:5px;" >
+									<?php echo $tr->translate("LAND_TYPE")." : ".$row['land_type_name']; ?>
+									</strong>
+									</td>
+								</tr>
+								<tr bgcolor="#c1d0f3" class="style" align="center" style="padding:0px 2px;white-space: nowrap;">
+				                    <td rowspan="2"><?php echo $tr->translate("NUM");?></td>
+				                    <td colspan="5"><?php echo $tr->translate("LAND_INFO");?></td>
+				                    <td colspan="5"><?php echo $tr->translate("SELLER_INFO");?></td>	
+				                    <td colspan="5"><?php echo $tr->translate("BUYER_INFO");?></td>                  
+				                    <td rowspan="2"><?php echo $tr->translate("BUY_DATE");?></td>
+				                </tr>
+				                <tr bgcolor="#c1d0f3" class="style" style="white-space: nowrap;text-align: center;">
+				                	<td><?php echo $tr->translate("LAND_TYPE");?></td>                   
+				                    <td><?php echo $tr->translate("WIDTH");?></td>
+				                    <td><?php echo $tr->translate("HEIGHT");?></td>
+				                    <td><?php echo $tr->translate("SIZE");?></td>	                    
+				                    <td><?php echo $tr->translate("PRICE");?></td>
+				                    <td><?php echo $tr->translate("NAMEKH");?></td>
+				                    <td><?php echo $tr->translate("SEX");?></td>
+				                    <td><?php echo $tr->translate("AGE");?></td>
+				                    <td><?php echo $tr->translate("NATIONALITY");?></td>
+				                    <td><?php echo $tr->translate("PHONE");?></td>
+				                    <td><?php echo $tr->translate("NAMEKH");?></td>
+				                    <td><?php echo $tr->translate("SEX");?></td>
+				                    <td><?php echo $tr->translate("AGE");?></td>
+				                    <td><?php echo $tr->translate("NATIONALITY");?></td>
+				                    <td><?php echo $tr->translate("PHONE");?></td>
+				                </tr>
+						<?php }?>
+						   <tr style="font-size: 12px;" align="left">
+						     <td align="center">&nbsp;<?php echo $i; ?></td>
+						     <td align="center">&nbsp;<?php echo $row['land_type_name'];?>&nbsp;</td>
+						     <td align="center">&nbsp;<?php echo $row['width'];?>&nbsp;</td>
+						     <td align="center">&nbsp;<?php echo $row['height'];?>&nbsp;</td>
+							 <td align="center">&nbsp;<?php echo $row['size'];?>&nbsp;</td>
+							 <td>&nbsp;<?php echo number_format($row['price'],2);?>&nbsp;</td>
+							 <td align="center">&nbsp;<?php echo $row['sale_name'];?>&nbsp;</td>
+							 <td align="center">&nbsp;<?php echo $row['sale_sex_name'];?>&nbsp;</td>
+							 <td align="center">&nbsp;<?php echo $row['sale_age'];?>&nbsp;</td>
+							 <td align="center">&nbsp;<?php echo $row['sale_nationlity'];?>&nbsp;</td>
+							 <td align="center">&nbsp;<?php echo $row['sale_phone'];?>&nbsp;</td>
+							 <td align="center">&nbsp;<?php echo $row['buyer_name'];?>&nbsp;</td>
+							 <td align="center">&nbsp;<?php echo $row['buyer_sex_name'];?>&nbsp;</td>
+							 <td align="center">&nbsp;<?php echo $row['buyer_age'];?>&nbsp;</td>
+							 <td align="center">&nbsp;<?php echo $row['buyer_nationality'];?>&nbsp;</td>
+							 <td align="center">&nbsp;<?php echo $row['buyer_phone'];?>&nbsp;</td>
+							  <td align="center">&nbsp;<?php echo date("d-M-Y",strtotime($row['buy_date']));?>&nbsp;</td>
+							</tr>
+							<?php 
+							$property_id = $row['land_type'];
+							?>
+						<?php }?>
+				    </table>
+            	</td>
+            </tr>
+            </table>
+			
+    	</td>
+    </tr>
+</table>
+		<br />
+		   <table align="center" width="100%">
+				   <tr style="font-size: 12px;">
+				        <th style="width:20%;text-align:center;  font-family:'Khmer MEF2'"><?php echo $tr->translate('APPROVED BY');?></th>
+				        <th></th>
+				        <th style="width:20%;text-align:center; font-family:'Khmer MEF2'"><?php echo $tr->translate('VERIFYED BY');?></th>
+				        <th></th>
+				        <th style="width:20%;text-align:center;font-family:'Khmer MEF2'"><?php echo $tr->translate('PREPARE BY');?></th>
+				   </tr>
+			</table>
+</div>

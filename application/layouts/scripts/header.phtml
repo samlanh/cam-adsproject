@@ -1,0 +1,104 @@
+<?php 
+	$session_lang=new Zend_Session_Namespace('lang');
+    $lang =	$session_lang->lang_id;
+	  $tr=Application_Form_FrmLanguages::getCurrentlanguage();
+	  $home=$this->url(array('module'=>'home','controller'=>'index','action'=>'index'), null, true);
+	  $group=$this->url(array('module'=>'group','controller'=>'index','action'=>'index'), null, true);
+	  $other=$this->url(array('module'=>'other','controller'=>'index','action'=>'index'), null, true);
+	  $old_report=$this->url(array('module'=>'allreport','controller'=>'index','action'=>'index'), null, true);
+	  $report=$this->url(array('module'=>'report','controller'=>'index','action'=>'index'), null, true);
+	  $loan_view=$this->url(array('module'=>'loan','controller'=>'index','action'=>'index'), null, true);
+	  $accounting_view=$this->url(array('module'=>'accounting','controller'=>'index','action'=>'index'), null, true);
+	  $teller=$this->url(array('module'=>'tellerandexchange','controller'=>'xchanges','action'=>'index'), null, true);
+	  $payroll_view=$this->url(array('module'=>'payroll','controller'=>'index','action'=>'index'), null, true);
+	  $callecterall=$this->url(array('module'=>'callecterall','controller'=>'index','action'=>'index'), null, true);
+	  $capital=$this->url(array('module'=>'capital','controller'=>'index','action'=>'index'), null, true);
+	  $backup=$this->url(array('module'=>'backup','controller'=>'index','action'=>'index'), null, true);
+      $user=$this->url(array('module'=>'user','controller'=>'index','action'=>'index'), null, true);
+      $acl=$this->url(array('module'=>'rsvacl','controller'=>'index','action'=>'index'), null, true);
+      $setting=$this->url(array('module'=>'setting','controller'=>'index','action'=>'index'), null, true);
+      $sale = $this->url(array('module'=>'loan','controller'=>'index','action'=>'add'), null, true);
+	  
+      $array_icon = array(
+      		'home'=>'<span class="icon_menu"><i class="fa  fa-home" aria-hidden="true"></i></span><br>',
+      		'other'=>'<span class="icon_menu"><i class="fa  fa-info-circle" aria-hidden="true"></i></span><br>',
+      		'group'=>'<span class="icon_menu"><i class="fa  fa-user-circle-o" aria-hidden="true"></i></span><br>',
+      		'dd'=>'<span class="icon_menu"><i class="fa  fa-plus" aria-hidden="true"></i></span><br>',
+      		'loan'=>'<span class="icon_menu"><i class="fa  fa-newspaper-o" aria-hidden="true"></i></span><br>',
+      		'loand'=>'<span class="icon_menu"><i class="fa  fa-newspaper-o" aria-hidden="true"></i></span><br>',
+      		'property'=>'<span class="icon_menu"><i class="fa  fa-product-hunt" aria-hidden="true"></i></span><br>',
+      		'report'=>'<span class="icon_menu"><i class="fa  fa-file-text" aria-hidden="true"></i></span><br>',
+      		'rsvacl'=>'<span class="icon_menu"><i class="fa  fa-cog" aria-hidden="true"></i></span><br>',
+      		'setting'=>'<span class="icon_menu"><i class="fa  fa-cogs" aria-hidden="true"></i></span><br>',
+      		'menu-manager'=>'<span class="icon_menu"><i class="fa fa-list" aria-hidden="true"></i></span><br>',
+      		'field-manager'=>'<span class="icon_menu"><i class="fa fa-window-restore" aria-hidden="true"></i></span><br>',
+      		);
+	  $module=Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
+      $session_user=new Zend_Session_Namespace('auth');
+      $arr_module = $session_user->arr_module;
+      $menuleft=array();
+      $class='link';
+      if(!empty($arr_module)){
+      	foreach ($arr_module as $rs){
+      		if($rs==$module){$class='current';}else{$class='link';}
+      		if($rs=='loan'){
+      			$old_module = $rs;
+      			$rs="dd";
+      			$menuleft[$rs]="<li ><a href='$sale'>".$array_icon[$rs]."<span>".$tr->translate(strtoupper("SALE_PROPERTY"))."</span></a></li>";
+      			$rs=$old_module;
+      		}
+      		$url =$this->url(array('module'=>$rs,'controller'=>'index','action'=>'index'), null, true); ;
+      		$menuleft[$rs]="<li class='$class'><a href='$url'>".$array_icon[$rs]."<span>".$tr->translate(strtoupper($rs))."</span></a></li>";
+      	}
+      }
+?>  
+<div id="menu">
+	<div class="logo" style=" width: 15%; display: inline-block; vertical-align: top;">
+		<img style=" padding: 10px 0px 0px 10px;" src="<?php echo $this->baseurl();?>/images/camapplogo.png" title="" />
+	</div>
+	<div class="menu_header" style=" width: 75%; display: inline-block;">
+	<ul>
+		<?php
+	$session_user=new Zend_Session_Namespace('auth');
+		$modules_access = $session_user->arr_module;
+			foreach($menuleft as $key=>$value){
+				$access = array_search($key,$modules_access);
+				//if($access!='' OR $access>=0){
+					if($module==$value){
+						echo str_replace('link', 'current',$value);
+					}
+					else{
+						echo $value;
+					}
+				//}
+			} 
+		?>
+	</ul>
+	</div>
+	<div class="language" style="width: 9%; display: inline-block;text-align: right;vertical-align: top; ">
+		<?php if($lang ==1){?>
+				<img onclick="changeLange(2);"  src="<?php echo $this->baseurl();?>/images/en.jpg" title="" style="cursor: pointer;" />
+			<?php }else{?>
+				<img onclick="changeLange(1);" src="<?php echo $this->baseurl();?>/images/km.png" title="" style="cursor: pointer;" />
+			<?php }?>
+	</div>
+</div>
+<script>
+		
+var url_changelang = '<?php echo $this->url(array('module'=>'default','controller'=>'index','action'=>'changelange'));?> ';
+function changeLange(lang){
+	dojo.xhrPost({
+		url: url_changelang,
+	    content :{ 
+			    'lange':lang,
+		},	
+		handleAs:"json",
+		load: function(data) {
+			location.reload();
+		},
+		error: function(err) {
+			
+		}
+	});
+}
+	</script>

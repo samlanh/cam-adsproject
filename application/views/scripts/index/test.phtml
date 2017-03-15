@@ -1,0 +1,73 @@
+<script type="text/javascript">
+	dojo.require("dojo.data.ItemFileWriteStore");  
+    dojo.require("dojo.NodeList-manipulate");
+    dojo.require('dijit.form.Textarea');
+    dojo.require("dojo.parser");
+    dojo.require("dijit.form.DateTextBox");
+    dojo.require("dijit.form.FilteringSelect"); 
+	dojo.require("dojo.html");
+	dojo.require("dijit.form.NumberTextBox");
+</script>
+<table cellspacing="10" style="margin: 0 auto;width:100%;" >
+	<tr>
+		<td>
+		<fieldset>
+				<table id="table_branch" style="margin: 0 auto; width: 100%;" cellspacing="10";>
+					<tr>
+						<td width="20%">
+							<select onChange="getControllByCate();" dojoType='dijit.form.FilteringSelect' id="category" name="category" class="fullside">
+								<?php if (!empty($this->category)) foreach ($this->category as $rs){?>
+										<option value="<?php echo $rs['id']?>"><?php echo $rs['name'];?></option>
+								<?php }?>
+							</select> 
+						</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+</table>
+<div id="formchange">
+</div>
+<script>
+var url_getControl = '<?php echo $this->url(array('module'=>'default','controller'=>'index','action'=>'getform')); ?>';
+function getControllByCate()
+{
+	category = dijit.byId('category').get('value');
+ 	dojo.xhrPost({
+ 		url:url_getControl,
+ 		content:{
+ 			'category':category
+ 			},
+ 		handleAs:"json",
+ 		load: function(data) {
+ 	 		//alert(data.form);
+ 	 		dojo.byId('formchange').innerHTML = data.form;
+ 		},
+ 		error: function(err) {
+ 			alert(err);
+ 		}
+ 	});
+}
+var url_getCascate = '<?php echo $this->url(array('module'=>'default','controller'=>'index','action'=>'getcascade')); ?>';
+function getCascadeValue(contr olId){
+	var parent = $("#".controlId).val();
+	dojo.xhrPost({
+ 		url:url_getCascate,
+ 		content:{
+ 			'parent':parent
+ 			},
+ 		handleAs:"json",
+ 		load: function(data) {
+ 	 		alert(data.form);
+ 	 		//dojo.byId('formchange').innerHTML = data.form;
+ 		},
+ 		error: function(err) {
+ 			alert(err);
+ 		}
+ 	});
+}
+</script>
