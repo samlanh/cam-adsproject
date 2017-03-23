@@ -1,178 +1,522 @@
-<?php
-$this->headTitle('Sale Realty Management System | log in page'); 
-echo $this->headTitle();
-$base_url = Application_Form_FrmMessage::getUrl("/");
-?>
-<!DOCTYPE HTML> 
-<html>
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-<?php /*
-*/?>
-<script src="<?php echo $base_url;?>js/dojo-1.6.1/dojo/dojo.js"  djConfig="isDebug: true,parseOnLoad: true"></script>
-<script>dojoConfig = {parseOnLoad: true}</script>
-<link rel="stylesheet" type="text/css" href="<?php echo $base_url;?>js/dojo-1.6.1/dijit/themes/tundra/tundra.css"/>
-	
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style type="text/css">
-	.btn{
-		height: 40px;
-		min-width: 100px;	
-	}
-	.f_style{
-		font-family:'NiDA Khmer Empire';
-	    font-size:14px;
-		text-shadow: 1px 1px 1px #0B404A;
-	}
-.t_shadow{ text-shadow: 1px 1px 1px #0B404A;}
-	#footer table tr td dl {
-    line-height: 28px ;
-    color: #ffffff;
-}
-</style>
-<link rel="stylesheet" href="css/stylelogin.css"/>
-<link rel="shortcut icon" href="images/icon.ico" type="image/x-icon"/>
-<script>	
-	require(["dojo/parser", "dijit/form/Form", "dijit/form/Button", "dijit/form/ValidationTextBox"]);
-</script>
+	<meta charset="UTF-8">
+	<title>Cam App Technology</title>	
+	<link rel="shortcut icon" href="wp-content/uploads/2016/04/favicon.jpg" type="image/x-icon" />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='classiads-ie-css'  href='http://demo.designinvento.net/classiads5/wp-content/themes/classiads/css/ie.css?ver=2013-11-08' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
+
+<link rel='stylesheet' id='bxslider-style-css'  href='<?php echo $this->baseUrl();?>/template/css/jquery.bxslider.css' type='text/css' media='all' />
+<link rel='stylesheet' id='owl-carousel-css'  href='<?php echo $this->baseUrl();?>/template/css/owl.carousel.css' type='text/css' media='all' />
+
+<link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/custom.css' type='text/css' media='all' />
+
+
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jqueryb8ff.js?ver=1.12.4'></script>
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>
+
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fancybox.packe.js'></script>
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fitvidse.js'></script>
+
+<link rel='stylesheet' href='<?php echo $this->baseUrl();?>/template/css/style.css' type='text/css' />
 </head>
-<body class="tundra" style="overflow: hidden;background: white;" id="body" >
-<div id="header" style="position:absolute;left: 0;top: 0;">
-	<table>
-		<tr align="center">
-			<td class="title" style="padding-left: 7px; text-align: center;font-size:20px;text-align:center; font-family:'Khmer MEF2'"><?php echo $this->data["system_name"];?></td>
-		</tr>
-		<tr>
-			<td class="textblue" align="center"></td>
-		</tr>
-	</table>
-</div>
-<div style="height:60px;">
-</div>
-<div id="content">
-	<div id='marquee'>
-		<marquee behavior="scroll" direction="left" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="5"><?php echo $this->data["label_animation"];?></marquee>
-	</div>
-	<table cellpadding="0" cellspacing="0" id="main">
-		<tr>
-			<td style="width: 472px;padding-left:50px;" >				
-				<img style="border:1px solid #eee;" alt="<?php ?>" src="<?php echo $base_url.$this->data['logo-path-name']?>">
-			</td>
-			<td valign="top" style="width: 120px">
-				<label class="lblheader"></label>
-			</td>
-			<td>
-				<div id="login">
-					<form id="frmLogin" dojoType="dijit.form.Form" method="post" action="">
-						<script type="dojo/method" event="onSubmit">				
-								if(this.validate()) {						
-									return true;
-								}
-								return false;
-						</script>
-						<table id="login">		
-						<tr>
-							<td colspan="2" align="center" class="lblheader textwithe">
-								<label style="font: bold 20px 'Khmer MEF2'; text-shadow: 1px 1px 1px #0B404A;"><small>ប្រព័ន្ធសុវត្ថិភាព ​</small></label>
-							</td>				
-						</tr>	
-						<tr>
-							<td colspan="2" align="center" style="color: red; padding-bottom: 10px;">
-								<?php echo $this->msg;?>
-							</td>				
-						</tr>			
-						<tr>
-							<td id="field"><label class="f_style" >អ៊ីម៉ែលអ្នកប្រើប្រាស់</label></td>
-							<td class="add-edit">
-								<input type="text" required="true" name="txt_user_name" id="txt_user_name" placeholder="ឈ្មោះអ្នកប្រើប្រាស់​" 
-								data-dojo-type="dijit/form/ValidationTextBox" missingMessage="សូមបំពេញឈ្មោះអ្នកប្រើប្រាស់! " style="width: 100%;"/>
-							</td>
-						</tr>
-						<tr>
-							<td id="field"><label class="f_style">លេខសំងាត់</label></td>
-							<td class="add-edit">
-								<input type="password" required="true" name="txt_password" id="txt_password" placeholder="លេខសំងាត់" 
-								data-dojo-type="dijit/form/ValidationTextBox" missingMessage="សូមបំពេញលេខសំងាត់!" style="width: 100%;"/>
-							</td>
-						</tr>
-						<tr>
-							<td id="field"><label class="f_style">ភាសា</label></td>
-							<td class="add-edit">
-								<select name="lang" id="lang" style=" height: 30px;width:100%;" > 
-									<option value="1">ខ្មែរ</option> 
-									<option value="2">អង់គ្លេស</option> 
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2" align="right">
-								<input class="f_styles" style="color: #1C90C3; font: 13px 'Khmer MEF2';" type="submit" value="ចូលប្រើប្រាស់" label="ចូលប្រើប្រាស់" data-dojo-type="dijit/form/Button" />
-								<input class="f_styles" style="color: #1C90C3; font: 13px 'Khmer MEF2';" type="reset" value="សំអាត" id="clear_login" data-dojo-type="dijit/form/Button" label="សំអាត" /> 
-								<a href="<?php echo $this->url(array('module'=>'default','controller'=>'index','action'=>'demo'), null, true);?>"><button class="f_styles" style="color: #1C90C3; font: 13px 'Khmer MEF2';" type="button" value="គណនាតារាងបង់ប្រាក់" label="គណនាតារាងបង់ប្រាក់" data-dojo-type="dijit/form/Button" >
-								គណនាតារាងរំលស់
-								</button>		</a>						
-							</td>				
-						</tr>
-					</table>
-					</form>
+<body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
+		
+	<section id="static-image2" class=" static-image-2" >
+			<div class="container search-bar search-bar-version4">
+				<div id="advanced-search-widget-version2" class="home-search">
+					<div class="">
+						<div class="advanced-search-widget-content">
+							<form action="http://demo.designinvento.net/classiads5" method="get" id="views-exposed-form-search-view-other-ads-page" accept-charset="UTF-8">
+								<div id="edit-search-api-views-fulltext-wrapper" class="views-exposed-widget views-widget-filter-search_api_views_fulltext">
+									<div class="views-widget">
+										<div class="control-group form-type-textfield form-item-search-api-views-fulltext form-item">
+											<div class="controls"> 
+												<input placeholder="Search your keyword here..." type="text" id="edit-search-api-views-fulltext" name="s" value="" size="30" maxlength="128" class="form-text">
+												<input type="hidden" id="hidden-keyword" name="s" value="all" size="30" maxlength="128" class="form-text">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="edit-field-category-wrapper" class="views-exposed-widget views-widget-filter-field_category">
+									<div class="views-widget">
+										<div class="control-group form-type-select form-item-field-category form-item">
+											<div class="controls"> 
+												<select id="edit-field-category" name="category_name" class="form-select" style="display: none;">												
+													<option value="All" selected="selected">Category...</option>
+													<option value="accounts-jobs">Accounts Jobs</option>
+													<option value="art-photography">Art &amp; Photography</option>
+													<option value="brides">Brides</option>
+													<option value="finance-jobs">Finance Jobs</option>
+													<option value="food-services">Food Services</option>
+													<option value="grooms">Grooms</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="edit-ad-location-wrapper" class="views-exposed-widget views-widget-filter-field_ad_location">
+									<div class="views-widget">
+										<div class="control-group form-type-select form-item-ad-location form-item">
+											<div class="controls"> 
+												<select id="edit-ad-location" name="geo-radius" class="form-select locationRadius" style="display: none;">
+													<option value="All" selected="selected">Select Radius</option>
+													<option value="100" >100</option>
+													<option value="150" >150</option>
+													<option value="200" >200</option>
+													<option value="250" >250</option>
+													<option value="300" >300</option>
+													<option value="400" >400</option>
+													<option value="450" >450</option>
+													<option value="500" >500</option>
+													<option value="550" >550</option>
+													<option value="600" >600</option>
+													<option value="650" >650</option>
+													<option value="700" >700</option>
+													<option value="750" >750</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<input type="text" name="geo-location" id="geo-location" value="off" data-default-value="off">
+								<input type="hidden" name="post_location" id="hid_post_location" value="All" >
+								<input type="text" name="geo-radius-search" id="geo-radius-search" value="500" data-default-value="500">
+								<input type="text" name="geo-search-lat" id="geo-search-lat" value="0" data-default-value="0">
+								<input type="text" name="geo-search-lng" id="geo-search-lng" value="0" data-default-value="0">
+								<div class="views-exposed-widget views-submit-button">
+									<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="" value="Search Now" type="submit"><span>Search Now<i class="fa fa-search"></i></span></button>
+								</div>
+							</form>
+						</div>
+					</div>
 				</div>
-			</td>
-		</tr>
-	</table>	
-	<br>
-</div>
-<div id="footer" style="position:absolute;left: 0;bottom: 0;">
-	<table id="main">
-		<tr>
-			<td valign="top" >
-		        <label class="textgreen footertitle f_style">ប្រើប្រាស់ដោយ៖</label>
-				<a  style="font-weight:bold;" href="#" target="_blank"><label class="textyellow footertitle">
-					<b><?php echo $this->data['client_company_name']?></b><br />
-				</label>	
-				<label class="textgreen footertitle f_style">អាសយដ្ឋាន​ ៖</label>
+			</div>	
+			<div class="banner-cat-container">
+				<div class="container">		
+					<div id="main-category">
+						<div  class="pos-relative">
+							<ul class="nav nav-tabs tabs cat-list" id="tabs">
+								<li class="active">
+									<a href="#Tlatest">
+										<span class="cat-tit">
+											<i class="fa fa-home" aria-hidden="true"></i><br />
+											Home									
+										</span>
+									</a>
+								</li>
+								<li>
+									<a href="#Trandom">
+										<span class="cat-tit">
+											<i class="fa fa-home" aria-hidden="true"></i><br />
+											Real Estate									
+										</span>
+									</a>
+								</li>
+								<li>
+									<a href="#Tpopuler">
+										<span class="cat-tit">
+											<i class="fa fa-briefcase"></i><br />
+											Jobs									
+										</span>
+									</a>
+								</li>
+								<li>
+									<a href="#Trandom">
+										<span class="cat-tit">
+											<i class="fa fa-gift"></i><br />
+											Grooms		
+										</span>
+									</a>
+								</li>
+								<li>
+									<a href="#Trandom">
+										<span class="cat-tit">
+											<i class="fa fa-female"></i><br />
+											Brides
+										</span>
+									</a>
+								</li>
+								<li>
+									<a href="#Trandom">
+										<span class="cat-tit">
+											<i class="fa fa-child"></i><br />
+											Kids Stuff			
+										</span>
+									</a>
+								</li>
+								<li>
+									<a href="#Trandom">
+										<span class="cat-tit">
+											<i class="fa fa-gift"></i><br />
+											Grooms		
+										</span>
+									</a>
+								</li>
+								<li>
+									<a href="#Trandom">
+										<span class="cat-tit">
+											<i class="fa fa-gift"></i><br />
+											Grooms		
+										</span>
+									</a>
+								</li>
+								<li>
+									<a href="#Trandom">
+										<span class="cat-tit">
+											More
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="tab-content">
+						<div class="tab-pane active subcategory-menu" id="Tlatest">
+							<div class="list-dropdow-category" >
+								<div class="banner-left-blog">
+									<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
+								</div>
+								<div class="blog-sub-categories-cener">
+									<ul class="menu-list-cate">
+										<li class="menu-list-cate"><a href="#">Private Policy</a></li>
+										<li class="menu-list-cate"><a href="#">Ads Posting Rule</a></li>
+										<li class="menu-list-cate"><a href="#">How To Use</a></li>
+										<li class="menu-list-cate"><a href="#">About Us</a></li>
+										<li class="menu-list-cate"><a href="#">Contacts Us</a></li>
+									 </ul>
+								</div>
+								<div class="banner-right-blog">
+									<div class="language">
+										<a class="lang km" href="#" title="Khmer" onclick="changeLange(1);"><img src="<?php echo $this->baseUrl();?>/images/km.png" > Khmer</a>
+										<a class="lang en" href="#" title="English" onclick="changeLange(2);"><img src="<?php echo $this->baseUrl();?>/images/en.jpg" > English</a>
+									</div>
+									<div class="login-register">
+										<button class="loginBtn loginBtn-normal">
+										  Login
+										</button>
+										<button class="loginBtn register" onclick="window.location.href='<?php echo $this->baseUrl();?>/index/register'">
+										  Register
+										</button>
+									</div>
+									<div class="button-facebook">
+										<button class="loginBtn loginBtn--facebook">
+										  Login with Facebook
+										</button>
+									</div>
+									<div class="button-postads">
+										<button class="loginBtn loginBtn-postads-free">
+										  Post Free Ads
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane subcategory-menu" id="Tpopuler">
+							<div class="list-dropdow-category" >
+								<div class="banner-left-blog">
+								<img src="images/camapplogo.png" alt="Logo">
+								</div>
+								<div class="blog-sub-categories">
+									<ul class="menu-list-cate">
+										<li class="menu-list-cate"><a href="#">Accounting</a></li>
+										<li class="menu-list-cate"><a href="#">Administration</a></li>
+										<li class="menu-list-cate"><a href="#">Architecture/Engineering</a></li>
+										<li class="menu-list-cate"><a href="#">Assistant/Secretary</a></li>
+										<li class="menu-list-cate"><a href="#">Audit/Taxation</a></li>
+										<li class="menu-list-cate"><a href="#">Bank/Insurance</a></li>
+										<li class="menu-list-cate"><a href="#">Customer Service</a></li>
+										<li class="menu-list-cate"><a href="#">Design</a></li>
+										<li class="menu-list-cate"><a href="#">Education/Training</a></li>
+									 </ul>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane subcategory-menu" id="Trandom">
+							<div class="list-dropdow-category" >
+								<div class="banner-left-blog">
+								<img src="images/camapplogo.png" alt="Logo">
+								</div>
+								<div class="blog-sub-categories">
+									<ul class="menu-list-cate">
+										<li class="menu-list-cate"><a href="#">Land For Sale</a></li>
+										<li class="menu-list-cate"><a href="#">Land For Rent</a></li>
+										<li class="menu-list-cate"><a href="#">House For Sale</a></li>
+										<li class="menu-list-cate"><a href="#">House For Rent</a></li>
+										<li class="menu-list-cate"><a href="#">Apartment For Sale</a></li>
+										<li class="menu-list-cate"><a href="#">Apartment For Rent</a></li>
+										<li class="menu-list-cate"><a href="#">Commercial Property For Sale</a></li>
+										<li class="menu-list-cate"><a href="#">Commercial Property For Rent</a></li>
+										<li class="menu-list-cate"><a href="#">Room For Rent</a></li>
+									 </ul>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>					
+	</section>
+
+	<section class="featured-slider-3 clearfix ">
+		<div class="container" >
+			<div class="category">
+				<h4 class="title">Real Estate 
+					<span class="label-show-all"><a href="#">Show all</a></span>
+				</h4>
+			</div>
+			<div class="full">
+				<div class="pane">
+					<div class=" owl-carousel" data-items="4" data-items-tab-ls="2" data-items-tab="2" data-autoplay="false" data-gutter="4" data-autoplay-speed="1500" data-delay="1000" data-loop="true" data-nav="false"  data-dots="false">
+						<div class="ad-box ">
+							<div class="ads-img-wrapper">
+								<a class="ad-image box" href="#" title="Finance officer for hotel" >
+									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/marketing21-30o7k73x9bx84ai65grdai-31dc2ug8a1r0mvrfgqd43u.jpg" alt=""  />
+								</a>
+								<div class="additional-buttons">
+									<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
+									<div class="sold-by-container">
+										<span>Posted By: </span>
+										<a title="Channy" href="#">Channy</a>
+									</div>
+								</div>
+							</div>
+							<div class="ads-title">
+								<h4><a class="ads-title" href="#" >Lexux RX300 2016 Lexux RX300 2016 Lexux RX300 2016</a></h4>
+							 </div>
+							 <div class="ads-price">
+								<h4><a class="ads-price" href="#" >$ 2000</a></h4>
+							 </div>
+						</div>
+						<div class="ad-box ">
+							<div class="ads-img-wrapper">
+								<a class="ad-image box" href="#" title="Account need urgently" >
+									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/job2-400x2801-30o7lr9ve46edz5vboegp6-31dc1phlynzmn2f7wc3cwa.jpg" alt="" />
+								</a>		
+								<div class="additional-buttons">
+									<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
+									<div class="sold-by-container">
+										<span>Posted By: </span>
+										<a title="Channy" href="#">Channy</a>
+									</div>
+								</div>	
+							</div>							
+							<div class="ads-title">
+								
+								<h4><a class="ads-title" href="#" >Lexux RX300</a></h4>
+							 </div>
+							 <div class="ads-price">
+								<h4><a class="ads-price" href="#" >$ 2000</a></h4>
+							 </div>
+							 <div class="notify-new red">
+								<span class="notify-new">NEW</span>
+							</div>
+						</div>
+						<div class="ad-box">
+							<div class="ads-img-wrapper">
+								<a class="ad-image box" href="#" title="Account need urgently" >
+									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/bike1-30o7jy6rik2usui9symtca-31ddv8jydx84pvtgj47zm2.jpg" alt="" />
+								</a>
+								<div class="additional-buttons">
+									<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
+									<div class="sold-by-container">
+										<span>Posted By: </span>
+										<a title="Channy" href="#">Channy</a>
+									</div>
+								</div>	
+							</div>										
+							<div class="ads-title">
+								
+								<h4><a class="ads-title" href="#" >Lexux RX300</a></h4>
+							 </div>
+							 <div class="ads-price">
+								<h4><a class="ads-price" href="#" >$ 2000</a></h4>
+							 </div>
+							 <div class="notify-new red">
+								<span class="notify-new">NEW</span>
+							</div>
+						</div>
+						<div class="ad-box">
+							<div class="ads-img-wrapper">
+								<a class="ad-image box" href="#" title="Account need urgently" >
+									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/marriage11-30grw36d1cdiwy6ndj670q-31dctadb6ntnaes9jf0n4a.jpg" class="attachment-hr-slider-thumb-vr-3 size-hr-slider-thumb-vr-3 wp-post-image" alt="" />
+								</a>			
+								<div class="additional-buttons">
+									<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
+									<div class="sold-by-container">
+										<span>Posted By: </span>
+										<a title="Channy" href="#">Channy</a>
+									</div>
+								</div>	
+							</div>									
+							<div class="ads-title">
+								
+								<h4><a class="ads-title" href="#" >Lexux RX300</a></h4>
+							 </div>
+							 <div class="ads-price">
+								<h4><a class="ads-price" href="#" >$ 2000</a></h4>
+							 </div>
+							 <div class="notify-new red">
+								<span class="notify-new">NEW</span>
+							</div>
+						</div>
+						<div class="ad-box">
+							<div class="ads-img-wrapper">
+								<a class="ad-image box" href="#" title="Account need urgently" >
+									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/diet-30grjzjtoyfnora2z96wp6-1-31ddwksxi9wfwig8fr7rwq.jpg" class="attachment-hr-slider-thumb-vr-3 size-hr-slider-thumb-vr-3 wp-post-image" alt="" />
+								</a>	
+								<div class="additional-buttons">
+									<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
+									<div class="sold-by-container">
+										<span>Posted By: </span>
+										<a title="Channy" href="#">Channy</a>
+									</div>
+								</div>	
+							</div>										
+							<div class="ads-title">
+								
+								<h4><a class="ads-title" href="#" >Lexux RX300</a></h4>
+							 </div>
+							 <div class="ads-price">
+								<h4><a class="ads-price" href="#" >$ 2000</a></h4>
+							 </div>
+						</div>
+						<div class="ad-box">
+							<div class="ads-img-wrapper">
+								<a class="ad-image box" href="#" title="Account need urgently" >
+									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/pet11-30o7l29pxw3xcbmdoalzbe-31dc28u7jq2mmjdh7qkc22.jpg" class="attachment-hr-slider-thumb-vr-3 size-hr-slider-thumb-vr-3 wp-post-image" alt="" />
+								</a>	
+								<div class="additional-buttons">
+									<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
+									<div class="sold-by-container">
+										<span>Posted By: </span>
+										<a title="Channy" href="#">Channy</a>
+									</div>
+								</div>	
+							</div>									
+							<div class="ads-title">
+								
+								<h4><a class="ads-title " href="#" >Lexux RX300</a></h4>
+							 </div>
+							 <div class="ads-price">
+								<h4><a class="ads-price" href="#" >$ 200,000.00</a></h4>
+							 </div>
+							 <div class="notify-new red">
+								<span class="notify-new">NEW</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+	<footer  class="footer-style-4">
+		<div class="container footer-grid-3">					
+			<div class="row">
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<div class="block-content clearfix">
+						<h4 class="block-title">ABOUT CLASSIADS</h4>			
+						<div class="textwidget">
+							<p>
+							Cam App Technology is the company provide the best IT solutions in Cambodia it was found by professional humane resource of information technology members.Moreover we have many experience with design and develop  professional website.We are focus on the following:Reliability,Security,Competitive market price. Flexibility,Accessibility ,Competence and skillful human resource,Quantity is our concern. 
+							</p>
+							<div class="widget-social footer-social-widget">
+								<a href="#" target="_blank"><i class="fa fa-facebook"></i></a>				
+								<a href="https://www.facebook.com/" target="_blank"><i class="fa fa-twitter"></i></a>				
+								<a href="https://www.facebook.com/" target="_blank"><i class="fa fa-pinterest"></i></a>								
+								<a href="https://www.facebook.com/" target="_blank"><i class="fa fa-google-plus"></i></a>								
+								<a href="#" target="_blank"><i class="fa fa-youtube-play"></i></a>							
+							</div>
+							<a href="http://demo.designinvento.net/classiads4" title="Home">
+								<img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo">
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<div class="block-content clearfix">
+						<div class="footer-logo">
+							<a class="footer-about-us" href="#" title="Home">
+								<img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo">
+							</a>
+						</div>
+						<div class="textwidget text-description">
+							<p>
+									Cam App Technology is the company provide the best IT solutions in Cambodia it was found by professional humane resource of information technology members.Moreover we have many experience with design and develop professional website.We are focus on the following:Reliability,Security,Competitive market price. Flexibility,Accessibility ,Competence and skillful human resource,Quantity is our concern.						
+
+							</p>
+						</div>
+					</div>
+				</div>
 				
-				   <lable class="f_style"><b><?php echo $this->data['brand_adress']?></b></lable><br />
-				  	<?php						
-						$tels = explode("," , $this->data['tel-client']);						
-						foreach ($tels AS $i =>$tel){
-							echo "<span class='t_shadow' style='font-weight:bold;font-size:20px;'>".$tel."<span>";
-						}
-					?>	
-					
-					
-				
-							
-			</td>
-			<td class="textgreenlight" valign="top" >
-				<label class="textgreen footertitle f_style">បង្កើតដោយ  Cam App Technology</label>
-				<dl>
-				អាសយដ្ឋាន​ ៖
-				<lable class="f_style"><b><?php echo $this->data['branch_add']?></b></lable><br />
-				   
-				  	<?php						
-						$tels = explode("," , $this->data['branch-tel']);						
-						foreach ($tels AS $i =>$tel){
-							echo "<span class='t_shadow' style='font-weight:bold;font-size:20px;'>".$tel."<span><br />";
-						}
-					?>	
-					<lable class='t_shadow' style='font-weight:bold; font-size:21px;'><?php echo $this->data['companywebsite']?></lable><br />
-					<lable class='t_shadow' style='font-weight:bold; font-size:20px;'><?php echo $this->data['branch_email']?></lable><br />		   
-				</dl>
-				<label class="textgreen footertitle f_style">&copy រក្សាសិទ្ធិគ្រប់យ៉ាង</label>
-				<a  style="font-weight:bold;" href="http://<?php echo $this->data['companywebsite']?>" target="_blank"><label class="textyellow footertitle">
-					<b><?php echo $this->data['power_by']?></b></a>
-				</label>	
-				<br />
-			</td>
-		</tr>
-	</table>
-</div>
-<div style="clear: both;"></div>
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<div class="block-content clearfix">
+						<h4 class="block-title">Get In Touch</h4>			
+						<div class="textwidget">
+							<div role="form" class="wpcf7" id="wpcf7-f4333-o1" lang="en-US" dir="ltr">
+								<div class="screen-reader-response"></div>
+								<form action="#" method="post" class="wpcf7-form" novalidate="novalidate">
+									<div style="display: none;">
+										<input type="hidden" name="_wpcf7" value="4333" />
+										<input type="hidden" name="_wpcf7_version" value="4.6" />
+										<input type="hidden" name="_wpcf7_locale" value="en_US" />
+										<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f4333-o1" />
+										<input type="hidden" name="_wpnonce" value="c4cd5f3f04" />
+									</div>
+									<p><span class="wpcf7-form-control-wrap your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Your Name" /></span> </p>
+									<p><span class="wpcf7-form-control-wrap your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="Email Address" /></span>  </p>
+									<p><span class="wpcf7-form-control-wrap your-message"><textarea name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false" placeholder="Type Your message here..."></textarea></span>  </p>
+									<p><input type="submit" value="Submit Message" class="wpcf7-form-control wpcf7-submit" /></p>
+									<div class="wpcf7-response-output wpcf7-display-none"></div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>			
+			</div>			
+		</div>			
+	</footer>
+	<section class="socket"  style="background-color:#262626;">
+		<div class="container">
+			<div class="site-info"  style="color:#999999;">
+								 All copyrights reserved &#x00040; 2017 - Design &AMP; Development by <a href="http://cam-app.com/">Cam App Technology</a>
+			</div><!-- .site-info -->
+			<div class="footer-menu">
+				<ul id="menu-footer" class="menu"><li id="menu-item-4384" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4384"><a>Home</a></li>
+					<li id="menu-item-4328" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4328"><a href="blog/index.html">BLOG</a></li>
+					<li id="menu-item-4331" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4331"><a href="pricing-plans/index.html">PRICING PLANS</a></li>
+					<li id="menu-item-4330" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4330"><a href="contact/index.html">CONTACT</a></li>
+				</ul>					
+			</div>
+		</div>
+	</section>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
+	
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.bxslider.mine.js'></script> <!--form search-->
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/custome.js'></script>
+	
+	
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.isotope.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/owl.carousel.mine.js'></script>
+
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.tools.mine.js'></script>
 </body>
 </html>
-<style>
-</style>
-<script type="text/javascript">
-</script>
-	
-</script>
-		
