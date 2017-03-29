@@ -113,5 +113,13 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		 FROM `vd_category` AS cat WHERE cat.`status`=1 AND cat.`parent`=0";
 		return $db->fetchAll($sql);
 	}
+	function getSubCateByParent($parent){
+		$language =1;
+		$db = $this->getAdapter();
+		$sql="SELECT cat.`id`,cat.`parent`,cat.`alias_category`,cat.`fontawsome_icon`,
+		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id= cat.`id` AND catd.languageId=$language LIMIT 1) AS `name`
+		FROM `vd_category` AS cat WHERE cat.`status`=1 AND cat.`parent`=$parent";
+		return $db->fetchAll($sql);
+	}
 }
 ?> 

@@ -10,9 +10,7 @@
 <!--<![endif]-->
 <?php $parentcate = $this->parentcate;
 $db = new Application_Model_DbTable_DbVdGlobal();
-
 ?>
-
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="UTF-8">
@@ -323,7 +321,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 									<div class="sub-categories-list">
 										<ul class="sub-cate">
 											<?php if (!empty($subcate)) foreach ($subcate as $cate){?>
-											<li class="cate-list"><a href="<?php echo $this->baseUrl()."/postsads/write-post/category/".$cate['alias_category'];?>"><?php  echo $cate['name'];?></a></li>
+											<li class="cate-list"><a href=""><?php  echo $cate['name'];?></a></li>
 											<?php }?>
 										</ul>
 									</div>
