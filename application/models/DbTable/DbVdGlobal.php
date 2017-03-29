@@ -9,17 +9,17 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		$session_user=new Zend_Session_Namespace('auth');
 		return $session_user->user_id;
 	}
-	public function getLaguage(){
+	public function getLaguage(){// get language active for front and backend
 		$db = $this->getAdapter();
 		$sql="SELECT * FROM `vd_language` AS l WHERE l.`status`=1";
 		return $db->fetchAll($sql);
 	}
-	public function getMenuManager(){
+	public function getMenuManager(){ // for backend 
 		$db = $this->getAdapter();
 		$sql="SELECT mg.`id`,mg.`title` AS `name` FROM `vd_menu_manager` AS mg WHERE mg.`status`=1";
 		return $db->fetchAll($sql);
 	}
-	public function getMenuItems($parent = 0, $spacing = '', $cate_tree_array = ''){
+	public function getMenuItems($parent = 0, $spacing = '', $cate_tree_array = ''){ // for backend 
 		$db=$this->getAdapter();
 		if (!is_array($cate_tree_array))
 			$cate_tree_array = array();
@@ -38,21 +38,21 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		}
 		return $cate_tree_array;
 	}
-	public function  getAllArticle(){
+	public function  getAllArticle(){ // for backend 
 		$db = $this->getAdapter();
 		$sql="SELECT *,
 		(SELECT ad.title FROM `vd_article_detail` AS ad WHERE ad.articleId = c.`id` AND ad.language_id =1 LIMIT 1) AS title
 		 FROM `vd_article` AS c WHERE c.`status`=1";
 		return $db->fetchAll($sql);
 	}
-	function getMenuType(){
+	function getMenuType(){ // for backend 
 		$db=$this->getAdapter();
 		$sql="SELECT mt.`id`,mt.`title` AS name FROM `vd_menu_type` AS mt WHERE mt.`status`=1";
 		return $db->fetchAll($sql);
 	}
 	
 	
-	public function getCategory($parent = 0, $spacing = '', $cate_tree_array = ''){
+	public function getCategory($parent = 0, $spacing = '', $cate_tree_array = ''){ // for backend 
 		$db=$this->getAdapter();
 		if (!is_array($cate_tree_array))
 			$cate_tree_array = array();
@@ -100,11 +100,18 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 // 		$arr = array("image"=>$str,);
 // 		return $arr;
 // 	}
-	function getFieldTypeSelect(){
+	function getFieldTypeSelect(){ // for front (form select option)
 		$db = $this->getAdapter();
 		$sql="SELECT ft.`id`,ft.`title` AS name  FROM `vd_field_type`  AS ft WHERE ft.`status`=1 AND ft.type IN ('select','cascade')";
 		return $db->fetchAll($sql);
 	}
-	
+	function getCategoryParent(){// get parent category for frontend
+		$language =1;
+		$db = $this->getAdapter();
+		$sql="SELECT cat.`id`,cat.`parent`,cat.`alias_category`,cat.`fontawsome_icon`,
+		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id= cat.`id` AND catd.languageId=$language LIMIT 1) AS `name`
+		 FROM `vd_category` AS cat WHERE cat.`status`=1 AND cat.`parent`=0";
+		return $db->fetchAll($sql);
+	}
 }
-?>
+?> 

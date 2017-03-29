@@ -107,7 +107,7 @@ var alias_require=0;
 	function generateAlias(alias){
 		title = dijit.byId('title'+alias).get('value');
 		var title_alias = title.split(' ').join('-');
-		title_alias = (title_alias.split('?').join('-')).split('"').join('-');
+		title_alias = ((title_alias.split('?').join('-')).split('"').join('-')).split('&').join('');
 		dijit.byId("title_alias").attr('value',title_alias);
 		//if(old_alias!=""){
 			//dijit.byId('title_alias').set('value',old_alias);

@@ -8,18 +8,11 @@
 <!--[if !(IE 7) | !(IE 8)  ]><!-->
 <html lang="en-US">
 <!--<![endif]-->
-<?php 
-$profile = $this->client_info;
-if (!empty($profile['photo'])){
-	$image = $profile['photo'];
-}else{
-	$image = "profile.jpg";
-}
-?>
+<?php $parentcate = $this->parentcate;?>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="UTF-8">
-	<title>Dashboard Management</title>	
+	<title>Choose Category</title>	
 	<link rel="shortcut icon" href="wp-content/uploads/2016/04/favicon.jpg" type="image/x-icon" />
 <!--[if lt IE 9]>
 <link rel='stylesheet' id='classiads-ie-css'  href='http://demo.designinvento.net/classiads5/wp-content/themes/classiads/css/ie.css?ver=2013-11-08' type='text/css' media='all' />
@@ -210,16 +203,14 @@ if (!empty($profile['photo'])){
 								</div>
 								<div class="banner-right-blog">
 									<div class="language">
-										<div class="language">
-											<a class="lang km" href="#" title="Khmer" onclick="changeLange(1);"><img src="<?php echo $this->baseUrl();?>/images/km.png" > Khmer</a>
-											<a class="lang en" href="#" title="English" onclick="changeLange(2);"><img src="<?php echo $this->baseUrl();?>/images/en.jpg" > English</a>
-										</div>
+										<a class="lang km" href="#" title="Khmer" onclick="changeLange(1);"><img src="images/km.png" > Khmer</a>
+										<a class="lang en" href="#" title="English" onclick="changeLange(2);"><img src="images/en.jpg" > English</a>
 									</div>
 									<div class="login-register">
 										<button class="loginBtn loginBtn-normal">
 										  Login
 										</button>
-										<button class="loginBtn register" onclick="window.location.href='<?php echo $this->baseUrl();?>/index/register'">
+										<button class="loginBtn register">
 										  Register
 										</button>
 									</div>
@@ -284,133 +275,58 @@ if (!empty($profile['photo'])){
 	<section class="container">
 		<div class="conten-body">
 			<div class="conten-body-left">
-				<div class="tab-left">
-					<div  class="pos-relative">
-						<ul class="nav nav-tabs tabs horizontal" id="tabs">
-							<li class="active">
-								<a href="#myAccount">
-									<span class="dash-title">
-										<i class="fa fa-user" aria-hidden="true"></i>
-										My Account									
-									</span>
-								</a>
-							</li>
-							<li>
-								<a href="#myAds">
-									<span class="dash-title">
-										<i class="fa fa-bullhorn" aria-hidden="true"></i>
-										My Ads									
-									</span>
-								</a>
-							</li>
-							<li>
-								<a href="#Trandom">
-									<span class="dash-title">
-										<i class="fa fa-home" aria-hidden="true"></i>
-										My Ads									
-									</span>
-								</a>
-							</li>
-						</ul>
-					</div>
+				<!--<h4 class="title-content"><span class="title">Choose category :</span></h4>-->
+				<div class="step-blog">
+					<ul class="SteppedProgress Vertical">
+						<li class="complete boxed"><span>Post Ads</span></li>
+						<li class="complete current"><span>Choose category</span></li>
+						<li class=" boxed"><span>Description</span></li>
+						<li class=" boxed"><span>Finish</span></li>
+					
+					</ul>
 				</div>
 			</div>
-			<div class="conten-body-center right">
-				<div class="tab-content">
-					<div class="tab-pane active " id="myAccount">
-						<div class="blog-wrapper" >
-							<div class="profile-info">
-								<div class="data-info">
-									<div class="title"><h4>Account Information
-									<span class="right" ><a class="button right" id="edit_account" title="Edit">Edit</a>	</span>
-									</h4> 
-										
-									</div>
-									<div class="row_data">
-										<div class="label_name"><label class="label">User Name <span class="right">:</span> </label>	</div>
-										<div class="label_value"><label class="value" id="user_name_v"><?php echo $profile['user_name'];?></label></div>
-									</div>
-									<div class="row_data">
-										<div class="label_name"><label class="label">Email <span class="right">:</span> </label></div>
-										<div class="label_value"><label class="value" id="email_v"><?php echo $profile['email'];?></label></div>
-									</div>
-									<div class="row_data">
-										<div class="label_name"><label class="label">Phone <span class="right">:</span> </label>	</div>
-										<div class="label_value"><label class="value" id="phone_v"><?php echo $profile['phone'];?></label></div>
-									</div>
+			<div class="conten-body-center right post-ads">
+				<div class="choose-category-blog">
+					<div class="main-category-blog">
+						<h4 class="title-content"><span class="number_list">1</span> <span class="title">Select a category :</span></h4>
+						<div class="tab-left">
+							<div  class="pos-relative">
+								<ul class="nav nav-tabs tabs horizontal" id="tabs">
+									<?php if (!empty($parentcate)) foreach ($parentcate as $parent){ ?>
+									<li class="<!--active-->">
+										<a href="<?php echo "#".$parent['alias_category'];?>">
+											<span class="dash-title">
+												<?php if (!empty($parentcate)){?>
+												<i class="fa <?php echo $parent['fontawsome_icon'];?>" aria-hidden="true"></i>
+												<?php } echo $parent['name'];?>							
+											</span>
+										</a>
+									</li>
+									<?php }?>
 									
-									<div class="title"><h4>Additional Information <span class="right" ><a class="button right" id="edit_additional" title="Edit">Edit</a></span></h4></div>
-									<div class="row_data">
-										<div class="label_name"><label class="label">Address <span class="right">:</span> </label>	</div>
-										<div class="label_value"><label class="value" id="address_v"><?php echo $profile['address'];?></label></div>
-									</div>
-									<div class="row_data">
-										<div class="label_name"><label class="label">Website <span class="right">:</span> </label>	</div>
-										<div class="label_value"><label class="value" id="website_v"><?php echo $profile['website'];?></label></div>
-									</div>
-								</div>
-								<div class="account-image">
-									<div class="image-box">
-										<img id="profile_wiew" src="<?php echo $this->baseUrl().'/images/'.$image;?>" alt=""  />
-									</div>
-									<div class="button_browse">
-									<div id='preview'></div>	
-										<form id="image_upload_form" method="post" enctype="multipart/form-data" action='<?php echo $this->baseUrl();?>/dashboard/upload' utocomplete="off">
-											<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
-											<input class="btn_borwse_image" type="file" id="profile_image" name="profile_image"  onchange="loadFile(event)"/>
-										</form>
-									</div>
-								</div>
+								</ul>
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane" id="myAds">
-						<div class="title"><h4>My Ads <span class="right" ><a class="button right" id="post-ads" title="Post Ads">Post Ads</a></h4></div>
-						<div class="blog-wrapper">
-							<div class="ads-left">
-								<a class="ad-image box" href="../../2016/04/30/finance-officer-for-hotel/index.html" title="Finance officer for hotel" >
-									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/marketing21-30o7k73x9bx84ai65grdai-31dc2ug8a1r0mvrfgqd43u.jpg" alt=""  />
-								</a>
+					<div class="sub-categories-blog">
+						<h4 class="title-content"><span class="number_list">2</span> <span class="title">Select a subcategory :</span></h4>
+						<div class="tab-content">
+							<div class="tab-pane <!--active--> " id="myAccount">
+								<div class="sub-categories-list">
+									<ul class="sub-cate">
+										<li class="cate-list"><a href="">House for sale</a></li>
+										<li class="cate-list"><a href="">House for Rent</a></li>
+										<li class="cate-list"><a href="">Land for sale</a></li>
+										<li class="cate-list"><a href="">Land for Rent</a></li>
+									</ul>
+								</div>
 							</div>
-							<div class="ads-description">
-								<div class="title-ads"><h4><a href="#">Photography Artistic Came...</a></h4></div>
-								<div class="categories-ads"><h5><a href="#">Art & Photography</a></h5></div>
-								<div class="description-ads"><p href="#">Morbi accumsan ipsum velit. Nam nec tellus a odio sit tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent permis conubia nostra, per inceptos himenaeos mauris inter erat justo. Nullam a</p></div>
-								<div class="footer-ads"><span><i class="fa fa-calendar" aria-hidden="true"></i></span><span class="value">21-03-2016</span> <span><i class="fa fa-eye" aria-hidden="true"></i> </span><span class="value">200</span></div>
-							</div>
-							<div class="icon_menu-right">
-								<ul class="icon_menu">
-									<li class="delete_icon"><a href="#" title="Delete">Delete</a></li>
-									<li class="edit_icon"><a href="#" title="Edit">Edit</a></li>
-									<li class="renew_icon"><a href="#" title="Renew">Renew</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="blog-wrapper">
-							<div class="ads-left">
-								<a class="ad-image box" href="../../2016/04/30/finance-officer-for-hotel/index.html" title="Finance officer for hotel" >
-									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/marketing21-30o7k73x9bx84ai65grdai-31dc2ug8a1r0mvrfgqd43u.jpg" alt=""  />
-								</a>
-							</div>
-							<div class="ads-description">
-								<div class="title-ads"><h4><a href="#">Photography Artistic Came...</a></h4></div>
-								<div class="categories-ads"><h5><a href="#">Art & Photography</a></h5></div>
-								<div class="description-ads"><p href="#">Morbi accumsan ipsum velit. Nam nec tellus a odio sit tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent permis conubia nostra, per inceptos himenaeos mauris inter erat justo. Nullam a</p></div>
-								<div class="footer-ads"><span><i class="fa fa-calendar" aria-hidden="true"></i></span><span class="value">21-03-2016</span> <span><i class="fa fa-eye" aria-hidden="true"></i> </span><span class="value">200</span></div>
-							</div>
-							<div class="icon_menu-right">
-								<ul class="icon_menu">
-									<li class="delete_icon"><a href="#" title="Delete">Delete</a></li>
-									<li class="edit_icon"><a href="#" title="Edit">Edit</a></li>
-									<li class="renew_icon"><a href="#" title="Renew">Renew</a></li>
-								</ul>
-							</div>
-						</div>
+					
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 
 	
 	<footer  class="footer-style-4">
@@ -493,86 +409,6 @@ if (!empty($profile['photo'])){
 			</div>
 		</div>
 	</section>
-	
-	<div id="pop-acc-info" class="pop-acc-info">
-	  <!-- popup content -->
-	  <div class="pop-acc-info_content">
-	    <div class="pop-acc-info_header">
-	      <span id="close-acc-info" class="close">×</span>
-	      <h2>Edit Account Information</h2>
-	    </div>
-	    <div class="pop-acc-info_body">
-	     <form id="form-account-info" method="post">
-     		<div class="form-row">
-     			<div class="row_data">
-					<div>
-						<label>User Name <span class="sign_req">*</span></label>
-						<input type="text" placeholder="User Name"  name="user_name" id="user_name" value="<?php echo $profile['user_name'];?>" required="required" class="form-control custom" />
-					</div>
-				</div>
-				<div class="row_data">
-					<div>
-						<label>Email <span class="sign_req">*</span></label>
-						<input type="text" placeholder="Email" readOnly="readOnly" name="email" id="email" value="<?php echo $profile['email'];?>"  required="required" class="form-control custom" />
-					</div>
-				</div>
-				<div class="row_data">
-					<div>
-						<label>Phone <span class="sign_req">*</span></label>
-						<input type="text" placeholder="Phone"  name="phone" id="phone" value="<?php echo $profile['phone'];?>" required="required" class="form-control custom" />
-					</div>
-				</div>
-			</div>
-			 
-	     </form>
-	     <div class="form-row botton">
-				<button class="loginBtn register" onclick="editAccountInfo();"> Submit</button>
-			</div>
-	    </div>
-	    <div class="popup_footer">
-	    </div>
-	  </div>
-	</div>
-	
-	<div id="pop-addtional" class="pop-acc-info">
-	  <!-- popup content -->
-	  <div class="pop-addtional_content">
-	    <div class="pop-addtional_header">
-	      <span id="close-pop-addtional" class="close">×</span>
-	      <h2>Edit Additional Information</h2>
-	    </div>
-	    <div class="pop-addtional_body">
-	     <form id="form-pop-addtional" method="post">
-     		<div class="form-row">
-     			<div class="row_data">
-					<div>
-						<label>Address <span class="sign_req">*</span></label>
-						<input type="text" placeholder="Address"  name="address" id="address" value="<?php echo $profile['address'];?>" required="required" class="form-control custom" />
-					</div>
-				</div>
-				<div class="row_data">
-					<div>
-						<label>Website <span class="sign_req">*</span></label>
-						<input type="text" placeholder="Website" name="website" id="website" value="<?php echo $profile['website'];?>"  required="required" class="form-control custom" />
-					</div>
-				</div>
-			</div>
-			 
-	     </form>
-	     <div class="form-row botton">
-				<button class="loginBtn register" onclick="editAdditional();"> Submit</button>
-			</div>
-	    </div>
-	    <div class="popup_footer">
-	    </div>
-	  </div>
-	</div>
-<script>
-
-window.onload = function(e){ 
-	getBaseUrl('<?php echo $this->baseUrl();?>');
-}
-</script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
 	
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
@@ -585,7 +421,5 @@ window.onload = function(e){
 
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.tools.mine.js'></script>
 	
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/javascript/jquery.form.js'></script>
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/javascript/custome.js'></script>
 </body>
 </html>
