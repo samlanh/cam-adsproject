@@ -28,7 +28,7 @@ class Application_Model_DbTable_DbFormPostAds extends Zend_Db_Table_Abstract
 		}
 		return $cate_tree_array;
 	}
-	function getAllControlByCateid($cate_id){
+	function getAllControlByCateid($cate_id){// old test form
 		$db = $this->getAdapter();
 		$sql="SELECT * FROM `vd_field_type` AS ft WHERE FIND_IN_SET($cate_id,ft.`category`) AND ft.`status`=1";
 		$row =  $db->fetchAll($sql);
@@ -83,7 +83,7 @@ class Application_Model_DbTable_DbFormPostAds extends Zend_Db_Table_Abstract
 		return $arr;
 	}
 	
-	function OptionSelect($fielid,$name,$require,$labelname){
+	function OptionSelect($fielid,$name,$require,$labelname){ // old form test
 		if($require==1){
 			$isreq= 'required="required"';
 			$sigrequir='<span class="req">*</span>';

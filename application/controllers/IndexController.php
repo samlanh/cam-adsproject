@@ -1,5 +1,5 @@
 <?php
-
+/*-- old form when testing dynamic form by category---*/
 class IndexController extends Zend_Controller_Action
 {
 

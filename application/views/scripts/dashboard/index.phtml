@@ -34,8 +34,8 @@ if (!empty($profile['photo'])){
 <link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/custom.css' type='text/css' media='all' />
 
 
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jqueryb8ff.js?ver=1.12.4'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery.js'></script>
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min.js'></script>
 
 <script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fancybox.packe.js'></script>
 <script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fitvidse.js'></script>
@@ -197,7 +197,7 @@ if (!empty($profile['photo'])){
 						<div class="tab-pane active subcategory-menu" id="Tlatest">
 							<div class="list-dropdow-category" >
 								<div class="banner-left-blog">
-								<img src="images/camapplogo.png" alt="Logo">
+									<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
 								</div>
 								<div class="blog-sub-categories-cener">
 									<ul class="menu-list-cate">
@@ -210,10 +210,8 @@ if (!empty($profile['photo'])){
 								</div>
 								<div class="banner-right-blog">
 									<div class="language">
-										<div class="language">
-											<a class="lang km" href="#" title="Khmer" onclick="changeLange(1);"><img src="<?php echo $this->baseUrl();?>/images/km.png" > Khmer</a>
-											<a class="lang en" href="#" title="English" onclick="changeLange(2);"><img src="<?php echo $this->baseUrl();?>/images/en.jpg" > English</a>
-										</div>
+										<a class="lang km" href="#" title="Khmer" onclick="changeLange(1);"><img src="<?php echo $this->baseUrl();?>/images/km.png" > Khmer</a>
+										<a class="lang en" href="#" title="English" onclick="changeLange(2);"><img src="<?php echo $this->baseUrl();?>/images/en.jpg" > English</a>
 									</div>
 									<div class="login-register">
 										<button class="loginBtn loginBtn-normal">
@@ -229,7 +227,7 @@ if (!empty($profile['photo'])){
 										</button>
 									</div>
 									<div class="button-postads">
-										<button class="loginBtn loginBtn-postads-free">
+										<button class="loginBtn loginBtn-postads-free" onclick="window.location.href='<?php echo $this->baseUrl();?>/postsads/choose-category'">
 										  Post Free Ads
 										</button>
 									</div>
@@ -239,7 +237,7 @@ if (!empty($profile['photo'])){
 						<div class="tab-pane subcategory-menu" id="Tpopuler">
 							<div class="list-dropdow-category" >
 								<div class="banner-left-blog">
-								<img src="images/camapplogo.png" alt="Logo">
+									<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
 								</div>
 								<div class="blog-sub-categories">
 									<ul class="menu-list-cate">
@@ -259,7 +257,7 @@ if (!empty($profile['photo'])){
 						<div class="tab-pane subcategory-menu" id="Trandom">
 							<div class="list-dropdow-category" >
 								<div class="banner-left-blog">
-								<img src="images/camapplogo.png" alt="Logo">
+									<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
 								</div>
 								<div class="blog-sub-categories">
 									<ul class="menu-list-cate">
@@ -321,10 +319,10 @@ if (!empty($profile['photo'])){
 						<div class="blog-wrapper" >
 							<div class="profile-info">
 								<div class="data-info">
-									<div class="title"><h4>Account Information
-									<span class="right" ><a class="button right" id="edit_account" title="Edit">Edit</a>	</span>
-									</h4> 
-										
+									<div class="title">
+										<h4>Account Information
+										<span class="right" ><a class="button right" id="edit_account" title="Edit">Edit</a>	</span>
+										</h4> 
 									</div>
 									<div class="row_data">
 										<div class="label_name"><label class="label">User Name <span class="right">:</span> </label>	</div>
@@ -587,5 +585,8 @@ window.onload = function(e){
 	
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/javascript/jquery.form.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/javascript/custome.js'></script>
+
+	<!-- softable -->
+	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
 </body>
 </html>

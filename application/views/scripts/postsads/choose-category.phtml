@@ -31,8 +31,8 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 <link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/custom.css' type='text/css' media='all' />
 
 
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jqueryb8ff.js?ver=1.12.4'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery.js'></script>
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min.js'></script>
 
 <script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fancybox.packe.js'></script>
 <script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fitvidse.js'></script>
@@ -224,7 +224,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 										</button>
 									</div>
 									<div class="button-postads">
-										<button class="loginBtn loginBtn-postads-free">
+										<button class="loginBtn loginBtn-postads-free" onclick="window.location.href='<?php echo $this->baseUrl();?>/postsads/choose-category'">
 										  Post Free Ads
 										</button>
 									</div>
@@ -234,7 +234,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 						<div class="tab-pane subcategory-menu" id="Tpopuler">
 							<div class="list-dropdow-category" >
 								<div class="banner-left-blog">
-								<img src="images/camapplogo.png" alt="Logo">
+									<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
 								</div>
 								<div class="blog-sub-categories">
 									<ul class="menu-list-cate">
@@ -254,7 +254,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 						<div class="tab-pane subcategory-menu" id="Trandom">
 							<div class="list-dropdow-category" >
 								<div class="banner-left-blog">
-								<img src="images/camapplogo.png" alt="Logo">
+									<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
 								</div>
 								<div class="blog-sub-categories">
 									<ul class="menu-list-cate">
@@ -428,6 +428,9 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/owl.carousel.mine.js'></script>
 
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.tools.mine.js'></script>
+	
+	<!-- softable -->
+	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
 	
 </body>
 </html>

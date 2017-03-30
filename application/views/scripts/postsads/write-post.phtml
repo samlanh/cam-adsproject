@@ -14,8 +14,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="UTF-8">
-	<title>Choose Category</title>	
-	<link rel="shortcut icon" href="wp-content/uploads/2016/04/favicon.jpg" type="image/x-icon" />
+	<title>Write Posts</title>	
 <!--[if lt IE 9]>
 <link rel='stylesheet' id='classiads-ie-css'  href='http://demo.designinvento.net/classiads5/wp-content/themes/classiads/css/ie.css?ver=2013-11-08' type='text/css' media='all' />
 <![endif]-->
@@ -29,8 +28,8 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 <link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/custom.css' type='text/css' media='all' />
 
 
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jqueryb8ff.js?ver=1.12.4'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery.js'></script>
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min.js'></script>
 
 <script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fancybox.packe.js'></script>
 <script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fitvidse.js'></script>
@@ -222,7 +221,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 										</button>
 									</div>
 									<div class="button-postads">
-										<button class="loginBtn loginBtn-postads-free">
+										<button class="loginBtn loginBtn-postads-free" onclick="window.location.href='<?php echo $this->baseUrl();?>/postsads/choose-category'">
 										  Post Free Ads
 										</button>
 									</div>
@@ -232,7 +231,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 						<div class="tab-pane subcategory-menu" id="Tpopuler">
 							<div class="list-dropdow-category" >
 								<div class="banner-left-blog">
-								<img src="images/camapplogo.png" alt="Logo">
+									<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
 								</div>
 								<div class="blog-sub-categories">
 									<ul class="menu-list-cate">
@@ -252,7 +251,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 						<div class="tab-pane subcategory-menu" id="Trandom">
 							<div class="list-dropdow-category" >
 								<div class="banner-left-blog">
-								<img src="images/camapplogo.png" alt="Logo">
+									<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
 								</div>
 								<div class="blog-sub-categories">
 									<ul class="menu-list-cate">
@@ -277,65 +276,148 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 	<section class="container">
 		<div class="conten-body">
 			<div class="conten-body-left">
-				<!--<h4 class="title-content"><span class="title">Choose category :</span></h4>-->
 				<div class="step-blog">
 					<ul class="SteppedProgress Vertical">
 						<li class="complete boxed"><span>Post Ads</span></li>
-						<li class="complete current"><span>Choose category</span></li>
-						<li class=" boxed"><span>Description</span></li>
+						<li class="complete boxed"><span>Choose category</span></li>
+						<li class=" complete current"><span>Description</span></li>
 						<li class=" boxed"><span>Finish</span></li>
 					
 					</ul>
 				</div>
 			</div>
 			<div class="conten-body-center right post-ads">
-				<div class="choose-category-blog">
-					<div class="main-category-blog">
-						<h4 class="title-content"><span class="number_list">1</span> <span class="title">Select a category :</span></h4>
-						<div class="tab-left">
-							<div  class="pos-relative">
-								<ul class="nav nav-tabs tabs horizontal" id="tabs">
-									<?php if (!empty($parentcate)) foreach ($parentcate as $parent){ ?>
-									<li class="<!--active-->">
-										<a href="<?php echo "#".$parent['alias_category'];?>">
-											<span class="dash-title">
-												<?php if (!empty($parentcate)){?>
-												<i class="fa <?php echo $parent['fontawsome_icon'];?>" aria-hidden="true"></i>
-												<?php } echo $parent['name'];?>							
-											</span>
-										</a>
+				<div class="title">
+					<h4><?php if (!empty($this->cate['parent_name'])){ echo $this->cate['parent_name']." >>";} echo $this->cate['name']?>
+					</h4> 
+				</div>
+				<div class="form-post-ads">
+					<form method="post" enctype="multipart/form-data">
+						<div class="form-row">
+							<div class="form-label">
+								<label>Title <span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<input type="text" placeholder="Title"  name="title" id="title"  required="required"class="form-control" />
+							</div>
+						</div>
+						<?php echo $this->form;?>
+						<div class="form-row">
+							<div class="form-label">
+								<label>Price <span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<input type="text" placeholder="Price"  name="price" id="price"  required="required" class="form-control" onkeypress="return isNumber(event);"/>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-label">
+								<label>Description <span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<textarea id="description" name="description" required="required" class="form-control textareadesc" placeholder="Description..."></textarea>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-label">
+								<label>Image <span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<ul class="sortable grid">
+								<?php $string=''; 
+								for ($i=1; $i<=6; $i++){ 
+										$string.="
+										jQuery('#filePhoto$i').click(function(e){
+										var imageLoader$i = document.getElementById('filePhoto$i');
+											imageLoader$i.addEventListener('change', handleImage$i, false);
+										
+											function handleImage$i(e) {
+											var reader = new FileReader();
+											reader.onload = function (event) {
+												jQuery('#uploader$i img').attr('src',event.target.result);
+												}
+											reader.readAsDataURL(e.target.files[0]);
+											}
+										})";
+									?>
+									<li>
+										<div id="uploader<?php echo $i;?>" class="uploader">
+											<img src="<?php echo $this->baseUrl();?>/images/broweimage.png"/>
+											<input class="filephoto" type="file" name="filePhoto<?php echo $i;?>"  id="filePhoto<?php echo $i;?>" value='' />
+										</div>
 									</li>
-									<?php }?>
-									
+									<?php }echo "<script>".$string."</script>";?>
 								</ul>
 							</div>
 						</div>
-					</div>
-					<div class="sub-categories-blog">
-						<h4 class="title-content"><span class="number_list">2</span> <span class="title">Select a subcategory :</span></h4>
-						<div class="tab-content">
-							<?php if (!empty($parentcate)) foreach ($parentcate as $parent){ 
-								$subcate = $db->getSubCateByParent($parent['id']);
-								?>
-								<div class="tab-pane <!--active--> " id="<?php echo $parent['alias_category'];?>">
-									<div class="sub-categories-list">
-										<ul class="sub-cate">
-											<?php if (!empty($subcate)) foreach ($subcate as $cate){?>
-											<li class="cate-list"><a href=""><?php  echo $cate['name'];?></a></li>
-											<?php }?>
-										</ul>
-									</div>
-								</div>
-							<?php }?>
+						<div class="form-row">
+							<div class="form-label">
+								<label>Name <span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<input type="text" placeholder="Name"  name="name" id="name"  required="required"class="form-control" />
+							</div>
 						</div>
-					 </div>
+						<div class="form-row">
+							<div class="form-label">
+								<label>Phone <span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<input type="text" placeholder="Phone"  name="phone1" id="phone1"  required="required"class="form-control" />
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-label">
+								<label></label>
+							</div>
+							<div class="form-value">
+								<input type="text" placeholder="Phone"  name="phone1" id="phone1"  required="required"class="form-control" />
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-label">
+								<label>Email <span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<input type="text" placeholder="Email"  name="email" id="email"  required="required"class="form-control" />
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-label">
+								<label>Location<span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<select id="location" name="location" class="form-select" >												
+									<option value="All" selected="selected">Phnom Penh</option>
+									<option value="accounts-jobs">Siem Reip</option>
+									<option value="art-photography">Kandal</option>
+									<option value="brides">Takeo</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-label">
+								<label>Address <span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<textarea id="adress" name="adress" required="required" class="form-control " placeholder="Address..."></textarea>
+							</div>
+						</div>
+						<div class="form-row ">
+							<div class="form-label">
+							</div>
+							<div class="form-value">
+								<button class="loginBtn register"> SUBMIT</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
-		</section>
+	</section>
 
 	
-	<footer  class="footer-style-4">
+	<footer  class="footer">
 		<div class="container footer-grid-3">					
 			<div class="row">
 				<div class="col-md-4 col-sm-6 col-xs-12">
@@ -377,25 +459,6 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="block-content clearfix">
 						<h4 class="block-title">Get In Touch</h4>			
-						<div class="textwidget">
-							<div role="form" class="wpcf7" id="wpcf7-f4333-o1" lang="en-US" dir="ltr">
-								<div class="screen-reader-response"></div>
-								<form action="#" method="post" class="wpcf7-form" novalidate="novalidate">
-									<div style="display: none;">
-										<input type="hidden" name="_wpcf7" value="4333" />
-										<input type="hidden" name="_wpcf7_version" value="4.6" />
-										<input type="hidden" name="_wpcf7_locale" value="en_US" />
-										<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f4333-o1" />
-										<input type="hidden" name="_wpnonce" value="c4cd5f3f04" />
-									</div>
-									<p><span class="wpcf7-form-control-wrap your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Your Name" /></span> </p>
-									<p><span class="wpcf7-form-control-wrap your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="Email Address" /></span>  </p>
-									<p><span class="wpcf7-form-control-wrap your-message"><textarea name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false" placeholder="Type Your message here..."></textarea></span>  </p>
-									<p><input type="submit" value="Submit Message" class="wpcf7-form-control wpcf7-submit" /></p>
-									<div class="wpcf7-response-output wpcf7-display-none"></div>
-								</form>
-							</div>
-						</div>
 					</div>
 				</div>			
 			</div>			
@@ -426,6 +489,10 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/owl.carousel.mine.js'></script>
 
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.tools.mine.js'></script>
+	
+	<!-- softable -->
+	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
+	
 	
 </body>
 </html>
