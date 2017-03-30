@@ -21,442 +21,7 @@ background: #f8f8f8;
 #navbar .logo img{
 	max-width:200px;
 }
-h3,.detail-cat a,.text-up-line { color: #444444; } 
-a, #navbar .main_menu .menu li.current_page_item .sub-menu a:hover, 
-#navbar .main_menu .menu li.current_page_item .children a:hover, 
-#navbar .main_menu .menu li.current-menu-item  .children a:hover, 
-.main_menu ul li ul.children li a:hover, 
-.main_menu ul li ul.sub-menu li a:hover, 
-.main_menu ul li ul.children li.current_page_item a, 
-.main_menu ul li ul.children li.current-menu-item a, 
-.main_menu .menu li.current_page_item .sub-menu a:hover, 
-.main_menu .menu li.current-menu-item  .sub-menu a:hover, 
-.main_menu .menu li.current_page_item .children a:hover, 
-.main_menu .menu li.current-menu-item  .children a:hover, 
-ul.custom-tabs li a.current, h4.trigger:hover, 
-h4.trigger.active:hover, h4.trigger.active,
-#navbar .main_menu .menu li .sub-menu li.current_page_item a, 
-#navbar .main_menu .menu li .children li.current_page_item a, 
-#navbar .main_menu .menu li .children li.current_page_item a:hover, 
-#navbar .main_menu .menu li .children li .current-menu-item a:hover,
-.callout-section-version-2 .callout .more-btn-inner a span { color: #666666; } 
-.quicktabs-tabs .grid-feat-ad-style a:hover, 
-.quicktabs-tabs .list-feat-ad-style a:hover, 
-.quicktabs-tabs .grid-feat-ad-style a.current, 
-.quicktabs-tabs .list-feat-ad-style a.current { background-color: #666666; } 
-.woocommerce ul.products li.product a:hover img, .woocommerce-page ul.products li.product a:hover img, .woocommerce #content div.product div.images a:hover img, .woocommerce div.product div.images a:hover img, .woocommerce-page #content div.product div.images a:hover img, .woocommerce-page div.product div.images a:hover img { border: 5px solid #666666; } #contact-form #contactName:focus, #contact-form #author:focus, #contact-form #email:focus, #contact-form #url:focus, #contact-form #subject:focus, #contact-form #commentsText:focus, #contact-form #humanTest:focus { border: 1px solid #666666; } .my-ad-details span a:hover,.my-ad-details span.my-ad-a:hover i,.my-ad-details a.my-ad-title:hover,.my-ad-details span a:hover,.main_menu > ul > li.current-menu-item > a,body.category .custom-widget .cat-widget-content li:hover span,body.category .custom-widget .cat-widget-content ul li:hover a,.custom-cat-widget .custom-widget .cat-widget-content li:hover span,.custom-cat-widget .custom-widget .cat-widget-content ul li:hover a,.marker-info-price,.site-info a,.ads-tags a:hover,.category-content li:hover a,.categories-homepage-vr-2 .category-content ul li a.view-all,.category-content li:hover span,.geo-location-button .on .fa, .geo-location-button .fa:hover,footer .jw-twitter li a,.publish-ad-button.login-page p a, a:hover, a:active, .main_menu > ul >  li:hover > a, .main_menu .menu li.current_page_item > a, .main_menu .menu li.current-menu-item > a, .main_menu ul li ul.children li:hover a, .main_menu ul li ul.sub-menu li:hover a,.text-bt-line,.plan-vr-3.single-plan #submit-plan,.color-default p:last-word,.plan-vr-3.single-plan #submit-plan,.menu-vr-5 a:active,.menu-vr-5 a:hover,.menu-vr-5 a:focus a { color: #0bb688 ; } .cat-widget-content ul li .widget-ad-list-content a:hover,.input-submit:hover,#register-login-block-top ul li a:hover i,.header-v3 .login-register > a:hover i,#top-menu-block.header-v2 #register-login-block-top ul li a:hover,#top-menu-block.header-v2 #register-login-block-top ul li a:hover i,.top-social  i:hover,.author-details a,.author-meta a,#ad-address span .fa,.single-share a i:hover,.ad-box:hover .post-title-cat a,.callout-desc p span,section#locations .location a:hover,section#locations .location a:hover i,.ad-title a:hover,.top-email,.custom-cat-widget .custom-widget .cat-widget-content ul li:hover i,footer .block-content .menu-footer-container ul li a:hover, #register-login-block-top li a:hover,body.category .custom-widget .cat-widget-content li:hover .category-icon-box i,.search-bar-version3 .geo-location-button .off .fa,#ads-homepage.grid-vr-3  ul.tabs li a:hover,#ads-homepage.grid-vr-3  ul.tabs li.active a,#ads-homepage.grid-vr-3  ul.tabs li:hover a,#ads-homepage.listing-ads-vr-2  ul.tabs li a:hover,#ads-homepage.listing-ads-vr-2  ul.tabs li.active a,#ads-homepage.grid-vr-3  .view-types li.activate a i,#ads-homepage.grid-vr-3 .post-title-cat .post-title a.feat-category,.categories-homepage-vr-3 .category-title-v3 a h4:hover,.section-header-style-2  .main-title-bottom-icon i, footer .block-title,.search-bar-version2 .geo-location-button .on .fa,.site-info a,.header-v4 .header-contact-info .header-top-call .contact-text .text-bt-line,.header-v4 .header-contact-info .header-top-email .contact-text .text-bt-line,.categories-homepage-vr-2 .category-content ul li a.view-all,.categories-homepage-vr-2 .category-content ul li a:hover,.header-v5 .main_menu a:hover,.search-bar-version3 #advanced-search-widget-version2 .views-exposed-widget .btn-primary:hover,.search-bar-version3 #advanced-search-widget-version2 .views-exposed-widget .btn-primary:hover i,.menu-vr-5 li a:active,.menu-vr-5 li a:hover,.menu-vr-5 li a:focus,#ads-homepage.listing-ads-vr-2  .view-types li.activate a i,.comments-header h3,.comment-reply a:hover,
-.single-description p a:hover,
-footer .jw-twitter ul li span a,
-.menu-vr-6.main_menu .menu li > a:hover,
-.menu-vr-6.main_menu ul li:hover > a,
-.banner-cat-list li a span,
-.banner-cat-list li a span i,
-.menu-vr-6.main_menu .menu li.current-menu-item > a,
-.menu-vr-5.main_menu .menu li.current_page_item > a,
-.mark-featured i{ color: #0bb688 !important; } 
-.page-template-template-profile-php .my-ad-box .my-ad-a:hover,
-.menu-v4,.header-top-bar,.header-v4 .header-contact-info .icon-head i,
-.widget-social a i:hover,.popular-title,.single-plan #submit-plan:hover,
-.plan-vr-3.single-plan.span4:hover #submit-plan,
-.plans .plan-vr-3.single-plan.span4:nth-child(2) #submit-plan,
-#ads-homepage ul.tabs li a:hover,#ads-homepage ul.tabs li.active a, #ads-homepage ul.tabs li a.current,
-.category-box:hover .category-btn,
-.ad-box .add-price,.featured-slider-2 .ad-box .add-price span,
-#ads-homepage.grid-vr-3  .ad-box .add-price span,.ui-slider-horizontal .ui-slider-handle,
-.ui-slider-horizontal .ui-slider-range-min,.search-your-keyword-txt label,
-.search-bar-version2 #advanced-search-widget-version2 .views-exposed-widget .btn-primary,
-.listing-ads .read-more-btn-inner:hover,.callout .view-more-btn:hover .more-btn-inner, 
-#contact-ad-owner .close,.backtop:hover,.author-profile-ad-details .button-ag:hover,
-h4.trigger.active,.login-title,.single-slider .single-ad-price,.bottom-social-icons i:hover,
-.detail-cat .category-icon .category-icon-box,.view-more-btn:hover .more-btn-inner,
-.h2-seprator,.h3-seprator,.h3-seprator-sidebar,
-.tagcloud a:hover, .pagination span.current,.pagination a:hover,
-#advanced-search-widget-version2 .views-exposed-widget .btn-primary:hover,
-.search-bar-version3 #advanced-search-widget-version2 .views-exposed-widget .btn-primary,.top-social-icons a:hover,
-.search-bar-version3 .geo-location-button .on .fa,#ads-homepage.grid-vr-2  .view-types li.activate a i,.price-pro-cont,
-.location-version-2 .span3 a i,#uploadTrigger.imagesbutton:hover,
-.hvr-underline-from-center:before,.sticky li i,#ads-homepage .view-types li.activate a i,
-.bog-date-box,.map-box-style-2 .marker-info-holder .add-price span,
-.search-bar-version4 #advanced-search-widget-version2 .views-exposed-widget .btn-primary,
-.subscribe_email #wp-subscribe input.submit,footer .wpcf7-form p .wpcf7-submit,
-.plan-vr-3.single-plan:hover #submit-plan,.imageupload:hover,
-.imageupload:focus 		{ background-color: #0bb688 !important; } 
-.log-forms input#edit-submit:hover,.page-template-template-contact-php .input-submit:hover,
-.listing-ads .read-more-btn-inner:hover,#edit-submit:hover,.log-forms #edit-submit:hover,
-.menu-v3 ul li ul.children, .menu-v3 ul li ul.sub-menu,.menu-v3 li:hover a,.menu-v4 ul li ul.children, .menu-v4 ul li ul.sub-menu,
-.author-btn .button-ag:hover,.ad-title .ad-page-price a,
-section#locations .location .span3:hover,.main_menu > ul > li.current-menu-item > a,
-blockquote,.main_menu ul li ul.children li:first-child, .main_menu ul li ul.sub-menu li:first-child,
-.tagcloud a:hover,.main_menu > ul > li > a:hover,
-#register-login-block-top .login a:hover,
-.pagination span.current,.pagination a:hover,
-#carousel-prev:hover,#carousel-next:hover, 
-#advanced-search-widget-version2 .views-exposed-widget 
-.btn-primary:hover,.plan-vr-3.single-plan #submit-plan,
-.partners-logo-style-2#partners .partner-logo:hover,
-.backtop.backtop-effect-2 a:hover,.callout .view-more-btn:hover .more-btn-inner,
-.comments-header h3,
-.subscribe_email #wp-subscribe input.submit,footer .wpcf7-form p .wpcf7-submit{ border-color:#0bb688 !important; } 
-.pacman{ border-top-color:#0bb688 !important; } 
-.pacman{ border-bottom-color:#0bb688 !important; } 
-.pacman{ border-left-color:#0bb688 !important; } 
-#ads-homepage.listing-ads-vr-2 .ad-box .add-price span{ background-color:#0bb688 !important; } 
-.marker-info-link a,#new-post a.btn, input[type='submit'], 
-.woocommerce span.onsale, .woocommerce-page span.onsale, 
-.products li a.button, 
-.woocommerce div.product form.cart .button, 
-.woocommerce-page div.product form.cart .button, 
-.woocommerce #content div.product form.cart .button,
- .woocommerce-page #content div.product form.cart .button, 
- .woocommerce button.button, .woocommerce-page button.button,
- .woocommerce input.button, .woocommerce-page input.button, 
- .woocommerce #respond input#submit, .woocommerce-page #respond input#submit, 
- .woocommerce #content input.button, .woocommerce-page #content input.button,
- #top-cart .button, form.cart .button-alt, .woocommerce #content input.button, 
- .woocommerce #respond input#submit, .woocommerce a.button, 
- .woocommerce button.button, 
- .woocommerce input.button, .woocommerce-page #content input.button, 
- .woocommerce-page #respond input#submit, .woocommerce-page a.button, 
- .woocommerce-page button.button, .woocommerce-page input.button, 
- .bbp-submit-wrapper button.button, .woocommerce .quantity .minus, 
- .woocommerce-page .quantity .minus, .woocommerce #content .quantity .minus, 
- .woocommerce-page #content .quantity .minus, .woocommerce .quantity .plus, 
- .woocommerce-page .quantity .plus, .woocommerce #content .quantity .plus, 
- .woocommerce-page #content .quantity .plus, form.cart .plus, form.cart .minus, 
- .product-quantity .plus, .product-quantity .minus, .woocommerce .quantity input.qty, 
- .woocommerce-page .quantity input.qty, .woocommerce #content .quantity input.qty, 
- .woocommerce-page #content .quantity input.qty, form.cart input.qty, form.cart input.qty, 
- .product-quantity input.qty, .pricing-plans a.btn, 
- #edit-submit, 
- #navbar .btn-navbar { background: #f8f8f8!important; }  
- .woocommerce ul.products li.product .price, 
- .woocommerce-page ul.products li.product .price { color: #f8f8f8; }
- .ads-tags a:hosver { background: #ecf0f1!important; color: #f8f8f8!important; } 
- .marker-info-link a:hover,#new-post a.btn:hover, input[type='submit']:hover, .products li a.button:hover, 
- .woocommerce div.product form.cart .button:hover, 
- .woocommerce-page div.product form.cart .button:hover,
- .woocommerce #content div.product form.cart .button:hover, 
- .woocommerce-page #content div.product form.cart .button:hover,
- .woocommerce button.button:hover, .woocommerce-page button.button:hover,
- .woocommerce input.button:hover, .woocommerce-page input.button:hover, 
- .woocommerce #respond input#submit:hover, 
- .woocommerce-page #respond input#submit:hover, 
- .woocommerce #content input.button:hover, 
- .woocommerce-page #content input.button:hover, #top-cart .button:hover, 
- form.cart .button-alt:hover, .woocommerce #content input.button:hover, 
- .woocommerce #respond input#submit:hover, .woocommerce a.button:hover, 
- .woocommerce button.button:hover, .woocommerce input.button:hover, 
- .woocommerce-page #content input.button:hover, .woocommerce-page #respond input#submit:hover, 
- .woocommerce-page a.button:hover, .woocommerce-page button.button:hover, .woocommerce-page input.button:hover, 
- .bbp-submit-wrapper button.button:hover, 
- .woocommerce .quantity .minus:hover, 
- .woocommerce-page .quantity .minus:hover, 
- .woocommerce #content .quantity .minus:hover,
- .woocommerce-page #content .quantity .minus:hover,
- .woocommerce .quantity .plus:hover, 
- .woocommerce-page .quantity .plus:hover, 
- .woocommerce #content .quantity .plus:hover, 
- .woocommerce-page #content .quantity .plus:hover, 
- form.cart .plus:hover, form.cart .minus:hover, 
- .product-quantity .plus:hover, .product-quantity .minus:hover, 
- .pricing-plans a.btn:hover, #edit-submit:hover, 
- #navbar .btn-navbar:hover { background: #0bb688!important; } 				
- .footer-menu #menu-footer li a{	
-	color: #999999;
-	}
-		.plan-vr-3.single-plan #submit-plan{
-		color:#0bb688;
-	}
-	.plans .plan-vr-3.single-plan.span4:nth-child(2) #submit-plan{
-		color:#fff;
-	}
-				.more-btn-inner{
-				border-radius:0px !important;
-				-webkit-box-shadow: inset 0px -2px 0px 0px rgba(0,0,0,0.2);
-				-moz-box-shadow: inset 0px -2px 0px 0px rgba(0,0,0,0.2);
-				box-shadow: inset 0px -2px 0px 0px rgba(0,0,0,0.2);
-				border:1px solid #0bb688 !important;
-				background-color:#0bb688 !important;
-			}
-			.listing-ads .read-more-btn-inner,.form-submit .submit{
-				border-radius:0px !important;
-				box-shadow:none !important;
-				border:1px solid #eee;
-			}
-			.listing-ads .read-more-btn-inner:hover,.form-submit .submit:hover{
-					border:1px solid #0bb688;
-					background-color:#0bb688;
-			}
-			.blog-btn{
-				border-radius:0px;
-			}
-			.blog-btn:hover{
-				background-color:#0bb688;
-				box-shadow: 0px 3px 0px 0px #0bb688;
-				border-color:#0bb688 !important;
-			}
-			.plan-vr-2.single-plan:hover #submit-plan{
-				border:1px solid #0bb688 !important;
-				background-color:#0bb688 !important;
-			}
-			.log-forms #edit-submit,a.register-social-button-facebook,a.register-social-button-twitter{
-				border-radius:0px !important;
-			}
-			#edit-submit{
-				border-radius: 8px;
-				box-shadow:none !important;
-				border-bottom-width: 3px !important;
-			}
-			.input-textarea:focus{
-				box-shadow:inset 1px 1px 0px 0px #eee !important;
-			}
-			.callout .more-btn-inner{
-				border:1px solid #0bb688 !important;
-				background-color:#0bb688 !important;
-			}
-			.more-btn-inner:hover{
-					border:1px solid #0bb688 !important;
-			}
-			footer .wpcf7-form p .wpcf7-submit{
-				border-wdith:1px !important;
-				border-style:solid !important;
-				border-radius:0px;
-			}
-			.more-btn-inner span{
-				color:#fff;
-			}
-			.more-btn-inner a i{
-				float: left;
-				width: 48px;
-				height: 48px;
-				line-height: 48px;
-				background: rgba(0, 0, 0, 0.2);
-				text-align: center;
-				margin-left:0px;
-				margin-right:0px;
-				color:#fff;
-							
-			}
-			.callout-section-version-3 .more-btn-inner{
-				background-color:#fff;
-			}
-			.input-submit,.comment-respond textarea,.comment-respond input{
-				border-radius:0px !important;
-				box-shadow:none !important;
-			}
-			#edit-submit,
-			.imageupload{
-				border-radius: 0px;
-				box-shadow:none !important;
-				border-bottom-width: 1px !important;
-			}
-			#uploadTrigger,.tagcloud a,.input-textarea,#video,#upload-ad select#catID, #upload-ad select#post_location,.button-ag.green,#commentsText{
-				border-bottom-width: 1px !important;
-				box-shadow:none !important;
-				border-radius: 0px !important;
-			}
-			#uploadTrigger.imagesbutton:hover{
-				background-color:#0bb688 !important;
-				color:#fff;
-			}
-			.widget-social a i{
-				color:#333;
-				background-color:transparent;
-			}
-			.widget-social a i:hover{
-				color:#fff;
-			}
-			.cat-widget-content ul li span{
-				margin-right:30px;
-				float:right;
-			}
-			#ads-homepage ul.tabs li{
-				border-radius:0px;
-				box-shadow: none !important;
-			}
-			#ads-homepage ul.tabs li:first-child > a{
-				border-radius:0px;
-			}
-			#ads-homepage .view-types li:first-child a i,#ads-homepage .view-types li:last-child a i{
-				border-radius:0px;
-				box-shadow: none !important;
-			}
-			.single-plan #submit-plan{
-				border-radius:0px !important;
-			}
-			
-			.bottom-social-icons a .fa:hover {
-				color: #fff !important;
-			}
-			
-			.selectOption-box select,
-			.form-s-select .chosen-container-single .chosen-single,
-			.form-s-select .chosen-container{
-				border-radius: 0px !important;
-			}
-			#add-btn,
-			#ads-homepage ul.tabs li a,
-			#ads-homepage.grid-vr-2 ul.tabs li{
-				border-radius: 0px;
-			}
-		 
-	 .make-new-ad{
-		 background-color:#0bb688 !important;
-		 border-color:#0bb688 !important;
-	 }
-		 
-	 .make-new-ad:hover,
-	 .header-v6-login-register .register-btn:hover{
-		 background-color:#369673 !important;
-		 border-color:#369673 !important;
-	 }
-		 
-	 .make-new-ad a,.make-new-ad i{
-		 color:#ffffff !important;
-	 }
-		 
-	 .make-new-ad:hover a,.make-new-ad:hover i{
-		 color:#ffffff !important;
-	 }
-			 
-		footer .container.footer-grid-3 {
-			padding-top: 68px !important;
-			padding-bottom: 63px !important;
-		}
-		footer .jw-twitter{
-			margin-top: 25px;
-		}
-		footer .jw-twitter .category-icon-box{
-			background-color:transparent !important;
-		}
-		
-		footer .jw-twitter .category-icon-box i{
-			color:#999 !important;
-			font-size: 24px;
-			line-height: 19px;
-		}
-		.footer-grid-3 h4.block-title{
-			text-transform:uppercase;
-		}
-		footer .container.footer-grid-3 .full{
-			margin-left:-15px;
-			margin-right:-15px;
-			width:auto !important;
-		}
-		footer .container.footer-grid-3 .full .span3{
-			padding-left:15px;
-			padding-right:15px;
-			margin-left:0px;
-		}
-		footer .container.footer-grid-3 .full .span3 .textwidget p{
-			line-height:24px;
-		}
-		footer .jw-twitter ul li {
-			border-bottom:1px solid rgba(255,255,255,0.30);
-		}
-		footer .jw-twitter ul li:last-child {
-			border-bottom:0px;
-		}
-		footer .jw-twitter ul li span{
-			width:85%;
-		}
-		footer .jw-twitter ul li span a{
-			color:#0bb688 !important;
-		}
-		.footer-menu #menu-footer li a{
-			text-transform:uppercase;
-		}
-		.site-info{
-			font-weight:bold;
-			padding: 28px 0;
-		}
-		.backtop{
-			bottom:80px;
-			height:48px;
-		}
-		.footer-menu 	{
-				padding:28px 0;
-		}
-		footer .widget-ad-list-content{
-			display:none;
-		}
-		footer .jw-recent-list-posts-widget .widget-ad-list-content{
-			display:block;
-		}
-		.jw-recent-posts-widget .widget-ad-list{
-			width:auto;
-			padding-bottom:0px;    
-			margin-right: 10px !important;
-		}
-		.latestads-widget .widget-ad-image{
-			width:80px;
-			height:70px;
-			height:auto;
-		}
-		.footer-style-4{
-			border-top:4px solid #0bb688;
-		}
-		.footer-style-4 h4.block-title{
-			color:#333 !important;
-		}
-		
-		footer.footer-style-4 .wpcf7-form input::-webkit-input-placeholder { 
-		  color: #cccccc !important;
-		}
-		footer.footer-style-4 .wpcf7-form input::-moz-placeholder {
-		  color: #cccccc !important;
-		}
-		footer.footer-style-4 .wpcf7-form input:-ms-input-placeholder {
-		  color: #cccccc !important;
-		}
-		footer.footer-style-4 .wpcf7-form input:-moz-placeholder { 
-		  color: #cccccc !important;
-		}
-		footer.footer-style-4 .wpcf7-form textarea::-webkit-input-placeholder { 
-		  color: #cccccc !important;
-		}
-		footer.footer-style-4 .wpcf7-form textarea::-moz-placeholder {
-		  color: #cccccc !important;
-		}
-		footer.footer-style-4 .wpcf7-form textarea:-ms-input-placeholder {
-		  color: #cccccc !important;
-		}
-		footer.footer-style-4 .wpcf7-form textarea:-moz-placeholder { 
-		  color: #cccccc !important;
-		}
-		@media (min-width: 768px) and (max-width: 979px) {
-			.backtop {
-				bottom: 104px;
-			}
-		}
-		
-	 
-		footer .footer-grid-3 .block-content div,.jw-recent-list-posts-widget  .widget-ad-list-content .widget-ad-list-content-title a {
-			color:#999999 !important;
-		}
-		.bottom-social-icons a .fa:hover, footer .jw-twitter ul li span{
-			color:#999999 !important;
-		}
-		footer.footer-style-4 .jw-twitter .category-icon-box i{
-			color:#0bb688 !important;
-		}
-		footer.footer-style-4 .jw-twitter ul li {
-			border-bottom: 1px solid #eeeeee;
-		}
-		footer.footer-style-4  .footer-social-widget{
-			border-top: 1px solid #eeeeee;
-		}
-		footer.footer-style-4 .wpcf7-form input, 
-		footer.footer-style-4 .wpcf7-form textarea, 
-		footer.footer-style-4 .wpcf7-form .uneditable-input{
-			background-color: #FFFFFF;
-			color: #cccccc !important;
-			border: 1px solid #eee !important;
-			width: 100%;
-		}
-		footer.footer-style-4 .wpcf7-form p .wpcf7-submit{
-			color: #fff !important;
-		}
+
 	.static-image{
 		background-color:#fff;
 	background-image:url("");
@@ -923,6 +488,7 @@ dl.language a.lang.km {
 .form-label {
     display: inline-block;
 	width: 145px;
+   vertical-align: top;
 }
 .form-value {
     display: inline-block;
@@ -931,6 +497,7 @@ dl.language a.lang.km {
 }
 .form-value .form-control {
     display: initial;
+	box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .075);
 }
 .form-row.botton {
     text-align: center;
@@ -1317,7 +884,6 @@ a.button {
 }
 .form-value .chosen-container .chosen-single{
 	height: 35px;
-	z-index: 9999;
 	color: #cccccc;
 }
 .form-value .chosen-container-single .chosen-single div {
@@ -1355,7 +921,77 @@ a.button {
 .form-value  .chosen-container-active.chosen-with-drop .chosen-single div b:after{
     color: #ddd;	
 }
+.form-value textarea.form-control.textareadesc {
+    width: 100%;
+    max-width: 332px;
+    max-height: 230px;
+	min-width: 332px;
+	min-height: 230px;
+    overflow-y: auto;
+    height: 230px;
+}
+/*------------blog image softable----------------*/
+	.connected, .sortable, .exclude, .handles {
+			margin: auto;
+			padding: 0;
+			width: 100%;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
 
+		.sortable.grid {
+			overflow: hidden;
+		}
+
+		.sortable.grid li {
+			line-height: 80px;
+			float: left;
+			width: 100px;
+			height: 100px;
+			text-align: center;
+		}
+		li.highlight {
+			background: #FEE25F;
+		}
+		.connected li, .sortable li, .exclude li, .handles li {
+			list-style: none;
+			border: 1px solid #CCC;
+			background: #F6F6F6;
+			font-family: "Tahoma";
+			color: #1C94C4;
+			margin: 5px;
+			height: 22px;
+		}
+			/*----image upload-*/
+			.uploader {position:relative; overflow:hidden; width: 100%;  height: 100%;
+			background:#e8e8e8;
+			}
+			
+			.filephoto{
+			    position:absolute;
+				width: 100%;
+			    height: 100%;
+			    
+			    left:0;
+			    z-index:2;
+			    opacity:0;
+			    cursor:pointer;
+			}
+			
+			.uploader img{
+			    position:absolute;
+			  	width: 100%;
+			    height: 100%;
+			  	top: 0;
+				left: 0;
+			    z-index:1;
+			    border:none;
+			}
+	/*------------End blog image softable----------------*/
 /*-------------Page Choose Category-----------------------*/
 .choose-category-blog {
    text-align: left;

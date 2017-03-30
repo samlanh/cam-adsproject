@@ -4,7 +4,20 @@
 
 jQuery.noConflict();
 jQuery(document).ready(function($){
+	/*------------------------------Softable------------------------------------------*/
 
+	jQuery('.sortable').sortable();
+	jQuery('.handles').sortable({
+		handle: 'span'
+	});
+	jQuery('.connected').sortable({
+		connectWith: '.connected'
+	});
+	jQuery('.exclude').sortable({
+		items: ':not(.disabled)'
+	});
+	/*------------------------------End Softable------------------------------------------*/
+	
 	jQuery('#edit-submit-search-view').click(function(){
 		var val = jQuery('#edit-search-api-views-fulltext') .val();
 
