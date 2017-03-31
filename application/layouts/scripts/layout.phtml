@@ -14,6 +14,7 @@
 <html>
 <head>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<?php if($module!='default'){?>
 <?php if($module!='home'){?>
 	<script src="<?php echo $base_url;?>js/dojo-1.6.1/dojo/dojo.js"  djConfig="isDebug: true,parseOnLoad: true"></script>
 	<script>dojoConfig = {parseOnLoad: true}</script>
@@ -50,7 +51,7 @@
 	<link rel="shortcut icon" href="<?php echo $base_url;?>images/icon.ico" type="image/x-icon"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
 	<style type="text/css">
-	*{ padding:0;margin:0;}
+	/*{ padding:0;margin:0;}
         html, body { width: 100%; height: 100%; margin: 0; }
 		.btn{
 			height: 40px;
@@ -59,7 +60,7 @@
 		.add-link{  
 				    background-color: #000088;
 			  width: 90px;
-			 /* margin-top: 2px;*/
+			
 			 padding: 2px;
 			  color: #fff;
 			  text-align: center;
@@ -69,14 +70,13 @@
 		.full{ width:100%;}
 		body, html {font-size:96%; 
 		font-family: 'Times New Roman','Kh Battambang','Khmer Battambang',Arial,Helvetica,sans-serif;
-		/*font-family:Arial,serif !important;*/ /*font-family:'Khmer OS Battambang'*/}
+		}
 		.normal,.alternate{ font-size:90% !important;}
-        /*body, html { font-family:helvetica,arial,sans-serif; font-size:95%; }*/
 		*{ padding: 0; margin: 0;}
 		fieldset{ font-family: inherit;}
 		.border{ border: 1px solid #ccc; height: 100%; margin: 5px; padding: 5px;}
         .border1{ border: 1px solid #ccc; height: 100%; margin: 5px; margin-left:0px; padding: 5px;}
-		
+		*/
 	</style>	
 	
 </head>
@@ -135,10 +135,14 @@
             	</tr>
             </table>
     </body>
-
+<?php }else{
+	echo $this->render('frontheader.phtml');
+	echo $this->layout()->content;
+}?>
 <iframe name=print_frame width=0 height=0 frameborder=0 src=about:blank></iframe>
 <?php if($module=='report' AND $action!='index'){?>
 <script type="text/javascript">
+/*
 function doPrint() {
 	window.frames["print_frame"].document.body.innerHTML=dojo.byId('divPrint').innerHTML;
     window.frames["print_frame"].window.focus();
@@ -164,7 +168,7 @@ function preview()
 }
 function exportExcel(){
 	$('#exportExcel').tableExport({type:'excel',escape:'false'});
-}
+}*/
 </script>
 <?php }?>
 </html>

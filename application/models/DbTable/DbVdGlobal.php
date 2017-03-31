@@ -105,12 +105,19 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		$sql="SELECT ft.`id`,ft.`title` AS name  FROM `vd_field_type`  AS ft WHERE ft.`status`=1 AND ft.type IN ('select','cascade')";
 		return $db->fetchAll($sql);
 	}
-	function getCategoryParent(){// get parent category for frontend
+	function getCategoryParent($parent=0){// get parent category for frontend
 		$language =1;
 		$db = $this->getAdapter();
-		$sql="SELECT cat.`id`,cat.`parent`,cat.`alias_category`,cat.`fontawsome_icon`,
+		$sql="SELECT cat.`id`,cat.`parent`,
+		(SELECT alias_category FROM `vd_category` WHERE id=cat.`parent` LIMIT 1) AS parent_alias,
+		cat.`alias_category`,cat.`fontawsome_icon`,
 		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id= cat.`id` AND catd.languageId=$language LIMIT 1) AS `name`
-		 FROM `vd_category` AS cat WHERE cat.`status`=1 AND cat.`parent`=0";
+		 FROM `vd_category` AS cat WHERE cat.`status`=1 ";
+		if($parent==0){//get parent
+			$sql.=" AND cat.`parent`=0 ";
+		}else{//get subcagegory
+			$sql.=" AND cat.`parent`!=0 ORDER BY cat.`parent` ASC ";
+		}
 		return $db->fetchAll($sql);
 	}
 	function getSubCateByParent($parent){
