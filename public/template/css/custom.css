@@ -2513,7 +2513,7 @@ form select:after, select:after,
 
 
 .search-bar-version4 #advanced-search-widget-version2 .controls input{
-	width:420px;
+	width:300px;
 }
 .search-bar-version4 .chosen-container {
     min-width: 226px !important;
@@ -5477,7 +5477,7 @@ p.form-submit input[type=submit]:hover{
     /*--margin-top: 30px;---*/
 }
 .banner-cat-container {
-	float:left;
+	/*float:left;*/
 	width:100%;
 }
 .banner-cat-list{
