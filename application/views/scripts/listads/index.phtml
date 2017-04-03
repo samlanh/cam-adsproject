@@ -6,24 +6,10 @@
 		<div class="all-categories section">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-3 col-sm-4">
-						<div class="sidebar">
-							<div class="filter-list">
-								<h4 class="list-title"><a href="categories.html">Categories</a></h4>
-							</div><!-- filter-list -->
-							<div class="filter-list">
-								<div id="advanced-filter">
-									<div id="advanced" class="panel-collapse collapse">
-										<!-- panel-body -->
-										<div class="panel-body">
-										</div><!-- panel-body -->
-									</div>
-								 </div><!-- advanced-filter -->
-							</div><!-- filter-list -->
-						</div><!-- sidebar -->
+					<div class="col-md-2 col-sm-3">
+						sadfsdf
 					</div><!-- col-sm-4 -->
-
-					<div class="col-md-9 col-sm-8">
+					<div class="col-md-8 col-sm-7" >
 						<div class="category-adds">
 							<div id="category-tab">
 								<div class="tab-view">
@@ -33,26 +19,23 @@
 										<li class="list-view-tab"><i class="fa fa-th-list" aria-hidden="true"></i></li>
 									</ul>
 								</div>
-								<div class="category-tab">
-									<ul class="nav nav-tabs" role="tablist">
-									   <li role="presentation" class="active"><a href="#recent" aria-controls="recent" role="tab" data-toggle="tab">Recent</a></li>
-									   <li role="presentation"><a href="#popular" aria-controls="popular" role="tab" data-toggle="tab">Popular</a></li>
-									   <li role="presentation"><a href="#rendom" aria-controls="rendom" role="tab" data-toggle="tab">Rendom</a></li>
-									</ul>
+								<div class="category-tab" >
+									<div style="height: 50px;">
+										Blog Left
+									</div>
 									<!-- Tab panes -->
 
 								  	<div class="tab-content small-view-tab">
 								    	<div role="tabpanel" class="tab-pane active" id="recent">
 								    		<ul>
-								    		
 											<?php 
 											if(!empty($this->rsads))foreach($this->rsads as $rs){?>
 								    			<li class="item-wrap">
 								    				<div class="item">
 														<div class="item-image">
-															<a href="details.html"><img src="<?php echo $this->baseUrl()."/imagesphotoA10_1.jpg"?>" alt="" class="img-responsive"></a>
+															<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['ads_title'];?>"><img src="<?php echo $this->baseUrl()."/imagesphotoA10_1.jpg"?>" alt="" class="img-responsive"></a>
 															<div class="item-price">
-																<span>$<?php echo $rs['price'];?></span>
+																<span>$<?php echo number_format($rs['price'],2);?></span>
 															</div> 
 														</div>
 														<div class="item-description">
@@ -72,15 +55,18 @@
 															<div class="item-info">
 																<p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit.</p>
 															</div>
+															
 														</div><!-- item-description -->
+														<div class="footerads" >
+																<ul >
+																   <li> <i class="fa fa-eye"></i><a href="javascript:void(0);">90 Views</a> </li>
+																   <li> <i class="fa fa-clock-o"></i>March 7, 2017</li>
+																</ul></div>
 													</div><!-- item -->
 								    			</li><!-- item-wrap -->
 								    			<?php }?>
-								    			
-
 								    		</ul>
 								    	</div> <!--tab-pane-->
-
 								  	</div>
 								</div>
 							</div><!-- category-tab-->	
@@ -98,91 +84,17 @@
 								<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
 							</ul>
 						</div><!-- pager-section -->
-					</div>
+					</div><!-- end blog center -->
+					<div class="col-md-2 col-sm-3">
+						Blog right
+					</div><!-- col-sm-4 -->
+					
 				</div>
 			</div>
 		</div> <!-- all-categories -->
 	</div>	<!-- page -->
-		
-	
-	<!-- footer -->
-	<footer id="footer">
-		<div class="footer-top section">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="footer-widget about-widget">
-							<h3>About Advert</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim</p>
-							<br> <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="footer-widget link-widget">
-							<h3>Useful Links</h3>
-							<ul>
-								<li><a href="#"> <i class="fa fa-angle-double-right"></i> Support & Help</a></li>
-								<li><a href="#"> <i class="fa fa-angle-double-right"></i> Affiliate Program</a></li>
-								<li><a href="#"> <i class="fa fa-angle-double-right"></i> Knowledge Base</a></li>
-								<li><a href="#"> <i class="fa fa-angle-double-right"></i> Career With Us</a></li>
-								<li><a href="#"> <i class="fa fa-angle-double-right"></i> Contact</a></li>
-								<li><a href="#"> <i class="fa fa-angle-double-right"></i> How It Works</a></li>
-								<li><a href="#"> <i class="fa fa-angle-double-right"></i> Privacy Policy</a></li>
-								<li><a href="#"> <i class="fa fa-angle-double-right"></i> Advertise Policy</a></li>
-								<li><a href="#"> <i class="fa fa-angle-double-right"></i> Terms Of Service</a></li>
-								<li><a href="#"> <i class="fa fa-angle-double-right"></i> Support</a></li>
-							</ul>
-						</div>
-					</div>
-					
-					<div class="col-sm-4">
-						<div class="footer-widget contact-widget">
-							<h3>Contact Us</h3>
-							<ul>
-								 <li><span><i class="fa fa-map-marker"></i> Address :</span> 123 Street, Your City, United States</li>
-						         <li><span><i class="fa fa-phone"></i> Phone number :</span> (123) 456-7890</li>
-						         <li><span><i class="fa fa-envelope"></i> E-mail :</span> <a href="mailto:#">yourmail@example.com</a></li>
-						         <li>
-						         	<ul class="list-inline social">
-										<li><a class="facebook" href="#"><i class="fa fa-facebook-square"></i></a></li>
-										<li><a class="twitter" href="#"><i class="fa fa-twitter-square"></i></a></li>
-										<li><a class="google" href="#"><i class="fa fa-google-plus-square"></i></a></li>
-										<li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
-										<li><a class="youtube" href="#"><i class="fa fa-youtube-play"></i></a></li>
-									</ul>
-						         </li>
-					        </ul>
-						</div>
-					</div>
-				</div>
-			</div><!-- container -->
-		</div><!-- footer-top -->
-		
-
-		<div class="footer-bottom clearfix">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6">
-						<p>&copy; 2017 Advert. Design & Developed by <a href="http://gridbootstrap.com/">GridBootstrap</a></p>
-					</div>
-					<div class="col-sm-6">
-						<div class="payment-opt-icons">
-							<span>Payments </span>
-							<ul>
-	                            <li><img src="images/others/1.png" alt="" class="img-responsive"></li>
-	                            <li><img src="images/others/2.png" alt="" class="img-responsive"></li>
-	                            <li><img src="images/others/3.png" alt="" class="img-responsive"></li>
-	                            <li><img src="images/others/4.png" alt="" class="img-responsive"></li>
-	                            <li><img src="images/others/5.png" alt="" class="img-responsive"></li>
-	                        </ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!-- footer-bottom -->
-	</footer><!-- footer -->
-	<script src="<?php echo $this->baseUrl()."/template/js/owl.carousel.min.js"?>"></script>
+	<script src="<?php echo $this->baseUrl()."/template/js/bootstrap.min.js"; ?>"></script>
+	<script src="<?php echo $this->baseUrl()."/template/js/owl.carousel.min.js";?>"></script>
+	<script src="<?php echo $this->baseUrl()."/template/js/custom.js";?>"></script>
   </body>
-
-<!-- Mirrored from template.gridbootstrap.com/avt/categories.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Mar 2017 04:03:52 GMT -->
 </html>

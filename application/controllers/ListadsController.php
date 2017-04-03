@@ -10,6 +10,9 @@ class listadsController extends Zend_Controller_Action
     	$this->view->rsads = $db->getAllAdsByName($id);
     	
     }
+    function detailAction(){
+    	
+    }
 }
 
 
