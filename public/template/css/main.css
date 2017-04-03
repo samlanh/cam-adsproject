@@ -329,11 +329,8 @@ a, .topbar a,
 .nav li a,
 .navbar-default .navbar-nav>li>a {
 	background-color: transparent;
-	font-weight: 500;
 	font-size: 14px;
 	color: #0a0a0a;
-	text-transform: uppercase;
-	line-height: 40px;
 }
 
 .nav li a:hover,
@@ -1018,7 +1015,7 @@ a, .topbar a,
 	float:left;
 	width:60%;
 	background-color: #fff;
-	padding:20px 25px;
+	padding:10px;
 	min-height: 175px;
 	position: relative;
 	display: block;
@@ -1026,7 +1023,7 @@ a, .topbar a,
 }
 
 .item .item-title h3 {
-	font-size: 22px;
+	font-size: 16px;
 }
 
 .item .item-title h3 a {
@@ -1119,16 +1116,16 @@ a, .topbar a,
 
 
 .tab-content ul {
-	margin-left: -15px;
-	margin-right: -15px;
+	/*margin-left: -15px;
+	margin-right: -15px;*/
 }
 
 .tab-content .item-wrap {
 	float: left;
 	width: 25%;
-	padding-left:15px;
-	padding-right:15px;
-	margin-top: 30px;
+	padding-left:10px;
+	padding-right:10px;
+	margin-top: 20px;
 	position: relative;
 }
 
@@ -1140,9 +1137,6 @@ a, .topbar a,
 	width: 50%;
 }
 
-.tab-content .item-wrap .item{
-	background-color: #f7f7f7;
-}
 .grid-view-tab .item .item-image, 
 .small-view-tab .item .item-image, 
 .grid-view-tab .item .item-description, 
@@ -2258,6 +2252,27 @@ p.quote-text {
 .contact-us button.btn.btn-primary {
     margin-top: 25px;
 }
+/**************channy add new***************/
+.tab-content .item-wrap .item{
+	background-color: #f7f7f7;
+    background-color: #fff;
+    border-color: transparent #e9e6e0 #e9e6e0;
+    border-image: none;
+    border-radius: 0;
+    border-style: none solid solid;
+    border-width: medium 1px 1px;
+    box-shadow: none;
+    width: 100%;
+}
+
+.footerads{    
+	border-top: 1px solid #e9e6e0;
+	background: #fcfbf9 none repeat scroll 0 0;
+	width: 100%;
+}
+.footerads ul li{ display: inline-block; padding:5px 10px;}
+.footerads ul li i{ padding-right: 5px;}
+
 
 
 
