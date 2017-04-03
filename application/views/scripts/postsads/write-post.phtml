@@ -8,9 +8,6 @@
 <!--[if !(IE 7) | !(IE 8)  ]><!-->
 <html lang="en-US">
 <!--<![endif]-->
-<?php $parentcate = $this->parentcate;
-$db = new Application_Model_DbTable_DbVdGlobal();
-?>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="UTF-8">
@@ -292,13 +289,17 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 					</h4> 
 				</div>
 				<div class="form-post-ads">
-					<form method="post" enctype="multipart/form-data">
+				<div id="alert" class="alert message">
+				  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+				  <span id="alertMessage"></span>
+				</div>
+					<form id="postads_form" onsubmit="return validateFormAds(this);" method="post" enctype="multipart/form-data" action="<?php echo $this->baseUrl()."/postsads";?>">
 						<div class="form-row">
 							<div class="form-label">
 								<label>Title <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<input type="text" placeholder="Title"  name="title" id="title"  required="required"class="form-control" />
+								<input type="text" placeholder="Title"  name="title" id="title"  required="required" class="form-control" />
 							</div>
 						</div>
 						<?php echo $this->form;?>
@@ -320,33 +321,63 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 						</div>
 						<div class="form-row">
 							<div class="form-label">
-								<label>Image <span class="sign_req">*</span></label>
+								<label>Image </label>
 							</div>
 							<div class="form-value">
 								<ul class="sortable grid">
 								<?php $string=''; 
+								$imageview="";
+								$imageloadin = '<img src="'.$this->baseUrl().'/images/loader.gif" alt="Uploading...."/>';
 								for ($i=1; $i<=6; $i++){ 
-										$string.="
-										jQuery('#filePhoto$i').click(function(e){
-										var imageLoader$i = document.getElementById('filePhoto$i');
-											imageLoader$i.addEventListener('change', handleImage$i, false);
+// 										$string.="
+// 										jQuery('#filePhoto$i').click(function(e){
+// 										var imageLoader$i = document.getElementById('filePhoto$i');
+// 											imageLoader$i.addEventListener('change', handleImage$i, false);
 										
-											function handleImage$i(e) {
-											var reader = new FileReader();
-											reader.onload = function (event) {
-												jQuery('#uploader$i img').attr('src',event.target.result);
-												}
-											reader.readAsDataURL(e.target.files[0]);
+// 											function handleImage$i(e) {
+// 											var reader = new FileReader();
+// 											reader.onload = function (event) {
+// 												jQuery('#uploader$i img').attr('src',event.target.result);
+// 												}
+// 											reader.readAsDataURL(e.target.files[0]);
+// 											}
+// 										})";
+									$string.="
+										jQuery('#filePhoto$i').change(function() {
+											var file = this.files[0];
+											var imagefile = file.type;
+											var match= ['image/jpeg','image/png','image/jpg'];
+											if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2])))
+											{
+												alert('Please Select A valid Image File! Only jpeg, jpg and png Images type allowed.');
+												return false;
 											}
-										})";
+											else
+											{
+												var reader = new FileReader();
+												reader.readAsDataURL(this.files[0]);
+											}
+											jQuery('#index').val($i);
+											jQuery('#postads_form').submit();
+											});
+									";
+									$imageview.="var loadFile$i = function(event) {
+									var output = document.getElementById('image_wiew$i');
+									output.src = URL.createObjectURL(event.target.files[0]);
+									};";
 									?>
 									<li>
+										
 										<div id="uploader<?php echo $i;?>" class="uploader">
-											<img src="<?php echo $this->baseUrl();?>/images/broweimage.png"/>
-											<input class="filephoto" type="file" name="filePhoto<?php echo $i;?>"  id="filePhoto<?php echo $i;?>" value='' />
+											<div id='preview<?php echo $i;?>'></div>
+												<img id="image_wiew<?php echo $i;?>" src="<?php echo $this->baseUrl();?>/images/broweimage.png"/>
+												<input type="hidden" id="ads-image<?php echo $i;?>" name="ads-image<?php echo $i;?>" />
+												<input class="filephoto" type="file" name="filePhoto<?php echo $i;?>"  id="filePhoto<?php echo $i;?>" accept="image/jpeg,image/gif,image/png" value='' onchange="loadFile<?php echo $i;?>(event)" />
 										</div>
+										
 									</li>
-									<?php }echo "<script>".$string."</script>";?>
+									<?php }
+									echo "<script>jQuery(document).ready(function() { jQuery(function() {".$string." }); }); $imageview</script>";?>
 								</ul>
 							</div>
 						</div>
@@ -355,6 +386,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 								<label>Name <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
+								<input type="hidden"  name="index" id="index"  />
 								<input type="text" placeholder="Name"  name="name" id="name"  required="required"class="form-control" />
 							</div>
 						</div>
@@ -363,7 +395,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 								<label>Phone <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<input type="text" placeholder="Phone"  name="phone1" id="phone1"  required="required"class="form-control" />
+								<input type="text" placeholder="Phone"  name="phone1" id="phone1" value="<?php echo $this->client_info['phone'];?>"  required="required" class="form-control" />
 							</div>
 						</div>
 						<div class="form-row">
@@ -371,7 +403,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 								<label></label>
 							</div>
 							<div class="form-value">
-								<input type="text" placeholder="Phone"  name="phone1" id="phone1"  required="required"class="form-control" />
+								<input type="text" placeholder="Phone"  name="phone2" id="phone2"  required="required"class="form-control" />
 							</div>
 						</div>
 						<div class="form-row">
@@ -379,7 +411,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 								<label>Email <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<input type="text" placeholder="Email"  name="email" id="email"  required="required"class="form-control" />
+								<input type="text" placeholder="Email"  name="email" id="email" value="<?php echo $this->client_info['email'];?>"  required="required" class="form-control" />
 							</div>
 						</div>
 						<div class="form-row">
@@ -388,11 +420,12 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 							</div>
 							<div class="form-value">
 								<select id="location" name="location" class="form-select" >												
-									<option value="All" selected="selected">Phnom Penh</option>
-									<option value="accounts-jobs">Siem Reip</option>
-									<option value="art-photography">Kandal</option>
-									<option value="brides">Takeo</option>
+									<option value="Phnom Penh" selected="selected">Phnom Penh</option>
+									<option value="Siem Reip">Siem Reip</option>
+									<option value="Kandal">Kandal</option>
+									<option value="Takeo">Takeo</option>
 								</select>
+								<input type="hidden"  name="category" id="category" value="<?php echo $this->cate['alias_category'];?>" />
 							</div>
 						</div>
 						<div class="form-row">
@@ -400,7 +433,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 								<label>Address <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<textarea id="adress" name="adress" required="required" class="form-control " placeholder="Address..."></textarea>
+								<textarea id="adress" name="adress" required="required" class="form-control " placeholder="Address..."><?php echo $this->client_info['address'];?></textarea>
 							</div>
 						</div>
 						<div class="form-row ">
@@ -490,9 +523,14 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.tools.mine.js'></script>
 	
+	<script src="<?php echo $this->baseUrl();?>/template/javascript/validate.js"></script>
+	<script src="<?php echo $this->baseUrl();?>/template/javascript/custome.js"></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/javascript/jquery.form.js'></script>
 	<!-- softable -->
 	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
-	
+	<script>
+	getBaseUrl('<?php echo $this->baseUrl();?>');
+	</script>
 	
 </body>
 </html>
