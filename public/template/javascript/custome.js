@@ -194,3 +194,15 @@ var loadFile = function(event) {
     var output = document.getElementById('profile_wiew');
     output.src = URL.createObjectURL(event.target.files[0]);
   };
+ 
+ /*-only number-*/ 
+ function isNumber(evt) {
+	    evt = (evt) ? evt : window.event;
+	    var charCode = (evt.which) ? evt.which : evt.keyCode;
+	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+	        var msg='You can input only number.';
+		alert(msg);
+		return false;
+    }
+    return true;
+}
