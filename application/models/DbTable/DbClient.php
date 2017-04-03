@@ -79,8 +79,8 @@ class Application_Model_DbTable_DbClient extends Zend_Db_Table_Abstract
     	$pasdsword= md5($data['password']);
     	if (empty($id)){
     		$sql ="SELECT * FROM `vd_client` AS c WHERE c.`status`=1 AND c.`user_name`='$username' AND c.`password` = '$pasdsword'";
-    	}else{
-    		$sql ="SELECT * FROM `vd_client` AS c WHERE  c.`id`=$id";
+    	}else{ // use with dashboard
+    		$sql ="SELECT * FROM `vd_client` AS c WHERE  c.`id`=$id LIMIT 1";
     	}
     	return $db->fetchRow($sql);
     }

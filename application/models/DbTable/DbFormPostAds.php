@@ -183,7 +183,7 @@ class Application_Model_DbTable_DbFormPostAds extends Zend_Db_Table_Abstract
 			$fontpart= PUBLIC_PATH.'/font/';
 			$photo = $_FILES['filePhoto'];
 			$temp = explode(".", $photo["name"]);
-			$newfilename1 = $temp[0].".jpg";
+			$newfilename1 = $temp[0].end($temp);
 			move_uploaded_file($_FILES['filePhoto']["tmp_name"], $part . $photo["name"]);
 			
 			$uploadimage=$part.$_FILES["filePhoto"]["name"];
