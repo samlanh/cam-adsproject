@@ -62,8 +62,7 @@ ul {
 }
 
 a {
-	font-family: 'Ubuntu', sans-serif;
-	color: #00a651;
+	font-family: 'Hanuman', sans-serif;
 }
 
 a, 
@@ -72,7 +71,7 @@ a:focus,
 input:focus {
 	text-decoration:none;
 	outline: none;
-	color:#02743a;
+	color: #262627;
 }
 
 img {
@@ -968,7 +967,7 @@ a, .topbar a,
 	right:0;
 	z-index: 10;
 	font-size: 18px;
-	background-color: #00a651;
+	background-color: #277ae4;
 	color:#fff;
 	padding: 4px 10px;
 	display: block;
@@ -1093,7 +1092,7 @@ a, .topbar a,
 .tab-view li.active {
 	color: #fff;
 	/*border:1px solid #00A659;*/
-	background-color: #00A659;
+	background-color: #b5b5b5;
 }
 
 .category-tab .nav-tabs>li {

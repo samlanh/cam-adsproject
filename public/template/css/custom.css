@@ -275,11 +275,12 @@ input:-moz-placeholder{
     height: 23px;
     border: none !important;
     border-radius: 0 !important;
-    background-color: #fff;
+    background-color: #ffcbcb;
     background: none !important;
     background-clip: padding-box;
     box-shadow: none !important;
     color: #444;
+    border: 1px solid #ccc;
     text-decoration: none;
     white-space: nowrap;
     line-height: 24px;
@@ -2312,9 +2313,10 @@ form select, select ,.search-bar-version2 .chosen-container-single .chosen-singl
 	line-height: 48px !important;
 }
 form select, select{
-    background-image: url('../images/select-arrow.jpg');
+    /* background-image: url('../images/select-arrow.jpg'); */
     background-repeat: no-repeat;
     background-position: center right;
+    background: red;
 }
 select:focus{
 	outline:none;
@@ -2493,12 +2495,13 @@ form select:after, select:after,
 .search-bar-version4 #edit-submit-search-view span{
 	width:100%;
 	padding: 12px 10px;
-    font-size: 13px;
-    text-transform: uppercase;
-    font-weight: bold;
-    text-shadow: none;
-    display: inherit;
+	font-size: 13px;
+	/* text-transform: uppercase; */
+	font-weight: bold;
+	text-shadow: none;
+	display: inherit;
 	text-align:center;
+	border: 1px solid #3a7dd2;
 }
 .search-bar-version4 .range-pin{
 	background:transparent url(../images/range-km-wit.png) no-repeat top left;

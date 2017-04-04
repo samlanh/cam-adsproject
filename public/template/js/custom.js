@@ -9,6 +9,7 @@ jQuery(function ($) {
 
     (function() {
           $('.select-cat').on('click', function() {
+        	  alert(11);
             $('this').closest('div').find('select').slideToggle(110)
 
         });

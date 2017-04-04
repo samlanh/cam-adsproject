@@ -26,7 +26,7 @@ jQuery(document).ready(function($){
 		}
 
 	});
-	jQuery('#tabs a').click(function (e) {
+	jQuery('#tabs a').hover(function (e) {
 	  e.preventDefault()
 	  jQuery(this).tab('show');
 	});
