@@ -1249,3 +1249,45 @@ ul.SteppedProgress.Vertical li.boxed span,ul.SteppedProgress.Vertical li.current
 ul.SteppedProgress.Vertical li.boxed span:after,ul.SteppedProgress.Vertical li.current span:after{bottom:auto;left:auto;right:100%;top: 16px;border-color:rgba(255,255,255,0);border-right-color:silver;margin:0}
 ul.SteppedProgress.Vertical li.current span:after{border-right-color:#de384f}
 ul.SteppedProgress.Vertical li.complete.boxed span:after{border-color:rgba(255,255,255,0);border-right-color:#319978}
+
+/*------------fix right----------*/
+.float-bar.hidden-xs.hidden-sm.hidden-md {
+    position: fixed;
+    -moz-transition: all 500ms ease;
+    -webkit-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 2;
+    width: 80px;
+    border: 1px solid #dbdbdb;
+    background: #fff;
+	right: 0;
+	top: 0;
+}
+ul.items {
+    padding: 0;
+	margin: 0;
+}
+ul.items li.item {
+    text-align: center;
+    padding: 10px 7px;
+    margin: 0;
+    font-size: 11px;
+    border-bottom: 1px solid #dbdbdb;
+}
+ul.items li a span {
+    display: block;
+}
+ul.items li a span.fa {
+    margin-bottom: 5px;
+    color: #4183d7;
+}
+ul.items li a .fa:before {
+    font-size: 18px;
+}
+ul.items li.item a img {
+    width: 100%;
+}
