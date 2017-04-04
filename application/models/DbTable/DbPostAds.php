@@ -103,9 +103,6 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			$sy = imagesy($stamp);
 			// Merge the stamp onto our photo with an opacity of 50%
 		$watermark =	imagecopymerge($im, $stamp, imagesx($im) - $sx, imagesy($im)/2, 0, 0, imagesx($stamp), imagesy($stamp), 50);
-			
-		$thumb = imagecreatetruecolor(257,257 / imagesx($im)*imagesy($im));
-		imagecopyresampled($thumb, $im, 0,0, 0,0, 257 / imagesx($im)*imagesy($im), imagesx($im),imagesy($im));
 		
 			// Save the image to file and free memory
 				imagejpeg($im, $uploadimage, 50);
