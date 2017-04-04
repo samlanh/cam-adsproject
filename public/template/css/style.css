@@ -130,25 +130,25 @@ ul.tabs.cat-list {
 }
 #main-category ul.tabs.cat-list li a span {
    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    left: 50%;
-    font-weight: 600;
-    padding: 0 1px;
-    width: 100%;
-    color: #0bb688;
-    word-wrap: break-word;
-    font-size: 13px;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
+   -moz-transform: translate(-50%, -50%);
+   -o-transform: translate(-50%, -50%);
+   left: 50%;
+   font-weight: 600;
+   padding: 0 1px;
+   width: 100%;
+   color: #4183d7;
+   word-wrap: break-word;
+   font-size: 13px;
 }
 #main-category ul.tabs.cat-list li a span i {
     font-size: 28px;
 }
 div.subcategory-menu{
-   border-top: solid 1px #0bb688;
-    background-color: rgba(255, 255, 255, 0.8);
+   border-top: solid 1px #4183d7;
+   background-color: rgba(255, 255, 255, 0.8);
 }
 div.list-dropdow-category{
 	 min-height: 200px;
@@ -195,7 +195,7 @@ li.menu-list-cate {
 		li.menu-list-cate a {
 			/* text-transform: uppercase; */
 			font-weight: 500;
-			color: #00a651;
+			color: #4183d7;
 			padding: 5px 10px;
 			font-family: 'Ubuntu', sans-serif;
 		}
