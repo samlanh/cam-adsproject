@@ -78,12 +78,13 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		$db = $this->getAdapter();
 		$lang_id = $this->getCurrentLang();
 		$sql=" SELECT *,
+		(SELECT customer_name FROM `vd_client` WHERE id=1 LIMIT 1) as suppliyer_name,
+		(SELECT id FROM `vd_client` WHERE id=1 LIMIT 1) as suppliyerid,
 		(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
-		(SELECT province_en_name FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name
+		(SELECT province_en_name FROM `vd_province` WHERE id=vd_ads.province_id LIMIT 1 ) as province_name
 		FROM `vd_ads` WHERE
 		category_id=$category_id
-		AND STATUS =1 AND is_expired=0 ORDER BY id DESC ";
-// 		echo $sql;exit();
+		AND STATUS =1 AND is_expired=0 ORDER BY id DESC LIMIT 15 ";
 		return $db->fetchAll($sql);
 	}
 	

@@ -24,8 +24,9 @@
 <link rel='stylesheet' href='<?php echo $this->baseUrl();?>/template/css/style.css' type='text/css' />
 </head>
 <body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
-	
-
+	<?php 
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	?>
 	<section class="featured-slider-3 clearfix ">
 		<div class="container" >
 			<div class="col-md-12 col-sm-12" >
@@ -48,22 +49,34 @@
 							<div class="ad-box ">
 								<div class="ads-img-wrapper">
 									<a class="ad-image box" href="#" title="Finance officer for hotel" >
-										<img src="<?php echo $this->baseUrl();?>/images/borey.jpg" alt=""  />
+										<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rsad['images']; ?>" alt=""  />
 									</a>
 									<div class="additional-buttons">
-										<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
+										<span class="quickview"><i class="fa fa-search-plus"></i><?php echo $tr->translate("Quickview");?></span>
 										<div class="sold-by-container">
-											<span>Posted By: </span>
-											<a title="Channy" href="#">Channy</a>
+											<a title="Channy" href="#"><span><?php echo $tr->translate("Posted By");?> </span><?php echo $rsad['suppliyer_name'];?></a>
 										</div>
 									</div>
 								</div>
 								<div class="ads-title">
 									<h4><a class="ads-title" href="#" ><?php echo $rsad['ads_title'];?></a></h4>
 								 </div>
-								 <div class="ads-price">
+								  <div class="ads-price">
 									<h4><a class="ads-price" href="#" >$ <?php echo number_format($rsad['price']);?></a></h4>
 								 </div>
+								 <div class="item-info">
+									<ul style="font-size: 10px;">
+									   <li style="float:left;"><?php echo $rsad['province_name'];?></li>
+									   <li style="float:left;"> <?php echo $rsad['province_name'];?></li>
+									</ul>
+								</div>
+								
+								 <div class="footerads" >
+									<ul >
+									   <li> <i class="fa fa-eye"></i><?php echo $rsad['viewer'];?> Views</li>
+									   <li> <i class="fa fa-clock-o"></i><?php echo date("M d, Y",strtotime($rsad['publish_date']));?></li>
+									</ul>
+								</div>
 							</div>
 						<?php }?>
 						
