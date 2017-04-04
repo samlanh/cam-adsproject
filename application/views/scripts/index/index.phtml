@@ -28,14 +28,11 @@
 
 	<section class="featured-slider-3 clearfix ">
 		<div class="container" >
-			<div class="col-md-2 col-sm-3" style="background: #fff;">
-				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
-				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
-				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
-				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
-			</div>
-			<div class="col-md-8 col-sm-7" >
-			<?php if(!empty($this->rscate))foreach($this->rscate as $cate) {?>
+			<div class="col-md-12 col-sm-12" >
+			<?php 
+			$db = new Application_Model_DbTable_DbVdGlobal();
+						
+			if(!empty($this->rscate))foreach($this->rscate as $cate) {?>
 			<div class="category">
 				<h4 class="title"><?php echo $cate['name']?>
 					<span class="label-show-all"><a href="#">Show all</a></span>
@@ -44,12 +41,14 @@
 			
 			<div class="full">
 				<div class="pane">
-					<div class=" owl-carousel" data-items="4" data-items-tab-ls="2" data-items-tab="2" data-autoplay="false" data-gutter="4" data-autoplay-speed="1500" data-delay="1000" data-loop="true" data-nav="false"  data-dots="false">
-						<?php for($i=0;$i<=10;$i++) {?>
+					<div class=" owl-carousel" data-items="5" data-items-tab-ls="2" data-items-tab="2" data-autoplay="false" data-gutter="4" data-autoplay-speed="1500" data-delay="1000" data-loop="true" data-nav="false"  data-dots="false">
+						<?php 
+						$rsads = $db->getAllAdsToHomepage($cate['category_id']);
+						foreach($rsads as $rsad) {?>
 							<div class="ad-box ">
 								<div class="ads-img-wrapper">
 									<a class="ad-image box" href="#" title="Finance officer for hotel" >
-										<img src="<?php echo $this->baseUrl();?>/template/imagedemo/marketing21-30o7k73x9bx84ai65grdai-31dc2ug8a1r0mvrfgqd43u.jpg" alt=""  />
+										<img src="<?php echo $this->baseUrl();?>/images/borey.jpg" alt=""  />
 									</a>
 									<div class="additional-buttons">
 										<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
@@ -60,10 +59,10 @@
 									</div>
 								</div>
 								<div class="ads-title">
-									<h4><a class="ads-title" href="#" >Lexux RX300 2016 Lexux RX300 2016 Lexux RX300 2016</a></h4>
+									<h4><a class="ads-title" href="#" ><?php echo $rsad['ads_title'];?></a></h4>
 								 </div>
 								 <div class="ads-price">
-									<h4><a class="ads-price" href="#" >$ 2000</a></h4>
+									<h4><a class="ads-price" href="#" >$ <?php echo number_format($rsad['price']);?></a></h4>
 								 </div>
 							</div>
 						<?php }?>
@@ -98,12 +97,8 @@
 			</div>
 			<?php }?>
 			</div>
-			<div class="col-md-2 col-sm-3" style="background: #fff;">
-				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
-				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
-				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
-				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
-			</div>
+			
+			
 		</div>
 	</section>
 	

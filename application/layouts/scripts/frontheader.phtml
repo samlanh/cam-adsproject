@@ -114,6 +114,15 @@ $lang =$db->getLaguage();
 					<div id="main-category">
 						<div  class="pos-relative">
 							<ul class="nav nav-tabs tabs cat-list" id="tabs">
+								<li class='active'>
+									<a href="#Trandom">
+										<span class="cat-tit">
+											<?php 
+											$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+											echo $tr->translate("HOME");?>
+										</span>
+									</a>
+								</li>
 								<?php 
 								$db = new Application_Model_DbTable_DbVdGlobal();
 								$rscate = $db->getCategoryParent();
@@ -121,8 +130,8 @@ $lang =$db->getLaguage();
 										$class='';
 										if($index==0){$class='active';}
 								?>
-								<li class="<?php echo $class;?>">
-									<a href="<?php echo "#".$rs['alias_category']?>">
+								<li class="<?php //echo $class;?>">
+									<a href="<?php echo "#".$rs['alias_category']?>" onclick="return false;">
 										<span class="cat-tit">
 											<i class="fa fa-home"></i><br />
 											<?php echo $rs['name'];?>									
@@ -131,15 +140,6 @@ $lang =$db->getLaguage();
 								</li>
 								<?php }
 								}?>
-								<li>
-									<a href="#Trandom">
-										<span class="cat-tit">
-											<?php 
-												$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-											echo $tr->translate("STATUS");?>
-										</span>
-									</a>
-								</li>
 							</ul>
 						</div>
 					</div>

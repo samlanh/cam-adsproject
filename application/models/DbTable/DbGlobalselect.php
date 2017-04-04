@@ -13,7 +13,6 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$session_lang=new Zend_Session_Namespace('lang');
 		return $session_lang->lang_id;
 	}
-	
 	function  getAllAdsByName($cagetory_name){
 		$db = $this->getAdapter();
 		$category_id = $this->categoryIdByName($cagetory_name);
@@ -26,6 +25,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 			AND STATUS =1 AND is_expired=0 ORDER BY id DESC ";
 		return $db->fetchAll($sql);
 	}
+	
 	function categoryIdByName($cagetory_name){
 		$db = $this->getAdapter();
 		$sql=" SELECT id FROM `vd_category` WHERE alias_category='".$cagetory_name."' LIMIT 1 ";

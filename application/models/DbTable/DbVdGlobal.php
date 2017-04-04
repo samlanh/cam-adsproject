@@ -55,7 +55,6 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		return $db->fetchAll($sql);
 	}
 	
-	
 	public function getCategory($parent = 0, $spacing = '', $cate_tree_array = ''){ // for backend 
 		$db=$this->getAdapter();
 		if (!is_array($cate_tree_array))
@@ -75,6 +74,18 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		}
 		return $cate_tree_array;
 	} 
+	function  getAllAdsToHomepage($category_id){
+		$db = $this->getAdapter();
+		$lang_id = $this->getCurrentLang();
+		$sql=" SELECT *,
+		(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
+		(SELECT province_en_name FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name
+		FROM `vd_ads` WHERE
+		category_id=$category_id
+		AND STATUS =1 AND is_expired=0 ORDER BY id DESC ";
+// 		echo $sql;exit();
+		return $db->fetchAll($sql);
+	}
 	
 // 	public function loadImageFromDir($data){
 // 		$str="";
@@ -114,7 +125,7 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		$db = $this->getAdapter();
 		$sql="SELECT cat.`id`,cat.`parent`,
 		(SELECT alias_category FROM `vd_category` WHERE id=cat.`parent` LIMIT 1) AS parent_alias,
-		cat.`alias_category`,cat.`fontawsome_icon`,
+		cat.`alias_category`,cat.`fontawsome_icon`,cat.id as category_id,
 		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id= cat.`id` AND catd.languageId=$language LIMIT 1) AS `name`
 		 FROM `vd_category` AS cat WHERE cat.`status`=1 ";
 		if($homepage!=null){
