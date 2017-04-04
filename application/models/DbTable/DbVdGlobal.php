@@ -9,6 +9,10 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		$session_user=new Zend_Session_Namespace('auth');
 		return $session_user->user_id;
 	}
+	static function getCurrentLang(){
+		$session_lang=new Zend_Session_Namespace('lang');
+		return $session_lang->lang_id;
+	}
 	public function getLaguage(){// get language active for front and backend
 		$db = $this->getAdapter();
 		$sql="SELECT * FROM `vd_language` AS l WHERE l.`status`=1";
@@ -106,7 +110,7 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		return $db->fetchAll($sql);
 	}
 	function getCategoryParent($parent=0,$homepage=null){// get parent category for frontend
-		$language =1;
+		$language = $this->getCurrentLang();
 		$db = $this->getAdapter();
 		$sql="SELECT cat.`id`,cat.`parent`,
 		(SELECT alias_category FROM `vd_category` WHERE id=cat.`parent` LIMIT 1) AS parent_alias,

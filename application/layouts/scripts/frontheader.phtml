@@ -1,3 +1,6 @@
+<?php $db = new Application_Model_DbTable_DbVdGlobal();
+$lang =$db->getLaguage();
+?>
 <head>
 	<meta charset="UTF-8">
 	<title>Cam App Technology</title>	
@@ -156,8 +159,9 @@
 								</div>
 								<div class="banner-right-blog">
 									<div class="language">
-										<a class="lang km" href="#" title="Khmer" onclick="changeLange(1);"><img src="<?php echo $this->baseUrl();?>/images/km.png" > Khmer</a>
-										<a class="lang en" href="#" title="English" onclick="changeLange(2);"><img src="<?php echo $this->baseUrl();?>/images/en.jpg" > English</a>
+										<?php if (!empty($lang)) foreach ($lang as $rs){?>
+										<a class="lang <?php echo $rs['class'];?>" href="#" title="<?php echo $rs['title'];?>" onclick="changeLange(<?php echo $rs['id'];?>);"><img src="<?php echo $this->baseUrl();?>/images/<?php echo $rs['iconImage'];?>" > <?php echo $rs['title'];?></a>
+										<?php }?>
 									</div>
 									<div class="login-register">
 										<button class="loginBtn loginBtn-normal">

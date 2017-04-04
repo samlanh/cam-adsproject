@@ -9,7 +9,7 @@ class Application_Form_FrmLanguages
 		// set up translation adapter
 		$session_lang=new Zend_Session_Namespace('lang');
 		$lang_id=$session_lang->lang_id;
-		if($lang_id==1){
+		if($lang_id==2){
 			$str="";
 		}else{$str="en"; }	
 		$tr = new Zend_Translate('ini', PUBLIC_PATH.'/lang/'.$str,  null, array('scan' => Zend_Translate::LOCALE_FILENAME));
