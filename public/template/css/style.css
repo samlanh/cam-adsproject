@@ -148,7 +148,7 @@ ul.tabs.cat-list {
 }
 div.subcategory-menu{
    border-top: solid 1px #4183d7;
-   background-color: rgba(255, 255, 255, 0.8);
+   background-color: rgba(255, 255, 255, 0.85);
 }
 div.list-dropdow-category{
 	 min-height: 200px;
