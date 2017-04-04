@@ -1,22 +1,10 @@
 <!DOCTYPE html>
-<!--[if IE 7]>
-<html class="ie ie7" lang="en-US">
-<![endif]-->
-<!--[if IE 8]>
-<html class="ie ie8" lang="en-US">
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8)  ]><!-->
 <html lang="en-US">
-<!--<![endif]-->
-
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="UTF-8">
 	<title>Cam App Technology</title>	
 	<link rel="shortcut icon" href="wp-content/uploads/2016/04/favicon.jpg" type="image/x-icon" />
-<!--[if lt IE 9]>
-<link rel='stylesheet' id='classiads-ie-css'  href='http://demo.designinvento.net/classiads5/wp-content/themes/classiads/css/ie.css?ver=2013-11-08' type='text/css' media='all' />
-<![endif]-->
 <link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
 <link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
 <link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
@@ -40,34 +28,46 @@
 
 	<section class="featured-slider-3 clearfix ">
 		<div class="container" >
+			<div class="col-md-2 col-sm-3" style="background: #fff;">
+				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
+				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
+				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
+				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
+			</div>
+			<div class="col-md-8 col-sm-7" >
+			<?php if(!empty($this->rscate))foreach($this->rscate as $cate) {?>
 			<div class="category">
-				<h4 class="title">Real Estate 
+				<h4 class="title"><?php echo $cate['name']?>
 					<span class="label-show-all"><a href="#">Show all</a></span>
 				</h4>
 			</div>
+			
 			<div class="full">
 				<div class="pane">
 					<div class=" owl-carousel" data-items="4" data-items-tab-ls="2" data-items-tab="2" data-autoplay="false" data-gutter="4" data-autoplay-speed="1500" data-delay="1000" data-loop="true" data-nav="false"  data-dots="false">
-						<div class="ad-box ">
-							<div class="ads-img-wrapper">
-								<a class="ad-image box" href="#" title="Finance officer for hotel" >
-									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/marketing21-30o7k73x9bx84ai65grdai-31dc2ug8a1r0mvrfgqd43u.jpg" alt=""  />
-								</a>
-								<div class="additional-buttons">
-									<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
-									<div class="sold-by-container">
-										<span>Posted By: </span>
-										<a title="Channy" href="#">Channy</a>
+						<?php for($i=0;$i<=10;$i++) {?>
+							<div class="ad-box ">
+								<div class="ads-img-wrapper">
+									<a class="ad-image box" href="#" title="Finance officer for hotel" >
+										<img src="<?php echo $this->baseUrl();?>/template/imagedemo/marketing21-30o7k73x9bx84ai65grdai-31dc2ug8a1r0mvrfgqd43u.jpg" alt=""  />
+									</a>
+									<div class="additional-buttons">
+										<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
+										<div class="sold-by-container">
+											<span>Posted By: </span>
+											<a title="Channy" href="#">Channy</a>
+										</div>
 									</div>
 								</div>
+								<div class="ads-title">
+									<h4><a class="ads-title" href="#" >Lexux RX300 2016 Lexux RX300 2016 Lexux RX300 2016</a></h4>
+								 </div>
+								 <div class="ads-price">
+									<h4><a class="ads-price" href="#" >$ 2000</a></h4>
+								 </div>
 							</div>
-							<div class="ads-title">
-								<h4><a class="ads-title" href="#" >Lexux RX300 2016 Lexux RX300 2016 Lexux RX300 2016</a></h4>
-							 </div>
-							 <div class="ads-price">
-								<h4><a class="ads-price" href="#" >$ 2000</a></h4>
-							 </div>
-						</div>
+						<?php }?>
+						
 						<div class="ad-box ">
 							<div class="ads-img-wrapper">
 								<a class="ad-image box" href="#" title="Account need urgently" >
@@ -92,101 +92,17 @@
 								<span class="notify-new">NEW</span>
 							</div>
 						</div>
-						<div class="ad-box">
-							<div class="ads-img-wrapper">
-								<a class="ad-image box" href="#" title="Account need urgently" >
-									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/bike1-30o7jy6rik2usui9symtca-31ddv8jydx84pvtgj47zm2.jpg" alt="" />
-								</a>
-								<div class="additional-buttons">
-									<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
-									<div class="sold-by-container">
-										<span>Posted By: </span>
-										<a title="Channy" href="#">Channy</a>
-									</div>
-								</div>	
-							</div>										
-							<div class="ads-title">
-								
-								<h4><a class="ads-title" href="#" >Lexux RX300</a></h4>
-							 </div>
-							 <div class="ads-price">
-								<h4><a class="ads-price" href="#" >$ 2000</a></h4>
-							 </div>
-							 <div class="notify-new red">
-								<span class="notify-new">NEW</span>
-							</div>
-						</div>
-						<div class="ad-box">
-							<div class="ads-img-wrapper">
-								<a class="ad-image box" href="#" title="Account need urgently" >
-									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/marriage11-30grw36d1cdiwy6ndj670q-31dctadb6ntnaes9jf0n4a.jpg" class="attachment-hr-slider-thumb-vr-3 size-hr-slider-thumb-vr-3 wp-post-image" alt="" />
-								</a>			
-								<div class="additional-buttons">
-									<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
-									<div class="sold-by-container">
-										<span>Posted By: </span>
-										<a title="Channy" href="#">Channy</a>
-									</div>
-								</div>	
-							</div>									
-							<div class="ads-title">
-								
-								<h4><a class="ads-title" href="#" >Lexux RX300</a></h4>
-							 </div>
-							 <div class="ads-price">
-								<h4><a class="ads-price" href="#" >$ 2000</a></h4>
-							 </div>
-							 <div class="notify-new red">
-								<span class="notify-new">NEW</span>
-							</div>
-						</div>
-						<div class="ad-box">
-							<div class="ads-img-wrapper">
-								<a class="ad-image box" href="#" title="Account need urgently" >
-									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/diet-30grjzjtoyfnora2z96wp6-1-31ddwksxi9wfwig8fr7rwq.jpg" class="attachment-hr-slider-thumb-vr-3 size-hr-slider-thumb-vr-3 wp-post-image" alt="" />
-								</a>	
-								<div class="additional-buttons">
-									<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
-									<div class="sold-by-container">
-										<span>Posted By: </span>
-										<a title="Channy" href="#">Channy</a>
-									</div>
-								</div>	
-							</div>										
-							<div class="ads-title">
-								
-								<h4><a class="ads-title" href="#" >Lexux RX300</a></h4>
-							 </div>
-							 <div class="ads-price">
-								<h4><a class="ads-price" href="#" >$ 2000</a></h4>
-							 </div>
-						</div>
-						<div class="ad-box">
-							<div class="ads-img-wrapper">
-								<a class="ad-image box" href="#" title="Account need urgently" >
-									<img src="<?php echo $this->baseUrl();?>/template/imagedemo/pet11-30o7l29pxw3xcbmdoalzbe-31dc28u7jq2mmjdh7qkc22.jpg" class="attachment-hr-slider-thumb-vr-3 size-hr-slider-thumb-vr-3 wp-post-image" alt="" />
-								</a>	
-								<div class="additional-buttons">
-									<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
-									<div class="sold-by-container">
-										<span>Posted By: </span>
-										<a title="Channy" href="#">Channy</a>
-									</div>
-								</div>	
-							</div>									
-							<div class="ads-title">
-								
-								<h4><a class="ads-title " href="#" >Lexux RX300</a></h4>
-							 </div>
-							 <div class="ads-price">
-								<h4><a class="ads-price" href="#" >$ 200,000.00</a></h4>
-							 </div>
-							 <div class="notify-new red">
-								<span class="notify-new">NEW</span>
-							</div>
-						</div>
+						
 					</div>
 				</div>
+			</div>
+			<?php }?>
+			</div>
+			<div class="col-md-2 col-sm-3" style="background: #fff;">
+				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
+				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
+				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
+				<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
 			</div>
 		</div>
 	</section>

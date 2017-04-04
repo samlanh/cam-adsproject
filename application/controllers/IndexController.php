@@ -15,6 +15,8 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
     	//$this->_helper->layout()->disableLayout();
+    	$db = new Application_Model_DbTable_DbVdGlobal();
+    	$this->view->rscate = $db->getCategoryParent(0,1);
     }
     public function administratorAction()
     {

@@ -9,6 +9,9 @@
 	$session_user=new Zend_Session_Namespace('auth');
 	$username = $session_user->first_name;
 	$them_style = 'soria'; //$session_user->theme_style;
+	$session_lang=new Zend_Session_Namespace('lang');
+	$lang_id = $session_lang->lang_id;//for creat session
+	if(empty($lang_id)){$session_lang->lang_id=2;}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>

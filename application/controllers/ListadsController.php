@@ -11,7 +11,7 @@ class listadsController extends Zend_Controller_Action
     	
     }
     function detailAction(){
-    	
+//     	$this->_helper->layout()->disableLayout();
     }
 }
 

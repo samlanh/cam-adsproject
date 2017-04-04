@@ -5,6 +5,7 @@
 <!--[if lt IE 9]>
 <link rel='stylesheet' id='classiads-ie-css'  href='http://demo.designinvento.net/classiads5/wp-content/themes/classiads/css/ie.css?ver=2013-11-08' type='text/css' media='all' />
 <![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
 <link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
 <link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
@@ -28,7 +29,7 @@
 				<div id="advanced-search-widget-version2" class="home-search">
 					<div class="">
 						<div class="advanced-search-widget-content">
-							<form action="http://demo.designinvento.net/classiads5" method="get" id="views-exposed-form-search-view-other-ads-page" accept-charset="UTF-8">
+							<form action="#" method="get" id="views-exposed-form-search-view-other-ads-page" accept-charset="UTF-8">
 								<div id="edit-search-api-views-fulltext-wrapper" class="views-exposed-widget views-widget-filter-search_api_views_fulltext">
 									<div class="views-widget">
 										<div class="control-group form-type-textfield form-item-search-api-views-fulltext form-item">
@@ -44,13 +45,19 @@
 										<div class="control-group form-type-select form-item-field-category form-item">
 											<div class="controls"> 
 												<select id="edit-field-category" name="category_name" class="form-select" style="display: none;">												
-													<option value="All" selected="selected">Category...</option>
-													<option value="accounts-jobs">Accounts Jobs</option>
-													<option value="art-photography">Art &amp; Photography</option>
-													<option value="brides">Brides</option>
-													<option value="finance-jobs">Finance Jobs</option>
-													<option value="food-services">Food Services</option>
-													<option value="grooms">Grooms</option>
+													<option value="-1" selected="selected">Select Category</option>
+													<?php 
+														$db = new Application_Model_DbTable_DbVdGlobal();
+														$rscate = $db->getCategory();
+// 														print_r($rscate);exit();
+														if(!empty($rscate)){
+															foreach($rscate as $rsc){
+														?>
+															<option value="<?php echo $rsc['id'];?>" ><?php echo $rsc['name'];?></option>
+														<?php }
+														} 
+													?>
+													
 												</select>
 											</div>
 										</div>
@@ -61,20 +68,17 @@
 										<div class="control-group form-type-select form-item-ad-location form-item">
 											<div class="controls"> 
 												<select id="edit-ad-location" name="geo-radius" class="form-select locationRadius" style="display: none;">
-													<option value="All" selected="selected">Select Radius</option>
-													<option value="100" >100</option>
-													<option value="150" >150</option>
-													<option value="200" >200</option>
-													<option value="250" >250</option>
-													<option value="300" >300</option>
-													<option value="400" >400</option>
-													<option value="450" >450</option>
-													<option value="500" >500</option>
-													<option value="550" >550</option>
-													<option value="600" >600</option>
-													<option value="650" >650</option>
-													<option value="700" >700</option>
-													<option value="750" >750</option>
+													<option value="-1" selected="selected">Select Location</option>
+													<?php 
+														$db = new Application_Model_DbTable_DbGlobalselect();
+														$rslocation = $db->getAllLocation();
+														if(!empty($rslocation)){
+															foreach($rslocation as $rsl){
+														?>
+															<option value="<?php echo $rsl['id'];?>" ><?php echo $rsl['province_en_name'];?></option>
+														<?php }
+														} 
+													?>
 												</select>
 											</div>
 										</div>
@@ -126,7 +130,9 @@
 								<li>
 									<a href="#Trandom">
 										<span class="cat-tit">
-											More
+											<?php 
+												$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+											echo $tr->translate("STATUS");?>
 										</span>
 									</a>
 								</li>
@@ -228,8 +234,6 @@
 				<span style="clear: both;"></span>			
 	</section>
 	<span style="clear: both;"></span>
-	
-
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.bxslider.mine.js'></script> <!--form search-->
@@ -238,3 +242,34 @@
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/owl.carousel.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.tools.mine.js'></script>
 	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
+	<script>		
+		var url_changelang = '<?php echo $this->url(array('module'=>'default','controller'=>'index','action'=>'changelange'));?> ';
+		function changeLange(lang){
+			$.ajax({
+				url: url_changelang,
+				type: "post",
+				data:{'lange':lang},
+				success: function(data){
+					location.reload();
+				},
+				error:function(err){
+					
+				   
+				}
+			});
+			
+			/*dojo.xhrPost({
+				url: url_changelang,
+			    content :{ 
+					    'lange':lang,
+				},	
+				handleAs:"json",
+				load: function(data) {
+					
+				},
+				error: function(err) {
+					
+				}
+			});*/
+		}
+	</script>

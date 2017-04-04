@@ -105,7 +105,7 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		$sql="SELECT ft.`id`,ft.`title` AS name  FROM `vd_field_type`  AS ft WHERE ft.`status`=1 AND ft.type IN ('select','cascade')";
 		return $db->fetchAll($sql);
 	}
-	function getCategoryParent($parent=0){// get parent category for frontend
+	function getCategoryParent($parent=0,$homepage=null){// get parent category for frontend
 		$language =1;
 		$db = $this->getAdapter();
 		$sql="SELECT cat.`id`,cat.`parent`,
@@ -113,12 +113,17 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		cat.`alias_category`,cat.`fontawsome_icon`,
 		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id= cat.`id` AND catd.languageId=$language LIMIT 1) AS `name`
 		 FROM `vd_category` AS cat WHERE cat.`status`=1 ";
+		if($homepage!=null){
+			$sql.=" AND cat.is_showhomepage=1 ";
+		}
 		if($parent==0){//get parent
 			$sql.=" AND cat.`parent`=0 ";
 		}else{//get subcagegory
-			$sql.=" AND cat.`parent`!=0 ORDER BY cat.`parent` ASC ";
+			$sql.=" AND cat.`parent`!=0 ";
 		}
-		return $db->fetchAll($sql);
+		$order = " ORDER BY cat.`parent` ASC,cat.ordering ASC ";
+// 		echo $sql;exit();
+		return $db->fetchAll($sql.$order);
 	}
 	function getSubCateByParent($parent){
 		$language =1;
@@ -132,8 +137,8 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		$language =1;
 		$db = $this->getAdapter();
 		$sql="SELECT *,
-(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id= c.`id` AND catd.languageId=$language LIMIT 1) AS `name`,
-(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id= c.`parent` AND catd.languageId=$language LIMIT 1) AS `parent_name` FROM `vd_category` AS c WHERE c.`alias_category`='$alias' LIMIT 1";
+				(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id= c.`id` AND catd.languageId=$language LIMIT 1) AS `name`,
+				(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id= c.`parent` AND catd.languageId=$language LIMIT 1) AS `parent_name` FROM `vd_category` AS c WHERE c.`alias_category`='$alias' LIMIT 1";
 		return $db->fetchRow($sql);
 	}
 }
