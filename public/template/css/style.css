@@ -102,7 +102,7 @@ ul.tabs.cat-list {
 }
 #main-category ul.tabs.cat-list li {
     display: inline-block;
-    margin-right: 2px;
+    margin-right: 1px;
     box-sizing: border-box;
 }
 #main-category ul#tabs.tabs.cat-list li a {

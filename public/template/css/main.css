@@ -1092,7 +1092,7 @@ a, .topbar a,
 .tab-view li:hover, 
 .tab-view li.active {
 	color: #fff;
-	border:1px solid #00A659;
+	/*border:1px solid #00A659;*/
 	background-color: #00A659;
 }
 
@@ -2255,14 +2255,15 @@ p.quote-text {
 /**************channy add new***************/
 .tab-content .item-wrap .item{
 	background-color: #f7f7f7;
-    background-color: #fff;
-    border-color: transparent #e9e6e0 #e9e6e0;
-    border-image: none;
-    border-radius: 0;
-    border-style: none solid solid;
-    border-width: medium 1px 1px;
-    box-shadow: none;
-    width: 100%;
+	background-color: #fff;
+	border-color: transparent #e9e6e0 #e9e6e0;
+	border-image: none;
+	border-radius: 0;
+	border-style: none solid solid;
+	border-width: medium 1px 1px;
+	box-shadow: none;
+	width: 100%;
+	border-top: 1px solid #f1efef;
 }
 
 .footerads{    

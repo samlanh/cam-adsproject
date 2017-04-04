@@ -2008,7 +2008,7 @@ ul.links .service-links-facebook-share{
 #advanced-search-widget-version2 .views-exposed-widget .btn-primary {
 	line-height: 75px;
     padding: 13px 41px;
-	background: #333;
+	background: #08a077;
 	font-weight: bold;
 	border:none;
 	border-radius:0;
@@ -2356,7 +2356,7 @@ form select:after, select:after,
 }
 .search-bar-version4 .chosen-container .chosen-results li,
 .form-s-select .chosen-container .chosen-results li{
-	color: #cccccc;
+	color: #6d6d6d;
 	background-color:transparent;
 }
 .search-bar-version4 .chosen-container .chosen-results li:hover{
@@ -2376,7 +2376,7 @@ form select:after, select:after,
     padding: 20px;
 }
 .search-bar-version4 #advanced-search-widget-version2 .views-exposed-widget .btn-primary:hover{
-	background-color:#333 !important;
+	background-color:#03b182  !important;
 }
 .search-bar-version4  #advanced-search-widget-version2{
 	background-color:transparent !important;
@@ -2492,7 +2492,7 @@ form select:after, select:after,
 }
 .search-bar-version4 #edit-submit-search-view span{
 	width:100%;
-	padding: 9px 0px;
+	padding: 12px 10px;
     font-size: 13px;
     text-transform: uppercase;
     font-weight: bold;
@@ -4804,11 +4804,11 @@ ul, ol {
 }
 
 .ad-title{
-	background:url(../images/header.png) #f8f8f8;
+	/*background:url(../images/header.png) #f8f8f8;
 	padding:60px 0px;
 	text-align:center;
 	margin-bottom:60px;
-	background-size:cover;
+	background-size:cover;*/
 }
 body.category .ad-title{
 	padding:40px 0px;
