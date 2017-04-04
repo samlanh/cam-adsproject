@@ -4,7 +4,7 @@ class DashboardController extends Zend_Controller_Action
 {
     public function indexAction()
     {
-       $this->_helper->layout()->disableLayout();
+       //$this->_helper->layout()->disableLayout();
        $client_session=new Zend_Session_Namespace('client');
        $db = new Application_Model_DbTable_DbClient();
        $this->view->client_info = $db->getClientInfo(null,$client_session->client_id);

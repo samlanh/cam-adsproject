@@ -20,265 +20,8 @@ if (!empty($profile['photo'])){
 <head>
 	<meta charset="UTF-8">
 	<title>Dashboard Management</title>	
-	<link rel="shortcut icon" href="wp-content/uploads/2016/04/favicon.jpg" type="image/x-icon" />
-<!--[if lt IE 9]>
-<link rel='stylesheet' id='classiads-ie-css'  href='http://demo.designinvento.net/classiads5/wp-content/themes/classiads/css/ie.css?ver=2013-11-08' type='text/css' media='all' />
-<![endif]-->
-<link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
-<link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
-
-<link rel='stylesheet' id='bxslider-style-css'  href='<?php echo $this->baseUrl();?>/template/css/jquery.bxslider.css' type='text/css' media='all' />
-<link rel='stylesheet' id='owl-carousel-css'  href='<?php echo $this->baseUrl();?>/template/css/owl.carousel.css' type='text/css' media='all' />
-
-<link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/custom.css' type='text/css' media='all' />
-
-
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery.js'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min.js'></script>
-
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fancybox.packe.js'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fitvidse.js'></script>
-
-<link rel='stylesheet' href='<?php echo $this->baseUrl();?>/template/css/style.css' type='text/css' />
 </head>
 <body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
-		
-	<section id="static-image2" class=" static-image-2" >
-			<div class="container search-bar search-bar-version4">
-				<div id="advanced-search-widget-version2" class="home-search">
-					<div class="">
-						<div class="advanced-search-widget-content">
-							<form action="http://demo.designinvento.net/classiads5" method="get" id="views-exposed-form-search-view-other-ads-page" accept-charset="UTF-8">
-								<div id="edit-search-api-views-fulltext-wrapper" class="views-exposed-widget views-widget-filter-search_api_views_fulltext">
-									<div class="views-widget">
-										<div class="control-group form-type-textfield form-item-search-api-views-fulltext form-item">
-											<div class="controls"> 
-												<input placeholder="Search your keyword here..." type="text" id="edit-search-api-views-fulltext" name="s" value="" size="30" maxlength="128" class="form-text">
-												<input type="hidden" id="hidden-keyword" name="s" value="all" size="30" maxlength="128" class="form-text">
-											</div>
-										</div>
-									</div>
-								</div>
-								<div id="edit-field-category-wrapper" class="views-exposed-widget views-widget-filter-field_category">
-									<div class="views-widget">
-										<div class="control-group form-type-select form-item-field-category form-item">
-											<div class="controls"> 
-												<select id="edit-field-category" name="category_name" class="form-select" style="display: none;">												
-													<option value="All" selected="selected">Category...</option>
-													<option value="accounts-jobs">Accounts Jobs</option>
-													<option value="art-photography">Art &amp; Photography</option>
-													<option value="brides">Brides</option>
-													<option value="finance-jobs">Finance Jobs</option>
-													<option value="food-services">Food Services</option>
-													<option value="grooms">Grooms</option>
-												</select>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div id="edit-ad-location-wrapper" class="views-exposed-widget views-widget-filter-field_ad_location">
-									<div class="views-widget">
-										<div class="control-group form-type-select form-item-ad-location form-item">
-											<div class="controls"> 
-												<select id="edit-ad-location" name="geo-radius" class="form-select locationRadius" style="display: none;">
-													<option value="All" selected="selected">Select Radius</option>
-													<option value="100" >100</option>
-													<option value="150" >150</option>
-													<option value="200" >200</option>
-													<option value="250" >250</option>
-													<option value="300" >300</option>
-													<option value="400" >400</option>
-													<option value="450" >450</option>
-													<option value="500" >500</option>
-													<option value="550" >550</option>
-													<option value="600" >600</option>
-													<option value="650" >650</option>
-													<option value="700" >700</option>
-													<option value="750" >750</option>
-												</select>
-											</div>
-										</div>
-									</div>
-								</div>
-								<input type="text" name="geo-location" id="geo-location" value="off" data-default-value="off">
-								<input type="hidden" name="post_location" id="hid_post_location" value="All" >
-								<input type="text" name="geo-radius-search" id="geo-radius-search" value="500" data-default-value="500">
-								<input type="text" name="geo-search-lat" id="geo-search-lat" value="0" data-default-value="0">
-								<input type="text" name="geo-search-lng" id="geo-search-lng" value="0" data-default-value="0">
-								<div class="views-exposed-widget views-submit-button">
-									<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="" value="Search Now" type="submit"><span>Search Now<i class="fa fa-search"></i></span></button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>	
-			<div class="banner-cat-container">
-				<div class="container">		
-					<div id="main-category">
-						<div  class="pos-relative">
-							<ul class="nav nav-tabs tabs cat-list" id="tabs">
-								<li class="active">
-									<a href="#Tlatest">
-										<span class="cat-tit">
-											<i class="fa fa-home" aria-hidden="true"></i><br />
-											Home									
-										</span>
-									</a>
-								</li>
-								<li>
-									<a href="#Trandom">
-										<span class="cat-tit">
-											<i class="fa fa-home" aria-hidden="true"></i><br />
-											Real Estate									
-										</span>
-									</a>
-								</li>
-								<li>
-									<a href="#Tpopuler">
-										<span class="cat-tit">
-											<i class="fa fa-briefcase"></i><br />
-											Jobs									
-										</span>
-									</a>
-								</li>
-								<li>
-									<a href="#Trandom">
-										<span class="cat-tit">
-											<i class="fa fa-gift"></i><br />
-											Grooms		
-										</span>
-									</a>
-								</li>
-								<li>
-									<a href="#Trandom">
-										<span class="cat-tit">
-											<i class="fa fa-female"></i><br />
-											Brides
-										</span>
-									</a>
-								</li>
-								<li>
-									<a href="#Trandom">
-										<span class="cat-tit">
-											<i class="fa fa-child"></i><br />
-											Kids Stuff			
-										</span>
-									</a>
-								</li>
-								<li>
-									<a href="#Trandom">
-										<span class="cat-tit">
-											<i class="fa fa-gift"></i><br />
-											Grooms		
-										</span>
-									</a>
-								</li>
-								<li>
-									<a href="#Trandom">
-										<span class="cat-tit">
-											<i class="fa fa-gift"></i><br />
-											Grooms		
-										</span>
-									</a>
-								</li>
-								<li>
-									<a href="#Trandom">
-										<span class="cat-tit">
-											More
-										</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="tab-content">
-						<div class="tab-pane active subcategory-menu" id="Tlatest">
-							<div class="list-dropdow-category" >
-								<div class="banner-left-blog">
-									<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
-								</div>
-								<div class="blog-sub-categories-cener">
-									<ul class="menu-list-cate">
-										<li class="menu-list-cate"><a href="#">Private Policy</a></li>
-										<li class="menu-list-cate"><a href="#">Ads Posting Rule</a></li>
-										<li class="menu-list-cate"><a href="#">How To Use</a></li>
-										<li class="menu-list-cate"><a href="#">About Us</a></li>
-										<li class="menu-list-cate"><a href="#">Contacts Us</a></li>
-									 </ul>
-								</div>
-								<div class="banner-right-blog">
-									<div class="language">
-										<a class="lang km" href="#" title="Khmer" onclick="changeLange(1);"><img src="<?php echo $this->baseUrl();?>/images/km.png" > Khmer</a>
-										<a class="lang en" href="#" title="English" onclick="changeLange(2);"><img src="<?php echo $this->baseUrl();?>/images/en.jpg" > English</a>
-									</div>
-									<div class="login-register">
-										<button class="loginBtn loginBtn-normal">
-										  Login
-										</button>
-										<button class="loginBtn register" onclick="window.location.href='<?php echo $this->baseUrl();?>/index/register'">
-										  Register
-										</button>
-									</div>
-									<div class="button-facebook">
-										<button class="loginBtn loginBtn--facebook">
-										  Login with Facebook
-										</button>
-									</div>
-									<div class="button-postads">
-										<button class="loginBtn loginBtn-postads-free" onclick="window.location.href='<?php echo $this->baseUrl();?>/postsads/choose-category'">
-										  Post Free Ads
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane subcategory-menu" id="Tpopuler">
-							<div class="list-dropdow-category" >
-								<div class="banner-left-blog">
-									<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
-								</div>
-								<div class="blog-sub-categories">
-									<ul class="menu-list-cate">
-										<li class="menu-list-cate"><a href="#">Accounting</a></li>
-										<li class="menu-list-cate"><a href="#">Administration</a></li>
-										<li class="menu-list-cate"><a href="#">Architecture/Engineering</a></li>
-										<li class="menu-list-cate"><a href="#">Assistant/Secretary</a></li>
-										<li class="menu-list-cate"><a href="#">Audit/Taxation</a></li>
-										<li class="menu-list-cate"><a href="#">Bank/Insurance</a></li>
-										<li class="menu-list-cate"><a href="#">Customer Service</a></li>
-										<li class="menu-list-cate"><a href="#">Design</a></li>
-										<li class="menu-list-cate"><a href="#">Education/Training</a></li>
-									 </ul>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane subcategory-menu" id="Trandom">
-							<div class="list-dropdow-category" >
-								<div class="banner-left-blog">
-									<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
-								</div>
-								<div class="blog-sub-categories">
-									<ul class="menu-list-cate">
-										<li class="menu-list-cate"><a href="#">Land For Sale</a></li>
-										<li class="menu-list-cate"><a href="#">Land For Rent</a></li>
-										<li class="menu-list-cate"><a href="#">House For Sale</a></li>
-										<li class="menu-list-cate"><a href="#">House For Rent</a></li>
-										<li class="menu-list-cate"><a href="#">Apartment For Sale</a></li>
-										<li class="menu-list-cate"><a href="#">Apartment For Rent</a></li>
-										<li class="menu-list-cate"><a href="#">Commercial Property For Sale</a></li>
-										<li class="menu-list-cate"><a href="#">Commercial Property For Rent</a></li>
-										<li class="menu-list-cate"><a href="#">Room For Rent</a></li>
-									 </ul>
-								</div>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-			</div>					
-	</section>
 	<section class="container">
 		<div class="conten-body">
 			<div class="conten-body-left">
@@ -302,10 +45,42 @@ if (!empty($profile['photo'])){
 								</a>
 							</li>
 							<li>
+								<a href="#myAds">
+									<span class="dash-title">
+										<i class="fa fa-bullhorn" aria-hidden="true"></i>
+										 My Store							
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="#myAds">
+									<span class="dash-title">
+										<i class="fa fa-bullhorn" aria-hidden="true"></i>
+										My Page						
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="#myAds">
+									<span class="dash-title">
+										<i class="fa fa-bullhorn" aria-hidden="true"></i>
+										 Manage Banner							
+									</span>
+								</a>
+							</li>
+							<li>
 								<a href="#Trandom">
 									<span class="dash-title">
 										<i class="fa fa-home" aria-hidden="true"></i>
-										My Ads									
+										Policy								
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="#Trandom">
+									<span class="dash-title">
+										<i class="fa fa-home" aria-hidden="true"></i>
+										Anouncement								
 									</span>
 								</a>
 							</li>

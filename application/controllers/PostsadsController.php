@@ -13,7 +13,7 @@ class PostsadsController extends Zend_Controller_Action
     }
 
     public function chooseCategoryAction(){ // choose category before go to write post ads
-    	$this->_helper->layout()->disableLayout();
+    	//$this->_helper->layout()->disableLayout();
     	$client_session=new Zend_Session_Namespace('client');
     	if(!empty($client_session->client_id)){ //check session has been have or not
 	    	$db = new Application_Model_DbTable_DbVdGlobal();
@@ -23,9 +23,8 @@ class PostsadsController extends Zend_Controller_Action
     	}
     }
     public function writePostAction(){ // write post ads and submit ads to finish
-    	$this->_helper->layout()->disableLayout();
+    	//$this->_helper->layout()->disableLayout();
     	$client_session=new Zend_Session_Namespace('client');
-
     	if(!empty($client_session->client_id)){ //check session has been have or not
 	    	$param = $this->getRequest()->getParam('category');
 	    	$db = new Application_Model_DbTable_DbVdGlobal();
@@ -38,6 +37,9 @@ class PostsadsController extends Zend_Controller_Action
 	    	
 	    	$db = new Application_Model_DbTable_DbClient();
 	    	$this->view->client_info = $db->getClientInfo(null,$client_session->client_id);
+	    	
+	    	$db = new Application_Model_DbTable_DbGlobalselect();
+	    	$this->view-> rslocation = $db->getAllLocation();
     	}else{
     		$this->_redirect("index/login");
     	}
