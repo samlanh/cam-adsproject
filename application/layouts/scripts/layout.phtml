@@ -140,7 +140,9 @@
     </body>
 <?php }else{
 	echo $this->render('frontheader.phtml');
+	
 	echo $this->layout()->content;
+	echo $this->render('sideright.phtml');
 }?>
 <iframe name=print_frame width=0 height=0 frameborder=0 src=about:blank></iframe>
 <?php if($module=='report' AND $action!='index'){?>
