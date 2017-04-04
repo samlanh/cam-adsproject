@@ -881,6 +881,25 @@ a.button {
 /*-----------------------End Form  Popup-----------------------------------------------*/
 
 /*---------form post ads---------------*/
+.alert.message {
+    padding: 10px;
+    background-color: #f4433699;
+    color: white;
+    display: none;
+}
+.closebtn {
+    margin-left: 0px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 14px;
+    line-height: 0;
+    cursor: pointer;
+    transition: 0.7s;
+}
+.closebtn:hover {
+    color: black;
+}
 .form-post-ads {
     text-align: left;
     padding-left: 20px;
