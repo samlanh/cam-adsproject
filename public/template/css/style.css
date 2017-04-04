@@ -105,6 +105,7 @@ ul.tabs.cat-list {
     display: inline-block;
     margin-right: 1px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 #main-category ul#tabs.tabs.cat-list li a {
     background-color: rgba(255, 255, 255, 0.8);
@@ -116,6 +117,7 @@ ul.tabs.cat-list {
     position: relative;
     border-radius: 0;
     padding:0;
+    cursor: pointer;
 }
 #main-category ul#tabs.tabs.cat-list li a:hover, 
 #main-category ul#tabs.tabs.cat-list li  a.current,
