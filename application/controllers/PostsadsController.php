@@ -78,6 +78,7 @@ class PostsadsController extends Zend_Controller_Action
     		$data['id']= $client_session->client_id;
     		$db = new Application_Model_DbTable_DbPostAds();
     		$rs = $db->uploadImageFirst($data);
+    		echo $rs;
     		exit();
     	}
     }
