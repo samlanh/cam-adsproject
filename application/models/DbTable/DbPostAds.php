@@ -26,35 +26,63 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 		$db = $this->getAdapter();
 		$db->beginTransaction();
 		try{
-			$photo = $_FILES['filePhoto1'];
-			$temp = explode(".", $photo["name"]);
-			echo $photo["name"];
-			print_r($data);exit();
+// 			$photo = $_FILES['filePhoto1'];
+// 			$temp = explode(".", $photo["name"]);
 			$arr = array(
-					"ads_code"=>$data['ads_code'],
-					"ads_title"=>$data['title'],
-					"price"=>$data['price'],
-					"category_id"=>$data['category_id'],
-					"user_id"=>$data['client_id'],
-					"date"=>date("Y-m-d"),
+					"ads_code"   =>$data['ads_code'],
+					"ads_title"  =>$data['title'],
+					"price"      =>$data['price'],
+					"old_price"      =>$data['price'],
+					'contact_name'=>$data['name'],
+					'is_whatapp'=>'',
+					'is_discount'=>0,
+					'is_showcontact'=>0,
+					'email'=>$data['name'],
+					'link'=>$data['name'],
+					'address'=>$data['adress'],
+					"category_id"=>$data['category'],
+					"date"       =>date("Y-m-d"),
 					"description"=>$data['description'],
+					"province_id"=>$data['location'],
+					"district_id"=>$data['district'],
+					"commune_id"=>$data['commune'],
 					"create_date"=>date("Y-m-d"),
 					"date_modified"=>date("Y-m-d"),
-					"publish_date"=>date("Y-m-d"),
-// 					"expired_date"=>date("Y-m-d"),
-					"meta_discription"=>$data['description'],
-					"meta_keyword"=>$data['description'],
-					"alias"=>date("Y-m-d"),
-					"phone1"=>date("Y-m-d"),
-					"phone2"=>date("Y-m-d"),
-					"location"=>date("Y-m-d"),
-					"images"=>$data['status'],
-					"image_feature"=>$data['note'],
+					"publish_date" =>date("Y-m-d"),
+					"expired_date"=>date("Y-m-d", strtotime(" date('Y-m-d') +15 day")),
+					"meta_description"=>$data['description'],
+					"meta_keyword"    =>$data['description'],
+					"alias"           =>date("Y-m-d"),//check later
+					"phone1"          =>$data['phone1'],
+					"phone2"          =>$data['phone2'],
+// 					"images"          =>$data['status'],
+// 					"image_feature"   =>$data['note'],
+					// 					"user_id"    =>$data['client_id'],
 			);
-			$this->_name = "vd_ads";
-			$typeid = $this->insert($arr);		
+			$this->_name='vd_ads';
+			$ads_id = $this->insert($arr);
+			
+			$data_detail=array();
+			$dbg = new Application_Model_DbTable_DbVdGlobal();
+			$rscontrol = $dbg->getAllcontrollByCategoryId($data['category']);
+				if(!empty($rscontrol)){
+					foreach ($rscontrol as $rscon){
+						if(empty($data[$rscon['label_name']])){
+							$data[$rscon['label_name']]='';//check here more
+						}
+						$data_detail=array(
+											'ads_id'=>$ads_id,
+											'control_name'=>$rscon['label_name'],
+								            'control_id'=>$rscon['id'],
+											'control_value'=>$data[$rscon['label_name']]);	
+						$this->_name='vd_ads_detail';
+						$this->insert($data_detail);
+					}
+				}
+// 				exit();
 			$db->commit();
 		}catch(exception $e){
+			echo $e->getMessage();exit();
 			Application_Form_FrmMessage::message("Application Error");
 			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			$db->rollBack();

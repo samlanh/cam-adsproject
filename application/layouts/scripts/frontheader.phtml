@@ -9,7 +9,7 @@ $lang =$db->getLaguage();
 <link rel='stylesheet' id='classiads-ie-css'  href='http://demo.designinvento.net/classiads5/wp-content/themes/classiads/css/ie.css?ver=2013-11-08' type='text/css' media='all' />
 <![endif]-->
 <link href="https://fonts.googleapis.com/css?family=Hanuman|Montserrat" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
 <link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
 <link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
@@ -48,7 +48,7 @@ $lang =$db->getLaguage();
 									<div class="views-widget">
 										<div class="control-group form-type-select form-item-field-category form-item">
 											<div class="controls"> 
-												<select id="edit-field-category" name="category_name" class="form-select" style="display: none;">												
+												<select id="edit-field-category" name="searchcategory_name" class="form-select" style="display: none;">												
 													<option value="-1" selected="selected">Select Category</option>
 													<?php 
 														$db = new Application_Model_DbTable_DbVdGlobal();
@@ -100,7 +100,6 @@ $lang =$db->getLaguage();
 								<input type="text" name="geo-radius-search" id="geo-radius-search" value="500" data-default-value="500">
 								<input type="text" name="geo-search-lat" id="geo-search-lat" value="0" data-default-value="0">
 								<input type="text" name="geo-search-lng" id="geo-search-lng" value="0" data-default-value="0">
-								
 								<div class="views-exposed-widget views-submit-button">
 									<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="" value="Search Now" type="submit"><span>Advance Search<i class="fa fa-search"></i></span></button>
 								</div>

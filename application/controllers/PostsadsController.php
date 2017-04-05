@@ -24,6 +24,12 @@ class PostsadsController extends Zend_Controller_Action
     }
     public function writePostAction(){ // write post ads and submit ads to finish
     	//$this->_helper->layout()->disableLayout();
+    	if($this->getRequest()->isPost()){
+    		$data=$this->getRequest()->getPost();
+    		$dbp = new Application_Model_DbTable_DbPostAds();
+    		$dbp->addPostsAds($data);
+    		$this->_redirect("/postsads/choose-category");
+    	}
     	$client_session=new Zend_Session_Namespace('client');
     	if(!empty($client_session->client_id)){ //check session has been have or not
 	    	$param = $this->getRequest()->getParam('category');
@@ -72,7 +78,15 @@ class PostsadsController extends Zend_Controller_Action
 			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 		}	
     }
-    
+    function getDistrictbyidAction(){
+    	if($this->getRequest()->isPost()){
+    		$data=$this->getRequest()->getPost();
+    		$db = new Application_Model_DbTable_DbVdGlobal();
+    		$rs = $db->getAllDistrictByProvince($data['pro_id']);
+    		print_r(Zend_Json::encode($rs));
+			exit();
+    	}
+    }
     public function uploadAction(){
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();

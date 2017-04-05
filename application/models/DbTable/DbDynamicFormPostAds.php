@@ -21,6 +21,7 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 				$sigrequir='<span class="sign_req">*</span>';
 			}else{ $isreq='';$sigrequir='';
 			}
+			
 			if ($rs["type"]=="select"){
 				$form.=$this->OptionSelect($rs["id"],$rs["title"],$rs["is_require"],$rs["label_name"]);
 			}elseif ($rs["type"]=="cascade"){

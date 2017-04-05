@@ -87,35 +87,11 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		AND STATUS =1 AND is_expired=0 ORDER BY id DESC LIMIT 15 ";
 		return $db->fetchAll($sql);
 	}
-	
-// 	public function loadImageFromDir($data){
-// 		$str="";
-// 		$dir=opendir($data['mainDir'].DIRECTORY_SEPARATOR.$data['dir']);
-// 		while(@$entitys=readdir($dir))
-// 		{
-// 			$arraydir[]=$entitys;
-// 		}
-// 		closedir($dir);
-// 		$contarray=count($arraydir);
-// 		for($all=0;$all<$contarray;$all++){
-// 			if($arraydir[$all] !=='..' and $arraydir[$all]!=="." ){
-// 				$file_parts = pathinfo($arraydir[$all]);
-// 				if(empty($file_parts['extension']))	{
-// 						$str.="<div  class='blockimagelink'style='cursor: pointer; display: inline-block;border: solid 1px #ccc;text-align: center;padding: 10px;width: 100px;'>
-// 								<img style=' width: 55px; height: 52px;' src='".$this->baseUrl()."/images/folder.png' width='30px' />
-// 								<p>".$arraydir[$all]."</p>
-// 							</div>";
-// 				}else{
-// 					$str.="<div onClick='getImageLink('".$arraydir[$all]."');' class='blockimagelink' style='cursor: pointer; display: inline-block;border: solid 1px #ccc;text-align: center;padding: 10px;width: 100px;'>
-// 							str.=<img style=' height: 50px;border:1px solid #ccc;' title='".$arraydir[$all]."' src='".$this->baseUrl()."/images/directory/'".$arraydir[$all]." />
-// 									<p>".substr($arraydir[$all],0,15)."</p>
-// 							</div>";	
-// 				}    
-// 			}
-// 		}
-// 		$arr = array("image"=>$str,);
-// 		return $arr;
-// 	}
+	function getAllcontrollByCategoryId($cate_id){
+		$db = $this->getAdapter();
+		$sql="SELECT * FROM `vd_field_type` AS ft WHERE FIND_IN_SET($cate_id,ft.`category`) AND ft.`status`=1 ";
+		return $db->fetchAll($sql);
+	}
 	function getFieldTypeSelect(){ // for front (form select option)
 		$db = $this->getAdapter();
 		$sql="SELECT ft.`id`,ft.`title` AS name  FROM `vd_field_type`  AS ft WHERE ft.`status`=1 AND ft.type IN ('select','cascade')";
@@ -156,6 +132,12 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 				(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id= c.`id` AND catd.languageId=$language LIMIT 1) AS `name`,
 				(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id= c.`parent` AND catd.languageId=$language LIMIT 1) AS `parent_name` FROM `vd_category` AS c WHERE c.`alias_category`='$alias' LIMIT 1";
 		return $db->fetchRow($sql);
+	}
+	function getAllDistrictByProvince($province_id){
+		$language=1;
+		$db = $this->getAdapter();
+		$sql="SELECT dis_id , district_namekh FROM `ln_district` WHERE status =1 AND pro_id = $province_id  ORDER BY district_namekh ASC";
+		return $db->fetchAll($sql);
 	}
 }
 ?> 

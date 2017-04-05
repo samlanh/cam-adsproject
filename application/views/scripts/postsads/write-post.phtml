@@ -1,31 +1,50 @@
 <!DOCTYPE html>
-<!--[if IE 7]>
-<html class="ie ie7" lang="en-US">
-<![endif]-->
-<!--[if IE 8]>
-<html class="ie ie8" lang="en-US">
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8)  ]><!-->
 <html lang="en-US">
-<!--<![endif]-->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="UTF-8">
-	<title>Write Posts</title>	
-<!--[if lt IE 9]>
-<link rel='stylesheet' id='classiads-ie-css'  href='http://demo.designinvento.net/classiads5/wp-content/themes/classiads/css/ie.css?ver=2013-11-08' type='text/css' media='all' />
-<![endif]-->
-<link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
-<link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='bxslider-style-css'  href='<?php echo $this->baseUrl();?>/template/css/jquery.bxslider.css' type='text/css' media='all' />
-<link rel='stylesheet' id='owl-carousel-css'  href='<?php echo $this->baseUrl();?>/template/css/owl.carousel.css' type='text/css' media='all' />
-<link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/custom.css' type='text/css' media='all' />
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery.js'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min.js'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fancybox.packe.js'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fitvidse.js'></script>
+	<title>Write Posts</title>
 </head>
+<script>
+var url_changelang = '<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'get-districtbyid'));?> ';
+function getAllDistrict(){
+	var pro_id = $('#location').val();
+		lang=1;
+		$.ajax({
+			url: url_changelang,
+			type: "post",
+			data:{'pro_id':pro_id},
+			success: function(data){
+
+				
+				/*for(j=0;j<data.length;j++){
+					alert(222)
+				}*/
+				HTML='<option>testing</option>';
+				$('#district').html(HTML).select2();
+			},
+			error:function(err){
+				alert(err);
+			   
+			}
+		});
+		
+		/*dojo.xhrPost({
+			url: url_changelang,
+		    content :{ 
+				    'lange':lang,
+			},	
+			handleAs:"json",
+			load: function(data) {
+				
+			},
+			error: function(err) {
+				
+			}
+		});*/
+	
+}
+</script>
 <body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
 	<section class="container">
 		<div class="conten-body">
@@ -36,27 +55,35 @@
 						<li class="complete boxed"><span>Choose category</span></li>
 						<li class=" complete current"><span>Description</span></li>
 						<li class=" boxed"><span>Finish</span></li>
-					
 					</ul>
 				</div>
 			</div>
 			<div class="conten-body-center right post-ads">
 				<div class="title">
-					<h4><?php if (!empty($this->cate['parent_name'])){ echo $this->cate['parent_name']." >>";} echo $this->cate['name']?>
-					</h4> 
+					<h4><span style='border: 1px dashed #b0c2d8;padding: 5px;font-size: 14px;'>
+						<?php if (!empty($this->cate['parent_name'])){ echo $this->cate['parent_name'].'<i class="fa fa-angle-double-right" aria-hidden="true"></i>';} echo $this->cate['name']?>
+						<a style="background:#ff8c07;color:#fff;padding:3px;" href="<?php echo $this->baseUrl()."/postsads/choose-category";?>"> Change Category</a></span></h4> 
 				</div>
 				<div class="form-post-ads">
 				<div id="alert" class="alert message">
 				  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
 				  <span id="alertMessage"></span>
-				</div>
-					<form id="postads_form" onsubmit="return validateFormAds(this);" method="post" enctype="multipart/form-data" action="<?php echo $this->baseUrl()."/postsads";?>">
+				</div><!-- return validateFormAds(this); -->
+					<form id="postads_form" onsubmit="return validateFormAds(this)" method="post" enctype="multipart/form-data" action="<?php echo $this->baseUrl()."/postsads/write-post";?>">
 						<div class="form-row">
 							<div class="form-label">
 								<label>Title <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<input type="text" placeholder="Title"  name="title" id="title"  required="required" class="form-control" />
+								<input type="text" placeholder="Title"  name="title" id="title"  class="form-control" />
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-label">
+								<label>Ads Code <span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<input type="text" placeholder="Your Product Code"  name="ads_code" id="ads_code" class="form-control" />
 							</div>
 						</div>
 						<?php echo $this->form;?>
@@ -65,7 +92,7 @@
 								<label>Price <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<input type="text" placeholder="Price"  name="price" id="price"  required="required" class="form-control" onkeypress="return isNumber(event);"/>
+								<input type="text" placeholder="Price"  name="price" id="price"   class="form-control" onkeypress="return isNumber(event);"/>
 							</div>
 						</div>
 						<div class="form-row">
@@ -73,7 +100,15 @@
 								<label>Description <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<textarea id="description" name="description" required="required" class="form-control textareadesc" placeholder="Description..."></textarea>
+								<textarea id="description" name="description" class="form-control textareadesc" placeholder="Description..."></textarea>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-label">
+								<label>Link <span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<input type="text" placeholder="Your Website"  name="link" id="link" class="form-control" />
 							</div>
 						</div>
 						<div class="form-row">
@@ -85,7 +120,7 @@
 								<?php $string=''; 
 								$imageview="";
 								$imageloadin = '<img src="'.$this->baseUrl().'/images/loader.gif" alt="Uploading...."/>';
-								for ($i=1; $i<=6; $i++){ 
+								for ($i=0; $i<=6; $i++){ 
 // 										$string.="
 // 										jQuery('#filePhoto$i').click(function(e){
 // 										var imageLoader$i = document.getElementById('filePhoto$i');
@@ -140,43 +175,10 @@
 						</div>
 						<div class="form-row">
 							<div class="form-label">
-								<label>Name <span class="sign_req">*</span></label>
-							</div>
-							<div class="form-value">
-								<input type="hidden"  name="index" id="index"  />
-								<input type="text" placeholder="Name"  name="name" id="name"  required="required"class="form-control" />
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-label">
-								<label>Phone <span class="sign_req">*</span></label>
-							</div>
-							<div class="form-value">
-								<input type="text" placeholder="Phone"  name="phone1" id="phone1" value="<?php echo $this->client_info['phone'];?>"  required="required" class="form-control" />
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-label">
-								<label></label>
-							</div>
-							<div class="form-value">
-								<input type="text" placeholder="Phone"  name="phone2" id="phone2"  required="required"class="form-control" />
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-label">
-								<label>Email <span class="sign_req">*</span></label>
-							</div>
-							<div class="form-value">
-								<input type="text" placeholder="Email"  name="email" id="email" value="<?php echo $this->client_info['email'];?>"  required="required" class="form-control" />
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-label">
 								<label>Location<span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<select id="location" name="location" class="form-select">
+								<select id="location" name="location" class="form-select" onchange="getAllDistrict();">
 									<option value="-1" selected="selected">Select Location</option>
 									<?php 
 										if(!empty($this->rslocation)){
@@ -187,22 +189,78 @@
 										} 
 									?>
 								</select>
-								<input type="hidden"  name="category" id="category" value="<?php echo $this->cate['alias_category'];?>" />
+								<input type="hidden"  name="category" id="category" value="<?php echo $this->cate['id'];?>" />
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-label">
-								<label>Address <span class="sign_req">*</span></label>
+								<label>District<span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<textarea id="adress" name="adress" required="required" class="form-control " placeholder="Address..."><?php echo $this->client_info['address'];?></textarea>
+								<select id="district" name="district" class="form-select">
+									<option value="-1" selected="selected">Select District</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-label">
+								<label>Commune<span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<select id="commune" name="commune" class="form-select col-md-10">
+									<option value="-1" selected="selected">Select Commune</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<h2 style="text-align: center;">Contact Information</h2>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-2">
+								<label>Name <span class="sign_req">*</span></label>
+							</div>
+							<div class="col-md-3">
+								<input type="hidden"  name="index" id="index"  />
+								<input type="text" placeholder="Name" name="name" id="name" class="form-control" />
+							</div>
+							<div class="col-md-2">
+								<label>Phone 1 <span class="sign_req">*</span></label>
+							</div>
+							<div class="col-md-3">
+								<input type="text" placeholder="Phone"  name="phone1" id="phone1" value="<?php echo $this->client_info['phone'];?>"  required="required" class="form-control" />
+							</div>
+							<div class="col-md-2">
+							
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-2">
+								<label>Phone 2</label>
+							</div>
+							<div class="col-md-3">
+								<input type="text" placeholder="Phone"  name="phone2" id="phone2" class="form-control" />
+							</div>
+							<div class="col-md-2">
+								<label>Email <span class="sign_req">*</span></label>
+							</div>
+							<div class="col-md-3">
+								<input type="text" placeholder="Email"  name="email" id="email" value="<?php echo $this->client_info['email'];?>"  required="required" class="form-control" />
+							</div>
+							<div class="col-md-2"></div>
+						</div>
+						<div class="form-row">
+							<div class="col-md-2">
+								<label>Address <span class="sign_req">*</span></label>
+							</div>
+							<div class="col-md-8">
+								<textarea id="adress" name="adress"  class="form-control " placeholder="Address..."><?php echo $this->client_info['address'];?></textarea>
 							</div>
 						</div>
 						<div class="form-row ">
 							<div class="form-label">
 							</div>
 							<div class="form-value">
-								<button class="loginBtn register"> SUBMIT</button>
+								<input type="submit" class="loginBtn register" value='SUBMIT' label='SUBMIT'>
 							</div>
 						</div>
 					</form>
@@ -210,8 +268,6 @@
 			</div>
 		</div>
 	</section>
-
-	
 	<footer  class="footer">
 		<div class="container footer-grid-3">					
 			<div class="row">
@@ -273,68 +329,54 @@
 			</div>
 		</div>
 	</section>
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
-	
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.bxslider.mine.js'></script> <!--form search-->
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/custome.js'></script>
-	
-	
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.isotope.mine.js'></script>
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/owl.carousel.mine.js'></script>
-
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.tools.mine.js'></script>
-	
-	<script src="<?php echo $this->baseUrl();?>/template/javascript/validate.js"></script>
-	<script src="<?php echo $this->baseUrl();?>/template/javascript/custome.js"></script>
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/javascript/jquery.form.js'></script>
-	<!-- softable -->
-	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
-	<script>
-	getBaseUrl('<?php echo $this->baseUrl();?>');
-	</script>
 	
 </body>
-</html>
 <script>
-						
-							//$('#city, #commune, #office').select2({ width: '100%' });
-
-							//	changeProvince();
-
-						jQuery('#location').change(function () {
-								getCommune();
-						});
-
-								/*$('#commune').change(function () {
-									changeCommune();
-								});*/
-
-
-								function getCommune() {
-									var id = jQuery('#location').val();
-									if (id == '') {
-										var temHTML = "<option value=''></option>";
-										$('#commune').html(temHTML).select2({ width: '100%' });
-										$('#office').html(temHTML).select2({ width: '100%' });
-									}
-									else {
-										var list = commune['p' + id];
-										var HTML = "<option value=''>-- សូមជ្រើសរើស --</option>";
-										$.each(list, function (key, data) {
-											var comName = data.name;
-											var comList = data.list;
-											var optGroup = '<optgroup label="' + comName + '">';
-											var temHTML = "";
-											$.each(comList, function (k, v) {
-												temHTML += '<option value="' + key + "||" + v.com_id + '">' + v.com_name + '</option>';
-											});
-											HTML += optGroup + temHTML + '</optgroup>';
-										})
-										$('#commune').html(HTML).select2({ width: '100%' });
-									}
-								}
-
-								
-							
-						</script>
+//$('#city, #commune, #office').select2({ width: '100%' });
+//	changeProvince();
+		
+		/*$('#commune').change(function () {
+			changeCommune();
+		});*/
+		function getAllDistrict() {
+			//var pro_id = jQuery('#location').val();
+			alert(2777);
+			var pro_id = $('#location').val();
+			alert(pro_id);
+			if (pro_id == '' OR pro_id==-1) {
+				//var temHTML = "<option value=''></option>";
+				//$('#commune').html(temHTML).select2({ width: '100%' });
+				//$('#office').html(temHTML).select2({ width: '100%' });
+			}
+			else {
+				lang=1;
+				/*var url_changelang = '<?php //echo $this->url(array('module'=>'default','controller'=>'index','action'=>'changelange'));?> ';
+				$.ajax({
+						url: url_changelang,
+						type: "post",
+						data:{'lange':lang},
+						success: function(data){
+							location.reload();
+						},
+						error:function(err){
+						}
+					});*/
+				}
+				
+			/*var list = commune['p' + id];
+			var HTML = "<option value=''>-- សូមជ្រើសរើស --</option>";
+			$.each(list, function (key, data) {
+				var comName = data.name;
+				var comList = data.list;
+				var optGroup = '<optgroup label="' + comName + '">';
+				var temHTML = "";
+				$.each(comList, function (k, v) {
+					temHTML += '<option value="' + key + "||" + v.com_id + '">' + v.com_name + '</option>';
+				});
+				HTML += optGroup + temHTML + '</optgroup>';
+			})
+			$('#commune').html(HTML).select2({ width: '100%' });*/
+			
+		}
+</script>
+</html>
