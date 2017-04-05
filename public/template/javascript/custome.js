@@ -110,33 +110,31 @@ var message = document.getElementById('error');
 }
 
 
-var popAccInfo = document.getElementById('pop-acc-info');//form id
-var btnpopcanel = document.getElementById("edit_account");//Get the button that opens the popup
-var spanClose = document.getElementById("close-acc-info");//Get the <span> element that closes the popup
-btnpopcanel.onclick = function() { //When the user clicks the button, open the popup
-	popAccInfo.style.display = "block";
-}
-spanClose.onclick = function() {//When the user clicks on <span> (x), close the popup
-	popAccInfo.style.display = "none";
+jQuery("#edit_account").live("click", function(){ // show form account info
+	$("#pop-acc-info").css("display", "block");
+});
+
+jQuery("#close-acc-info").live("click", closeFormAccinfor);
+function closeFormAccinfor(){
+	$("#pop-acc-info").css("display", "none");
 }
 window.onclick = function(event) {//When the user clicks anywhere outside of the modal, close it
-    if (event.target == popAccInfo) {
-    	popAccInfo.style.display = "none";
+    if (event.target == document.getElementById('pop-acc-info')) {
+    	closeFormAccinfor();
     }
-	if (event.target == popaddtional) {
-    	popaddtional.style.display = "none";
+	if (event.target == document.getElementById('pop-addtional')) {
+		closeAddtional();
     }
-}
 
-var popaddtional = document.getElementById('pop-addtional');//form id
-var btnEditAdditional = document.getElementById("edit_additional");//botton click popup form
-var spanCloseAdd = document.getElementById("close-pop-addtional");//botton close popup form
-btnEditAdditional.onclick = function() { //When the user clicks the button, open the popup
-	popaddtional.style.display = "block";
 }
-spanCloseAdd.onclick = function() { //When the user clicks on <span> (x), close the popup
-	popaddtional.style.display = "none";
+function closeAddtional(){
+	$("#pop-addtional").css("display", "none");
 }
+jQuery("#close-pop-addtional").live("click", closeAddtional);
+jQuery("#edit_additional").live("click", function(){ //show form addtional info
+	$("#pop-addtional").css("display", "block");
+});
+
 
 
 //edit account information
