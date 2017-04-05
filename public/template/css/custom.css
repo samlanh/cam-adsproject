@@ -2318,7 +2318,6 @@ form select, select{
     /* background-image: url('../images/select-arrow.jpg'); */
     background-repeat: no-repeat;
     background-position: center right;
-    background: red;
 }
 select:focus{
 	outline:none;
@@ -2846,8 +2845,8 @@ td {
 }
 
 .form-control {
-	padding: 10px 20px;
-	border: 1px solid #eee;
+	padding: 10px 10px;
+	border: 1px solid #6f93c7;
 	height: 35px;
 	color: #484848;
 	border-image: initial;

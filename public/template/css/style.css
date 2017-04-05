@@ -597,7 +597,7 @@ dl.language a.lang.km {
 }
 .form-value .form-control {
     display: initial;
-	box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .075);
+    /* box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .075); */
 }
 .form-row.botton {
     text-align: center;
@@ -987,10 +987,10 @@ a.button {
 	margin-bottom: 10px;
 }
 .form-post-ads .form-row {
-   margin-bottom: 10px;
+   margin-bottom: 5px;
 }
 .form-post-ads .form-row .form-value{
-   width: 350px;
+   width: 570px;
 }
 .form-post-ads .form-row {
 }
@@ -999,7 +999,8 @@ a.button {
 	background: none;
 	text-align: left;
 	border-left: 1px solid #e1e1e1;
-	box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .075);
+	border:1px solid #6f93c7;
+	/*box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .075);*/
 }
 .form-value .chosen-container .chosen-single{
 	height: 35px;
@@ -1042,10 +1043,10 @@ a.button {
 }
 .form-value textarea.form-control.textareadesc {
     width: 100%;
-    max-width: 332px;
+    /* max-width: 332px; */
     max-height: 230px;
-	min-width: 332px;
-	min-height: 230px;
+    min-width: 332px;
+    min-height: 230px;
     overflow-y: auto;
     height: 230px;
 }
@@ -1086,7 +1087,11 @@ a.button {
 			height: 22px;
 		}
 			/*----image upload-*/
-			.uploader {position:relative; overflow:hidden; width: 100%;  height: 100%;
+			.uploader {
+			position:relative;
+			overflow:hidden;
+			width: 99%;
+			height: 100%;
 			background:#e8e8e8;
 			}
 			
@@ -1291,3 +1296,4 @@ ul.items li a .fa:before {
 ul.items li.item a img {
     width: 100%;
 }
+span.sign_req{color:red;}

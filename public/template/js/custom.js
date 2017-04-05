@@ -1,8 +1,5 @@
 jQuery(function ($) {
-
     'use strict';
-
-
     // -------------------------------------------------------------
     //  select options
     // -------------------------------------------------------------
@@ -16,11 +13,9 @@ jQuery(function ($) {
 
     }());
     
-   
      // -------------------------------------------------------------
     //  Home Carousel
     // -------------------------------------------------------------
-
     (function( $ ) {
 
         //Function to animate slider captions 
@@ -36,17 +31,14 @@ jQuery(function ($) {
                 });
             });
         }
-        
         //Variables on page load 
         var $myCarousel = $('#home-section'),
             $firstAnimatingElems = $myCarousel.find('.item:first').find("[data-animation ^= 'animated']");
             
         //Initialize carousel 
         $myCarousel.carousel();
-        
         //Animate captions in first slide on page load 
         doAnimations($firstAnimatingElems);
-        
         //Pause carousel  
         $myCarousel.carousel('pause');
         
@@ -60,9 +52,10 @@ jQuery(function ($) {
 
 
 
+
     // -------------------------------------------------------------
     //  Owl Carousel
-    // -------------------------------------------------------------
+    // -------------------------------------------------------------
 
 
     (function() {
@@ -107,7 +100,6 @@ jQuery(function ($) {
     // -------------------------------------------------------------
 
    (function() {
-
         $('.category-dropdown').on('click', '.category-change a', function(ev) {
             if ("#" === $(this).attr('href')) {
                 ev.preventDefault();
