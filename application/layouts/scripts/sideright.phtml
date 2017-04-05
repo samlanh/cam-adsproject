@@ -2,14 +2,23 @@
 $lang =$db->getLaguage();
 $session_lang=new Zend_Session_Namespace('lang');
 $session_lang->lang_id;
+
+$client_session=new Zend_Session_Namespace('client');
+$clentid = $client_session->client_id;
 ?>
 	<div class="widget block block-static-block">
     <div class="float-bar hidden-xs hidden-sm hidden-md">
 			<div class="float-bar-content">
 				<ul class="items">
 					<li class="item"><a href="<?php echo $this->baseUrl();?>/postsads/choose-category"><span class="fa fa-plus-square">&nbsp;</span><span>Posts Ads</span></a></li>
+					<?php if (empty($clentid)){?>
 					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/login"><span class="fa fa-sign-in">&nbsp;</span><span>Login</span></a></li>
 					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/register"><span class="fa fa-user">&nbsp;</span><span>Register</span></a></li>
+					<?php }else{?>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/logout"><span class="fa fa-sign-out">&nbsp;</span><span>Logout</span></a></li>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/dashboard"><span class="fa fa-user">&nbsp;</span><span>My Account</span></a></li>
+					
+					<?php }?>
 					<li class="item">
 					<?php if (!empty($lang)) foreach ($lang as $rs){ 
 					if ($session_lang->lang_id!=$rs['id']){
