@@ -60,7 +60,7 @@ $lang  = $session_lang->lang_id;
 									<?php }?>
 									</a>
 									<div class="additional-buttons">
-										<span class="quickview" id="quickview" onClick="getAdsDetail('<?php echo $rsad['id'];?>');" ><i class="fa fa-search-plus"></i><?php echo $tr->translate("Quickview");?></span>
+										<span class="quickview"  onClick="getAdsDetail('<?php echo $rsad['id'];?>');" ><i class="fa fa-search-plus"></i><?php echo $tr->translate("Quickview");?></span>
 										<div class="sold-by-container">
 											<a title="<?php echo $rsad['suppliyer_name'];?>" href="#"><span><?php echo $tr->translate("Posted By");?> </span><?php echo $rsad['suppliyer_name'];?></a>
 										</div>
@@ -74,7 +74,7 @@ $lang  = $session_lang->lang_id;
 									<h4><a class="ads-price" href="#" >$ <?php echo number_format($rsad['price']);?></a></h4>
 								 </div>
 								  <div class="item-info">
-									<ul style="font-size: 10px;">
+									<ul>
 									   <li ><?php echo $rsad['province_name'];?></li>
 									   <li > <?php echo $rsad['province_name'];?></li>
 									</ul>
@@ -107,7 +107,7 @@ $lang  = $session_lang->lang_id;
 									<h4><a class="ads-price" href="#" >$ <?php echo number_format(11111123456);?></a></h4>
 								 </div>
 								 <div class="item-info">
-									<ul style="font-size: 10px;">
+									<ul >
 									   <li >Phnom Penh</li>
 									   <li > Phnom Penh</li>
 									</ul>
@@ -225,12 +225,5 @@ $lang  = $session_lang->lang_id;
 	</section> -->
 	
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 </body>
 </html>

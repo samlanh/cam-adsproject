@@ -8,6 +8,7 @@ class listadsController extends Zend_Controller_Action
     	$id = $this->getRequest()->getParam("cateid");
     	$db = new Application_Model_DbTable_DbGlobalselect();
     	$this->view->rsads = $db->getAllAdsByName($id);
+    	$this->view->cate_info = $db->getCategoryInfo($id);
     	
     }
     function detailAction(){

@@ -1,8 +1,24 @@
+<?php 
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	?>
 <link href="<?php echo $this->baseUrl();?>/template/css/main.css" media="screen" rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <html lang="en">
   <body>
 	<div class="page">
+		<div class="breadcrumb">
+			<div class="container">
+				<ul class="breadcrumb">
+				  <li><a href="<?php echo $this->baseUrl()."/index"?>"><i class="fa fa-home"></i>Home</a></li>
+				  <?php if (!empty($this->cate_info['parent_cate_name'])){?>
+				  <li><a href="#"><?php echo $this->cate_info['parent_cate_name'];?></a></li>
+				  <?php }?>
+				   <?php if (!empty($this->cate_info['cate_name'])){?>
+				  <li><a href="#"><?php echo $this->cate_info['cate_name'];?></a></li>
+				  <?php }?>
+				</ul>
+			</div>
+		</div>
 		<div class="all-categories section">
 			<div class="container">
 				<div class="row clearpadding">
@@ -12,17 +28,19 @@
 					<div class="col-md-8 col-sm-7" style="background: #fff;">
 						<div class="category-adds">
 							<div id="category-tab">
-								<div class="tab-view">
-									<ul class="list-inline">
-										<li class="grid-view-tab"><i class="fa fa-th-large" aria-hidden="true"></i></li>
-										<li class="small-view-tab active"><i class="fa fa-th" aria-hidden="true"></i></li>
-										<li class="list-view-tab"><i class="fa fa-th-list" aria-hidden="true"></i></li>
-									</ul>
+								<div class="category-tab-top">
+									<div class="catgorylist-title">
+										<h4 class="title-page"><?php echo $this->cate_info['cate_name'];?></h4>
+									</div>
+									<div class="tab-view">
+										<ul class="list-inline">
+											<!-- <li class="grid-view-tab"><i class="fa fa-th-large" aria-hidden="true"></i></li> -->
+											<li class="small-view-tab active"><i class="fa fa-th" aria-hidden="true"></i></li>
+											<li class="list-view-tab"><i class="fa fa-th-list" aria-hidden="true"></i></li>
+										</ul>
+									</div>
 								</div>
 								<div class="category-tab" >
-									<div style="height: 50px;">
-										
-									</div>
 									<!-- Tab panes -->
 								  	<div class="tab-content small-view-tab">
 								    	<div role="tabpanel" class="tab-pane active" id="recent">
@@ -30,27 +48,39 @@
 											<?php 
 											if(!empty($this->rsads))foreach($this->rsads as $rs){?>
 								    			<li class="item-wrap">
-								    				<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['ads_title'];?>">
-									    				<div class="item">
-															<div class="item-image">
-																<img src="<?php echo $this->baseUrl()."/imagesphotoA10_1.jpg"?>" alt="" class="img-responsive">
+									    				<div class="item ad-box ">
+									    				
+																<div class="item-image">
+																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['ads_title'];?>">
+																	<?php if (!empty($rs['images'])){?>
+																		<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rs['images']; ?>" alt=""  />
+																	<?php }else{?>
+																		<img src="<?php echo $this->baseUrl()."/images/noimagefound.jpg"; ?>" alt=""  />
+																	<?php }?>
+																	</a>
+																	<div class="additional-buttons">
+																		<span class="quickview" onClick="getAdsDetail('<?php echo $rs['id'];?>');" ><i class="fa fa-search-plus"></i><?php echo $tr->translate("Quickview");?></span>
+																		<div class="sold-by-container">
+																			<a title="Channy" href="#"><span><?php echo $tr->translate("Posted By");?> </span><?php echo $rs['author'];?></a>
+																		</div>
+																	</div>
+																</div>
 																<div class="item-price">
 																	<span>$<?php echo number_format($rs['price'],2);?></span>
 																</div> 
-															</div>
 															<div class="item-description">
-																<div class="item-meta" style="display: none;">
-																	<ul class="list-inline product-social">
-																		<li><i class="fa fa-bookmark-o" aria-hidden="true"></i></li>
-																		<li><i class="fa fa-heart-o" aria-hidden="true"></i></li>
-																		<li><i class="fa fa-share-alt" aria-hidden="true"></i></li>
-																	</ul>
-																</div>
 																<div class="item-title">
-																	<h3><?php echo substr($rs['ads_title'],0,100);?></h3>
+																	<h3>
+																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['ads_title'];?>">
+																		<?php echo substr($rs['ads_title'],0,100);?>
+																	</a>
+																	</h3>
 																</div>
+																<!-- <div class="ads-price">
+																	<h4><a class="ads-price" href="#" >$ <?php //echo number_format($rs['price'],2);?></a></h4>
+																 </div> -->
 																<div class="item-info">
-																	<p><?php 
+																	<p class="description"><?php 
 																	$str1 = utf8_encode($rs['description']);
 																	$description = substr($str1, 0, 600);
 																	echo utf8_decode($description); 
@@ -60,9 +90,9 @@
 																	
 																	?></p>
 																	
-																	<ul style="font-size: 10px;">
-																	   <li style="float:left;"><?php echo $rs['category_name'];?></li>
-																	   <li style="float:left;"> <?php echo $rs['province_name'];?></li>
+																	<ul>
+																	   <li ><?php echo $rs['category_name'];?></li>
+																	   <li> <?php echo $rs['province_name'];?></li>
 																	</ul>
 																</div>
 															</div><!-- item-description -->
@@ -72,8 +102,9 @@
 																	   <li> <i class="fa fa-clock-o"></i><?php echo date("M d, Y",strtotime($rs['publish_date']));?></li>
 																	</ul>
 															</div>
+															
 														</div><!-- item -->
-													</a>
+													
 								    			</li><!-- item-wrap -->
 								    			<?php }?>
 								    		</ul>
