@@ -102,6 +102,9 @@ padding: 10px;
     vertical-align: top;
 	padding: 0 10px;
 }
+.pop-content-body-right div.ads-title h4{
+	min-height:0;
+}
 .pop-content-body-right div.ads-title h4 a.ads-title {
 font-size: 16px;
 }
@@ -128,8 +131,9 @@ font-size: 16px;
 	padding:0;
 }
 .pop-content-body-right .description {
-    max-height: 140px;
+    max-height: 142px;
     overflow-x: auto;
+	min-height: 142px;
 }
 .pop-content-body-right .description p {
     font-size: 12px;
@@ -1521,3 +1525,35 @@ ul.items li.item a img {
     width: 100%;
 }
 span.sign_req{color:red;}
+
+
+/*-- 
+	list ads by cate
+*/
+.category-tab-top {
+    border-bottom: solid #4183d7;
+}
+.catgorylist-title {
+    display: inline-block;
+}
+.catgorylist-title h4.title-page {
+    color: #4183d7;
+    font-weight: 600;
+    margin: 0;
+	line-height: 55px;
+}
+.tab-content.small-view-tab .item-description {
+    min-height: 85px;
+}
+.tab-content.grid-view-tab p.description ,
+.tab-content.small-view-tab p.description {
+    display: none;
+}
+.tab-content.grid-view-tab .item-image,
+.tab-content.small-view-tab   .item-image {
+    border-bottom: solid 1px #eee;
+}
+.item .item-info ul li{
+	font-weight: 600;
+    color: #6f6f6f;
+}
