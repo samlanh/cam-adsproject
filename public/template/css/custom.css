@@ -960,13 +960,9 @@ footer .container.footer-grid-3 a.logo,footer .container.footer-grid-4 a.logo{
 	margin-top:-10px;
 }
 footer {
-	background: #222222;
+	background: #063863;
 }
 
-footer .container {
-	padding-top: 90px;
-	padding-bottom: 90px;
-	}
 .footer-menu 	{
     width: 49%;
     float: right;

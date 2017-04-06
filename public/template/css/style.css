@@ -717,13 +717,64 @@ p.label-show-all a:hover{
 		text-transform: uppercase;
 	}
 /*--------------------Start Footer----------------------------------*/
+div.right-blog,
+div.left-blog,
+div.center-blog {
+    padding: 10px 0;
+}
+div.block-content h4 {
+    margin: 0;
+	padding: 10px 0;
+}
+div.block-content h4 span {
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.block-content p {
+    color: #fff;
+}
 .footer-logo {
     text-align: center;
 }
 footer div.text-description {
     margin-top: 10px;
-    text-align: justify;
+    text-align: center;
     font-size: 14px;
+}
+ul.social {
+    text-align: center;
+}
+ul.social li {
+    display: inline-block;
+}
+ul.social li a {
+    padding: 10px;
+    font-size: 20px;
+    color: #fff;
+    background: #ccc;
+    display: block;
+    width: 40px;
+    text-align: center;
+}
+ul.social li a.twitter:hover,
+ul.social li a.google-plus:hover,
+ul.social li a.facebook:hover,
+ul.social li a.youtube:hover,
+ul.social li a:hover {
+    background: #e2c636;
+}
+ul.social li a.facebook {
+	background: #2a328d;
+}
+ul.social li a.google-plus {
+	background: #b52525;
+}
+ul.social li a.twitter {
+	background: #4183d7;
+}
+ul.social li a.youtube {
+	background: #8c0505;
 }
 /*--------------------End Footer----------------------------------*/
 /*------Start Register page--------------------*/
@@ -1130,12 +1181,7 @@ a.button {
     margin-bottom: 0px;
 }
 
-/*--.cancel_save_chage_footer,
-.make_save_chage_footer {
-   padding: 10px 16px;
-    background-color: #666666;
-    color: white;
-}--*/
+
 /*-----------------------End Form  Popup-----------------------------------------------*/
 
 /*---------form post ads---------------*/
