@@ -276,4 +276,23 @@ $lang =$db->getLaguage();
 				}
 			});*/
 		}
+
+		
+		<?php if ($lang==1){?>
+			var monthNames = [
+			                  "Jan", "Feb", "Mar",
+			                  "Apr", "May", "Jun", "Jul",
+			                  "Aug", "September", "Oct",
+			                  "Nov", "Dec"
+			                ];
+	      <?php }else{?>
+	      var monthNames = [
+		                  "មករា", "កុម្ភៈ", "មិនា",
+		                  "មេសា", "ឧសភា", "មិថុនា", "កក្កដា",
+		                  "សីហា", "កញ្ញា", "តុលា",
+		                  "វិច្ឆិការ", "ធ្នូ"
+		                ];
+	      <?php }?>
+	      var baseurl = '<?php echo $this->baseUrl();?>';
+	  
 	</script>

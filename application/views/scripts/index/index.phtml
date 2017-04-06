@@ -1,3 +1,7 @@
+<?php 
+$session_lang=new Zend_Session_Namespace('lang');
+$lang  = $session_lang->lang_id;
+?>
 <!DOCTYPE html>
 <html lang="en-US">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -234,118 +238,6 @@
 			</div>
 		</div>
 	</section>
-	<div id="pop-ads-detail" class="popup detail-pro" style="display:none;">
-	  <!-- popup content -->
-	  <div class="pop-content">
-	    <div class="pop-content_header">
-	      <span id="close-detail" class="close">×</span>
-	      <h2>បង់ប្រាក់មុនត្រឹមតែ7900$អាចចូលស្នាក់នៅបានភ្លាមៗ</h2>
-	    </div>
-
-	    <div class="pop-content-body" >
-	    	<div class="pop-content-body-left">
-	    		<div class="slide-content" style="max-width:100%;">
-	    		  <div class="blog-main-slide">
-					  <img class="mySlides" src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" >
-					  <img class="mySlides" src="<?php echo $this->baseUrl()."/images/adsimg/banimg.jpg"; ?>" >
-					  <img class="mySlides" src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" >
-				  </div>
-				
-				  <div class="thumnail-blog">
-				    <div class="thumnail-image-slide">
-				      <img class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" style="width:100%" onclick="currentDiv(1)">
-				    </div>
-				    <div class="thumnail-image-slide">
-				      <img class=" images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/banimg.jpg"; ?>" style="width:100%" onclick="currentDiv(2)">
-				    </div>
-				    <div class="thumnail-image-slide">
-				      <img class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" style="width:100%" onclick="currentDiv(3)">
-				    </div>
-				  </div>
-				</div>
-	    	</div>
-	    	<div class="pop-content-body-right">
-	    		<div class="ads-title">
-					<h4><a class="ads-title" href="#" >បង់ប្រាក់មុនត្រឹមតែ7900$អាចចូលស្នាក់នៅបានភ្លាមៗ</a></h4>
-				 </div>
-				 <div class="viewer" >
-					<ul >
-					   <li> <i class="fa fa-eye"></i>100 Views</li>
-					   <li> <i class="fa fa-clock-o"></i>12, Mar 2017</li>
-					</ul>
-				</div>
-				 <div class="ads-price">
-					<h4><a class="ads-price" href="#" >$ <?php echo number_format(11111123456);?></a></h4>
-				 </div>
-				 <div class="description">
-				 	<p>
-				 		Morbi accumsan ipsum velit. Nam nec tellus a odio sit tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent permis conubia nostra, per inceptos himenaeos mauris inter erat justo. Nullam a
-				 	</p>
-				 </div>
-				 <div class="postedby"> 
-				 	<p>Posted By : <span class="bold"><a href="#">Sok Chandara</a></span></p>
-				 </div>
-				 <div class="item-info">
-					<ul style="font-size: 10px;">
-					   <li >Category : </li>
-					   <li class="value">Houses & Lands</li>
-					   <li > Location : </li>
-					   <li class="value"> Phnom Penh</li>
-					</ul>
-				</div>
-				<div class="social-share">
-					<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button " data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a></div>
-				</div>
-	    	</div>
-	    </div>
-	    <div class="popup_footer">
-	    </div>
-	  </div>
-	</div>
-	<script>
-		var slideIndex = 1;
-		showDivs(slideIndex);
-		
-		function plusDivs(n) {
-		  showDivs(slideIndex += n);
-		}
-		
-		function currentDiv(n) {
-		  showDivs(slideIndex = n);
-		}
-		
-		function showDivs(n) {
-		  var i;
-		  var x = document.getElementsByClassName("mySlides");
-		  var dots = document.getElementsByClassName("images-thum");
-		  if (n > x.length) {slideIndex = 1}
-		  if (n < 1) {slideIndex = x.length}
-		  for (i = 0; i < x.length; i++) {
-		     x[i].style.display = "none";
-		  }
-		  x[slideIndex-1].style.display = "initial";
-		
-		}
-
-
-		/*
-			popup form
-		*/
-		function getAdsDetail(index){
-			alert(index);
-			 $("#pop-ads-detail").css("display", "block");
-		}
-		jQuery("#close-detail").live("click", closeformdetail);
-		window.onclick = function(event) {//When the user clicks anywhere outside of the modal, close it
-			if (event.target == document.getElementById("pop-ads-detail")) {
-				closeformdetail();
-		    }
-
-		}
-		function closeformdetail() {
-	         $("#pop-ads-detail").css("display", "none");
-	    }
-	</script>
 	
 <div id="fb-root"></div>
 <script>(function(d, s, id) {

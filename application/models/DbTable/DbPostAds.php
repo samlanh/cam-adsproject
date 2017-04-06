@@ -9,6 +9,10 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 		$session_user=new Zend_Session_Namespace('auth');
 		return $session_user->user_id;
 	}
+	static function getCurrentLang(){
+		$session_lang=new Zend_Session_Namespace('lang');
+		return $session_lang->lang_id;
+	}
 	public function getNewAdsCode(){
 		$this->_name='vd_ads';
 		$db = $this->getAdapter();
@@ -138,6 +142,25 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			//imagedestroy($uploadimage);
 			
 		return $newName;
+	}
+	
+	public function getAdsDetail($ads_id){
+		$db =$this->getAdapter();
+		$language = $this->getCurrentLang();
+		$province_field = array(
+				"1"=>"province_en_name",
+				"2"=>"province_kh_name"
+				);
+		$province = $province_field[$language];
+		$sql= "SELECT ads.* ,
+			(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author,
+			(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = ads.`category_id`  AND catd.languageId =$language LIMIT 1)  AS cateogry_title,
+			(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$language LIMIT 1)  AS parent_cateogry_title,
+			(SELECT province.$province FROM `vd_province` AS province WHERE province.id = ads.`province_id` LIMIT 1) AS province
+			FROM `vd_ads` AS ads,
+			`vd_category` AS cat
+			 WHERE cat.`id` = ads.`category_id` AND ads.`id`=$ads_id LIMIT 1";
+		return $db->fetchRow($sql);
 	}
 }
 ?>
