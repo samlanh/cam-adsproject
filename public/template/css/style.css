@@ -1,8 +1,45 @@
+/*
+loading
+*/
+.load-wrapper {
+    display: none;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    outline: 0;
+    background: rgba(25, 25, 25, 0.4);
+}
+.load-blog {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 35%;
+    top: -moz-calc((100% - 45px)/2);
+    top: -webkit-calc((100% - 45px)/2);
+    top: -o-calc((100% - 45px)/2);
+    top: calc((100% - 45px)/2);
+}
+.load-blog .loader {
+    min-width: 300px;
+    vertical-align: middle;
+    margin-top: 0px;
+    display: block;
+    vertical-align: top;
+    text-align: center;
+    clear: both;
+}
+.load-blog .loader img {
+    width: 100px;
+}
 /*--------popup form-------------*/
 .popup {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 9999; /* Sit on top */
+    z-index: 999; /* Sit on top */
     padding-top: 5%; /* Location of the box */
     overflow: hidden;
     left: 0;
@@ -472,7 +509,7 @@ p.b-title span:after {
     width: 0;
     height: 0;
     top: -5px;
-    left: 7px;
+    left: 8px;
     border: 6px solid transparent;
     border-bottom: 6px solid #3e59a5;
     -moz-transform: rotate(135deg);
