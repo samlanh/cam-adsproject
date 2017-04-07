@@ -1712,31 +1712,12 @@ transition: all 0.5s ease-in-out;
 	margin-bottom: 15px;
 }
 
-.ad-details .item-meta {
-	border-bottom:1px solid #ddd;
-	padding-bottom: 20px; 
-}
-
 .ad-details .item-price {
 	top: 30px;
 	padding: 7px 15px;
 }
 
-.ad-details .item-info ul li {
-	margin-bottom: 10px;
-	padding-left: 20px;
-	position: relative;
-}
 
-.ad-details .item-info ul li:before {
-	position: absolute;
-	content: "\f101";
-	font-family: FontAwesome;
-	left: 0;
-	top:0;
-	font-size:12px;
-	line-height: 20px;
-}
 
 .ad-details .item-image {
 	max-height: 400px;
@@ -1806,13 +1787,18 @@ transition: all 0.5s ease-in-out;
     border-bottom: 1px solid #ddd;
     margin-bottom: 25px;
     padding-bottom: 10px;
-    color: #000;
+    color: #4692de;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 .item-author .seller-image {
-	margin-bottom: 20px;
+	margin-bottom: 0px;
 }
-
+.seller-image img {
+    border: solid 1px #999;
+    border-radius: 50%;
+}
 .side-bar .btn.btn-primary {
 	width:100%;
 }
@@ -1821,9 +1807,15 @@ transition: all 0.5s ease-in-out;
 	font-weight: 700;
 	margin-right: 5px;
 }
-
+.seller-info a {
+    color: #4183d7;
+    font-weight: 600;
+}
+.seller-info a.author {
+    text-transform: uppercase;
+}
 .side-bar .seller-info a:hover {
-	color:#00a651
+	color:#e28736
 }
 
 .side-bar .seller-info address {
