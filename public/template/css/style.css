@@ -183,7 +183,7 @@ font-size: 16px;
 a.next, a.prev {
     cursor: pointer;
     position: absolute;
-    top: 50%;
+    top: 35%;
     width: auto;
     padding: 16px;
     margin-top: -22px;
@@ -1583,4 +1583,15 @@ span.sign_req{color:red;}
 .item .item-info ul li{
 	font-weight: 600;
     color: #6f6f6f;
+}
+
+/*
+ads detail
+*/
+img.slides-detail {
+    height: 250px;
+    width: auto;
+    max-width: 502px;
+    position: relative;
+    animation: animateright 0.4s;
 }
