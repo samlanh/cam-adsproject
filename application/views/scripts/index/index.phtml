@@ -67,11 +67,11 @@ $lang  = $session_lang->lang_id;
 									</div>
 								</div>
 								<div class="ads-title">
-									<h4><a class="ads-title" href="#" ><?php echo $rsad['ads_title'];?></a></h4>
+									<h4><a class="ads-title" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rsad['alias'];?>" ><?php echo $rsad['ads_title'];?></a></h4>
 								 </div>
 							
 							 	 <div class="ads-price">
-									<h4><a class="ads-price" href="#" >$ <?php echo number_format($rsad['price']);?></a></h4>
+									<h4><a class="ads-price" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rsad['alias'];?>" >$ <?php echo number_format($rsad['price']);?></a></h4>
 								 </div>
 								  <div class="item-info">
 									<ul>

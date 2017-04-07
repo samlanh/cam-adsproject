@@ -13,6 +13,12 @@ class listadsController extends Zend_Controller_Action
     }
     function detailAction(){
 //     	$this->_helper->layout()->disableLayout();
+    	$ads_alise = $this->getRequest()->getParam("ads");
+    	$db = new Application_Model_DbTable_DbGlobalselect();
+    	$adsdetail = $db->getAdsDetail($ads_alise);
+    	$this->view->adsDetail = $adsdetail;
+    	
+    	$this->view->relate_pro = $db->getRelatedAds($adsdetail);
     }
 }
 

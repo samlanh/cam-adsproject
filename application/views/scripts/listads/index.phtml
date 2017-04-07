@@ -49,9 +49,8 @@
 											if(!empty($this->rsads))foreach($this->rsads as $rs){?>
 								    			<li class="item-wrap">
 									    				<div class="item ad-box ">
-									    				
 																<div class="item-image">
-																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['ads_title'];?>">
+																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'];?>">
 																	<?php if (!empty($rs['images'])){?>
 																		<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rs['images']; ?>" alt=""  />
 																	<?php }else{?>
@@ -71,7 +70,7 @@
 															<div class="item-description">
 																<div class="item-title">
 																	<h3>
-																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['ads_title'];?>">
+																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'];?>">
 																		<?php echo substr($rs['ads_title'],0,100);?>
 																	</a>
 																	</h3>

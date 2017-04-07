@@ -57,6 +57,48 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$db = $this->getAdapter();
 		return $db->fetchAll($sql);
 	}
-	
+	 
+	function getAdsDetail($alias){ // for page ads detail
+		$db = $this->getAdapter();
+		$lang_id = $this->getCurrentLang();
+		$province_field = array(
+				"1"=>"province_en_name",
+				"2"=>"province_kh_name"
+		);
+		$province = $province_field[$lang_id];
+		$this->_name='vd_ads';
+		$sql="SELECT ads.*,
+			(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author,
+			(SELECT vc.photo FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author_photo,
+			(SELECT vc.address FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author_address,
+			(SELECT vc.phone FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author_phone,
+			(SELECT title FROM `vd_category_detail` WHERE category_id= ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
+			(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$lang_id LIMIT 1)  AS parent_category_name,
+			(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name
+ 		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.`alias`='$alias' LIMIT 1";
+		return $db->fetchRow($sql); 
+	}
+	function getRelatedAds($data){// for page ads detail
+		$this->_name='vd_ads';
+		$db = $this->getAdapter();
+		$lang_id = $this->getCurrentLang();
+		$province_field = array(
+				"1"=>"province_en_name",
+				"2"=>"province_kh_name"
+		);
+		$province = $province_field[$lang_id];
+		$category = $data['category_id'];
+		$adsid = $data['id'];
+		$sql="SELECT ads.*,
+		(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author,
+		(SELECT vc.photo FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author_photo,
+		(SELECT vc.address FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author_address,
+		(SELECT vc.phone FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author_phone,
+		(SELECT title FROM `vd_category_detail` WHERE category_id= ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
+		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$lang_id LIMIT 1)  AS parent_category_name,
+		(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name
+		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.`category_id`=$category AND ads.id < $adsid  LIMIT 10";
+		return $db->fetchAll($sql);
+	}
 }
 ?>
