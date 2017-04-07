@@ -161,6 +161,7 @@ font-size: 16px;
 }
 .slide-content {
     text-align: center;
+	position: relative;
 }
 .blog-main-slide{
 
@@ -178,6 +179,32 @@ font-size: 16px;
 }
 .thumnail-image-slide img.images-thum{
 	cursor: pointer;
+}
+a.next, a.prev {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: #999;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    background: #f4f4f4;
+	 border-radius: 3px 0 0 3px;
+}
+a.next:hover, a.prev:hover {
+	color: #fff;
+    background-color: rgba(0,0,0,0.8);
+}
+a.prev {
+    left: 0;
+   
+}
+a.next {
+    right: 0;
 }
 /*-----------------------*/
 @font-face{font-family: 'Ubuntu', sans-serif;src:url("../font/Ubuntu-RI.ttf");}

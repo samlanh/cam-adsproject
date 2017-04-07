@@ -211,7 +211,7 @@ textarea {
 }
 
 .pagination > li > a, .pagination > li > span {
-	color: #00a651;
+	color: #4183d7;
 	padding: 9px 15px;
 }
 
@@ -222,8 +222,8 @@ textarea {
 .pagination > .active > a:focus, 
 .pagination > .active > a:hover, .pagination > .active > span, 
 .pagination > .active > span:focus, .pagination > .active > span:hover {
-	background-color: #00a651;
-	border-color:#00a651;
+	background-color: #4183d7;
+	border-color: #337ab7;
 	color: #fff;
 }
 /*label {
