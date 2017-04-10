@@ -171,7 +171,7 @@ Class MenuManager_Form_FrmCategory extends Zend_Dojo_Form {
 				'required'=>'true',
 				'class'=>'fullside'));
 		$option = array("0"=>$this->tr->translate("CHOOSE_CATEGORY"));
-		$result = $db->getCategory();
+		$result = $db->getCategoryForMenu();
 		if(!empty($result))foreach($result AS $row){
 			$option[$row['id']]=$row['name'];
 		}

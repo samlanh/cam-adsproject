@@ -63,7 +63,7 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		
 		$sql="SELECT c.`id`,
 		(SELECT cd.title FROM `vd_category_detail` AS cd WHERE cd.category_id = c.`id` AND cd.languageId=$language LIMIT 1) AS name,
-		c.`parent` FROM `vd_category` AS c WHERE c.`status`=1 AND c.`parent`=$parent ORDER BY id ASC";
+		c.`parent` FROM `vd_category` AS c WHERE c.`status`=1 AND c.cate_type=1 AND  c.`parent`=$parent ORDER BY id ASC";
 		$query = $db->fetchAll($sql);
 		$stmt = $db->query($sql);
 		$rowCount = count($query);
