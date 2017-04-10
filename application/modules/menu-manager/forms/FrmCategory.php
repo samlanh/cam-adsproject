@@ -81,8 +81,20 @@ Class MenuManager_Form_FrmCategory extends Zend_Dojo_Form {
 		if (!empty($data)){unset($option[$data['id']]);}
 		$_cateory_parent->setMultiOptions($option);
 		$_cateory_parent->setValue($request->getParam('parent'));
+		
+		$_cate_type = new Zend_Dojo_Form_Element_FilteringSelect("cate_type");
+		$_arr=array(
+				"1"=>$this->tr->translate("FOR_FIELD_MANAGER"),
+				"2"=>$this->tr->translate("FOR_MENU_MANAGER"),
+		);
+		$_cate_type->setMultiOptions($_arr);
+		$_cate_type->setAttribs(array(
+				'dojoType'=>'dijit.form.FilteringSelect',
+				'required'=>'true',
+				'class'=>'fullside'));
+		$_cate_type->setValue($request->getParam('cate_type'));
 		if($data!=null){
-			
+			$_cate_type->setValue($data['cate_type']);
 			$_cateory_parent->setValue($data['parent']);
 			$_status->setValue($data['status']);
 			$id->setValue($data['id']);
@@ -92,7 +104,7 @@ Class MenuManager_Form_FrmCategory extends Zend_Dojo_Form {
 		}
 		
 		$this->addElements(array($id,$_btn_search,$_title,$_status,$note,$_status_search,$_title_alias,
-				$_cateory_parent
+				$_cateory_parent,$_cate_type
 				));
 		return $this;
 	}	

@@ -114,7 +114,7 @@ Class MenuManager_Form_FrmMenu extends Zend_Dojo_Form {
 			$option[$rs['id']]=$rs['name'];
 		}
 		$_menu_type->setMultiOptions($option);
-		$_menu_type->setValue($request->getParam('parent'));
+		$_menu_type->setValue($request->getParam('menu_type'));
 		
 		$_target_type = new Zend_Dojo_Form_Element_FilteringSelect("target_type");
 		$_target_type->setAttribs(array(
@@ -192,7 +192,7 @@ Class MenuManager_Form_FrmMenu extends Zend_Dojo_Form {
 				'required'=>'true',
 				'class'=>'fullside'));
 		$option = array("0"=>$this->tr->translate("CHOOSE_CATEGORY"));
-		$result = $db->getCategory();
+		$result = $db->getCategoryForMenu();
 		if(!empty($result))foreach($result AS $row){
 			$option[$row['id']]=$row['name'];
 		}

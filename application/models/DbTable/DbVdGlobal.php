@@ -76,6 +76,27 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		}
 		return $cate_tree_array;
 	} 
+	public function getCategoryForMenu($parent = 0, $spacing = '', $cate_tree_array = ''){ // for backend menu item category for menu
+		$db=$this->getAdapter();
+		if (!is_array($cate_tree_array))
+			$cate_tree_array = array();
+		$language = $this->getCurrentLang();
+	
+		$sql="SELECT c.`id`,
+		(SELECT cd.title FROM `vd_category_detail` AS cd WHERE cd.category_id = c.`id` AND cd.languageId=$language LIMIT 1) AS name,
+		c.`parent` FROM `vd_category` AS c WHERE c.`status`=1 AND c.cate_type=2 AND c.`parent`=$parent ORDER BY id ASC";
+		$query = $db->fetchAll($sql);
+		$stmt = $db->query($sql);
+		$rowCount = count($query);
+		$id='';
+		if ($rowCount > 0) {
+			foreach ($query as $row){
+				$cate_tree_array[] = array("id" => $row['id'], "name" => $spacing . $row['name']);
+				$cate_tree_array = $this->getCategory($id=$row['id'], $spacing . ' - ', $cate_tree_array);
+			}
+		}
+		return $cate_tree_array;
+	}
 	function  getAllAdsToHomepage($category_id){
 		$db = $this->getAdapter();
 		$lang_id = $this->getCurrentLang();
@@ -106,7 +127,7 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		(SELECT alias_category FROM `vd_category` WHERE id=cat.`parent` LIMIT 1) AS parent_alias,
 		cat.`alias_category`,cat.`fontawsome_icon`,cat.id as category_id,
 		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id= cat.`id` AND catd.languageId=$language LIMIT 1) AS `name`
-		 FROM `vd_category` AS cat WHERE cat.`status`=1 ";
+		 FROM `vd_category` AS cat WHERE cat.`status`=1 and cat.`cate_type`=1";
 		if($homepage!=null){
 			$sql.=" AND cat.is_showhomepage=1 ";
 		}

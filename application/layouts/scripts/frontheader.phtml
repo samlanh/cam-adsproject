@@ -1,6 +1,9 @@
 <?php $db = new Application_Model_DbTable_DbVdGlobal();
+$db_select = new Application_Model_DbTable_DbGlobalselect();
 $lang =$db->getLaguage();
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
+
+$menu_items = $db_select->getMenuItems();
 ?>
 <head>
 	<meta charset="UTF-8">
@@ -144,37 +147,13 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 								</div>
 								<div class="blog-sub-categories-cener">
 									<ul class="menu-list-cate">
-										<li class="menu-list-cate"><a href="#">Private Policy</a></li>
-										<li class="menu-list-cate"><a href="#">Ads Posting Rule</a></li>
-										<li class="menu-list-cate"><a href="#">How To Use</a></li>
-										<li class="menu-list-cate"><a href="#">About Us</a></li>
-										<li class="menu-list-cate"><a href="#">Contacts Us</a></li>
+										<?php if (!empty($menu_items)) foreach ($menu_items as $rs){?>
+										<li class="menu-list-cate"><a href="<?php echo $this->baseUrl()."/page/index?param=".$rs['alias_menu'];?>"><?php echo $rs['title'];?></a></li>
+										<?php }?>
+										
 									 </ul>
 								</div>
 								<div class="banner-right-blog">
-									<div class="language">
-										<?php if (!empty($lang)) foreach ($lang as $rs){?>
-										<a class="lang <?php echo $rs['class'];?>" href="#" title="<?php echo $rs['title'];?>" onclick="changeLange(<?php echo $rs['id'];?>);"><img src="<?php echo $this->baseUrl();?>/images/<?php echo $rs['iconImage'];?>" > <?php echo $rs['title'];?></a>
-										<?php }?>
-									</div>
-									<div class="login-register">
-										<button class="loginBtn loginBtn-normal">
-										  Login
-										</button>
-										<button class="loginBtn register" onclick="window.location.href='<?php echo $this->baseUrl();?>/index/register'">
-										  Register
-										</button>
-									</div>
-									<div class="button-facebook">
-										<button class="loginBtn loginBtn--facebook">
-										  Login with Facebook
-										</button>
-									</div>
-									<div class="button-postads">
-										<button class="loginBtn loginBtn-postads-free" onclick="window.location.href='<?php echo $this->baseUrl();?>/postsads/choose-category'">
-										  Post Free Ads
-										</button>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -208,7 +187,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 								<div class="tab-pane subcategory-menu" id="<?php echo $rs['parent_alias']?>">
 									<div class="list-dropdow-category" >
 									<div class="banner-left-blog">
-									<img src="images/camapplogo.png" alt="Logo">
+										<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
 									</div>
 									<div class="blog-sub-categories">
 										<ul class="menu-list-cate"><!-- open 1 -->

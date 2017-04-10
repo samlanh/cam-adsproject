@@ -165,6 +165,41 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name
 		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.user_id = $user_id ";
 		return $db->fetchAll($sql);
+	} 
+	
+	function getMenuItems(){ //  for menu front
+		$db = $this->getAdapter();
+		$lang_id = $this->getCurrentLang();
+		$sql="SELECT *,
+		(SELECT md.title FROM `vd_menu_detail` AS md WHERE md.menu_id = m.`id` AND md.languageId=$lang_id LIMIT 1) AS title
+		 FROM `vd_menu` AS m WHERE m.`status`=1 ";
+		return $db->fetchAll($sql);
+	}
+	function getMenuItemsByAlias($alias){ //  for Controler page index
+		$db = $this->getAdapter();
+		$sql="SELECT * FROM `vd_menu` AS m WHERE m.`alias_menu`='$alias' limit 1";
+		
+// 		$row = $db->fetchRow($sql);
+// 		$result='';
+// 		if ($row['menu_type_id']==1){ //category blog
+		
+// 		}elseif ($row['menu_type_id']==2){//category list
+		
+// 		}elseif ($row['menu_type_id']==3){//sigle aticle
+		
+// 		}elseif ($row['menu_type_id']==4){//contacts
+		
+// 		}
+		return $db->fetchRow($sql);
+	}
+	function getArcticleByCate($cateId){ //  for Controler page index
+		$db = $this->getAdapter();
+		$lang_id = $this->getCurrentLang();
+		$sql="SELECT *,
+(SELECT ad.title FROM `vd_article_detail` AS ad WHERE ad.articleId = a.`id` AND ad.language_id=$lang_id LIMIT 1) AS title,
+(SELECT ad.description FROM `vd_article_detail` AS ad WHERE ad.articleId = a.`id` AND ad.language_id=$lang_id LIMIT 1) AS description
+ FROM `vd_article` AS a WHERE a.`status`=1 AND a.`category_id`=$cateId ";
+		return $db->fetchAll($sql); 
 	}
 }
 ?>

@@ -1,170 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<?php $menu_info = $this->menu_info; 
 
-<!-- Mirrored from layerstheme.com/developers/jamshaid/directin/add-listings.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Mar 2017 04:19:16 GMT -->
-<head>
-	<meta charset="UTF-8">
-	<title>Directin</title>
-	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-	<!-- Style Sheets -->
+$db = new Application_Model_DbTable_DbGlobalselect();
+?>
+<html lang="en">
+<?php if ($menu_info['menu_type_id']==1){ //category blog?>
+<?php }else if ($menu_info['menu_type_id']==2){//category list
+	$article = $db->getArcticleByCate($menu_info['category_id']);
 	
-</head>
-<body data-spy="scroll" data-target=".scrollspy">
-<div id="loader">
-    <div class="book">
-      <div class="book__page"></div>
-      <div class="book__page"></div>
-      <div class="book__page"></div>
-    </div>
-</div>
-    <div id="add-listings">
+	
+?>
+    <div class="block-content-page">
     	<div class="container clear">
         	<div class="row">
-            	<div class="col-sm-12 col-md-9">
-                	<!-- start user form-->
-                	<div id="user-option">
-                    	<div style="height: 500px; background: red;" >
-                        </div>
-                    </div>
-                    <div id="enter-listings">
-                    	<h1>enter listings detail</h1>
-                        <hr>
-                        <div style="height: 500px; background: blue;" >
-                        </div>
-                    </div>
-                    <!-- end listings-->
-                    
-                    <!-- start location detail-->
-                    <div id="location-detail">
-                    	<div style="height: 500px; background: yello;" >
-                        </div>
-                    </div>
-                    <!-- end location detail-->
-                    <!--start gallery images-->
-                    <div id="gallery-images">
-                    	<h1>gallery images</h1>
-                        <hr>
-                        <div style="height: 500px; background: red;" >
-                        </div>
-                    </div>
-                    <!-- end gallery images-->
-                    <!-- start packages-->
-                   
-                    <!-- end packages-->
-                </div>
-                <div class="col-sm-12 col-md-3 scrollspy">
-                	<div id="process" data-spy="affix" data-offset-top="40">
-                    	<h1>process</h1>
-                        <!-- <div id="checkdiv"></div> -->                        
-                        	<!-- <div> -->
-                            <!-- <nav id="process-section"> -->
-                        <ul id="nav" class="nav list-unstyled">
-                            <li class="active">
-                                <a href="#user-option" class="scroll"><span>1.</span>General</a>
-                            </li>                                    
-                            <hr>
+        	 <div class="col-sm-12 col-md-3 scrollspy">
+                	<div id="nav-left"  class="nav-left">
+                        <ul class="nav list-unstyled">
+                        	<?php if (!empty($article)) foreach ($article as $ss){?>
                             <li>
-                                <a href="#enter-listings" class="scroll"><span>2.</span>Listings Details</a>
+                                <a href="<?php echo '#'.$ss['alias_article'];?>"><?php echo $ss['title'];?></a>
                             </li>
-                            <hr>
-                            <li>
-                                <a href="#location-detail" class="scroll"><span>3.</span>Location Details</a>
-                            </li>
-                            <hr>
-                            <li>
-                                <a href="#gallery-images" class="scroll"><span>4.</span>Gallery Images</a>
-                            </li>
-                            <hr>
-                            <li>
-                                <a href="#price-package" class="scroll"><span>5.</span>Pricing Plan</a>
-                            </li>                                    
-                            <hr>
-                            <li>
-                                <a href="#preview-add" class="scroll"><span>6.</span>Preview Add</a>
-                            </li>
-                            <hr>
-                            <!-- <li>
-                                <a href="#" class="scroll"><span>7.</span>Publish Add</a>
-                            </li> -->
+                            <?php }?>                                    
                         </ul>
                     </div>
-                    <div id="sidebar-navigation">
-                    	<h1>navigation</h1>
-                        <div id="siderbar-navigation-section">
-                        	<a href="#">Submits</a>
-                            <hr>
-                            <a href="#">My Listings</a>
-                            <hr>
-                            <a href="#">My favourites</a>
-                            <hr>
-                            <a href="#">transactions</a>
-                            <hr>
-                            <a href="#">profile</a>
-                            <hr>
-                            <a href="#">change password</a>
+                </div>
+            	<div class="col-sm-12 col-md-9">
+            		<?php if (!empty($article)) foreach ($article as $ss){?>
+                	<!-- start div-->
+                	<div id="<?php echo $ss['alias_article'];?>">
+                		<div class="title-blog">
+                			<h1 class="title-blog"><?php echo $ss['title'];?></h1>
+                		</div>
+                    	<div class="blog-content">
+                    	<?php echo $ss['description'];?>
                         </div>
                     </div>
+                    <?php }?>
+                    <!-- end div-->
                 </div>
             </div>
         </div>
     </div>
-    <!-- end add listings-->
+    <?php }else if ($menu_info['menu_type_id']==3){//sigle aticle?>
+     <?php }else if ($menu_info['menu_type_id']==4){//Contacts?>
+    <?php }?>
      <!-- start prefooter-->
-    <div id="prefooter">
-    </div>
-    <!-- end prefooter-->
-	<!-- Scripts -->
-	<script src="<?php echo $this->baseUrl()."/template/js/bootstrap.min.js"; ?>"></script>
-	<script src="js/wow.min.js"></script>
-	<script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/waypoints.js"></script>
-    <script src="js/jquery.counterup.js"></script>
-    <script src="js/jquery.bxslider-rahisified.min.js"></script>
-    <script src="../../../../cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script src="js/jquery.tagsinput.js"></script>
-    <script src="js/fileinput.js"></script>
-	<script src="js/custom.js"></script>
-   	<script>tinymce.init({ selector:'textarea' });
-    
-    $('#tags_1').tagsInput({
-		defaultText:'Tags',
-		width:'auto'
-	});
+     <script>
+		$(function() {
+		  $('a[href*="#"]:not([href="#"])').click(function() {
+			  $('#nav-left a').each(function () {
+				  $(this).removeClass('active');
+			  });
+			  var currLink = $(this);
+			  currLink.addClass("active");
+			  
+		    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+		      var target = $(this.hash);
+		      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+		      if (target.length) {
+		        $('html, body').animate({
+		          scrollTop: target.offset().top
+		        }, 1000);
+		        return false;
+		      }
+		
+		    }
+		 
+		  });
+		});
+		$(window).scroll(function() { 
+			 var scroll = $(window).scrollTop();
+			 var heigtheader = $("#static-image2").height();
+			 if (scroll >= heigtheader) {
+				 $(".nav-left").addClass("fixed");
+			 }else{
+				 $(".nav-left").removeClass("fixed");
+			 }
 
-	// function for map image on listings page
-	function MyControl(controlDiv, map) {
-    	 var controlImg = document.createElement('IMG');
-    	 controlImg.style.width = '96px';
-    	 controlImg.style.height = '96px';
-    	 //controlImg.style.marginBottom = '30px';
-    	 controlImg.width = '96';
-    	 controlImg.height = '96';
-    	 controlImg.src = 'images/green-home2eccb.png?3';
-    	 controlDiv.appendChild(controlImg);
-	}
-	
-
-    $(document).ready(function() {
-        
-        "use strict";
-
-        $('#process').affix({
-            offset: {     
-              top: $('#process').offset().top,
-              bottom: ($('#footer').outerHeight(true) + $('#prefooter').outerHeight(true)) + 125
-            }
-        });
-        
-        /* Smooth-Scroll */
-
-        $(".scroll").click(function(event){
-            event.preventDefault();
-            $('html,body').animate({scrollTop:$(this.hash).offset().top}, 1000);
-        });
-        
-        /* Smooth-Scroll */
-        
-    });
- </script>
-</body>
+			  $('#nav-left a').each(function () {
+			        var currLink = $(this);
+			        var refElement = $(currLink.attr("href"));
+			        if (refElement.position().top <= scroll && refElement.position().top + refElement.height() > scroll) {
+			            $('#nav-left ul li a').removeClass("active");
+			            currLink.addClass("active");
+			        }
+			        else{
+			            currLink.removeClass("active");
+			        }
+			    });
+		
+		});
+	</script>
 </html>

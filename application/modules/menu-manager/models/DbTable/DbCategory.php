@@ -49,6 +49,7 @@ class MenuManager_Model_DbTable_DbCategory extends Zend_Db_Table_Abstract
 	    			'status'=>$data['status'],
 					'modify_date'=>date("Y-m-d"),
 	    			'description'=>$data['description'],
+	    			'cate_type'=>$data['cate_type'],
 	    			'user_id'=>$this->getUserId(),
 	    		);
 	    		 $this->_name="vd_category";
