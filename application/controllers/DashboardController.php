@@ -8,7 +8,9 @@ class DashboardController extends Zend_Controller_Action
        $client_session=new Zend_Session_Namespace('client');
        $db = new Application_Model_DbTable_DbClient();
        $this->view->client_info = $db->getClientInfo(null,$client_session->client_id);
-        
+       
+       $db = new Application_Model_DbTable_DbGlobalselect();
+       $this->view->myads = $db->getAdsByUserid($client_session->client_id);
     }
 	public  function errorAction(){
 		$this->_helper->layout()->disableLayout();

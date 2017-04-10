@@ -118,9 +118,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$this->_name='vd_ads';
 		$lang_id = $this->getCurrentLang();
 		$db = $this->getAdapter();
-		
 		$province = $this->getStringProvince();
-		
 		$sql="SELECT ad.*,
 		(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author,
 		(SELECT vc.photo FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_photo,
@@ -150,6 +148,22 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 	function getBannerByPosition($position){
 		$db = $this->getAdapter();
 		$sql=" SELECT * FROM `ln_banneravert` WHERE STATUS=1 AND position_id=$position ";
+		return $db->fetchAll($sql);
+	}
+	function getAdsByUserid($user_id){
+	$this->_name='vd_ads';
+		$db = $this->getAdapter();
+		$lang_id = $this->getCurrentLang();
+		$province = $this->getStringProvince($lang_id);
+		$sql="SELECT ads.*,
+		(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author,
+		(SELECT vc.photo FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author_photo,
+		(SELECT vc.address FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author_address,
+		(SELECT vc.phone FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author_phone,
+		(SELECT title FROM `vd_category_detail` WHERE category_id= ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
+		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$lang_id LIMIT 1)  AS parent_category_name,
+		(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name
+		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.user_id = $user_id ";
 		return $db->fetchAll($sql);
 	}
 }
