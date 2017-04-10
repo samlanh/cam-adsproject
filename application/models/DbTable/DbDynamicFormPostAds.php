@@ -10,15 +10,21 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 		return $session_user->user_id;
 	}
 	
-	function getAllFormTypeCateid($cate_id){// old test form
+	function getAllFormTypeCateid($cate_id,$search=null){// old test form
 		$db = $this->getAdapter();
-		$sql="SELECT * FROM `vd_field_type` AS ft WHERE FIND_IN_SET($cate_id,ft.`category`) AND ft.`status`=1";
+		$sql="SELECT * FROM `vd_field_type` AS ft WHERE FIND_IN_SET($cate_id,ft.`category`) AND ft.`status`=1 ";
+		if($search!=null){
+			$sql.=" AND ft.is_search=1 ";
+		}
 		$row =  $db->fetchAll($sql);
 		$form='';
 		if (!empty($row)) foreach ($row as $rs){
-			if($rs["is_require"]==1){
+			if($rs["is_require"]==1 ){
 				$isreq= 'required="required"';
 				$sigrequir='<span class="sign_req">*</span>';
+				if($search!=null){
+					$isreq='';$sigrequir='';
+				}
 			}else{ $isreq='';$sigrequir='';
 			}
 			

@@ -5,46 +5,9 @@
 	<meta charset="UTF-8">
 	<title>Write Posts</title>
 </head>
-<script>
-var url_changelang = '<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'get-districtbyid'));?> ';
-function getAllDistrict(){
-	var pro_id = $('#location').val();
-		lang=1;
-		$.ajax({
-			url: url_changelang,
-			type: "post",
-			data:{'pro_id':pro_id},
-			success: function(data){
-
-				
-				/*for(j=0;j<data.length;j++){
-					alert(222)
-				}*/
-				HTML='<option>testing</option>';
-				$('#district').html(HTML).select2();
-			},
-			error:function(err){
-				alert(err);
-			   
-			}
-		});
-		
-		/*dojo.xhrPost({
-			url: url_changelang,
-		    content :{ 
-				    'lange':lang,
-			},	
-			handleAs:"json",
-			load: function(data) {
-				
-			},
-			error: function(err) {
-				
-			}
-		});*/
-	
-}
-</script>
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
 <body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
 	<section class="container">
 		<div class="conten-body">
@@ -159,14 +122,12 @@ function getAllDistrict(){
 									};";
 									?>
 									<li>
-										
 										<div id="uploader<?php echo $i;?>" class="uploader">
 											<div id='preview<?php echo $i;?>'></div>
 												<img id="image_wiew<?php echo $i;?>" src="<?php echo $this->baseUrl();?>/images/broweimage.png"/>
 												<input type="hidden" id="ads-image<?php echo $i;?>" name="ads-image<?php echo $i;?>" />
 												<input class="filephoto" type="file" name="filePhoto<?php echo $i;?>"  id="filePhoto<?php echo $i;?>" accept="image/jpeg,image/gif,image/png" value='' onchange="loadFile<?php echo $i;?>(event)" />
 										</div>
-										
 									</li>
 									<?php }
 									echo "<script>jQuery(document).ready(function() { jQuery(function() {".$string." }); }); $imageview</script>";?>
@@ -184,7 +145,7 @@ function getAllDistrict(){
 										if(!empty($this->rslocation)){
 											foreach($this->rslocation as $rsl){
 										?>
-											<option value="<?php echo $rsl['id'];?>" ><?php echo $rsl['province_en_name'];?></option>
+											<option value="<?php echo $rsl['id'];?>" ><?php echo $rsl['province_name'];?></option>
 										<?php }
 										} 
 									?>
@@ -194,22 +155,20 @@ function getAllDistrict(){
 						</div>
 						<div class="form-row">
 							<div class="form-label">
-								<label>District<span class="sign_req">*</span></label>
+								<label>District<span class="sign_req"></span></label>
 							</div>
 							<div class="form-value">
-								<select id="district" name="district" class="form-select">
-									<option value="-1" selected="selected">Select District</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-label">
-								<label>Commune<span class="sign_req">*</span></label>
-							</div>
-							<div class="form-value">
-								<select id="commune" name="commune" class="form-select col-md-10">
-									<option value="-1" selected="selected">Select Commune</option>
-								</select>
+								<label id="lbl_district">
+									<select id="district" name="district" class="form-select">
+										<option value="-1" selected="selected"><?php echo $tr->translate("Choose Distict");?></option>
+									</select>
+								</label>
+								<label>District<span class="sign_req"></span></label>
+								<label id="lbl_commune">
+									<select id="commune" name="commune" class="form-select">
+										<option value="-1" selected="selected"><?php echo $tr->translate("Choose Commune");?></option>
+									</select>
+								</label>
 							</div>
 						</div>
 						<div class="col-md-12">
@@ -338,45 +297,59 @@ function getAllDistrict(){
 		/*$('#commune').change(function () {
 			changeCommune();
 		});*/
-		function getAllDistrict() {
-			//var pro_id = jQuery('#location').val();
-			alert(2777);
-			var pro_id = $('#location').val();
-			alert(pro_id);
-			if (pro_id == '' OR pro_id==-1) {
-				//var temHTML = "<option value=''></option>";
-				//$('#commune').html(temHTML).select2({ width: '100%' });
-				//$('#office').html(temHTML).select2({ width: '100%' });
-			}
-			else {
-				lang=1;
-				/*var url_changelang = '<?php //echo $this->url(array('module'=>'default','controller'=>'index','action'=>'changelange'));?> ';
-				$.ajax({
-						url: url_changelang,
-						type: "post",
-						data:{'lange':lang},
-						success: function(data){
-							location.reload();
-						},
-						error:function(err){
-						}
-					});*/
+		
+</script>
+
+<script>
+var url_district = '<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'get-districtbyid'));?> ';
+function getAllDistrict(){
+	var pro_id = $('#location').val();
+		$.ajax({
+			url: url_district,
+			type: "post",
+			data:{'pro_id':pro_id},
+			success: function(data){
+				datars = $.parseJSON(data);
+				stringhtml='<select onchange="getCommuneById()" id="district" name="district" class="form-select">';
+				stringhtml+='<option value="0" selected="selected"><?php echo $tr->translate("Choose Distict");?></option>';
+				for(j=0;j<datars.length;j++){
+					stringhtml+='<option value="'+datars[j].id+'">'+datars[j].district_name+'</option>';
 				}
-				
-			/*var list = commune['p' + id];
-			var HTML = "<option value=''>-- សូមជ្រើសរើស --</option>";
-			$.each(list, function (key, data) {
-				var comName = data.name;
-				var comList = data.list;
-				var optGroup = '<optgroup label="' + comName + '">';
-				var temHTML = "";
-				$.each(comList, function (k, v) {
-					temHTML += '<option value="' + key + "||" + v.com_id + '">' + v.com_name + '</option>';
-				});
-				HTML += optGroup + temHTML + '</optgroup>';
-			})
-			$('#commune').html(HTML).select2({ width: '100%' });*/
-			
+				stringhtml+='</select';
+				document.getElementById('lbl_district').innerHTML=stringhtml;
+				stringcommune='<select id="commune" name="commune" class="form-select"><option><?php echo $tr->translate("Choose Commune");?></option></select>';
+				document.getElementById('lbl_commune').innerHTML=stringcommune;
+				var noResult = jQuery(".form-select").data('noResult');
+				jQuery(".form-select").chosen({});
+			},
+			error:function(err){
+				alert(err);
+			}
+		});
+}
+var url_commune = '<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'get-communebyid'));?> ';
+function getCommuneById(){
+	var commune_id = $('#district').val();
+	if(commune_id==0){return false;}
+	$.ajax({
+		url: url_commune,
+		type: "post",
+		data:{'distict_id':commune_id},
+		success: function(data){
+			datars = $.parseJSON(data);
+			stringhtml='<select id="commune" name="commune" class="form-select">';
+			stringhtml+='<option value="0" selected="selected"><?php echo $tr->translate("Choose Commune");?></option>';
+			for(j=0;j<datars.length;j++){
+				stringhtml+='<option value="'+datars[j].id+'">'+datars[j].commune_name+'</option>';
+			}
+			stringhtml+='</select';
+			document.getElementById('lbl_commune').innerHTML=stringhtml;
+			var noResult = jQuery(".form-select").data('noResult');
+			jQuery(".form-select").chosen({});
+		},
+		error:function(xhr){
 		}
+	});
+}
 </script>
 </html>

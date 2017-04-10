@@ -87,6 +87,15 @@ class PostsadsController extends Zend_Controller_Action
 			exit();
     	}
     }
+    function getCommunebyidAction(){
+    	if($this->getRequest()->isPost()){
+    		$data=$this->getRequest()->getPost();
+    		$db = new Application_Model_DbTable_DbVdGlobal();
+    		$rs = $db->getAllCommunebyDistict($data['distict_id']);
+    		print_r(Zend_Json::encode($rs));
+    		exit();
+    	}
+    }
     public function uploadAction(){
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();

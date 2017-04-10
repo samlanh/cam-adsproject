@@ -1,5 +1,6 @@
 <?php $db = new Application_Model_DbTable_DbVdGlobal();
 $lang =$db->getLaguage();
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 ?>
 <head>
 	<meta charset="UTF-8">
@@ -33,13 +34,12 @@ $lang =$db->getLaguage();
 				<div id="advanced-search-widget-version2" class="home-search">
 					<div class="">
 						<div class="advanced-search-widget-content">
-							<form action="#" method="get" id="views-exposed-form-search-view-other-ads-page" accept-charset="UTF-8">
+							<form action="<?php echo $this->url(array("module"=>'default','controller'=>'listads','action'=>'result'));?>" method="post" id="views-exposed-form-search-view-other-ads-page" accept-charset="UTF-8">
 								<div id="edit-search-api-views-fulltext-wrapper" class="views-exposed-widget views-widget-filter-search_api_views_fulltext">
 									<div class="views-widget">
 										<div class="control-group form-type-textfield form-item-search-api-views-fulltext form-item">
 											<div class="controls"> 
-												<input placeholder="Search your keyword here..." type="text" id="edit-search-api-views-fulltext" name="s" value="" size="30" maxlength="128" class="form-text">
-												<input type="hidden" id="hidden-keyword" name="s" value="all" size="30" maxlength="128" class="form-text">
+												<input placeholder="<?php echo $tr->translate("Search your keyword here...");?>" type="text" id="edit-search-api-views-fulltext" name="keywork_search" value="<?php echo $this->search['keywork_search'];?>" size="30" maxlength="128" class="form-text">
 											</div>
 										</div>
 									</div>
@@ -48,16 +48,15 @@ $lang =$db->getLaguage();
 									<div class="views-widget">
 										<div class="control-group form-type-select form-item-field-category form-item">
 											<div class="controls"> 
-												<select id="edit-field-category" name="searchcategory_name" class="form-select" style="display: none;">												
-													<option value="-1" selected="selected">Select Category</option>
+												<select id="edit-field-category" name="category_search" class="form-select" style="display: none;">												
+													<option value="-1" selected="selected"><?php echo $tr->translate("Choose Category");?></option>
 													<?php 
 														$db = new Application_Model_DbTable_DbVdGlobal();
 														$rscate = $db->getCategory();
-// 														print_r($rscate);exit();
 														if(!empty($rscate)){
 															foreach($rscate as $rsc){
 														?>
-															<option value="<?php echo $rsc['id'];?>" ><?php echo $rsc['name'];?></option>
+															<option value="<?php echo $rsc['id'];?>" <?php if($this->search['category_search']==$rsc['id']){ echo'selected="selected"';}?> ><?php echo $rsc['name'];?></option>
 														<?php }
 														} 
 													?>
@@ -71,15 +70,15 @@ $lang =$db->getLaguage();
 									<div class="views-widget">
 										<div class="control-group form-type-select form-item-ad-location form-item">
 											<div class="controls"> 
-												<select id="edit-ad-location" name="geo-radius" class="form-select locationRadius" style="display: none;">
-													<option value="-1" selected="selected">Select Location</option>
+												<select id="edit-ad-location" name="location_search" class="form-select locationRadius" style="display: none;">
+													<option value="-1"><?php echo $tr->translate("Choose Location");?></option>
 													<?php 
 														$db = new Application_Model_DbTable_DbGlobalselect();
 														$rslocation = $db->getAllLocation();
 														if(!empty($rslocation)){
 															foreach($rslocation as $rsl){
 														?>
-															<option value="<?php echo $rsl['id'];?>" ><?php echo $rsl['province_en_name'];?></option>
+															<option value="<?php echo $rsl['id'];?>" <?php if($this->search['location_search']==$rsl['id']){ echo'selected="selected"';}?>><?php echo $rsl['province_name'];?></option>
 														<?php }
 														} 
 													?>
@@ -91,17 +90,12 @@ $lang =$db->getLaguage();
 								<div id="edit-ad-location-wrapper" class="views-exposed-widget views-widget-filter-field_ad_location">
 									<div class="views-widget">
 										<div class="control-group form-type-select form-item-ad-location form-item">
-											<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="" value="Search Now" type="submit"><span>Search Now<i class="fa fa-search"></i></span></button>
+											<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="submit_search" value="Search Now" type="submit"><span>Search Now<i class="fa fa-search"></i></span></button>
 										</div>
 									</div>
 								</div>
-								<input type="text" name="geo-location" id="geo-location" value="off" data-default-value="off">
-								<input type="hidden" name="post_location" id="hid_post_location" value="All" >
-								<input type="text" name="geo-radius-search" id="geo-radius-search" value="500" data-default-value="500">
-								<input type="text" name="geo-search-lat" id="geo-search-lat" value="0" data-default-value="0">
-								<input type="text" name="geo-search-lng" id="geo-search-lng" value="0" data-default-value="0">
 								<div class="views-exposed-widget views-submit-button">
-									<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="" value="Search Now" type="submit"><span>Advance Search<i class="fa fa-search"></i></span></button>
+									<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="advance_search" value="Search Now" type="submit"><span>Advance Search<i class="fa fa-search"></i></span></button>
 								</div>
 							</form>
 						</div>

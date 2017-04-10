@@ -59,8 +59,10 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		$db=$this->getAdapter();
 		if (!is_array($cate_tree_array))
 			$cate_tree_array = array();
+		$language = $this->getCurrentLang();
+		
 		$sql="SELECT c.`id`,
-		(SELECT cd.title FROM `vd_category_detail` AS cd WHERE cd.category_id = c.`id` AND cd.languageId=1 LIMIT 1) AS name,
+		(SELECT cd.title FROM `vd_category_detail` AS cd WHERE cd.category_id = c.`id` AND cd.languageId=$language LIMIT 1) AS name,
 		c.`parent` FROM `vd_category` AS c WHERE c.`status`=1 AND c.`parent`=$parent ORDER BY id ASC";
 		$query = $db->fetchAll($sql);
 		$stmt = $db->query($sql);
@@ -134,9 +136,26 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		return $db->fetchRow($sql);
 	}
 	function getAllDistrictByProvince($province_id){
-		$language=1;
+		$language = $this->getCurrentLang();
+		$lang_name=array(
+				1=>'district_name',
+				2=>'district_namekh'
+				);
+		$string_dis = $lang_name[$language];
 		$db = $this->getAdapter();
-		$sql="SELECT dis_id , district_namekh FROM `ln_district` WHERE status =1 AND pro_id = $province_id  ORDER BY district_namekh ASC";
+		$sql="SELECT dis_id AS id , $string_dis AS district_name FROM `ln_district` WHERE status =1 AND pro_id = $province_id  ORDER BY district_namekh ASC";
+		return $db->fetchAll($sql);
+	}
+	function getAllCommunebyDistict($district_id){
+		$language = $this->getCurrentLang();
+		$lang_name=array(
+				1=>'commune_name',
+				2=>'commune_namekh'
+		);
+		$string_dis = $lang_name[$language];
+		$db = $this->getAdapter();
+		$sql="SELECT com_id AS id, $string_dis AS commune_name FROM `ln_commune` WHERE status =1 AND district_id= $district_id ORDER BY $string_dis ASC ";
+		//return $sql;
 		return $db->fetchAll($sql);
 	}
 }

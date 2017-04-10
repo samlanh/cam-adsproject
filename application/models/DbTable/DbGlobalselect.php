@@ -53,7 +53,13 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 	}
 	function getAllLocation(){
 		$this->_name='vd_province';
-		$sql = " SELECT id,province_en_name, province_kh_name FROM $this->_name WHERE status=1 AND (province_en_name!='' OR province_kh_name!='') ORDER BY id DESC ";
+		$province_field = array(
+				"1"=>"province_en_name",
+				"2"=>"province_kh_name"
+		);
+		$lang_id = $this->getCurrentLang();
+		$province_string = $province_field[$lang_id];
+		$sql = " SELECT id,$province_string AS province_name FROM $this->_name WHERE status=1 AND (province_en_name!='' OR province_kh_name!='') ORDER BY id DESC ";
 		$db = $this->getAdapter();
 		return $db->fetchAll($sql);
 	}
@@ -98,6 +104,52 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$lang_id LIMIT 1)  AS parent_category_name,
 		(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name
 		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.`category_id`=$category AND ads.id < $adsid  LIMIT 10";
+		return $db->fetchAll($sql);
+	}
+	function getStringProvince(){
+		$lang_id = $this->getCurrentLang();
+		$province_field = array(
+				"1"=>"province_en_name",
+				"2"=>"province_kh_name"
+		);
+		return $province_field[$lang_id];
+	}
+	function getSearchHomePage($search){
+		$this->_name='vd_ads';
+		$lang_id = $this->getCurrentLang();
+		$db = $this->getAdapter();
+		
+		$province = $this->getStringProvince();
+		
+		$sql="SELECT ad.*,
+		(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author,
+		(SELECT vc.photo FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_photo,
+		(SELECT vc.address FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_address,
+		(SELECT vc.phone FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_phone,
+		(SELECT $province FROM `vd_province` WHERE id= ad.province_id ) as province_name,
+		(SELECT title FROM `vd_category_detail` WHERE category_id= ad.category_id AND languageId=$lang_id LIMIT 1) as category_name
+		 FROM $this->_name AS ad WHERE ad.status=1 ";
+		if(!empty($search['keywork_search'])){
+			$s_where = array();
+			$s_search = addslashes(trim($search['keywork_search']));
+			$s_where[] = " ads_code LIKE '%{$s_search}%'";
+			$s_where[] = " ads_title LIKE '%{$s_search}%'";
+			$s_where[] = " price LIKE '%{$s_search}%'";
+			$s_where[] = " description LIKE '%{$s_search}%'";
+			$s_where[] = " street LIKE '%{$s_search}%'";
+// 			$where .=' AND ('.implode(' OR ',$s_where).')';
+		}
+		if($search['category_search']>-1){
+			$sql.= " AND ad.category_id = ".$search['category_search'];
+		}
+		if($search['location_search']>-1){
+			$sql.= " AND ad.province_id = ".$search['location_search'];
+		}
+		return $db->fetchAll($sql);
+	}
+	function getBannerByPosition($position){
+		$db = $this->getAdapter();
+		$sql=" SELECT * FROM `ln_banneravert` WHERE STATUS=1 AND position_id=$position ";
 		return $db->fetchAll($sql);
 	}
 }

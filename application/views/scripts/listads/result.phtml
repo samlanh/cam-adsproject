@@ -8,40 +8,19 @@
 	<div class="page">
 		<div class="breadcrumb">
 			<div class="container">
-				<ul class="breadcrumb">
-				  <li><a href="<?php echo $this->baseUrl()."/index"?>"><i class="fa fa-home"></i>Home</a></li>
-				  <?php if (!empty($this->cate_info['parent_cate_name'])){?>
-				  <li><a href="#"><?php echo $this->cate_info['parent_cate_name'];?></a></li>
-				  <?php }?>
-				   <?php if (!empty($this->cate_info['cate_name'])){?>
-				  <li><a href="#"><?php echo $this->cate_info['cate_name'];?></a></li>
-				  <?php }?>
-				</ul>
 			</div>
 		</div>
 		<div class="all-categories section">
 			<div class="container">
 				<div class="row clearpadding">
 					<div class="col-md-2 col-sm-3 leftblog" style="height:500px;background:#fff;">
-						<?php if(!empty($this->rsbannerleft)){
-						 		  foreach($this->rsbannerleft  as $rsimg){?>
-									<a href="<?php echo $rsimg['link_url'];?>" target="_blank">
-										<img src="<?php echo $this->baseUrl()."/images/banner/".$rsimg['image']; ?>"  />
-									</a>
-						<?php }}?>
+						<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
 					</div><!-- col-sm-4 -->
 					<div class="col-md-8 col-sm-7" style="border-left:1px solid #eee;border-right:1px solid #eee;">
 						<div class="category-adds">
 							<div id="category-tab">
 								<div class="category-tab-top">
-									<div class="catgorylist-title">
-										<form>
-											<?php echo $this->form;?>
-											<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="" value="Search Now" type="submit"><span>Search Now<i class="fa fa-search"></i></span></button>
-										</form>
-									<h4 class="title-page"><?php echo $this->cate_info['cate_name'];?></h4>
-									</div>
-									<div class="tab-view">
+									<div class="tab-view" style="width:100%;">
 										<ul class="list-inline">
 											<!-- <li class="grid-view-tab"><i class="fa fa-th-large" aria-hidden="true"></i></li> -->
 											<li class="small-view-tab active"><i class="fa fa-th" aria-hidden="true"></i></li>
@@ -49,8 +28,7 @@
 										</ul>
 									</div>
 								</div>
-								<div class="category-tab" >
-									<!-- Tab panes -->
+								<div class="category-tab"  >
 								  	<div class="tab-content small-view-tab">
 								    	<div role="tabpanel" class="tab-pane active" id="recent">
 								    		<ul>
@@ -92,12 +70,7 @@
 																	$str1 = utf8_encode($rs['description']);
 																	$description = substr($str1, 0, 600);
 																	echo utf8_decode($description); 
-																	
-// 																	$description = mb_substr($rs['description'], 0, 400, 'UTF-8');
-// 																	echo utf8_decode($description);
-																	
 																	?></p>
-																	
 																	<ul>
 																	   <li ><?php echo $rs['category_name'];?></li>
 																	   <li> <?php echo $rs['province_name'];?></li>
@@ -134,14 +107,8 @@
 						</div><!-- pager-section -->
 					</div><!-- end blog center -->
 					<div class="col-md-2 col-sm-3" style="height:500px;background:#fff;border-right:1px solid #eee;">
-						<?php if(!empty($this->rsbannerright)){
-						 		  foreach($this->rsbannerright  as $rsimg){?>
-									<a href="<?php echo $rsimg['link_url'];?>" target="_blank">
-										<img src="<?php echo $this->baseUrl()."/images/banner/".$rsimg['image']; ?>"  />
-									</a>
-						<?php }}?>
+						Blog right
 					</div><!-- col-sm-4 -->
-					
 				</div>
 			</div>
 		</div> <!-- all-categories -->

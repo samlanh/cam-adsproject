@@ -10,6 +10,13 @@ class listadsController extends Zend_Controller_Action
     	$this->view->rsads = $db->getAllAdsByName($id);
     	$this->view->cate_info = $db->getCategoryInfo($id);
     	
+    	$dbform = new Application_Model_DbTable_DbDynamicFormPostAds();
+    	$category_id = $db->categoryIdByName($id);
+    	$this->view->form = $dbform->getAllFormTypeCateid($category_id,1);
+    	
+    	$this->view->rsbannerleft = $db->getBannerByPosition(1);//1 = left
+    	$this->view->rsbannerright = $db->getBannerByPosition(2);//2 = right
+    	
     }
     function detailAction(){
 //     	$this->_helper->layout()->disableLayout();
@@ -19,6 +26,21 @@ class listadsController extends Zend_Controller_Action
     	$this->view->adsDetail = $adsdetail;
     	
     	$this->view->relate_pro = $db->getRelatedAds($adsdetail);
+    }
+    function resultAction(){
+    	if($this->getRequest()->isPost()){
+    		$data = $this->getRequest()->getPost();
+    	}else{
+    		$data = array(
+    				'keywork_search'=>'',
+    				'category_id'=>-1,
+    				'province_id'=>-1,
+    				);
+    	}
+    	$this->view-> search= $data;
+    	$db = new Application_Model_DbTable_DbGlobalselect();
+    	$this->view->rsads = $db->getSearchHomePage($data);
+//     	print_r($db->getSearchHomePage($data));
     }
 }
 
