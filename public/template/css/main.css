@@ -1053,6 +1053,7 @@ a, .topbar a,
 .tab-view {
 	float: right;
 	font-size: 20px;
+     width:100% !important;
 }
 
 .tab-view li {
@@ -1064,6 +1065,7 @@ a, .topbar a,
 	margin-left: 7px;
 	cursor: pointer;
 }
+.tab-view ul{ float: right;margin-top:10px;}
 
 .view-all-ads {
 	margin-top: 65px;
