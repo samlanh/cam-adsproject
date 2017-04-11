@@ -1,10 +1,7 @@
 /*-----------------------------------------------------------------------------------*/
 /*	Custom Script
 /*-----------------------------------------------------------------------------------*/
-var baseurl = '';
-function getBaseUrl(url){
-		baseurl = url;
-	}
+
 /*----validate form-------------*/
 function validateFormAds(form)
 {
@@ -81,6 +78,7 @@ jQuery("#postads_form").on('submit',(function(e) {
 	e.preventDefault();
 //	$("#message").empty();
 //	$('#loading').show();
+	
 	index = jQuery("#index").val();
 	jQuery.ajax({
 		url: baseurl+"/postsads/upload", // Url to which the request is send
