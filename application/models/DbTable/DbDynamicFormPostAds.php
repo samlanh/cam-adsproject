@@ -70,7 +70,6 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 		}
 		return $form;
 	}
-	
 	function OptionSelect($fielid,$name,$require,$labelname){ // old form test
 		if($require==1){
 			$isreq= 'required="required"';
@@ -96,6 +95,93 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 		$string.='</div>';
 		return $string;
 	}
+	function getAllFormSearchByCateid($cate_id,$search=null){// old test form
+		$db = $this->getAdapter();
+		$sql="SELECT * FROM `vd_field_type` AS ft WHERE FIND_IN_SET($cate_id,ft.`category`) AND ft.`status`=1 ";
+		if($search!=null){
+			$sql.=" AND ft.is_search=1 ";
+		}
+		$row =  $db->fetchAll($sql);
+		$form='';
+		if (!empty($row)) foreach ($row as $rs){
+			if($rs["is_require"]==1 ){
+				$isreq= 'required="required"';
+				$sigrequir='<span class="sign_req">*</span>';
+				if($search!=null){
+					$isreq='';$sigrequir='';
+				}
+			}else{ $isreq='';$sigrequir='';
+			}
+	
+			if ($rs["type"]=="select"){
+				$form.=$this->OptionSelectSearch($rs["id"],$rs["title"],$rs["is_require"],$rs["label_name"]);
+			}elseif ($rs["type"]=="cascade"){
+				$form.='<div class="col-md-2 col-sm-3">';
+				$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+				$form.='<div class="form-value">';
+				$form.='<select onChange="getCascadeValue('.$rs["title"].')"  id="'.$rs["title"].'" name="'.$rs["title"].'" '.$isreq.' class="form-select">';
+				$form.='</select>';
+				$form.='</div>';
+				$form.='</div>';
+			}elseif ($rs["type"]=="text"){
+				$form.='<div class="col-md-2 col-sm-3">';
+				$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+				$form.='<div class="form-value">';
+				$form.='<input class="form-control " type="text" value="" placeholder="'.$rs["label_name"].'"  '.$isreq.' id="'.$rs["title"].'" name="'.$rs["title"].'" />';
+				$form.='</div>';
+				$form.='</div>';
+			}elseif ($rs["type"]=="number"){
+				$form.='<div class="form-row">';
+				$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+				$form.='<div class="form-value">';
+				$form.='<input class="form-control " onkeypress="return isNumber(event);" type="text" value="" placeholder="'.$rs["label_name"].'"  '.$isreq.' id="'.$rs["title"].'" name="'.$rs["title"].'" />';
+				$form.='</div>';
+				$form.='</div>';
+			}elseif ($rs["type"]=="textarea"){
+				$form.='<div class="form-row">';
+				$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+				$form.='<div class="form-value">';
+				$form.=' <textarea class="form-control " id="'.$rs["title"].'" placeholder="'.$rs["label_name"].'"  name="'.$rs["title"].'" '.$isreq.' ></textarea>';
+				$form.='</div>';
+				$form.='</div>';
+			}elseif ($rs["type"]=="emailaddress"){
+				$form.='<div class="form-row">';
+				$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+				$form.='<div class="form-value">';
+				$form.=' <input type="email" id="'.$rs["title"].'" name="'.$rs["title"].'" '.$isreq.' autocomplete="off" placeholder="'.$rs["label_name"].'" />';
+				$form.='</div>';
+				$form.='</div>';
+			}
+		}
+		return $form;
+	}
+	function OptionSelectSearch($fielid,$name,$require,$labelname){ // old form test
+		if($require==1){
+			$isreq= 'required="required"';
+			$sigrequir='<span class="sign_req">*</span>';
+		}else{ $isreq=''; $sigrequir='';
+		}
+		$functionOnchage='';
+		if ($this->checkFieldHasChild($fielid)>0){
+			$controlname = "'".$name."'";
+			$functionOnchage='onChange="getCascadeValue('.$controlname.')"';
+		}
+		$value = $this->getValueofOption($fielid);
+		$string='';
+		$string.='	<div class="col-md-4 col-sm-7">';
+		//$string.='<div class="form-label"><label>'.$labelname.$sigrequir.'</label> </div>';
+		$string.='<div class="form-value formsearch">';
+		$string.='<select '.$functionOnchage.'   id="'.$name.'" name="'.$name.'" '.$isreq.' class="form-select" >';
+		$string.='<option value=""></option>';
+		if (!empty($value)) foreach ($value as $rs){
+			$string.='<option value="'.$rs['name'].'">'.$rs['name'].'</option>';
+		}
+		$string.='</select>';
+		$string.='</div>';
+		$string.='</div>';
+		return $string;
+	}
+	
 	function getValueofOption($fielid){
 		$db = $this->getAdapter();
 		$sql="SELECT fv.`id`,fv.`name` FROM `vd_field_value` AS fv WHERE fv.`field_type_id`=".$fielid;

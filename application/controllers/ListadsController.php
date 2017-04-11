@@ -12,7 +12,7 @@ class listadsController extends Zend_Controller_Action
     	
     	$dbform = new Application_Model_DbTable_DbDynamicFormPostAds();
     	$category_id = $db->categoryIdByName($id);
-    	$this->view->form = $dbform->getAllFormTypeCateid($category_id,1);
+    	$this->view->form = $dbform->getAllFormSearchByCateid($category_id,1);
     	
     	$this->view->rsbannerleft = $db->getBannerByPosition(1);//1 = left
     	$this->view->rsbannerright = $db->getBannerByPosition(2);//2 = right
