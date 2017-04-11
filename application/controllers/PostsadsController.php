@@ -27,6 +27,7 @@ class PostsadsController extends Zend_Controller_Action
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();
     		$dbp = new Application_Model_DbTable_DbPostAds();
+    		print_r($data);exit();
     		$dbp->addPostsAds($data);
     		$this->_redirect("/postsads/choose-category");
     	}
