@@ -166,17 +166,17 @@ textarea {
 }
 
 .btn.btn-primary {
-	font-size:18px;
-	font-weight:400;
-	text-transform:capitalize;
-	background-color:#00a651;
-	padding:10px 40px 12px;
-	border:1px solid #00a651;
-	color: #fff;
+	font-size: 18px;
+    font-weight: 400;
+    text-transform: capitalize;
+    background-color: #4282d4;
+    /* padding: 10px 40px 12px; */
+    border: 1px solid #4183d7;
+    color: #fff;
 }
 
 .btn.btn-primary:hover {
-	background-color:#028b45;
+	background-color:#2276e0;
 	color:#fff;
 }
 
@@ -2280,6 +2280,8 @@ p.quote-text {
 }
 .footerads ul li{ display: inline-block; padding:5px 10px;}
 .footerads ul li i{ padding-right: 5px;}
+.form-value .chosen-container{width:238px !important;}
+.form-value{padding-left:5px !important;}
 
 
 

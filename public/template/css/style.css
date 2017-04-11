@@ -1566,6 +1566,8 @@ span.sign_req{color:red;}
 }
 .catgorylist-title {
     display: inline-block;
+    border: 1px solid #ccc;
+    padding: 12px 2px;
 }
 .catgorylist-title h4.title-page {
     color: #4183d7;
