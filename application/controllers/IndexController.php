@@ -246,7 +246,7 @@ class IndexController extends Zend_Controller_Action
     	$client_session->unsetAll();
     }
     function loginAction(){
-    	$this->_helper->layout()->disableLayout();
+    	
     	$client_session=new Zend_Session_Namespace('client');
     	if(empty($client_session->client_id)){ //check session has been have or not
 	    	if($this->getRequest()->isPost())
@@ -272,7 +272,6 @@ class IndexController extends Zend_Controller_Action
     
     }
     function registerAction(){
-    	$this->_helper->layout()->disableLayout();
     	$client_session=new Zend_Session_Namespace('client');
     	if(empty($client_session->client_id)){ //check session has been have or not
 	    	if($this->getRequest()->isPost()){
