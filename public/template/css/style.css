@@ -93,7 +93,7 @@ padding: 10px;
 	max-width: 502px;
 	position:relative;animation:animateright 0.4s;
 }
-@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+@keyframes animateright{from{right:-50px;opacity:0} to{right:0;opacity:1}}
 .mySlides {display:none}
 
 .pop-content-body-right {
@@ -472,15 +472,15 @@ li.menu-list-cate {
 						margin: 0.2em 0;
 						text-align: center;
 						padding: 0;
-						 background-image: linear-gradient(#0bb688, #05926c);
+						/*background-image: linear-gradient(#0074d8, #063863);*/
+						background: #044e8c;
 					}
 					.loginBtn.loginBtn-normal:hover,
 					.loginBtn.loginBtn-normal:focus,
 					.loginBtn.register:hover,
 					.loginBtn.register:focus 					{
-					  background-color: #0bb688;
-					  background-image: linear-gradient(#18cc9b, #39a26d);
-					 
+					  /*background-image: linear-gradient(#0769bd, #063863);*/
+					  background: #0769bd;
 					}
 					a.lang img{
 						
@@ -773,6 +773,10 @@ footer div.text-description {
     text-align: center;
     font-size: 14px;
 }
+footer div.text-description a {
+    font-weight: 600;
+    color: #ffe200;
+}
 ul.social {
     text-align: center;
 }
@@ -931,16 +935,15 @@ span.regis-guid a:before {
 
 ul.tabs.horizontal li {
     width: 100%;
-    border: solid 1px #e5ecf5;
-    /* background: #ccc; */
+	border-bottom: solid 4px #fff;
 }
 ul.tabs.horizontal li a {
     border-radius: 0;
-    /* background: #f0f1f2; */
-    color: #4183d7;
-    text-align: left;
+    background: #069770;
+	color: #fff;
+	text-align: left;
     font-size: 16px;
-    /* font-weight: bold; */
+    font-weight: bold;
 }
 ul.tabs.horizontal li a i {
     font-size: 18px;
@@ -952,7 +955,7 @@ ul.tabs.horizontal li.active a:focus,
 ul.tabs.horizontal li a:focus,
 ul.tabs.horizontal li.active a {
     background: #fbfbfb;
-    color: #bb9d04 !important;
+    color: #0bb688 !important;
 }
 	/*------Start My ads list Dashboard page--------------------*/
 		div.title h4 {
@@ -982,8 +985,7 @@ ul.tabs.horizontal li.active a {
 		.ads-left {
 			vertical-align: top;
 			display: inline-block;
-			/*width: 222px;*/
-		    width: 190px;
+			width: 222px;
 			border: solid 1px #ccc;
 		}
 		.ads-description {
@@ -1037,7 +1039,6 @@ ul.tabs.horizontal li.active a {
 		}*/
 		.footer-ads span.value {
 			font-weight: bold;
-		    font-size: 12px;
 		}
 		.footer-ads span i {
 			padding: 0 10px;

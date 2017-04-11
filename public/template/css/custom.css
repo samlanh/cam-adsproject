@@ -4779,7 +4779,7 @@ pre {
 
 
 ul, ol {
-  padding-left: 10px;
+  padding-left: 25px;
   line-height: 1.5em;
 }
 
@@ -5117,7 +5117,7 @@ body.single .container > .span3, body.page-template-template-add-post-php .conta
 	margin:0;
 	padding:8px 0;
 	color:#fff;
-   background: #07a077;
+	background: #044e8c;
 }
 .error404 .btn-container{
 		width:170px;
