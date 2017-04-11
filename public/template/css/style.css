@@ -931,15 +931,16 @@ span.regis-guid a:before {
 
 ul.tabs.horizontal li {
     width: 100%;
-	border-bottom: solid 4px #fff;
+    border: solid 1px #e5ecf5;
+    /* background: #ccc; */
 }
 ul.tabs.horizontal li a {
     border-radius: 0;
-    background: #069770;
-	color: #fff;
-	text-align: left;
+    /* background: #f0f1f2; */
+    color: #4183d7;
+    text-align: left;
     font-size: 16px;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 ul.tabs.horizontal li a i {
     font-size: 18px;
@@ -951,7 +952,7 @@ ul.tabs.horizontal li.active a:focus,
 ul.tabs.horizontal li a:focus,
 ul.tabs.horizontal li.active a {
     background: #fbfbfb;
-    color: #0bb688 !important;
+    color: #bb9d04 !important;
 }
 	/*------Start My ads list Dashboard page--------------------*/
 		div.title h4 {
@@ -981,7 +982,8 @@ ul.tabs.horizontal li.active a {
 		.ads-left {
 			vertical-align: top;
 			display: inline-block;
-			width: 222px;
+			/*width: 222px;*/
+		    width: 190px;
 			border: solid 1px #ccc;
 		}
 		.ads-description {
@@ -1035,6 +1037,7 @@ ul.tabs.horizontal li.active a {
 		}*/
 		.footer-ads span.value {
 			font-weight: bold;
+		    font-size: 12px;
 		}
 		.footer-ads span i {
 			padding: 0 10px;
