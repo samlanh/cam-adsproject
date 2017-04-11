@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<?php 
+<?php 	
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 	$profile = $this->client_info;
 	if (!empty($profile['photo'])){
 		$image = $profile['photo'];
@@ -130,7 +131,13 @@
 						</div>
 					</div>
 					<div class="tab-pane" id="myAds">
-						<div class="title"><h4>My Ads <span class="right" ><a class="button right" id="post-ads" title="Post Ads">Post Ads</a></h4></div>
+						<div class="title">
+						<div data-dismiss="alert" class="alert mar_b20 msg_err">Delete Error
+							<div class="close">
+							<span aria-hidden="true">×</span>
+							</div>
+						</div>
+						<h4>My Ads <span class="right" ><a class="button right" id="post-ads" title="Post Ads">Post Ads</a></h4></div>
 						<?php if(!empty($this->myads))foreach($this->myads as $rsad){?>
 						<div class="blog-wrapper">
 							<div class="ads-left">
@@ -161,9 +168,9 @@
 							</div>
 							<div class="icon_menu-right">
 								<ul class="icon_menu">
-									<li class="delete_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>''));?>" title="Delete">Delete</a></li>
-									<li class="edit_icon"><a href="#" title="Edit">Edit</a></li>
-									<li class="renew_icon"><a href="#" title="Renew">Renew</a></li>
+									<li class="delete_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'delete'));?>" title="Delete" onclick="return confirm('<?php echo $tr->translate("Do you sure to delete this ads ?");?>');"><?php echo $tr->translate('DELETE');?></a></li>
+									<li class="edit_icon"><a href="#" title="Edit"><?php echo $tr->translate('EDIT');?></a></li>
+									<li class="renew_icon"><a href="#" title="Renew"><?php echo $tr->translate('RENEW');?></a></li>
 								</ul>
 							</div>
 						</div>
