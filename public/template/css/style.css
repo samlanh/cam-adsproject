@@ -1460,7 +1460,7 @@ h4.title-content {
     padding: 15px 0;
 }
 h4 span.number_list {
-    background: #319978;
+    background: #005094;
     color: #fff;
     display: inline-block;
     width: 25px;
@@ -1469,50 +1469,75 @@ h4 span.number_list {
     border-radius: 50%;
     font-size: 16px;
     line-height: 24px;
-	margin-right: 10px;
+    margin-right: 10px;
 }
 .conten-body-center.right.post-ads {
     border-left: solid 1px #ccc;
 }
 /*------------progress bar-----------*/
 ul.SteppedProgress{counter-reset:step;display:flex;margin:auto;overflow:hidden;padding:0;position:relative;text-align:center;z-index:1}
-.SteppedProgress li{list-style-type:none;color:#404140;line-height:normal;font-size:18px;position:relative;padding:0 2%}
+.SteppedProgress li{list-style-type:none;color:#404140;line-height:normal;font-size:18px;position:relative;padding:0 2%;}
 .SteppedProgress li.boxed span,.SteppedProgress li.current span{
-	background:silver;border:1px solid silver;color:#fff;
-	display:inline-block;padding: 14px 6px;position:relative;
-	margin:0px -6px;width:100%
+	background: #f1f1f1;
+	border: 1px solid #f1f1f1;
+	color: #4183d7;
+	display:inline-block;
+	padding: 8px 6px;
+	position:relative;
+	margin:0px -6px;
+	width:100%;
 }
-.SteppedProgress li.boxed span:after,.SteppedProgress li.current span:after{bottom:100%;left:50%;
-	border:solid transparent;content:" ";height:0;width:0;position:absolute;pointer-events:none;
-	border-color:rgba(255,255,255,0);border-bottom-color:silver;border-width:10px;margin-left:-10px;
+.SteppedProgress li.boxed span:after,.SteppedProgress li.current span:after{
+	bottom:100%;
+	left:50%;
+	border:solid transparent;
+	content:" ";
+	height:0;
+	width:0;
+	position:absolute;
+	pointer-events:none;
+	border-color:rgba(255,255,255,0);
+	border-bottom-color: #f6f9ff;
+	border-width:10px;
+	margin-left:-10px;
 }
-.SteppedProgress li.current span{background:#de384f;color:#FFF}
+.SteppedProgress li.current span{background: #e2c636;color:#FFF;}
 .SteppedProgress li.current span:after{border-bottom-color:#de384f}
 
-.SteppedProgress li.complete.boxed span{background:#319978;color:#FFF}
+.SteppedProgress li.complete.boxed span{background: #005094;color:#FFF;}
 .SteppedProgress li.complete.current::before {
-    background: #de384f;
+    background: #e2c636;
 }
 .SteppedProgress li.complete.boxed span:after{border-bottom-color:#319978}
 
-.SteppedProgress li:before{content:counter(step);counter-increment:step;width:30px;line-height:30px;display:block;
-	font-size:16px;color:#FFF;background:silver;border-radius:15px;
-	margin:0 auto 25px 10px;position:relative;z-index:1
+.SteppedProgress li:before{
+	content:counter(step);
+	counter-increment:step;
+	width:30px;
+	line-height:30px;
+	display:block;
+	font-size:16px;
+	color: #4183d7;
+	background: #f1f1f1;
+	border-radius:15px;
+	margin:0 auto 25px 10px;
+	position:relative;
+	z-index:1;
 }
-.SteppedProgress li:after{content:'';width:100%;height:6px;background:silver;position:absolute;left:-50%;top:15px;z-index:-1}
+.SteppedProgress li:after{content:'';width:100%;height:6px;background: #f1f1f1;position:absolute;left:-50%;top:15px;z-index:-1;}
 .SteppedProgress li:first-child:after{content:none}
-.SteppedProgress li.complete:before{background:#319978;color:white}
-.SteppedProgress li.complete:after{background:#319978}
+.SteppedProgress li.complete:before{background: #005094;color:white;}
+.SteppedProgress li.complete:after{background: #005094;}
 ul.SteppedProgress.Vertical{display:block}
-.SteppedProgress.Vertical li{flex:none;clear:both;text-align:left;padding:0;margin-left:0;min-height:2.2em}
+.SteppedProgress.Vertical li{flex:none;clear:both;text-align:left;padding:0;margin-left:0;min-height:2.2em;}
 .SteppedProgress.Vertical li span{white-space:nowrap;width: 80%; text-align: center;}
 ul.SteppedProgress.Vertical li:before{float:none;display:inline-block;margin-right:10px;text-align:center;margin-left:0}
 .SteppedProgress.Vertical li:after{content:'';width:6px;height:100%;position:absolute;left:12px;top:-50%;z-index:-1}
 ul.SteppedProgress.Vertical li.boxed,ul.SteppedProgress.Vertical li.current{min-width:90%}
 ul.SteppedProgress.Vertical li.boxed span,ul.SteppedProgress.Vertical li.current span{display: inline-block;margin-left:0}
-ul.SteppedProgress.Vertical li.boxed span:after,ul.SteppedProgress.Vertical li.current span:after{bottom:auto;left:auto;right:100%;top: 16px;border-color:rgba(255,255,255,0);border-right-color:silver;margin:0}
-ul.SteppedProgress.Vertical li.current span:after{border-right-color:#de384f}
-ul.SteppedProgress.Vertical li.complete.boxed span:after{border-color:rgba(255,255,255,0);border-right-color:#319978}
+ul.SteppedProgress.Vertical li.boxed span:after,ul.SteppedProgress.Vertical li.current span:after{bottom:auto;left:auto;right:100%;top: 9px;border-color:rgba(255,255,255,0);border-right-color: #f1f1f1;margin:0;}
+ul.SteppedProgress.Vertical li.current span:after{border-right-color: #e2c636;}
+ul.SteppedProgress.Vertical li.complete.boxed span:after{border-color:rgba(255,255,255,0);border-right-color: #005094;}
 
 /*------------fix right----------*/
 .float-bar.hidden-xs.hidden-sm.hidden-md {

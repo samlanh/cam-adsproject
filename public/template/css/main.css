@@ -1399,22 +1399,8 @@ transform: scale(1);
 	margin-right: 10px;
 }
 
-.footer-widget li, 
-.contact-widget a, 
-.social li a i, 
-.link-widget a{
-	color:#a0a0a0;
-}
-
 .twitter-widget a {
 	color:#fff;
-}
-
-.contact-widget a:hover, 
-.social li a:hover i, 
-.link-widget a:hover, 
-.twitter-widget a:hover {
-	color:#00A659;
 }
 
 .contact-widget .social {
