@@ -7,12 +7,12 @@
     <meta name="author" content="Theme Region">
    	<meta name="description" content="">
     <title>Advert | Ad Details | Classifieds Ads Template</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" >
+   <!--  <link rel="stylesheet" href="css/bootstrap.min.css" >
     <link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/owl.carousel.css">  
     <link rel="stylesheet" href="css/main.css">  
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/responsive.css">-->
     <link href="<?php echo $this->baseUrl();?>/template/css/main.css" media="screen" rel="stylesheet" type="text/css">
 	<!-- font -->
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700,300' rel='stylesheet' type='text/css'>
@@ -50,20 +50,28 @@
 							<div class="item">
 		    				<div class="slide-content" style="max-width:100%;">
 					    		  <div class="blog-main-slide">
-									  <img class="slides-detail" src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" >
-									  <img class="slides-detail" src="<?php echo $this->baseUrl()."/images/adsimg/banimg.jpg"; ?>" >
-									  <img class="slides-detail" src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" >
+				    		  		  <?php if (!empty($ads['image_feature'])){?>
+									  	<img class="slides-detail" src="<?php echo $this->baseUrl()."/images/adsimg/".$ads['image_feature']; ?>" >
+									  <?php }else{?>
+									  	<img class="slides-detail" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" >
+									  <?php }?>
+									  <?php for ($i=1; $i<=6; $i++){ ?>
+									 	 <img class="slides-detail" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" >
+									  <?php }?>
 								  </div>
 								  <div class="thumnail-blog">
 								    <div class="thumnail-image-slide">
-								      <img class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" style="width:100%" onclick="currentSlide(1)">
+								     <?php if (!empty($ads['image_feature'])){?>
+								      <img class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/".$ads['image_feature']; ?>" style="width:100%" onclick="currentSlide(1)">
+							    	 <?php }else{?>
+							    	  <img class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" style="width:100%" onclick="currentSlide(1)">
+						    	     <?php }?>
 								    </div>
+								    <?php for ($i=1; $i<=6; $i++){ ?>
 								    <div class="thumnail-image-slide">
-								      <img class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/banimg.jpg"; ?>" style="width:100%" onclick="currentSlide(2)">
+								      <img class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" style="width:100%" onclick="currentSlide(<?php echo $i+1;?>)">
 								    </div>
-								    <div class="thumnail-image-slide">
-								      <img class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" style="width:100%" onclick="currentSlide(3)">
-								    </div>
+								      <?php }?>
 								  </div>
 								   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 								  <a class="next" onclick="plusSlides(1)">&#10095;</a>

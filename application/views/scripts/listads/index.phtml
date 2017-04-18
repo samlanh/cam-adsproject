@@ -148,8 +148,8 @@ function getCommuneById(){
 									    				<div class="item ad-box ">
 																<div class="item-image">
 																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'];?>">
-																	<?php if (!empty($rs['images'])){?>
-																		<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rs['images']; ?>" alt=""  />
+																	<?php if (!empty($rs['image_feature'])){?>
+																		<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rs['image_feature']; ?>" alt=""  />
 																	<?php }else{?>
 																		<img src="<?php echo $this->baseUrl()."/images/noimagefound.jpg"; ?>" alt=""  />
 																	<?php }?>

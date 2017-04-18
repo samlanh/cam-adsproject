@@ -60,9 +60,9 @@ $lang  = $session_lang->lang_id;
 						foreach($rsads as $rsad) {?>
 							<div class="ad-box ">
 								<div class="ads-img-wrapper">
-									<a class="ad-image box" href="#" title="Finance officer for hotel" >
-									<?php if (!empty($rsad['images'])){?>
-										<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rsad['images']; ?>" alt=""  />
+									<a class="ad-image box" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rsad['alias'];?>" title="Finance officer for hotel" >
+									<?php if (!empty($rsad['image_feature'])){?>
+										<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rsad['image_feature']; ?>" alt=""  />
 									<?php }else{?>
 										<img src="<?php echo $this->baseUrl()."/images/noimagefound.jpg"; ?>" alt=""  />
 									<?php }?>
@@ -89,7 +89,7 @@ $lang  = $session_lang->lang_id;
 								</div>
 								<div class="footerads" >
 									<ul >
-									   <li> <i class="fa fa-eye"></i><?php echo $rsad['viewer'];?> </li>
+									   <li> <i class="fa fa-eye"></i><?php echo $rsad['viewer'];?> Views</li>
 									   <li> <i class="fa fa-clock-o"></i><?php echo date("M d, Y",strtotime($rsad['publish_date']));?></li>
 									</ul>
 								</div>

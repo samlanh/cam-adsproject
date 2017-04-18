@@ -48,22 +48,22 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 	    	<div class="pop-content-body-left">
 	    		<div class="slide-content" style="max-width:100%;">
 	    		  <div class="blog-main-slide">
-					  <img class="mySlides" src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" >
-					  <img class="mySlides" src="<?php echo $this->baseUrl()."/images/adsimg/banimg.jpg"; ?>" >
-					  <img class="mySlides" src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" >
-						 
+					  <img id="pop-feature-image" class="mySlides" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" >
+					  <?php for ($i=1; $i<=6; $i++){ ?>
+					  <img id="pop-slide-image<?php echo $i;?>" class="mySlides" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" >
+					  <?php }?>
 				  </div>
 				
 				  <div class="thumnail-blog">
 				    <div class="thumnail-image-slide">
-				      <img class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" style="width:100%" onclick="currentDiv(1)">
+				      <img id="pop-images-thum" class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" style="width:100%" onclick="currentDiv(0)">
 				    </div>
+				    <?php for ($i=1; $i<=6; $i++){ ?>
 				    <div class="thumnail-image-slide">
-				      <img class=" images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/banimg.jpg"; ?>" style="width:100%" onclick="currentDiv(2)">
+				      <img id="pop-images-thum<?php echo $i;?>" class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" style="width:100%" onclick="currentDiv(<?php echo $i;?>)">
 				    </div>
-				    <div class="thumnail-image-slide">
-				      <img class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" style="width:100%" onclick="currentDiv(3)">
-				    </div>
+				    <?php }?>
+				    
 				  </div>
 				   <a class="prev" onclick="plusDivs(-1)">&#10094;</a>
 						  <a class="next" onclick="plusDivs(1)">&#10095;</a>

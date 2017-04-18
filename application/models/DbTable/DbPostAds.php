@@ -27,6 +27,8 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 		return $pre.$new_acc_no;
 	}
 	function addPostsAds($data){
+		$client_session=new Zend_Session_Namespace('client');
+		$client_id = $client_session->client_id;
 		$db = $this->getAdapter();
 		$db->beginTransaction();
 		try{
@@ -59,10 +61,18 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 					"alias"           =>date("Y-m-d"),//check later
 					"phone1"          =>$data['phone1'],
 					"phone2"          =>$data['phone2'],
-// 					"images"          =>$data['status'],
-// 					"image_feature"   =>$data['note'],
+					"status"          =>1,
+					"user_id"          =>$client_id,
+					
 					// 					"user_id"    =>$data['client_id'],
 			);
+			for ($i=0; $i<=6; $i++){
+				if($i==0){
+					$arr['image_feature']=$data['ads-image'.$i];
+				}else{
+					$arr['images']=$data['ads-image'.$i];
+				}
+			}
 			$this->_name='vd_ads';
 			$ads_id = $this->insert($arr);
 			
@@ -95,6 +105,8 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 
 	
 	function uploadImageFirst($data){
+		$client_session=new Zend_Session_Namespace('client');
+		
 		$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
 		$part= PUBLIC_PATH.'/images/';
 		$index = $data['index'];
@@ -102,7 +114,7 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 // 		$size = $_FILES["filePhoto$index"]['size'];
 		$photo = $_FILES["filePhoto$index"];
 			$temp = explode(".", $photo["name"]);
-			$newName = "Ko.".end($temp);
+			$newName = date("Y-m-d").round(microtime(true)).$client_session->client_id.'.'.end($temp);
 			move_uploaded_file($_FILES["filePhoto$index"]["tmp_name"], $part . $newName);
 			
 			$uploadimage=$part.$newName;

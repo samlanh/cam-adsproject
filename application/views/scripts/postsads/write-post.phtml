@@ -113,7 +113,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 												reader.readAsDataURL(this.files[0]);
 											}
 											jQuery('#index').val($i);
-											jQuery('#postads_form').submit();
+											uploadimageajax();
 											});
 									";
 									$imageview.="var loadFile$i = function(event) {
@@ -124,9 +124,9 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 									<li>
 										<div id="uploader<?php echo $i;?>" class="uploader">
 											<div id='preview<?php echo $i;?>'></div>
-												<img id="image_wiew<?php echo $i;?>" src="<?php echo $this->baseUrl();?>/images/broweimage.png"/>
-												<input type="hidden" id="ads-image<?php echo $i;?>" name="ads-image<?php echo $i;?>" />
-												<input class="filephoto" type="file" name="filePhoto<?php echo $i;?>"  id="filePhoto<?php echo $i;?>" accept="image/jpeg,image/gif,image/png" value='' onchange="loadFile<?php echo $i;?>(event)" />
+											<img id="image_wiew<?php echo $i;?>" src="<?php echo $this->baseUrl();?>/images/broweimage.png"/>
+											<input type="hidden" id="ads-image<?php echo $i;?>" name="ads-image<?php echo $i;?>" />
+											<input class="filephoto" type="file" name="filePhoto<?php echo $i;?>"  id="filePhoto<?php echo $i;?>" accept="image/jpeg,image/gif,image/png" value='' onchange="loadFile<?php echo $i;?>(event)" />
 										</div>
 									</li>
 									<?php }

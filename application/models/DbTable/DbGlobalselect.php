@@ -89,6 +89,16 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$sql=" SELECT * FROM `vd_ads_detail` WHERE ads_id=$ads_id AND status=1 ";
 		return $db->fetchAll($sql);
 	}
+	function addCountView($ads_alias){
+		$ads = $this->getAdsDetail($ads_alias);
+		$db = $this->getAdapter();
+		$arr = array(
+				"viewer"   =>$ads['viewer']+1,
+			);
+		$where = "alias = '$ads_alias'";
+		$this->update($arr, $where);
+		
+	}
 	function getRelatedAds($data){// for page ads detail
 		$this->_name='vd_ads';
 		$db = $this->getAdapter();

@@ -29,6 +29,7 @@ class listadsController extends Zend_Controller_Action
     	$this->view->adsDetail = $adsdetail;
     	$this->view->rsattr = $db->getAdsDetailById($adsdetail['id']);
     	$this->view->relate_pro = $db->getRelatedAds($adsdetail);
+    	$db->addCountView($ads_alise);
     }
     function resultAction(){
     	if($this->getRequest()->isPost()){
