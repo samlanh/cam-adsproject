@@ -61,12 +61,12 @@ function validateFormAds(form)
 	  
     message.innerHTML = "Note: Please complete all field that require.";
     blogalert.style.display = "block";
-    form.title.focus();
+   /*-- form.title.focus();
     window.scroll({
     	  top: 0, 
     	  left: 0, 
     	  behavior: 'smooth' 
-    	});
+    	});*/
 
     return false;
   }
