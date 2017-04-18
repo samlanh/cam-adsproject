@@ -1742,13 +1742,16 @@ transition: all 0.5s ease-in-out;
 }
 .ad-details .item-info ul li {
 	margin-bottom: 10px;
-	padding-left: 20px;
+	/* padding-left: 20px; */
 	position: relative;
+	display: inline-block;
+	padding-right: 10px;
+	list-style-type: none;
 }
 
 .ad-details .item-info ul li:before {
 	position: absolute;
-	content: "\f101";
+	/* content: "\f101"; */
 	font-family: FontAwesome;
 	left: 0;
 	top:0;
