@@ -1616,14 +1616,18 @@ transform: scale(1);
 	margin-top: 15px;
 	width: 100%;
 }
-
+.page div.tab-content.small-view-tab  .item .item-image {
+    height: 165px;
+}
 .page .item .item-image {
     float: none; 
     width: 100%; 
     height: auto;
 	text-align: center;
 }
-
+.page div.tab-content.small-view-tab .item .item-image img {
+    width: 100%;
+}
 .page .item .item-description {
     float: none;
     width: 100%;
@@ -1671,7 +1675,11 @@ transition: all 0.5s ease-in-out;
 /* ==========================================================================
  	== Page == ad-details Page 
  ========================================================================== */
-
+.ad-details .item {
+    border-right: solid 2px #eee;
+    padding-right: 15px;
+    margin-bottom: 10px;
+}
 .ad-details .item-post-date {
 	float: none;
 }
@@ -1681,9 +1689,10 @@ transition: all 0.5s ease-in-out;
 }
 
 .ad-details .ad-title h3 {
-	margin-top: 0px;
-	color: #000;
-	font-size:26px;
+    margin-top: 5px;
+    color: #063863;
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .details-description {
