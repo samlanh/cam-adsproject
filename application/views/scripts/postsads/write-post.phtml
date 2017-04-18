@@ -55,7 +55,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 								<label>Price <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<input type="text" placeholder="Price"  name="price" id="price"   class="form-control" onkeypress="return isNumber(event);"/>
+								<input type="text" placeholder="Price"  name="price" id="price"   class="form-control" onkeypress="return isNumber(event);" />
 							</div>
 						</div>
 						<div class="form-row">
@@ -230,6 +230,8 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 	
 </body>
 <script src="<?php echo $this->baseUrl();?>/template/javascript/validate.js"></script>
+<script src="<?php echo $this->baseUrl();?>/template/javascript/custome.js"></script>
+
 <script>
 //$('#city, #commune, #office').select2({ width: '100%' });
 //	changeProvince();
