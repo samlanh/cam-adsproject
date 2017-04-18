@@ -139,53 +139,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane" id="myAds">
-						<div class="title">
-						<div data-dismiss="alert" class="alert mar_b20 msg_err">Delete Error
-							<div class="close">
-							<span aria-hidden="true">×</span>
-							</div>
-						</div>
-						<h4>My Ads <span class="right" ><a class="button right" id="post-ads" title="Post Ads">Post Ads</a></h4></div>
-						<?php if(!empty($this->myads))foreach($this->myads as $key =>$rsad){?>
-						<div class="blog-wrapper">
-							<div class="ads-left">
-								<a class="ad-image box" href="#" title="Finance officer for hotel" >
-										<?php if (!empty($rsad['images'])){?>
-											<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rsad['images']; ?>" alt=""  />
-										<?php }else{?>
-											<img src="<?php echo $this->baseUrl()."/images/noimagefound.jpg"; ?>" alt=""  />
-										<?php }?>
-								</a>
-							</div>
-							<div class="ads-description">
-								<div class="title-ads"><h4><a target="_blank" href="<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'detail','ads'=>$rsad['alias']));?>"><?php echo $rsad['ads_title'];?></a></h4></div>
-								<div class="categories-ads"><h5><a href="#"><?php echo $rsad['category_name']?></a></h5></div>
-								<div class="description-ads"><p href="#">
-								<?php
-									$str1 = utf8_encode($rsad['description']);
-									$description = substr($str1, 0, 600);
-									echo utf8_decode($description); 
-								?>
-								</p></div>
-								<div class="footer-ads">
-									<span><i class="fa fa-calendar" aria-hidden="true"></i></span>
-									<span class="value"><?php echo date("d, M Y",strtotime($rsad['publish_date']));?></span>
-									<span><i class="fa fa-eye" aria-hidden="true"></i> </span>
-									<span class="value"><?php echo $rsad['viewer']; ?> Views</span>
-								</div>
-							</div>
-							<div class="icon_menu-right">
-								<ul class="icon_menu">
-									<li class="delete_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'delete','adsid'=>$rsad['id']));?>" title="Delete" onclick="return confirm('<?php echo $tr->translate("Do you sure to delete this ads ?");?>');"><?php echo $tr->translate('DELETE');?></a></li>
-									<li class="edit_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'edit','adsid'=>$rsad['id']));?>" title="Edit"><?php echo $tr->translate('EDIT');?></a></li>
-									<li class="renew_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'renew','adsid'=>$rsad['id']));?>" title="Renew"><?php echo $tr->translate('RENEW');?></a></li>
-								</ul>
-							</div>
-						</div>
-						<?php }?>
-						
-					</div>
 				</div>
 			</div>
 		</div>

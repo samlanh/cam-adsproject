@@ -72,7 +72,7 @@ $menu_items = $db_select->getMenuItems();
 								
 								<div style="clear:both;"></div>
 								<div class="col-md-3">
-									<select id="edit-ad-location" name="location_search" class="form-select locationRadius" style="display: none;">
+									<select id="location_search" name="location_search" class="form-select locationRadius" style="display: none;" onchange="getAllDistrict();">
 										<option value="-1"><?php echo $tr->translate("Choose Location");?></option>
 										<?php 
 											$db = new Application_Model_DbTable_DbGlobalselect();
@@ -145,9 +145,6 @@ $menu_items = $db_select->getMenuItems();
 			</div>	
 				<span style="clear: both;"></span>			
 	</section>
-	
-	
-	
 	<span style="clear: both;"></span>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
@@ -286,8 +283,7 @@ $menu_items = $db_select->getMenuItems();
 	<script>
 var url_district = '<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'get-districtbyid'));?> ';
 function getAllDistrict(){
-	var pro_id = $('#location').val();
-	alert(pro_id);
+	var pro_id = $('#location_search').val();
 		$.ajax({
 			url: url_district,
 			type: "post",

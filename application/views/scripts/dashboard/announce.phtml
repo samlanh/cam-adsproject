@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<?php 	
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$profile = $this->client_info;
+	if (!empty($profile['photo'])){
+		$image = $profile['photo'];
+	}else{
+		$image = "profile.jpg";
+	}
+?>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+	<meta charset="UTF-8">
+	<title>Dashboard Management</title>	
+</head>
+<body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
+	<section class="container">
+		<div class="conten-body">
+			<div class="conten-body-left">
+				<div class="tab-left">
+					<div  class="pos-relative">
+						<ul class="nav nav-tabs tabs horizontal">
+							<li >
+								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'myaccount')); ?>">
+									<span class="dash-title">
+										<i class="fa fa-user" aria-hidden="true"></i>
+										My Account									
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'myads')); ?>">
+									<span class="dash-title">
+										<i class="fa fa-cart-plus" aria-hidden="true"></i>
+										My Ads									
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'mystore')); ?>">
+									<span class="dash-title">
+										<i class="fa fa-university" aria-hidden="true"></i>
+										 My Store							
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'mypage')); ?>">
+									<span class="dash-title">
+										<i class="fa fa-bullhorn" aria-hidden="true"></i>
+										My Page						
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'mypage')); ?>">
+									<span class="dash-title">
+										<i class="fa fa-map-marker" aria-hidden="true"></i>
+										Contact Us					
+									</span>
+								</a>
+							</li>
+							
+							<li>
+								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'banner')); ?>">
+									<span class="dash-title">
+										<i class="fa fa-picture-o" aria-hidden="true"></i>
+										 Manage Banner							
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'policy')); ?>">
+									<span class="dash-title">
+										<i class="fa fa-newspaper-o" aria-hidden="true"></i>
+										Policy								
+									</span>
+								</a>
+							</li>
+							<li class="active">
+								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'announce')); ?>">
+									<span class="dash-title">
+										<i class="fa fa-comment-o" aria-hidden="true"></i>
+										Anouncement								
+									</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="conten-body-center right">
+				<div class="tab-content">
+					<div>
+					  announcement
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<script>
+	window.onload = function(e){ 
+		getBaseUrl('<?php echo $this->baseUrl();?>');
+	}
+</script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.bxslider.mine.js'></script> <!--form search-->
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/custome.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.isotope.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/owl.carousel.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.tools.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/javascript/jquery.form.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/javascript/custome.js'></script>
+	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
+</body>
+</html>

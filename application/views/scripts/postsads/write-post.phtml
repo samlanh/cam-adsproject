@@ -35,7 +35,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 					<form id="postads_form" onsubmit="return validateFormAds(this)" method="post" enctype="multipart/form-data" action="<?php echo $this->baseUrl()."/postsads/write-post";?>">
 						<div class="form-row">
 							<div class="form-label">
-								<label>Title <span class="sign_req">*</span></label>
+								<label><?php echo $tr->translate("Title");?><span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
 								<input type="text" placeholder="Title"  name="title" id="title"  class="form-control" />
@@ -43,7 +43,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 						</div>
 						<div class="form-row">
 							<div class="form-label">
-								<label>Ads Code <span class="sign_req">*</span></label>
+								<label><?php echo $tr->translate("Ads Code");?></label>
 							</div>
 							<div class="form-value">
 								<input type="text" placeholder="Your Product Code"  name="ads_code" id="ads_code" class="form-control" />
@@ -52,7 +52,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 						<?php echo $this->form;?>
 						<div class="form-row">
 							<div class="form-label">
-								<label>Price <span class="sign_req">*</span></label>
+								<label><?php echo $tr->translate("Price");?> <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
 								<input type="text" placeholder="Price"  name="price" id="price"   class="form-control" onkeypress="return isNumber(event);" />
@@ -60,15 +60,15 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 						</div>
 						<div class="form-row">
 							<div class="form-label">
-								<label>Description <span class="sign_req">*</span></label>
+								<label><?php echo $tr->translate("Description");?> <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<textarea id="description" name="description" class="form-control textareadesc" placeholder="Description..."></textarea>
+								<textarea id="description" required="1" name="description" class="form-control textareadesc" placeholder="Description..."></textarea>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-label">
-								<label>Link <span class="sign_req">*</span></label>
+								<label><?php echo $tr->translate("Link");?></label>
 							</div>
 							<div class="form-value">
 								<input type="text" placeholder="Your Website"  name="link" id="link" class="form-control" />
@@ -76,7 +76,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 						</div>
 						<div class="form-row">
 							<div class="form-label">
-								<label>Image </label>
+								<label><?php echo $tr->translate("Image");?> </label>
 							</div>
 							<div class="form-value">
 								<ul class="sortable grid">
@@ -136,11 +136,11 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 						</div>
 						<div class="form-row">
 							<div class="form-label">
-								<label>Location<span class="sign_req">*</span></label>
+								<label><?php echo $tr->translate("Location");?><span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
 								<select id="location" name="location" class="form-select" onchange="getAllDistrict();">
-									<option value="-1" selected="selected">Select Location</option>
+									<option value="-1" selected="selected"><?php echo $tr->translate("Choose Location");?></option>
 									<?php 
 										if(!empty($this->rslocation)){
 											foreach($this->rslocation as $rsl){
@@ -155,7 +155,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 						</div>
 						<div class="form-row">
 							<div class="form-label">
-								<label>District<span class="sign_req"></span></label>
+								<label><?php echo $tr->translate("District");?><span class="sign_req"></span></label>
 							</div>
 							<div class="form-value">
 								<label id="lbl_district">
@@ -163,7 +163,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 										<option value="-1" selected="selected"><?php echo $tr->translate("Choose Distict");?></option>
 									</select>
 								</label>
-								<label>District<span class="sign_req"></span></label>
+								<label><?php echo $tr->translate("Commune");?><span class="sign_req"></span></label>
 								<label id="lbl_commune">
 									<select id="commune" name="commune" class="form-select">
 										<option value="-1" selected="selected"><?php echo $tr->translate("Choose Commune");?></option>
@@ -172,18 +172,18 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 							</div>
 						</div>
 						<div class="col-md-12">
-							<h2 style="text-align: center;">Contact Information</h2>
+							<h2 style="text-align: center;"><?php echo $tr->translate("Contact Information");?></h2>
 						</div>
 						<div class="col-md-12">
 							<div class="col-md-2">
-								<label>Name <span class="sign_req">*</span></label>
+								<label><?php echo $tr->translate("Contact Name");?><span class="sign_req">*</span></label>
 							</div>
 							<div class="col-md-3">
 								<input type="hidden"  name="index" id="index"  />
-								<input type="text" placeholder="Name" name="name" id="name" class="form-control" />
+								<input type="text" placeholder="Name" name="name" id="name" value="<?php echo $this->client_info['customer_name'];?>" class="form-control" />
 							</div>
 							<div class="col-md-2">
-								<label>Phone 1 <span class="sign_req">*</span></label>
+								<label><?php echo $tr->translate("Phone 1");?><span class="sign_req">*</span></label>
 							</div>
 							<div class="col-md-3">
 								<input type="text" placeholder="Phone"  name="phone1" id="phone1" value="<?php echo $this->client_info['phone'];?>"  required="required" class="form-control" />
@@ -194,32 +194,47 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 						</div>
 						<div class="col-md-12">
 							<div class="col-md-2">
-								<label>Phone 2</label>
+								<label><?php echo $tr->translate("Phone 2");?></label>
 							</div>
 							<div class="col-md-3">
 								<input type="text" placeholder="Phone"  name="phone2" id="phone2" class="form-control" />
 							</div>
 							<div class="col-md-2">
-								<label>Email <span class="sign_req">*</span></label>
+								<label><?php echo $tr->translate("Email");?></label>
 							</div>
 							<div class="col-md-3">
-								<input type="text" placeholder="Email"  name="email" id="email" value="<?php echo $this->client_info['email'];?>"  required="required" class="form-control" />
+								<input type="text" placeholder="Email"  name="email" id="email" value="<?php echo $this->client_info['email'];?>"  class="form-control" />
 							</div>
 							<div class="col-md-2"></div>
 						</div>
 						<div class="form-row">
 							<div class="col-md-2">
-								<label>Address <span class="sign_req">*</span></label>
+								<label><?php echo $tr->translate("Address");?></label>
 							</div>
 							<div class="col-md-8">
 								<textarea id="adress" name="adress"  class="form-control " placeholder="Address..."><?php echo $this->client_info['address'];?></textarea>
 							</div>
 						</div>
-						<div class="form-row ">
-							<div class="form-label">
+						<!-- <div class="form-row">
+							<div class="col-md-4">
 							</div>
-							<div class="form-value">
-								<input type="submit" class="loginBtn register" value='SUBMIT' label='SUBMIT'>
+							<div class="col-md-4">
+								<label><?php //echo $tr->translate("Use in LINE");?></label><input type="checkbox" name='is_whatapp' class=""  >
+								<label><?php //echo $tr->translate("Use in WhatsApp");?><i style="color:green;font-size: 16px;" class="fa fa-whatsapp" aria-hidden="true"></i></label><input type="checkbox" name='is_whatapp' class=""  >
+							</div>
+							<div class="col-md-4">
+							</div>
+						</div> -->
+						<div class="form-row ">
+							<div class="col-md-3">
+							</div>
+							<div class="col-md-3">
+								<input type="submit" class="loginBtn register" value='<?php echo $tr->translate('Save And Close');?>' label='Submit My Ads'>
+							</div>
+							<div class="col-md-3">
+								<input type="submit" class="loginBtn register" value='<?php echo $tr->translate('Save And New');?>' label='Submit My Ads'>
+							</div>
+							<div class="col-md-3">
 							</div>
 						</div>
 					</form>

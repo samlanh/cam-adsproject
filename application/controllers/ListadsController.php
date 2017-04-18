@@ -71,6 +71,7 @@ class listadsController extends Zend_Controller_Action
      	}else{
      		$data = array(
      				'keywork_search'=>'',
+     				'location_search'=>-1,
      				'category_search'=>-1,
      				'province_id'=>-1,
      				'district'=>-1,
@@ -78,7 +79,6 @@ class listadsController extends Zend_Controller_Action
      		);
      	}
      	$this->view-> search= $data;
-     	print_r($data);
      	$db = new Application_Model_DbTable_DbGlobalselect();
      	$this->view->rsads = $db->getAllAdvanceSearch($data);
     }

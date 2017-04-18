@@ -69,7 +69,32 @@ class DashboardController extends Zend_Controller_Action
 		}else{
 			$this->_redirect("/dashboard");
 		}
+	}
+	function announceAtion(){
+		
 	}	
+	function bannerAction(){
+		
+	}
+	function myaccountAction(){
+		
+	}
+	function myadsAction(){
+		$client_session=new Zend_Session_Namespace('client');
+		$db = new Application_Model_DbTable_DbGlobalselect();
+		$this->view->myads = $db->getAdsByUserid($client_session->client_id);
+	}
+	function mypageAction(){
+	}
+	function mystoreAction(){
+		
+	}
+	function policyAction(){
+		
+	}
+	function announceAction(){
+		
+	}
 }
 
 

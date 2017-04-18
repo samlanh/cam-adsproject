@@ -34,6 +34,8 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 		try{
 // 			$photo = $_FILES['filePhoto1'];
 // 			$temp = explode(".", $photo["name"]);
+			$adsid = $this->getLastAdsId();
+			$adsidalias = $adsid.str_replace("'",'', $data['title']);
 			$arr = array(
 					"ads_code"   =>$data['ads_code'],
 					"ads_title"  =>$data['title'],
@@ -56,23 +58,28 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 					"date_modified"=>date("Y-m-d"),
 					"publish_date" =>date("Y-m-d"),
 					"expired_date"=>date("Y-m-d", strtotime(" date('Y-m-d') +15 day")),
-					"meta_description"=>$data['description'],
-					"meta_keyword"    =>$data['description'],
-					"alias"           =>date("Y-m-d"),//check later
+// 					"meta_description"=>$data['description'],
+// 					"meta_keyword"    =>$data['description'],
+					"alias"           =>$adsidalias,//check later
 					"phone1"          =>$data['phone1'],
 					"phone2"          =>$data['phone2'],
 					"status"          =>1,
 					"user_id"          =>$client_id,
-					
-					// 					"user_id"    =>$data['client_id'],
 			);
+			$str_img = '';
 			for ($i=0; $i<=6; $i++){
 				if($i==0){
+					$str_img.='{'.$data['ads-image'.$i];
 					$arr['image_feature']=$data['ads-image'.$i];
 				}else{
 					$arr['images']=$data['ads-image'.$i];
+					$comma = ',';
+					if($i==6){$comma='}';}
+					$str_img.=':'.$data['ads-image'.$i].$comma;
 				}
+				//{"img1":"img2", "img3":"img3"}
 			}
+			$arr['images']=$str_img;
 			$this->_name='vd_ads';
 			$ads_id = $this->insert($arr);
 			
@@ -93,14 +100,18 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 						$this->insert($data_detail);
 					}
 				}
-// 				exit();
 			$db->commit();
+			return 1;
 		}catch(exception $e){
-			echo $e->getMessage();exit();
-			Application_Form_FrmMessage::message("Application Error");
+			Application_Form_FrmMessage::message("Your Submit Error!");
 			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			$db->rollBack();
 		}
+	}
+	function getLastAdsId(){
+		$db = $this->getAdapter();
+		$sql="SELECT (id+1) AS adsid FROM `vd_ads` ORDER BY id DESC LIMIT 1 ";
+		return $db->fetchOne($sql);
 	}
 
 	

@@ -18,17 +18,29 @@ class PostsadsController extends Zend_Controller_Action
     	if(!empty($client_session->client_id)){ //check session has been have or not
 	    	$db = new Application_Model_DbTable_DbVdGlobal();
 	    	$this->view->parentcate = $db->getCategoryParent();
+	    	
+	    	$session_post=new Zend_Session_Namespace('postads');
+	    	$this->view->success = $session_post->success;
     	}else{
     		$this->_redirect("index/login");
     	}
     }
     public function writePostAction(){ // write post ads and submit ads to finish
+    	
     	//$this->_helper->layout()->disableLayout();
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();
     		$dbp = new Application_Model_DbTable_DbPostAds();
-    		$dbp->addPostsAds($data);
-    		$this->_redirect("/postsads/choose-category");
+    		$result = $dbp->addPostsAds($data);
+    		if(!empty($data['Save And Close'])){
+    			$this->_redirect("/dashboard/myads/".$result);
+    		}else{
+    			$session_post=new Zend_Session_Namespace('postads');
+    			$session_post->success=$result;
+    			Application_Form_FrmMessage::Sucessfull("Your ad has been insert success", "/postsads/choose-category/");
+    			//$this->_redirect("/postsads/choose-category/".$result);
+    		}
+    		
     	}
     	$client_session=new Zend_Session_Namespace('client');
     	if(!empty($client_session->client_id)){ //check session has been have or not
