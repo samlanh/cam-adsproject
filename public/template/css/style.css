@@ -960,6 +960,7 @@ span.regis-guid a:before {
 	}
 	.conten-body-left {
 		float:left;
+		margin-top: -6px;
 	}
 	.conten-body-center{
 		width:60%;
@@ -983,15 +984,17 @@ span.regis-guid a:before {
 
 ul.tabs.horizontal li {
     width: 100%;
-	border-bottom: solid 4px #fff;
+   
 }
 ul.tabs.horizontal li a {
     border-radius: 0;
-    background: #069770;
-	color: #fff;
-	text-align: left;
+    /* background: #e0e2e8; */
+    color: #4183d7;
+    text-align: left;
     font-size: 16px;
-    font-weight: bold;
+    /* font-weight: bold; */
+    border: 1px solid #ddd;
+    border-top: 0px;
 }
 ul.tabs.horizontal li a i {
     font-size: 18px;
@@ -1002,8 +1005,9 @@ ul.tabs.horizontal li a:hover,
 ul.tabs.horizontal li.active a:focus,
 ul.tabs.horizontal li a:focus,
 ul.tabs.horizontal li.active a {
-    background: #fbfbfb;
-    color: #0bb688 !important;
+    background: #ececec;
+    color: #e2c636 !important;
+	
 }
 	/*------Start My ads list Dashboard page--------------------*/
 		div.title h4 {
@@ -1013,7 +1017,7 @@ ul.tabs.horizontal li.active a {
 		}
 		div.title-ads h4 a {
 			color: #1870e0;
-			font-weight: 700;
+			font-weight: 600;
 		}
 		div.title-ads h4 a:hover {
 			color: #e2c636;
@@ -1029,11 +1033,13 @@ ul.tabs.horizontal li.active a {
 			padding: 10px;
 			margin: 0 10px;
 			border: solid 1px #ccc;
+    		border-bottom: 0px;
 		}
+		.last_record{border-bottom: solid 1px #ccc;}
 		.ads-left {
 			vertical-align: top;
 			display: inline-block;
-			width: 222px;
+			width: 190px;
 			border: solid 1px #ccc;
 		}
 		.ads-description {
@@ -1179,13 +1185,14 @@ input.btn_borwse_image {
 a.button {
     vertical-align: top;
     display: block;
-    padding: 6px 20px;
+    padding: 5px 20px;
     text-align: center;
-    color: #545353;
+    color: #ffffff;
     background: rgba(249, 246, 246, 0.6);
-    border: solid 1px #ccc;
-    font-size: 12px;
-	cursor: pointer;
+    border: solid 1px #d4b30b;
+    font-size: 16px;
+    cursor: pointer;
+    background: #ffb100;
 }
 
 /*--------------------- Form  Popup----------------------------*/
@@ -1308,10 +1315,11 @@ a.button {
 	border-left: 1px solid #e1e1e1;
 	border:1px solid #6f93c7;
 	/*box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .075);*/
+	margin-left: 4px;
 }
 .form-value .chosen-container .chosen-single{
 	height: 35px;
-	color: #cccccc;
+	color: #212020;
 }
 .form-value .chosen-container-single .chosen-single div {
     height: 40px;
@@ -1482,6 +1490,7 @@ div.main-category-blog ul.tabs.horizontal li a{
 	background: none;
 	border-bottom: solid 1px #EAEAEA;
 	font-weight: 400;
+	cursor: pointer;
 }
 .sub-categories-list {
     height: 450px;
