@@ -157,8 +157,10 @@ input:focus, textarea:focus, select:focus, .form-control:focus {
 	box-shadow:none;
 	-webkit-box-shadow:none;
 	border: 1px solid #e3e3e3;
-	height:44px;
+	/*height:44px;*/
+    height:37px;
 	color:#777;
+    border:1px solid #4282d4;
 }
 
 textarea {
@@ -1730,6 +1732,7 @@ transition: all 0.5s ease-in-out;
 	margin-left: 10px;
 }
 
+
 .ad-details .item .product-social li:before {
 	display: none;
 }
@@ -1737,8 +1740,21 @@ transition: all 0.5s ease-in-out;
 .ad-details .product-social a {
 	font-size:18px;
 }
+.ad-details .item-info ul li {
+	margin-bottom: 10px;
+	padding-left: 20px;
+	position: relative;
+}
 
-
+.ad-details .item-info ul li:before {
+	position: absolute;
+	content: "\f101";
+	font-family: FontAwesome;
+	left: 0;
+	top:0;
+	font-size:12px;
+	line-height: 20px;
+}
 .related-ads .item-wrap {
 	width:33.33%;
 }

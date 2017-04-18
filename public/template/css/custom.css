@@ -2483,7 +2483,7 @@ form select:after, select:after,
     margin-left: 10px;
 }
 .search-bar-version4 #advanced-search-widget-version2 .views-submit-button{
-	width:206px;
+	width: 158px;
 }
 .search-bar-version4 #edit-submit-search-view {
 	width: 100%;
@@ -2514,10 +2514,11 @@ form select:after, select:after,
 
 
 .search-bar-version4 #advanced-search-widget-version2 .controls input{
-	width:300px;
+	width: 269px;
+	margin-bottom: 10px;
 }
 .search-bar-version4 .chosen-container {
-    min-width: 226px !important;
+    min-width: 268px !important;
     background-color: #fff !important;
 }
 

@@ -338,7 +338,7 @@ ul.tabs.cat-list {
 	font-family: 'FontAwesome';
 	left: 0;
 	top:0;
-    color:green;
+    color:#4183d7;
 }
 #main-category ul.tabs.cat-list li a span {
    position: absolute;
@@ -856,7 +856,7 @@ dl.language a.lang.km {
 }
 .form-value {
     display: inline-block;
-    width: 300px;
+    /*width: 300px;*/
     padding-left: 15px;
 }
 .form-value .form-control {
@@ -1018,9 +1018,9 @@ ul.tabs.horizontal li.active a {
 		ul.icon_menu li a {
 			position: relative;
 			display: block;
-			padding: 8px 20px;
+			padding: 5px 10px;
 			text-align: center;
-			color: #545353;
+			color: blue;
 			background: rgba(249, 246, 246, 0.6);
 			border: solid 1px #ccc;
 		}
@@ -1274,7 +1274,7 @@ a.button {
 .form-value .chosen-container .chosen-single b{
 	background-repeat: no-repeat;
 	background-position: 1px 4px !important;
-	background-color: #ecebea;
+	background-color: rgba(0, 23, 187, 0.06);
 	position: relative;
 }
 .form-value .chosen-container .chosen-single b::after {
