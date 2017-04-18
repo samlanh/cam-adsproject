@@ -90,10 +90,13 @@
 										<h4>Description</h4>
 										<p><?php echo $ads['description'];?></p>
 									</div><!-- item-info -->
-									<!-- <div class="item-info">
+									 <div class="item-info">
 										<h4>Other Info</h4>
 										<ul>
-											<li>Consectetur adipisicing elit</li>
+										<?php if(!empty($this->rsattr))foreach ($this->rsattr as $attr){?>
+											<li><?php echo $attr['control_name'];?> : <?php echo $attr['control_value'];?></li>
+										<?php }?>
+											
 											<li>Sed do eiusmod tempor incididunt</li>
 											<li>Quis nostrud exercitation ullamco </li>
 											<li>Labore et dolore magna aliqua</li>
@@ -106,7 +109,7 @@
 											<li>Consectetur adipisicing elit</li>
 											<li>Sed do eiusmod tempor incididunt</li>
 										</ul>
-									</div>item-info -->
+									</div>
 								</div>
 		    				</div><!-- item -->
 		    				<!--<div class="location-map">

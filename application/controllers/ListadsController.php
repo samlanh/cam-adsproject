@@ -14,8 +14,11 @@ class listadsController extends Zend_Controller_Action
     	$category_id = $db->categoryIdByName($id);
     	$this->view->form = $dbform->getAllFormSearchByCateid($category_id,1);
     	
+    	$this->view-> rslocation = $db->getAllLocation();
+    	
     	$this->view->rsbannerleft = $db->getBannerByPosition(1);//1 = left
     	$this->view->rsbannerright = $db->getBannerByPosition(2);//2 = right
+    	
     	
     }
     function detailAction(){
@@ -24,7 +27,7 @@ class listadsController extends Zend_Controller_Action
     	$db = new Application_Model_DbTable_DbGlobalselect();
     	$adsdetail = $db->getAdsDetail($ads_alise);
     	$this->view->adsDetail = $adsdetail;
-    	
+    	$this->view->rsattr = $db->getAdsDetailById($adsdetail['id']);
     	$this->view->relate_pro = $db->getRelatedAds($adsdetail);
     }
     function resultAction(){
@@ -40,7 +43,39 @@ class listadsController extends Zend_Controller_Action
     	$this->view-> search= $data;
     	$db = new Application_Model_DbTable_DbGlobalselect();
     	$this->view->rsads = $db->getSearchHomePage($data);
-//     	print_r($db->getSearchHomePage($data));
+    }
+    function advresultAction(){
+    	if($this->getRequest()->isPost()){
+    		$data = $this->getRequest()->getPost();
+    		$data['keywork_search']='';
+    	}else{
+    		$data = array(
+    				'keywork_search'=>'',
+    				'category_id'=>-1,
+    				'province_id'=>-1,
+    		);
+    	}
+    	$this->view-> search= $data;
+    	$db = new Application_Model_DbTable_DbGlobalselect();
+    	$this->view->rsads = $db->getAdvanceSearch($data);
+    }
+    function advancesearchAction(){
+     	$this->_helper->layout()->disableLayout();
+     	if($this->getRequest()->isPost()){
+     		$data = $this->getRequest()->getPost();
+     	}else{
+     		$data = array(
+     				'keywork_search'=>'',
+     				'category_search'=>-1,
+     				'province_id'=>-1,
+     				'district'=>-1,
+     				'commune'=>-1,
+     		);
+     	}
+     	$this->view-> search= $data;
+     	print_r($data);
+     	$db = new Application_Model_DbTable_DbGlobalselect();
+     	$this->view->rsads = $db->getAllAdvanceSearch($data);
     }
 }
 

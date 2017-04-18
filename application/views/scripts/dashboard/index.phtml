@@ -138,7 +138,7 @@
 							</div>
 						</div>
 						<h4>My Ads <span class="right" ><a class="button right" id="post-ads" title="Post Ads">Post Ads</a></h4></div>
-						<?php if(!empty($this->myads))foreach($this->myads as $rsad){?>
+						<?php if(!empty($this->myads))foreach($this->myads as $key =>$rsad){?>
 						<div class="blog-wrapper">
 							<div class="ads-left">
 								<a class="ad-image box" href="#" title="Finance officer for hotel" >
@@ -150,7 +150,7 @@
 								</a>
 							</div>
 							<div class="ads-description">
-								<div class="title-ads"><h4><a href="#"><?php echo $rsad['ads_title'];?></a></h4></div>
+								<div class="title-ads"><h4><a target="_blank" href="<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'detail','ads'=>$rsad['alias']));?>"><?php echo $rsad['ads_title'];?></a></h4></div>
 								<div class="categories-ads"><h5><a href="#"><?php echo $rsad['category_name']?></a></h5></div>
 								<div class="description-ads"><p href="#">
 								<?php
@@ -168,9 +168,9 @@
 							</div>
 							<div class="icon_menu-right">
 								<ul class="icon_menu">
-									<li class="delete_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'delete'));?>" title="Delete" onclick="return confirm('<?php echo $tr->translate("Do you sure to delete this ads ?");?>');"><?php echo $tr->translate('DELETE');?></a></li>
-									<li class="edit_icon"><a href="#" title="Edit"><?php echo $tr->translate('EDIT');?></a></li>
-									<li class="renew_icon"><a href="#" title="Renew"><?php echo $tr->translate('RENEW');?></a></li>
+									<li class="delete_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'delete','adsid'=>$rsad['id']));?>" title="Delete" onclick="return confirm('<?php echo $tr->translate("Do you sure to delete this ads ?");?>');"><?php echo $tr->translate('DELETE');?></a></li>
+									<li class="edit_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'edit','adsid'=>$rsad['id']));?>" title="Edit"><?php echo $tr->translate('EDIT');?></a></li>
+									<li class="renew_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'renew','adsid'=>$rsad['id']));?>" title="Renew"><?php echo $tr->translate('RENEW');?></a></li>
 								</ul>
 							</div>
 						</div>

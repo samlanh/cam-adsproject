@@ -50,6 +50,26 @@ class DashboardController extends Zend_Controller_Action
 			exit();
 		}
 	}
+	function deleteAction(){
+		$adsid = $this->getRequest()->getParam("adsid");
+		if(!empty($adsid)){
+			$db = new Application_Model_DbTable_DbGlobalselect();
+			$id = $db->deleteMyadsById($adsid);
+			$this->_redirect("/dashboard");
+		}else{
+			$this->_redirect("/dashboard");
+		}
+	}
+	function renewAction(){
+		$adsid = $this->getRequest()->getParam("adsid");
+		if(!empty($adsid)){
+			$db = new Application_Model_DbTable_DbGlobalselect();
+			$id = $db->renewMyadsById($adsid);
+			$this->_redirect("/dashboard");
+		}else{
+			$this->_redirect("/dashboard");
+		}
+	}	
 }
 
 

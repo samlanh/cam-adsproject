@@ -9,8 +9,12 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 		$session_user=new Zend_Session_Namespace('auth');
 		return $session_user->user_id;
 	}
-	
+	static function getCurrentLang(){
+		$session_lang=new Zend_Session_Namespace('lang');
+		return $session_lang->lang_id;
+	}
 	function getAllFormTypeCateid($cate_id,$search=null){// old test form
+		$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 		$db = $this->getAdapter();
 		$sql="SELECT * FROM `vd_field_type` AS ft WHERE FIND_IN_SET($cate_id,ft.`category`) AND ft.`status`=1 ";
 		if($search!=null){
@@ -29,10 +33,10 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 			}
 			
 			if ($rs["type"]=="select"){
-				$form.=$this->OptionSelect($rs["id"],$rs["title"],$rs["is_require"],$rs["label_name"]);
+				$form.=$this->OptionSelect($rs["id"],$rs["title"],$rs["is_require"],$tr->translate($rs["label_name"]));
 			}elseif ($rs["type"]=="cascade"){
 				$form.='<div class="form-row">';
-					$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+					$form.='<div class="form-label"> <label>'.$tr->translate($rs["label_name"]).$sigrequir.'</label> </div>';
 					$form.='<div class="form-value">';
 						$form.='<select onChange="getCascadeValue('.$rs["title"].')"  id="'.$rs["title"].'" name="'.$rs["title"].'" '.$isreq.' class="form-select">';
 						$form.='</select>';
@@ -40,28 +44,28 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 				$form.='</div>';
 			}elseif ($rs["type"]=="text"){
 				$form.='<div class="form-row">';
-					$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+					$form.='<div class="form-label"> <label>'.$tr->translate($rs["label_name"]).$sigrequir.'</label> </div>';
 					$form.='<div class="form-value">';
 						$form.='<input class="form-control " type="text" value="" placeholder="'.$rs["label_name"].'"  '.$isreq.' id="'.$rs["title"].'" name="'.$rs["title"].'" />';
 					$form.='</div>';
 				$form.='</div>';
 			}elseif ($rs["type"]=="number"){
 				$form.='<div class="form-row">';
-					$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+					$form.='<div class="form-label"> <label>'.$tr->translate($rs["label_name"]).$sigrequir.'</label> </div>';
 					$form.='<div class="form-value">';
 						$form.='<input class="form-control " onkeypress="return isNumber(event);" type="text" value="" placeholder="'.$rs["label_name"].'"  '.$isreq.' id="'.$rs["title"].'" name="'.$rs["title"].'" />';
 					$form.='</div>';
 				$form.='</div>';
 			}elseif ($rs["type"]=="textarea"){
 				$form.='<div class="form-row">';
-					$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+					$form.='<div class="form-label"> <label>'.$tr->translate($rs["label_name"]).$sigrequir.'</label> </div>';
 					$form.='<div class="form-value">';
 						$form.=' <textarea class="form-control " id="'.$rs["title"].'" placeholder="'.$rs["label_name"].'"  name="'.$rs["title"].'" '.$isreq.' ></textarea>';
 					$form.='</div>';
 				$form.='</div>';
 			}elseif ($rs["type"]=="emailaddress"){
 				$form.='<div class="form-row">';
-					$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+					$form.='<div class="form-label"> <label>'.$tr->translate($rs["label_name"]).$sigrequir.'</label> </div>';
 					$form.='<div class="form-value">';
 						$form.=' <input type="email" id="'.$rs["title"].'" name="'.$rs["title"].'" '.$isreq.' autocomplete="off" placeholder="'.$rs["label_name"].'" />';
 					$form.='</div>';
@@ -97,6 +101,7 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 	}
 	function getAllFormSearchByCateid($cate_id,$search=null){// old test form
 		$db = $this->getAdapter();
+		$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 		$sql="SELECT * FROM `vd_field_type` AS ft WHERE FIND_IN_SET($cate_id,ft.`category`) AND ft.`status`=1 ";
 		if($search!=null){
 			$sql.=" AND ft.is_search=1 ";
@@ -105,50 +110,49 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 		$form='';
 		if (!empty($row)) foreach ($row as $rs){
 			if($rs["is_require"]==1 ){
-				$isreq= 'required="required"';
-				$sigrequir='<span class="sign_req">*</span>';
 				if($search!=null){
 					$isreq='';$sigrequir='';
 				}
-			}else{ $isreq='';$sigrequir='';
+			}else{ $isreq='';
 			}
-	
+			$isreq='';
+			$sigrequir='';
 			if ($rs["type"]=="select"){
 				$form.=$this->OptionSelectSearch($rs["id"],$rs["title"],$rs["is_require"],$rs["label_name"]);
 			}elseif ($rs["type"]=="cascade"){
-				$form.='<div class="col-md-2 col-sm-3">';
-				$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+				$form.='<div class="col-md-4 col-sm-3">';
+				//$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
 				$form.='<div class="form-value">';
 				$form.='<select onChange="getCascadeValue('.$rs["title"].')"  id="'.$rs["title"].'" name="'.$rs["title"].'" '.$isreq.' class="form-select">';
 				$form.='</select>';
 				$form.='</div>';
 				$form.='</div>';
 			}elseif ($rs["type"]=="text"){
-				$form.='<div class="col-md-2 col-sm-3">';
-				$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
-				$form.='<div class="form-value">';
-				$form.='<input class="form-control " type="text" value="" placeholder="'.$rs["label_name"].'"  '.$isreq.' id="'.$rs["title"].'" name="'.$rs["title"].'" />';
+				$form.='<div class="col-md-4 col-sm-3">';
+				//$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+				$form.='<div class="form-values">';
+				$form.='<input class="form-control " type="text" value="" placeholder="'.$tr->translate($rs["label_name"]).'"  '.$isreq.' id="'.$rs["title"].'" name="'.$rs["title"].'" />';
 				$form.='</div>';
 				$form.='</div>';
 			}elseif ($rs["type"]=="number"){
-				$form.='<div class="form-row">';
-				$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
-				$form.='<div class="form-value">';
-				$form.='<input class="form-control " onkeypress="return isNumber(event);" type="text" value="" placeholder="'.$rs["label_name"].'"  '.$isreq.' id="'.$rs["title"].'" name="'.$rs["title"].'" />';
+				$form.='<div class="col-md-4">';
+				//$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+				$form.='<div class="form-values">';
+				$form.='<input class="form-control " onkeypress="return isNumber(event);" type="text" value="" placeholder="'.$tr->translate($rs["label_name"]).'"  '.$isreq.' id="'.$rs["title"].'" name="'.$rs["title"].'" />';
 				$form.='</div>';
 				$form.='</div>';
 			}elseif ($rs["type"]=="textarea"){
-				$form.='<div class="form-row">';
-				$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+				$form.='<div class="col-md-4">';
+				//$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
 				$form.='<div class="form-value">';
-				$form.=' <textarea class="form-control " id="'.$rs["title"].'" placeholder="'.$rs["label_name"].'"  name="'.$rs["title"].'" '.$isreq.' ></textarea>';
+				$form.=' <textarea class="form-control " id="'.$rs["title"].'" placeholder="'.$tr->translate($rs["label_name"]).'"  name="'.$rs["title"].'" '.$isreq.' ></textarea>';
 				$form.='</div>';
 				$form.='</div>';
 			}elseif ($rs["type"]=="emailaddress"){
-				$form.='<div class="form-row">';
-				$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
+				$form.='<div class="col-md-4">';
+				//$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
 				$form.='<div class="form-value">';
-				$form.=' <input type="email" id="'.$rs["title"].'" name="'.$rs["title"].'" '.$isreq.' autocomplete="off" placeholder="'.$rs["label_name"].'" />';
+				$form.=' <input type="email" id="'.$rs["title"].'" name="'.$rs["title"].'" '.$isreq.' autocomplete="off" placeholder="'.$tr->translate($rs["label_name"]).'" />';
 				$form.='</div>';
 				$form.='</div>';
 			}
@@ -157,10 +161,10 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 	}
 	function OptionSelectSearch($fielid,$name,$require,$labelname){ // old form test
 		if($require==1){
-			$isreq= 'required="required"';
 			$sigrequir='<span class="sign_req">*</span>';
-		}else{ $isreq=''; $sigrequir='';
+		}else{ $sigrequir='';
 		}
+		$isreq='';
 		$functionOnchage='';
 		if ($this->checkFieldHasChild($fielid)>0){
 			$controlname = "'".$name."'";
@@ -184,7 +188,14 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 	
 	function getValueofOption($fielid){
 		$db = $this->getAdapter();
-		$sql="SELECT fv.`id`,fv.`name` FROM `vd_field_value` AS fv WHERE fv.`field_type_id`=".$fielid;
+		$lang_id = $this->getCurrentLang();
+		$column = array(
+				"1"=>"value",
+				"2"=>"value_khmer"
+		);
+		$str_collect = $column[$lang_id];
+		
+		$sql="SELECT fv.`id`, $str_collect  AS name FROM `vd_field_value` AS fv WHERE fv.`field_type_id`=".$fielid;
 		return $db->fetchAll($sql);
 	}
 	function checkFieldHasChild($parent){

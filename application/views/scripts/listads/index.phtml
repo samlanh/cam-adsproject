@@ -1,6 +1,59 @@
 <?php 
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 ?>
+<script>
+var url_district = '<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'get-districtbyid'));?> ';
+function getAllDistrict(){
+	var pro_id = $('#location').val();
+	alert(pro_id);
+		$.ajax({
+			url: url_district,
+			type: "post",
+			data:{'pro_id':pro_id},
+			success: function(data){
+				datars = $.parseJSON(data);
+				stringhtml='<select onchange="getCommuneById()" id="district" name="district" class="form-select">';
+				stringhtml+='<option value="0" selected="selected"><?php echo $tr->translate("Choose Distict");?></option>';
+				for(j=0;j<datars.length;j++){
+					stringhtml+='<option value="'+datars[j].id+'">'+datars[j].district_name+'</option>';
+				}
+				stringhtml+='</select';
+				document.getElementById('lbl_district').innerHTML=stringhtml;
+				stringcommune='<select id="commune" name="commune" class="form-select"><option><?php echo $tr->translate("Choose Commune");?></option></select>';
+				document.getElementById('lbl_commune').innerHTML=stringcommune;
+				var noResult = jQuery(".form-select").data('noResult');
+				jQuery(".form-select").chosen({});
+			},
+			error:function(err){
+				alert(err);
+			}
+		});
+}
+var url_commune = '<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'get-communebyid'));?> ';
+function getCommuneById(){
+	var commune_id = $('#district').val();
+	if(commune_id==0){return false;}
+	$.ajax({
+		url: url_commune,
+		type: "post",
+		data:{'distict_id':commune_id},
+		success: function(data){
+			datars = $.parseJSON(data);
+			stringhtml='<select id="commune" name="commune" class="form-select">';
+			stringhtml+='<option value="0" selected="selected"><?php echo $tr->translate("Choose Commune");?></option>';
+			for(j=0;j<datars.length;j++){
+				stringhtml+='<option value="'+datars[j].id+'">'+datars[j].commune_name+'</option>';
+			}
+			stringhtml+='</select';
+			document.getElementById('lbl_commune').innerHTML=stringhtml;
+			var noResult = jQuery(".form-select").data('noResult');
+			jQuery(".form-select").chosen({});
+		},
+		error:function(xhr){
+		}
+	});
+}
+</script>
 <link href="<?php echo $this->baseUrl();?>/template/css/main.css" media="screen" rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <html lang="en">
@@ -35,9 +88,44 @@
 							<div id="category-tab">
 								<div class="col-md-12">
 									<div class="catgorylist-title">
-										<form action="post" method="post" enctype="multipart/form-data">
+										<form action="<?php echo $this->url(array("module"=>'default','controller'=>'listads','action'=>'advresult'));?>" method="post" enctype="multipart/form-data">
 											<?php echo $this->form;?>
-											<button type="submit" class="btn btn-primary form-submit" id="edit-submit-search-view" name="btn_search">&nbsp;<?php echo $tr->translate("Search Now");?>&nbsp;<i class="fa fa-search"></i></button>
+											<div style="clear:both;"></div>
+											<div class="form-row">
+												<div class="form-value">
+													<select id="location" name="location" class="form-select" onchange="getAllDistrict();">
+														<option value="-1" selected="selected"><?php echo $tr->translate("Choose Location");?></option>
+														<?php 
+															if(!empty($this->rslocation)){
+																foreach($this->rslocation as $rsl){
+															?>
+																<option value="<?php echo $rsl['id'];?>" ><?php echo $rsl['province_name'];?></option>
+															<?php }
+															} 
+														?>
+													</select>
+												</div>
+												<div class="form-value">
+													<label id="lbl_district">
+														<select id="district" name="district" class="form-select">
+															<option value="-1" selected="selected"><?php echo $tr->translate("Choose Distict");?></option>
+														</select>
+													</label>
+												</div>
+												<div class="form-value">
+													<label id="lbl_commune">
+														<select id="commune" name="commune" class="form-select">
+															<option value="-1" selected="selected"><?php echo $tr->translate("Choose Commune");?></option>
+														</select>
+													</label>
+												</div>
+											</div>
+											<div class="col-md-4">
+											
+											</div>
+											<div class="col-md-4">
+												<button type="submit" class="btn btn-primary form-submit" id="btn_advsearch" name="btn_advsearch">&nbsp;<?php echo $tr->translate("Search Now");?>&nbsp;<i class="fa fa-search"></i></button>
+											</div>
 										</form>
 									</div>
 									<div class="tab-view">

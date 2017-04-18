@@ -149,6 +149,19 @@ class IndexController extends Zend_Controller_Action
         	exit();
         } 
     }
+    public function logoutclientAction(){
+    	if($this->getRequest()->getParam('value')==1){
+    		$aut=Zend_Auth::getInstance();
+    		$aut->clearIdentity();
+    		$session_user=new Zend_Session_Namespace('client');
+//     		$log=new Application_Model_DbTable_DbUserLog();
+//     		$log->insertLogout($session_user->user_id);
+    		$session_user->unsetAll();
+    		$this->_redirect("/index/login");
+    		//Application_Form_FrmMessage::redirectUrl("/");
+    		exit();
+    	}
+    }
 
     public function changepasswordAction()
     {

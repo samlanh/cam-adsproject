@@ -42,7 +42,7 @@ $menu_items = $db_select->getMenuItems();
 									<div class="views-widget">
 										<div class="control-group form-type-textfield form-item-search-api-views-fulltext form-item">
 											<div class="controls"> 
-												<input placeholder="<?php echo $tr->translate("Search your keyword here...");?>" type="text" id="edit-search-api-views-fulltext" name="keywork_search" value="<?php echo $this->search['keywork_search'];?>" size="30" maxlength="128" class="form-text">
+												<input placeholder="<?php echo $tr->translate("Search your keyword here");?>..." type="text" id="edit-search-api-views-fulltext" name="keywork_search" value="<?php echo $this->search['keywork_search'];?>" size="30" maxlength="128" class="form-text">
 											</div>
 										</div>
 									</div>
@@ -93,12 +93,12 @@ $menu_items = $db_select->getMenuItems();
 								<div id="edit-ad-location-wrapper" class="views-exposed-widget views-widget-filter-field_ad_location">
 									<div class="views-widget">
 										<div class="control-group form-type-select form-item-ad-location form-item">
-											<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="submit_search" value="Search Now" type="submit"><span>Search Now<i class="fa fa-search"></i></span></button>
+											<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="submit_search" value="Search Now" type="submit"><span><?php echo $tr->translate("Search Now");?><i class="fa fa-search"></i></span></button>
 										</div>
 									</div>
 								</div>
 								<div class="views-exposed-widget views-submit-button">
-									<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="advance_search" value="Search Now" type="submit"><span>Advance Search<i class="fa fa-search"></i></span></button>
+									<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="advance_search" value="Search Now" type="button" onclick="window.location ='<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'advancesearch'),null,true);?>'" ><span><?php echo $tr->translate("Advance Search");?><i class="fa fa-search"></i></span></button>
 								</div>
 							</form>
 						</div>

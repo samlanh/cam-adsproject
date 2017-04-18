@@ -5,18 +5,19 @@ $session_lang->lang_id;
 
 $client_session=new Zend_Session_Namespace('client');
 $clentid = $client_session->client_id;
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 ?>
 	<div class="widget block block-static-block">
     <div class="float-bar hidden-xs hidden-sm hidden-md">
 			<div class="float-bar-content">
 				<ul class="items">
-					<li class="item"><a href="<?php echo $this->baseUrl();?>/postsads/choose-category"><span class="fa fa-plus-square">&nbsp;</span><span>Posts Ads</span></a></li>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/postsads/choose-category"><span class="fa fa-plus-square">&nbsp;</span><span><?php echo $tr->translate("Posts Ads");?></span></a></li>
 					<?php if (empty($clentid)){?>
-					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/login"><span class="fa fa-sign-in">&nbsp;</span><span>Login</span></a></li>
-					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/register"><span class="fa fa-user">&nbsp;</span><span>Register</span></a></li>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/login"><span class="fa fa-sign-in">&nbsp;</span><span><?php echo $tr->translate("Login");?></span></a></li>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/register"><span class="fa fa-user">&nbsp;</span><span><?php echo $tr->translate("Register");?></span></a></li>
 					<?php }else{?>
-					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/logout"><span class="fa fa-sign-out">&nbsp;</span><span>Logout</span></a></li>
-					<li class="item"><a href="<?php echo $this->baseUrl();?>/dashboard"><span class="fa fa-user">&nbsp;</span><span>My Account</span></a></li>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/logoutclient/value/1"><span class="fa fa-sign-out">&nbsp;</span><span><?php echo $tr->translate("Logout");?></span></a></li>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/dashboard"><span class="fa fa-user">&nbsp;</span><span><?php echo $tr->translate("My Account");?></span></a></li>
 					
 					<?php }?>
 					<li class="item">
@@ -29,7 +30,7 @@ $clentid = $client_session->client_id;
 					<?php }
 						}?>
 					</li>
-					<li class="item"><a href="#"><span class="fa fa-comments-o">&nbsp;</span><span>Live Chat</span></a></li>
+					<li class="item"><a href="#"><span class="fa fa-comments-o">&nbsp;</span><span><?php echo $tr->translate("Live Chat");?></span></a></li>
 				</ul>
 			</div>
 		</div>

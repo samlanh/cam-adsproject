@@ -1,0 +1,120 @@
+<?php 
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	?>
+<link href="<?php echo $this->baseUrl();?>/template/css/main.css" media="screen" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+	<div class="page">
+		<div class="breadcrumb">
+			<div class="container">
+			</div>
+		</div>
+		<div class="all-categories section">
+			<div class="container">
+				<div class="row clearpadding">
+					<div class="col-md-2 col-sm-3 leftblog" style="height:500px;background:#fff;">
+						<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
+					</div><!-- col-sm-4 -->
+					<div class="col-md-8 col-sm-7" style="border-left:1px solid #eee;border-right:1px solid #eee;">
+						<div class="category-adds">
+							<div id="category-tab">
+								<div class="category-tab-top">
+									<div class="tab-view" style="width:100%;">
+										<ul class="list-inline">
+											<!-- <li class="grid-view-tab"><i class="fa fa-th-large" aria-hidden="true"></i></li> -->
+											<li class="small-view-tab active"><i class="fa fa-th" aria-hidden="true"></i></li>
+											<li class="list-view-tab"><i class="fa fa-th-list" aria-hidden="true"></i></li>
+										</ul>
+									</div>
+								</div>
+								<div class="category-tab"  >
+								  	<div class="tab-content small-view-tab">
+								    	<div role="tabpanel" class="tab-pane active" id="recent">
+								    		<ul>
+											<?php 
+											if(!empty($this->rsads))foreach($this->rsads as $rs){?>
+								    			<li class="item-wrap">
+									    				<div class="item ad-box ">
+																<div class="item-image">
+																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'];?>">
+																	<?php if (!empty($rs['images'])){?>
+																		<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rs['images']; ?>" alt=""  />
+																	<?php }else{?>
+																		<img src="<?php echo $this->baseUrl()."/images/noimagefound.jpg"; ?>" alt=""  />
+																	<?php }?>
+																	</a>
+																	<div class="additional-buttons">
+																		<span class="quickview" onClick="getAdsDetail('<?php echo $rs['id'];?>');" ><i class="fa fa-search-plus"></i><?php echo $tr->translate("Quickview");?></span>
+																		<div class="sold-by-container">
+																			<a title="Channy" href="#"><span><?php echo $tr->translate("Posted By");?> </span><?php echo $rs['author'];?></a>
+																		</div>
+																	</div>
+																</div>
+																<div class="item-price">
+																	<span>$<?php echo number_format($rs['price'],2);?></span>
+																</div> 
+															<div class="item-description">
+																<div class="item-title">
+																	<h3>
+																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'];?>">
+																		<?php echo substr($rs['ads_title'],0,100);?>
+																	</a>
+																	</h3>
+																</div>
+																<!-- <div class="ads-price">
+																	<h4><a class="ads-price" href="#" >$ <?php //echo number_format($rs['price'],2);?></a></h4>
+																 </div> -->
+																<div class="item-info">
+																	<p class="description"><?php 
+																	$str1 = utf8_encode($rs['description']);
+																	$description = substr($str1, 0, 600);
+																	echo utf8_decode($description); 
+																	?></p>
+																	<ul>
+																	   <li ><?php echo $rs['category_name'];?></li>
+																	   <li> <?php echo $rs['province_name'];?></li>
+																	</ul>
+																</div>
+															</div><!-- item-description -->
+															<div class="footerads" >
+																	<ul >
+																	   <li> <i class="fa fa-eye"></i><?php echo $rs['viewer'];?> Views</li>
+																	   <li> <i class="fa fa-clock-o"></i><?php echo date("M d, Y",strtotime($rs['publish_date']));?></li>
+																	</ul>
+															</div>
+														</div><!-- item -->
+								    			</li><!-- item-wrap -->
+								    			<?php }?>
+								    		</ul>
+								    	</div> <!--tab-pane-->
+								  	</div>
+								</div>
+							</div><!-- category-tab-->	
+						</div>
+						<div class="pager-section">
+							<ul class="pagination ">
+								<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li class="active"><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">6</a></li>
+								<li><a href="#">7</a></li>
+								<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+							</ul>
+						</div><!-- pager-section -->
+					</div><!-- end blog center -->
+					<div class="col-md-2 col-sm-3" style="height:500px;background:#fff;border-right:1px solid #eee;">
+						Blog right
+					</div><!-- col-sm-4 -->
+				</div>
+			</div>
+		</div> <!-- all-categories -->
+	</div>	<!-- page -->
+	<script src="<?php echo $this->baseUrl()."/template/js/bootstrap.min.js"; ?>"></script>
+	<script src="<?php echo $this->baseUrl()."/template/js/owl.carousel.min.js";?>"></script>
+	<script src="<?php echo $this->baseUrl()."/template/js/custom.js";?>"></script>
+  </body>
+</html>
