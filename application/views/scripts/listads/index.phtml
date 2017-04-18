@@ -57,17 +57,27 @@ function getCommuneById(){
 <link href="<?php echo $this->baseUrl();?>/template/css/main.css" media="screen" rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <?php if (!empty($this->cate_info['cate_name'])){?>
+ 		<title><?php echo $this->cate_info['cate_name'];?></title>	
+ 	<?php } else if(!empty($this->cate_info['parent_cate_name'])){?>
+ 	<title><?php echo $this->cate_info['parent_cate_name'];?></title>	
+ 	<?php }else{?>
+ 	<title>Lists all ads in all Categories</title>	
+ 	<?php }?>
+</head>
   <body>
 	<div class="page">
 		<div class="breadcrumb">
 			<div class="container">
 				<ul class="breadcrumb">
 				  <li><a href="<?php echo $this->baseUrl()."/index"?>"><i class="fa fa-home"></i>Home</a></li>
+				   <li><a href="<?php echo $this->baseUrl()."//listads/index"?>">All Categories</a></li>
 				  <?php if (!empty($this->cate_info['parent_cate_name'])){?>
-				  <li><a href="#"><?php echo $this->cate_info['parent_cate_name'];?></a></li>
+				  <li><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$this->cate_info['parent_alias_category'];?>"><?php echo $this->cate_info['parent_cate_name'];?></a></li>
 				  <?php }?>
 				   <?php if (!empty($this->cate_info['cate_name'])){?>
-				  <li><a href="#"><?php echo $this->cate_info['cate_name'];?></a></li>
+				  <li><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$this->cate_info['alias_category'];?>"><?php echo $this->cate_info['cate_name'];?></a></li>
 				  <?php }?>
 				</ul>
 			</div>
@@ -151,7 +161,7 @@ function getCommuneById(){
 																	<?php if (!empty($rs['image_feature'])){?>
 																		<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rs['image_feature']; ?>" alt=""  />
 																	<?php }else{?>
-																		<img src="<?php echo $this->baseUrl()."/images/noimagefound.jpg"; ?>" alt=""  />
+																		<img src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" alt=""  />
 																	<?php }?>
 																	</a>
 																	<div class="additional-buttons">

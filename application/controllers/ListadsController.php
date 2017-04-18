@@ -7,8 +7,12 @@ class listadsController extends Zend_Controller_Action
     	//$this->_helper->layout()->disableLayout();
     	$id = $this->getRequest()->getParam("cateid");
     	$db = new Application_Model_DbTable_DbGlobalselect();
-    	$this->view->rsads = $db->getAllAdsByName($id);
-    	$this->view->cate_info = $db->getCategoryInfo($id);
+    	if (!empty($id)){
+	    	$this->view->rsads = $db->getAllAdsByName($id);
+	    	$this->view->cate_info = $db->getCategoryInfo($id);
+    	}else{
+    		$this->view->rsads = $db->getAllAds();
+    	}
     	
     	$dbform = new Application_Model_DbTable_DbDynamicFormPostAds();
     	$category_id = $db->categoryIdByName($id);

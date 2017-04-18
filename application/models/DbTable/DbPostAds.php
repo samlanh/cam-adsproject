@@ -108,7 +108,7 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 		$client_session=new Zend_Session_Namespace('client');
 		
 		$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
-		$part= PUBLIC_PATH.'/images/';
+		$part= PUBLIC_PATH.'/images/adsimg/';
 		$index = $data['index'];
 // 		$name = $_FILES["filePhoto$index"]['name'];
 // 		$size = $_FILES["filePhoto$index"]['size'];
@@ -117,8 +117,17 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			$newName = date("Y-m-d").round(microtime(true)).$client_session->client_id.'.'.end($temp);
 			move_uploaded_file($_FILES["filePhoto$index"]["tmp_name"], $part . $newName);
 			
-			$uploadimage=$part.$newName;
 			
+			$uploadimage= $part.$newName;
+			
+			$percent = 0.5;
+			list($width, $height) = getimagesize($uploadimage);
+			$new_width = $width * $percent;
+			$new_height = $height * $percent;
+			
+			
+			// Resample
+			$image_p = imagecreatetruecolor($new_width, $new_height);
 			// Load the stamp and the photo to apply the watermark to
 			if (end($temp) == 'jpg') {
 				$im = imagecreatefromjpeg($uploadimage);
@@ -132,13 +141,18 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 				if (end($temp) == 'gif') {
 				$im = imagecreatefromgif($uploadimage);
 			}
+			imagecopyresampled($image_p, $im, 0, 0, 0, 0, $new_width, $new_height, $width, $height);// resize image
 			
-			$textcolor = imagecolorallocate($im, 32, 32, 32);
+			// Output
+			//imagejpeg($image_p, null, 100);
 			
+			
+			
+			$textcolor = imagecolorallocate($image_p, 32, 32, 32);
 			//$stamp =	imagestring($im, 14, 30, 50,  'Sample Water Mark', $textcolor);
-			$stamp = imagecreatetruecolor(imagesx($im), 20);
-				imagefilledrectangle($stamp, 0, 0, imagesx($im), 20, 0xFFFFFF);
-				imagestring($stamp, 18, (imagesx($im)/2)-((imagesx($im)/2)/3), 0, "www.cam-app.com", $textcolor);
+			$stamp = imagecreatetruecolor(imagesx($image_p), 20);
+				imagefilledrectangle($stamp, 0, 0, imagesx($image_p), 20, 0xFFFFFF);
+				imagestring($stamp, 18, (imagesx($image_p)/2)-((imagesx($image_p)/2)/3), 0, "www.cam-app.com", $textcolor);
 // 			$fontfile = $fontpart."arial.ttf";
 // 			imagettftext($stamp, 14, 0, imagesx($stamp), 0, $textcolor, $fontfile, 'Sample Water Mark');
 		
@@ -146,13 +160,14 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			$sx = imagesx($stamp);
 			$sy = imagesy($stamp);
 			// Merge the stamp onto our photo with an opacity of 50%
-		$watermark =	imagecopymerge($im, $stamp, imagesx($im) - $sx, imagesy($im)/2, 0, 0, imagesx($stamp), imagesy($stamp), 50);
+			imagecopymerge($image_p, $stamp, imagesx($image_p) - $sx, imagesy($image_p)/2, 0, 0, imagesx($stamp), imagesy($stamp), 50);
 		
 			// Save the image to file and free memory
-				imagejpeg($im, $uploadimage, 50);
+				imagejpeg($image_p, $uploadimage, 50);
 				
 			//imagedestroy($uploadimage);
-			
+				
+				
 		return $newName;
 	}
 	

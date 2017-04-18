@@ -1,23 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Theme Region">
-   	<meta name="description" content="">
-    <title>Advert | Ad Details | Classifieds Ads Template</title>
-   <!--  <link rel="stylesheet" href="css/bootstrap.min.css" >
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/owl.carousel.css">  
-    <link rel="stylesheet" href="css/main.css">  
-    <link rel="stylesheet" href="css/responsive.css">-->
-    <link href="<?php echo $this->baseUrl();?>/template/css/main.css" media="screen" rel="stylesheet" type="text/css">
-	<!-- font -->
-	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700,300' rel='stylesheet' type='text/css'>
-
-  </head>
   <?php 
   $tr = Application_Form_FrmLanguages::getCurrentlanguage();
   $ads = $this->adsDetail;
@@ -27,17 +8,37 @@
   	$image = "profile.jpg";
   }
   ?>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="cam app technology">
+   	<meta name="description" content="<?php echo $ads['ads_title'];?>">
+    <title><?php echo $ads['ads_title'];?></title>
+   <!--  <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">  
+    <link rel="stylesheet" href="css/main.css">  
+    <link rel="stylesheet" href="css/responsive.css">-->
+    <link href="<?php echo $this->baseUrl();?>/template/css/main.css" media="screen" rel="stylesheet" type="text/css">
+	<!-- font -->
+
+  </head>
+
   <body>
 	<div class="page">
 		<div class="breadcrumb">
 			<div class="container">
 				<ul class="breadcrumb">
 				  <li><a href="<?php echo $this->baseUrl()."/index"?>"><i class="fa fa-home"></i>Home</a></li>
+				  <li><a href="<?php echo $this->baseUrl()."//listads/index"?>">All Categories</a></li>
 				  <?php if (!empty($ads['parent_category_name'])){?>
-				  <li><a href="#"><?php echo $ads['parent_category_name'];?></a></li>
+				  <li><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$ads['parent_alias_category'];?>"><?php echo $ads['parent_category_name'];?></a></li>
 				  <?php }?>
 				   <?php if (!empty($ads['category_name'])){?>
-				  <li><a href="#"><?php echo $ads['category_name'];?></a></li>
+				  <li><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$ads['alias_category'];?>"><?php echo $ads['category_name'];?></a></li>
 				  <?php }?>
 				</ul>
 			</div>
@@ -137,7 +138,11 @@
 										<div class="ad-box ">
 											<div class="ads-img-wrapper">
 												<a class="ad-image box" href="#" title="Finance officer for hotel" >
-													<img src="<?php echo $this->baseUrl()."/images/adsimg/borey.jpg"; ?>" alt=""  />
+													<?php if (!empty($relate['image_feature'])){?>
+														<img src="<?php echo $this->baseUrl()."/images/adsimg/".$relate['image_feature']; ?>" alt=""  />
+													<?php }else{?>
+														<img src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" alt=""  />
+													<?php }?>
 												</a>
 												<div class="additional-buttons">
 													<span class="quickview" onClick="getAdsDetail('<?php echo $relate['id'];?>');"><i class="fa fa-search-plus"></i><?php echo $tr->translate("Quickview");?></span>

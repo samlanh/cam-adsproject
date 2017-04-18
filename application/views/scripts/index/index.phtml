@@ -49,7 +49,7 @@ $lang  = $session_lang->lang_id;
 			<div class="col-md-12 col-sm-12" >
 			<div class="block-title-cate">
 				<p class="b-title"><span><i class="fa fa-television"></i><?php echo $cate['name']?></span></p>
-				<p class="label-show-all"><a href="#">Show all</a></p>
+				<p class="label-show-all"><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$cate['alias_category'];?>">Show all</a></p>
 			</div>
 			
 			<div class="full">
@@ -83,7 +83,7 @@ $lang  = $session_lang->lang_id;
 								 </div>
 								  <div class="item-info">
 									<ul>
-									   <li ><?php echo $rsad['province_name'];?></li>
+									   <li ><?php echo $rsad['category_name'];?></li>
 									   <li > <?php echo $rsad['province_name'];?></li>
 									</ul>
 								</div>
