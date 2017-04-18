@@ -59,6 +59,15 @@ function getAdsDetail(index){ /* get detail ads */
 			document.getElementById('pop-author').innerHTML = '<a href="'+baseurl+'/index/store/user/'+val.user_id+'" >'+val.author+'</a>';
 			document.getElementById('pop-category').innerHTML = val.parent_cateogry_title;
 			document.getElementById('pop-location').innerHTML = val.province;
+			var feature = document.getElementById("pop-feature-image");
+			var imagefea='';
+			if(val.image_feature==null){
+				imagefea ='noimagefound.jpg';
+			}else{
+			imagefea =val.image_feature;}
+			  feature.setAttribute("src", baseurl+"/images/adsimg/"+imagefea);
+		  var pop_thum = document.getElementById("pop-images-thum");
+			pop_thum.setAttribute("src", baseurl+"/images/adsimg/"+imagefea);
 			},
 			error: function(err) {
 				alert(err);
