@@ -645,7 +645,7 @@ p.label-show-all a:hover{
 		padding:0;
 	}
 	.item-info ul li {
-		display: inline-block;
+		/*display: inline-block;*/
 		padding-right: 10px;
 		font-size: 12px;
 	}
