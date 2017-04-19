@@ -549,11 +549,12 @@ filter: alpha(opacity=0);
 	opacity: 1;
 
 }
+.ads-left .ad-image img { /*---blog my ads---*/
+    max-height: 170px;
+}
 .ad-image img {
 	float: left;
 	width: 100%;
-    max-height:149px; 
-
 }
 
 .add-box-main-image {
