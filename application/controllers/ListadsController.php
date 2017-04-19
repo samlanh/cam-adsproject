@@ -1,6 +1,6 @@
 <?php
 /*-- old form when testing dynamic form by category---*/
-class listadsController extends Zend_Controller_Action
+class ListadsController extends Zend_Controller_Action
 {
 	public function indexAction()
     {
@@ -19,11 +19,8 @@ class listadsController extends Zend_Controller_Action
     	$this->view->form = $dbform->getAllFormSearchByCateid($category_id,1);
     	
     	$this->view-> rslocation = $db->getAllLocation();
-    	
     	$this->view->rsbannerleft = $db->getBannerByPosition(1);//1 = left
     	$this->view->rsbannerright = $db->getBannerByPosition(2);//2 = right
-    	
-    	
     }
     function detailAction(){
 //     	$this->_helper->layout()->disableLayout();
@@ -81,6 +78,23 @@ class listadsController extends Zend_Controller_Action
      	$this->view-> search= $data;
      	$db = new Application_Model_DbTable_DbGlobalselect();
      	$this->view->rsads = $db->getAllAdvanceSearch($data);
+     	
+     	$db = new Application_Model_DbTable_DbVdGlobal();
+     	$param = $this->getRequest()->getParam('category');
+     	$cate = $db->getCategoryIdbyAlias($param);
+     	
+//      	$dbform = new Application_Model_DbTable_DbDynamicFormPostAds();
+//      	$this->view->form = $dbform->getAllFormSearchByCateid($cate['id'],1);
+    }
+    function getcontrollerAction(){
+    	if($this->getRequest()->isPost()){
+    		$data=$this->getRequest()->getPost();
+    		$dbform = new Application_Model_DbTable_DbDynamicFormPostAds();
+    		$rs = $dbform->getAllFormSearchByCateid($data['category_id'],1);
+    		print_r(($rs));
+    		//print_r(Zend_Json::encode($rs));
+    		exit();
+    	}	
     }
 }
 

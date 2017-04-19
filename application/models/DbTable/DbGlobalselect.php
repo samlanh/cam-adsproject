@@ -236,28 +236,47 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		(SELECT vc.phone FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_phone,
 		(SELECT $province FROM `vd_province` WHERE id= ad.province_id ) as province_name,
 		(SELECT title FROM `vd_category_detail` WHERE category_id= ad.category_id AND languageId=$lang_id LIMIT 1) as category_name
-		FROM $this->_name AS ad WHERE ad.status=1 ";
+		FROM $this->_name AS ad,vd_ads_detail as dt WHERE ad.status=1 AND ad.id=dt.ads_id ";
 		if(!empty($search['keywork_search'])){
 		 $s_where = array();
 			$s_search = addslashes(trim($search['keywork_search']));
-			$s_where[] = " ads_code LIKE '%{$s_search}%'";
-			$s_where[] = " ads_title LIKE '%{$s_search}%'";
-			$s_where[] = " price LIKE '%{$s_search}%'";
-			$s_where[] = " description LIKE '%{$s_search}%'";
+			$s_where[] = " ad.ads_code LIKE '%{$s_search}%'";
+			$s_where[] = " ad.ads_title LIKE '%{$s_search}%'";
+			$s_where[] = " ad.price LIKE '%{$s_search}%'";
+			$s_where[] = " ad.description LIKE '%{$s_search}%'";
 // 			$s_where[] = " street LIKE '%{$s_search}%'";
 			$sql .=' AND ('.implode(' OR ',$s_where).')';
 		}
+		
 		if($search['category_search']>-1){
 			$sql.= " AND ad.category_id = ".$search['category_search'];
+			$rscontrol = $this->getcontrollSearch($search['category_search'],1);//ទាញយក Controll តាម Cate // search in ads_detail
+			if(!empty($rscontrol)){
+				foreach ($rscontrol as $controll){
+					if(!empty($search[$controll['title']])){//តម្លៃក្នុង Controll មានតម្លៃ
+						$sql.=" AND dt.control_name = '".$controll['title']."'";
+						//$sql.=" AND dt.control_name = ".$search[$controll['title']];
+					}
+				}
+			}
 		}
-		if($search['location_search']>-1){
+		if($search['location_search']>-0){
 			$sql.= " AND ad.province_id = ".$search['location_search'];
 		}
-		if($search['district']>-1){
+		if($search['district']>-0){
 			$sql.= " AND ad.district_id = ".$search['district'];
 		}
-		if($search['commune']>-1){
+		if($search['commune']>-0){
 			$sql.= " AND ad.commune_id = ".$search['commune'];
+		}
+// 		echo $sql;exit();
+		return $db->fetchAll($sql);
+	}
+	function getcontrollSearch($cate_id,$search=null){
+		$db = $this->getAdapter();
+		$sql="SELECT * FROM `vd_field_type` AS ft WHERE FIND_IN_SET($cate_id,ft.`category`) AND ft.`status`=1 ";
+		if($search!=null){
+			$sql.=" AND ft.is_search=1 ";
 		}
 		return $db->fetchAll($sql);
 	}
