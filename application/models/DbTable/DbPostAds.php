@@ -75,14 +75,14 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 					$set_feature=1;
 				}
 				if(empty($data['ads-image'.$i])){continue;}
-				if($i==0){
-					$str_img.=$data['ads-image'.$i].',';
-				}else{
-					$arr['images']=$data['ads-image'.$i];
-					$comma = ',';
-					if($i==6){$comma='';}
-					$str_img.=$data['ads-image'.$i].$comma;
-				}
+					if($i==0){
+						$str_img.=$data['ads-image'.$i].',';
+					}else{
+						$arr['images']=$data['ads-image'.$i];
+						$comma = ',';
+						if($i==6){$comma='';}
+						$str_img.=$data['ads-image'.$i].$comma;
+					}
 			}
 			$arr['images']=$str_img;
 			$this->_name='vd_ads';
@@ -138,8 +138,13 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			
 			$percent = 0.5;
 			list($width, $height) = getimagesize($uploadimage);
-			$new_width = $width * $percent;
-			$new_height = $height * $percent;
+			if ($width<=400){
+				$new_width = $width;
+				$new_height = $height;
+			}else{
+				$new_width = $width * $percent;
+				$new_height = $height * $percent;
+			}
 			
 			
 			// Resample
