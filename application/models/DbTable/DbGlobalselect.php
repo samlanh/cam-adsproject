@@ -54,6 +54,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		}
 		$where.=" AND STATUS =1 AND is_expired=0  ";
 		$order=' ORDER BY id DESC'; 
+		echo $sql.$where.$order;
 		return $db->fetchAll($sql.$where.$order);
 	}
 	function checkCateparent($id){

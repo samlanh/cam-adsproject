@@ -67,17 +67,22 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 					"user_id"          =>$client_id,
 			);
 			$str_img = '';
+			$arr['image_feature']='noimagefound.jpg';
 			for ($i=0; $i<=6; $i++){
-				if($i==0){
-					$str_img.='{'.$data['ads-image'.$i];
+				$set_feature=0;
+				if(!empty($data['ads-image'.$i]) AND $set_feature==0){
 					$arr['image_feature']=$data['ads-image'.$i];
+					$set_feature=1;
+				}
+				if(empty($data['ads-image'.$i])){continue;}
+				if($i==0){
+					$str_img.=$data['ads-image'.$i].',';
 				}else{
 					$arr['images']=$data['ads-image'.$i];
 					$comma = ',';
-					if($i==6){$comma='}';}
-					$str_img.=':'.$data['ads-image'.$i].$comma;
+					if($i==6){$comma='';}
+					$str_img.=$data['ads-image'.$i].$comma;
 				}
-				//{"img1":"img2", "img3":"img3"}
 			}
 			$arr['images']=$str_img;
 			$this->_name='vd_ads';
