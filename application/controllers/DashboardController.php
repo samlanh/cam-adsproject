@@ -82,7 +82,40 @@ class DashboardController extends Zend_Controller_Action
 	function myadsAction(){
 		$client_session=new Zend_Session_Namespace('client');
 		$db = new Application_Model_DbTable_DbGlobalselect();
-		$this->view->myads = $db->getAdsByUserid($client_session->client_id);
+		$ads = $db->getAdsByUserid($client_session->client_id);
+		
+		$paginator = Zend_Paginator::factory($ads);
+		$paginator->setDefaultItemCountPerPage(5);
+		$allItems = $paginator->getTotalItemCount();
+		$countPages= $paginator->count();
+		$p = $this->getRequest()->getParam('pages');
+		 
+		if(isset($p))
+		{
+			$paginator->setCurrentPageNumber($p);
+		} else $paginator->setCurrentPageNumber(1);
+		 
+		$currentPage = $paginator->getCurrentPageNumber();
+		 
+		$this->view->myads = $paginator;
+		$this->view->countItems = $allItems;
+		$this->view->countPages = $countPages;
+		$this->view->currentPage = $currentPage;
+		 
+		if($currentPage == $countPages)
+		{
+			$this->view->nextPage = $countPages;
+			$this->view->previousPage = $currentPage-1;
+		}
+		else if($currentPage == 1)
+		{
+			$this->view->nextPage = $currentPage+1;
+			$this->view->previousPage = 1;
+		}
+		else {
+			$this->view->nextPage = $currentPage+1;
+			$this->view->previousPage = $currentPage-1;
+		}
 	}
 	function mypageAction(){
 	}
