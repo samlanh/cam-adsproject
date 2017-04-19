@@ -1760,3 +1760,12 @@ div.blog-content {
     padding: 10px;
     line-height: 20px;
 }
+/**************pagination style***************/
+ul.pagination li.disable > a {
+    color: #ddd !important;
+    background-color: #f5f5f5 !important;
+    pointer-events: none !important;
+}
+ul.pagination li.active a {
+    pointer-events: none;
+}
