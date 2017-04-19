@@ -137,7 +137,7 @@
   										?>
 										<div class="ad-box ">
 											<div class="ads-img-wrapper">
-												<a class="ad-image box" href="#" title="Finance officer for hotel" >
+												<a class="ad-image box" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$relate['alias'];?>" title="<?php echo $relate['ads_title'];?>" >
 													<?php if (!empty($relate['image_feature'])){?>
 														<img src="<?php echo $this->baseUrl()."/images/adsimg/".$relate['image_feature']; ?>" alt=""  />
 													<?php }else{?>

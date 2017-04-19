@@ -56,11 +56,11 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 				
 				  <div class="thumnail-blog">
 				    <div class="thumnail-image-slide">
-				      <img id="pop-images-thum" class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" style="width:100%" onclick="currentDiv(0)">
+				      <img id="pop-images-thum" class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>"  onclick="currentDiv(0)">
 				    </div>
 				    <?php for ($i=1; $i<=6; $i++){ ?>
 				    <div class="thumnail-image-slide">
-				      <img id="pop-images-thum<?php echo $i;?>" class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" style="width:100%" onclick="currentDiv(<?php echo $i;?>)">
+				      <img id="pop-images-thum<?php echo $i;?>" class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" onclick="currentDiv(<?php echo $i;?>)">
 				    </div>
 				    <?php }?>
 				    
