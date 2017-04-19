@@ -47,26 +47,14 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 	    <div class="pop-content-body" >
 	    	<div class="pop-content-body-left">
 	    		<div class="slide-content" style="max-width:100%;">
-	    		  <div class="blog-main-slide">
-					  <img id="pop-feature-image" class="mySlides" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" >
-					  <?php for ($i=1; $i<=6; $i++){ ?>
-					  <img id="pop-slide-image<?php echo $i;?>" class="mySlides" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" >
-					  <?php }?>
+	    		  <div id="blog-main-slide" class="blog-main-slide">
+	    		 
 				  </div>
 				
-				  <div class="thumnail-blog">
-				    <div class="thumnail-image-slide">
-				      <img id="pop-images-thum" class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>"  onclick="currentDiv(0)">
-				    </div>
-				    <?php for ($i=1; $i<=6; $i++){ ?>
-				    <div class="thumnail-image-slide">
-				      <img id="pop-images-thum<?php echo $i;?>" class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/noimagefound.jpg"; ?>" onclick="currentDiv(<?php echo $i;?>)">
-				    </div>
-				    <?php }?>
-				    
+				  <div id="thumnail-blog" class="thumnail-blog">
 				  </div>
 				   <a class="prev" onclick="plusDivs(-1)">&#10094;</a>
-						  <a class="next" onclick="plusDivs(1)">&#10095;</a>
+				   <a class="next" onclick="plusDivs(1)">&#10095;</a>
 			</div>
 	    	</div>
 	    	<div class="pop-content-body-right">

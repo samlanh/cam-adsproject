@@ -92,7 +92,6 @@
 			</div>
 			<div class="conten-body-center right">
 				<div class="tab-content">
-					<div  >
 						<div class="title">
 						<div data-dismiss="alert" class="alert mar_b20 msg_err">Delete Error
 							<div class="close">
@@ -105,7 +104,7 @@
 							<div class="ads-left">
 								<a class="ad-image box" href="#" title="Finance officer for hotel" >
 										<?php if (!empty($rsad['images'])){?>
-											<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rsad['images']; ?>" alt=""  />
+											<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rsad['image_feature']; ?>" alt=""  />
 										<?php }else{?>
 											<img src="<?php echo $this->baseUrl()."/images/noimagefound.jpg"; ?>" alt=""  />
 										<?php }?>
@@ -136,9 +135,20 @@
 								</ul>
 							</div>
 						</div>
-						<?php }?>
-						
-					</div>
+					<?php }?>
+					<div class="pager-section">
+							<ul class="pagination ">
+								<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li class="active"><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">6</a></li>
+								<li><a href="#">7</a></li>
+								<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+							</ul>
+						</div><!-- pager-section -->
 				</div>
 			</div>
 		</div>

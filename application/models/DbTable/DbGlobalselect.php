@@ -50,11 +50,10 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$where='';
 		$parent = $this->checkCateparent($category_id);
 		if ($parent['parent']==0){
-			$where.=" OR (SELECT c.`id` FROM `vd_category` AS c WHERE c.`id` = 1) = $category_id";
+			$where.=" OR (SELECT c.`parent` FROM `vd_category` AS c WHERE c.`id` = category_id LIMIT 1)  = $category_id";
 		}
 		$where.=" AND STATUS =1 AND is_expired=0  ";
 		$order=' ORDER BY id DESC'; 
-		echo $sql.$where.$order;
 		return $db->fetchAll($sql.$where.$order);
 	}
 	function checkCateparent($id){
