@@ -1699,10 +1699,25 @@ transition: all 0.5s ease-in-out;
 	background-color: #fff;
 	padding:30px;
 }
-
+ul.detail-ads li span.field-title {
+    color: #4282d4;
+      /* border-bottom: solid 1px #4183d7;*/
+}
+ul.detail-ads li span.field-value {
+    font-weight: 500;
+    margin-left: 30px;
+}
+.ad-details .item-info p {
+    margin-top: 15px;
+}
 .details-description h4 {
-	color: #000;
-	font-weight: 500;
+	color: #4692de;
+    font-weight: 600;
+    display: initial;
+    margin: 0;
+    margin-bottom: 10px;
+    /* text-transform: uppercase; 
+    border-bottom: solid 1px #4282d4;*/
 }
 
 .ad-details .item-info {

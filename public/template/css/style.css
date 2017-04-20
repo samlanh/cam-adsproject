@@ -96,7 +96,7 @@ loading
 /* Modal Content */
 .popup .pop-content{
     position: relative;
-    background-color: #fefefe;
+    background-color: #f4f4f4;
     margin: auto;
     padding: 0;
     border: 1px solid #888;
@@ -105,14 +105,14 @@ loading
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 1s;
     animation-name: animatetop;
-    animation-duration: 1s
+    animation-duration: 1s;
 }
 .pop-content .pop-content_header{
 	padding: 10px 16px;
-    background-color: #F9F9F6;
-    color: #605f5f;
-    vertical-align: top;
-    border-bottom: solid 1px #ccc;
+	background-color: #777;
+	color: #fefefe;
+	vertical-align: top;
+	border-bottom: solid 1px #ccc;
 }
 .pop-content .pop-content_header h2{
 	text-align: center;
@@ -650,7 +650,7 @@ p.label-show-all a:hover{
 	.item-info ul li {
 		/*display: inline-block;*/
 		padding-right: 10px;
-		font-size: 12px;
+		font-size: 14px;
 	}
 	.footerads ul li {
 		display: inline-block;
@@ -681,7 +681,7 @@ p.label-show-all a:hover{
 		margin: 0;
 	}
 	div.ads-title h4  a.ads-title{
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
 		color: #4183d7;
 		line-height: 18px;
@@ -1245,12 +1245,12 @@ a.button {
 
 /* The Close Button */
 .close {
-   color: #d10505;
-	float: right;
-	font-size: 19px;
-	font-weight: bold;
-	opacity: 1;
-	line-height: 15px;
+   color: #f4f4f4;
+   float: right;
+   font-size: 19px;
+   font-weight: bold;
+   opacity: 1;
+   line-height: 15px;
 }
 .pop-addtional_header,
 .pop-acc-info_header{
