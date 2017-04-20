@@ -32,9 +32,10 @@ class PostsadsController extends Zend_Controller_Action
     		$data=$this->getRequest()->getPost();
     		$dbp = new Application_Model_DbTable_DbPostAds();
     		$result = $dbp->addPostsAds($data);
-    		if(!empty($data['Save And Close'])){
+    		if(!empty($data['saveclose'])){
     			$this->_redirect("/dashboard/myads/".$result);
     		}else{
+//     			choose-category
     			$session_post=new Zend_Session_Namespace('postads');
     			$session_post->success=$result;
     			Application_Form_FrmMessage::Sucessfull("Your ad has been insert success", "/postsads/choose-category/");

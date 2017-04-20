@@ -224,7 +224,21 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		}
 		return $db->fetchAll($sql);
 	}
-	function getAllAdvanceSearch($search){
+	function getAllSubcategory($cate_name='category_id',$maincateid){
+		$db = $this->getAdapter();
+		$sql=" SELECT * FROM `vd_category` WHERE  parent = $maincateid ";
+		$rows = $db->fetchAll($sql);
+		$s_where = array();
+		$where='';
+		if(!empty($rows)){
+			foreach ($rows as $rs){
+				$s_where[] = $cate_name." = {$rs['id']}";
+			}
+			$where .=' AND ('.implode(' OR ',$s_where).' )';
+		}
+		return $where;
+	}
+	function getAllAdvanceSearch($search,$string=null){
 		$this->_name='vd_ads';
 		$lang_id = $this->getCurrentLang();
 		$db = $this->getAdapter();
@@ -234,7 +248,9 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		(SELECT vc.photo FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_photo,
 		(SELECT vc.address FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_address,
 		(SELECT vc.phone FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_phone,
-		(SELECT $province FROM `vd_province` WHERE id= ad.province_id ) as province_name,
+		(SELECT $province FROM `vd_province` WHERE id= ad.province_id LIMIT 1) as province_name,
+		(SELECT $province FROM `vd_province` WHERE id= ad.province_id LIMIT 1) as province_name,
+		(SELECT $province FROM `vd_province` WHERE id= ad.province_id LIMIT 1) as province_name,
 		(SELECT title FROM `vd_category_detail` WHERE category_id= ad.category_id AND languageId=$lang_id LIMIT 1) as category_name
 		FROM $this->_name AS ad,vd_ads_detail as dt WHERE ad.status=1 AND ad.id=dt.ads_id ";
 		if(!empty($search['keywork_search'])){
@@ -247,17 +263,25 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 // 			$s_where[] = " street LIKE '%{$s_search}%'";
 			$sql .=' AND ('.implode(' OR ',$s_where).')';
 		}
-		
 		if($search['category_search']>-1){
-			$sql.= " AND ad.category_id = ".$search['category_search'];
+			$sub_cate = $this->getAllSubcategory('ad.category_id',$search['category_search']);
+			if(!empty($sub_cate)){//parent
+				$sql.= " ".$sub_cate;
+			}else{//sub cate
+				$sql.= " AND ad.category_id = ".$search['category_search'];
+			}
 			$rscontrol = $this->getcontrollSearch($search['category_search'],1);//ទាញយក Controll តាម Cate // search in ads_detail
 			if(!empty($rscontrol)){
+				$s_where=array();
 				foreach ($rscontrol as $controll){
 					if(!empty($search[$controll['title']])){//តម្លៃក្នុង Controll មានតម្លៃ
-						$sql.=" AND dt.control_name = '".$controll['title']."'";
+						$s_where[] .=" dt.control_name = '".$controll['title']."'";
 						//$sql.=" AND dt.control_name = ".$search[$controll['title']];
 					}
+					
 				}
+// 				$where .=' '.implode(' OR ',$s_where).'';
+				$sql .=' AND ( '.implode(' OR ',$s_where).' )';
 			}
 		}
 		if($search['location_search']>-0){
@@ -269,8 +293,69 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		if($search['commune']>-0){
 			$sql.= " AND ad.commune_id = ".$search['commune'];
 		}
-// 		echo $sql;exit();
-		return $db->fetchAll($sql);
+		$sql.=" GROUP BY ad.id ";
+		$rs = $db->fetchAll($sql);
+		if($string!=null){
+			return $this->viewProductForm($rs);
+		}else{
+			return $rs;
+		}
+	}
+	function viewProductForm($result){
+		if(!empty($result)){
+			$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+			$str='';
+			 foreach($result as $rs){
+				$str.= "<li class='item-wrap'>
+				<div class='item ad-box'>
+				<div class='item-image'>";
+				$base_url=Zend_Controller_Front::getInstance()->getBaseUrl();
+				$str.='<a href="'.$base_url.'/listads/detail/ads/'.$rs["alias"].'">';
+					if (!empty($rs['image_wfeature'])){
+						$str.="<img src=".$base_url.'/images/adsimg/'.$rs['image_feature']." />";
+					}else{
+						$str.="<img src=".$base_url.'/images/adsimg/noimagefound.jpg'." />";
+					}
+					$str.='</a>';
+					$str.='<div class="additional-buttons">
+						<span class="quickview" onClick="getAdsDetail('.$rs['id'].');" ><i class="fa fa-search-plus"></i>'.$tr->translate("Quickview").'</span>
+							<div class="sold-by-container">
+								<a title="Channy" href="#"><span>.'.$tr->translate("Posted By").'</span>'.$rs['author'].'</a>
+							</div>
+						</div>';
+					$str.='</div>
+						<div class="item-price">
+							<span>$'.number_format($rs['price'],2).'</span>
+						</div> 
+						<div class="item-description">
+							<div class="item-title">
+								<h3>';
+								$str.='<a href="">'.substr($rs["ads_title"],0,100).'</a>
+								</h3>
+							</div>';
+					$str.='<div class="item-info">
+							<p class="description">';
+							$str1 = utf8_encode($rs['description']);
+							$description = substr($str1, 0, 600);
+							 utf8_decode($description); 
+					$str.='</p>
+							<ul>
+							   <li>'.$rs['category_name'].'</li>
+							   <li>'.$rs['province_name'].'</li>
+							</ul>
+						</div>
+					</div><!-- item-description -->
+					<div class="footerads" >
+							<ul>
+							   <li> <i class="fa fa-eye"></i>'.$rs['viewer'].' Views</li>
+							   <li> <i class="fa fa-clock-o"></i>'.date("M d, Y",strtotime($rs["publish_date"])).'</li>
+							</ul>
+					</div>
+					</div><!-- item -->
+		    	</li><!-- item-wrap -->';
+			}
+			return $str;
+		}									    			
 	}
 	function getcontrollSearch($cate_id,$search=null){
 		$db = $this->getAdapter();

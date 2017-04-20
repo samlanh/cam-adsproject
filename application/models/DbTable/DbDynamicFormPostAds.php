@@ -118,7 +118,8 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 			$isreq='';
 			$sigrequir='';
 			if ($rs["type"]=="select"){
-				$form.=$this->OptionSelectSearch($rs["id"],$rs["title"],$rs["is_require"],$rs["label_name"]);
+				$label = $tr->translate("Choose").$tr->translate($rs["label_name"]);
+				$form.=$this->OptionSelectSearch($rs["id"],$rs["title"],$rs["is_require"],$label);
 			}elseif ($rs["type"]=="cascade"){
 				$form.='<div class="col-md-3 col-sm-3">';
 				//$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
@@ -226,7 +227,7 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 		//$string.='<div class="form-label"><label>'.$labelname.$sigrequir.'</label> </div>';
 		//$string.='<div class="form-value formsearch">';
 		$string.='<select '.$functionOnchage.'   id="'.$name.'" name="'.$name.'" '.$isreq.' class="form-select" >';
-		$string.='<option value=""></option>';
+		$string.='<option value="-1">'.$labelname.'</option>';
 		if (!empty($value)) foreach ($value as $rs){
 			$string.='<option value="'.$rs['name'].'">'.$rs['name'].'</option>';
 		}

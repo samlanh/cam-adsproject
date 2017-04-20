@@ -1,0 +1,112 @@
+<?php $db = new Application_Model_DbTable_DbVdGlobal();
+$lang =$db->getLaguage();
+$session_lang=new Zend_Session_Namespace('lang');
+$session_lang->lang_id;
+
+$client_session=new Zend_Session_Namespace('client');
+$clentid = $client_session->client_id;
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
+	<div class="widget block block-static-block">
+    <div class="float-bar hidden-xs hidden-sm hidden-md">
+			<div class="float-bar-content">
+				<ul class="items">
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/postsads/choose-category"><span class="fa fa-plus-square">&nbsp;</span><span><?php echo $tr->translate("Posts Ads");?></span></a></li>
+					<?php if (empty($clentid)){?>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/login"><span class="fa fa-sign-in">&nbsp;</span><span><?php echo $tr->translate("Login");?></span></a></li>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/register"><span class="fa fa-user">&nbsp;</span><span><?php echo $tr->translate("Register");?></span></a></li>
+					<?php }else{?>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/logoutclient/value/1"><span class="fa fa-sign-out">&nbsp;</span><span><?php echo $tr->translate("Logout");?></span></a></li>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/dashboard"><span class="fa fa-user">&nbsp;</span><span><?php echo $tr->translate("My Account");?></span></a></li>
+					
+					<?php }?>
+					<li class="item">
+					<?php if (!empty($lang)) foreach ($lang as $rs){ 
+					if ($session_lang->lang_id!=$rs['id']){
+					?>
+						<a href="" href="#" title="<?php echo $rs['title'];?>" onclick="changeLange(<?php echo $rs['id'];?>);" >
+							<img src="<?php echo $this->baseUrl();?>/images/<?php echo $rs['iconImage'];?>" > 
+						</a>
+					<?php }
+						}?>
+					</li>
+					<li class="item"><a href="#"><span class="fa fa-comments-o">&nbsp;</span><span><?php echo $tr->translate("Live Chat");?></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div id="pop-ads-detail" class="popup detail-pro" style="display:none;">
+	  <!-- popup content -->
+	  <div class="pop-content">
+	    <div class="pop-content_header">
+	      <span id="close-detail" class="close">×</span>
+	      <h2 id="pop-titlebar">បង់ប្រាក់មុនត្រឹមតែ7900$អាចចូលស្នាក់នៅបានភ្លាមៗ</h2>
+	    </div>
+
+	    <div class="pop-content-body" >
+	    	<div class="pop-content-body-left">
+	    		<div class="slide-content" style="max-width:100%;">
+	    		  <div id="blog-main-slide" class="blog-main-slide">
+	    		 
+				  </div>
+				
+				  <div id="thumnail-blog" class="thumnail-blog">
+				  </div>
+				   <a class="prev" onclick="plusDivs(-1)">&#10094;</a>
+				   <a class="next" onclick="plusDivs(1)">&#10095;</a>
+			</div>
+	    	</div>
+	    	<div class="pop-content-body-right">
+	    		<div class="ads-title">
+					<h4 id="pop-title"><a class="ads-title" href="#" >បង់ប្រាក់មុនត្រឹមតែ7900$អាចចូលស្នាក់នៅបានភ្លាមៗ</a></h4>
+				 </div>
+				 <div class="viewer" >
+					<ul >
+					   <li> <i class="fa fa-eye"></i><span id="pop-viewer">100</span> Views</li>
+					   <li> <i class="fa fa-clock-o"></i><span id="pop-date">12, Mar 2017</span></li>
+					</ul>
+				</div>
+				 <div class="ads-price">
+					<h4><a class="ads-price" href="#" id="pop-price">$ <?php echo number_format(11111123456);?></a></h4>
+				 </div>
+				 <div class="description">
+				 	<p id="pop-description">
+				 		Morbi accumsan ipsum velit. Nam nec tellus a odio sit tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent permis conubia nostra, per inceptos himenaeos mauris inter erat justo. Nullam a
+				 	</p>
+				 </div>
+				 <div class="postedby"> 
+				 	<p>Posted By : <span class="bold" id="pop-author"><a href="#">Sok Chandara</a></span></p>
+				 </div>
+				 <div class="item-info">
+					<ul style="font-size: 10px;">
+					   <li >Category : </li>
+					   <li class="value" id="pop-category">Houses & Lands</li>
+					   <li > Location : </li>
+					   <li class="value" id="pop-location"> Phnom Penh</li>
+					</ul>
+				</div>
+				<div class="social-share" id="facebook-share">
+					<div class="fb-share-button" data-href="<?php echo $this->baseUrl()."/listads/detail/ads/ipones-224";?>" data-layout="button " data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a></div>
+				</div>
+	    	</div>
+	    </div>
+	    <div class="popup_footer">
+	    </div>
+	  </div>
+	</div>
+	<div id="load-wrapper" class="load-wrapper">
+		<div class="load-blog">
+			<div class="loader">
+				<img class="loading" src="<?php echo $this->baseUrl()."/images/loader-light.gif";?>" />
+			</div>
+		</div>
+	</div>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/javascript/ads.js'></script>
+	<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

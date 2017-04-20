@@ -39,7 +39,7 @@ $menu_items = $db_select->getMenuItems();
 					<div class="">
 						<div class="advanced-search-widget-content">
 							<div class="col-md-12">
-							<form action="<?php echo $this->url(array("module"=>'default','controller'=>'listads','action'=>'advancesearch'));?>" method="post" id="views-exposed-form-search-view-other-ads-page" accept-charset="UTF-8">
+							<form id="frmadvancesearch" action="<?php echo $this->url(array("module"=>'default','controller'=>'listads','action'=>'advancesearch'));?>" method="post" id="views-exposed-form-search-view-other-ads-page" accept-charset="UTF-8">
 								<div class="col-md-3">
 									<div class="views-widget">
 										<div class="control-group form-type-textfield form-item-search-api-views-fulltext form-item">
@@ -66,12 +66,12 @@ $menu_items = $db_select->getMenuItems();
 								</div>
 								<div class="col-md-3">
 									<div id="edit-ad-location-wrapper" class="views-exposed-widget views-widget-filter-field_ad_location">
-										<div class="views-widget">
+										<div class="views-widget"><!--  onclick="advancesearch();" -->
 											<div class="control-group form-type-select form-item-ad-location form-item">
-												<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="submit_search" value="Search Now" type="submit"><span><?php echo $tr->translate("Search Now");?><i class="fa fa-search"></i></span></button>
+												<button class="btn btn-primary form-submit" id="edit-submit-search-view" name="submit_search" value="Search Now" type="button" onclick="advancesearch();" ><span><?php echo $tr->translate("Search Now");?><i class="fa fa-search"></i></span></button>
 											</div>
 										</div>
-									</div>
+									</div><!--  -->
 								</div>
 								<label id="lbl_controlsearch" style="width:100%;"></label>
 								<div style="clear:both;"></div>
@@ -107,15 +107,6 @@ $menu_items = $db_select->getMenuItems();
 								<div class="col-md-3">
 								</div>
 							</form>
-							<section class="featured-slider-3 blog-cateory-items-slide ">
-								<div class="container" >
-									<div class="col-md-12 col-sm-12" >
-									<div class="banner-top" style="width:100; height:100px;border:1px solid #ccc;">
-										<h2 align="center">1170x100(px)</h2>
-									</div>
-									</div>
-								</div>
-							</section>
 						</div>
 					</div>
 				</div>
@@ -171,6 +162,7 @@ $menu_items = $db_select->getMenuItems();
 								  	<div class="tab-content small-view-tab">
 								    	<div role="tabpanel" class="tab-pane active" id="recent">
 								    		<ul>
+								    			<label id="lbl_adsshow" style="width: 100%;">
 											<?php 
 											if(!empty($this->rsads))foreach($this->rsads as $rs){?>
 								    			<li class="item-wrap">
@@ -201,9 +193,6 @@ $menu_items = $db_select->getMenuItems();
 																	</a>
 																	</h3>
 																</div>
-																<!-- <div class="ads-price">
-																	<h4><a class="ads-price" href="#" >$ <?php //echo number_format($rs['price'],2);?></a></h4>
-																 </div> -->
 																<div class="item-info">
 																	<p class="description"><?php 
 																	$str1 = utf8_encode($rs['description']);
@@ -225,6 +214,7 @@ $menu_items = $db_select->getMenuItems();
 														</div><!-- item -->
 								    			</li><!-- item-wrap -->
 								    			<?php }?>
+								    			</lable>
 								    		</ul>
 								    	</div> <!--tab-pane-->
 								  	</div>
@@ -252,13 +242,46 @@ $menu_items = $db_select->getMenuItems();
 			</div>
 		</div> <!-- all-categories -->
 	</div>	<!-- page -->
+	<div id="load-wrapper" class="load-wrapper">
+		<div class="load-blog">
+			<div class="loader">
+				<img class="loading" src="<?php echo $this->baseUrl()."/images/loader-light.gif";?>" />
+			</div>
+		</div>
+	</div>
+	<?php
+   $page = $this->baseurl();
+	echo $this->render('sideright.phtml');?>
 	<script>
 	jQuery(document).ready(function($){
 		<?php if($this->search['category_search']>0){ ?>
 		getControll();
 		<?php }?>
 		});
-		var url_getcontrol = '<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'getcontroller'));?> ';
+	var url_search = '<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'searchajax'));?> ';
+	   function advancesearch(){
+		   var formData = $('#frmadvancesearch').val(); 
+		 // var formData = document.getElementById("frmadvancesearch");
+		   //var formData = new FormData(myform);
+		   $("#load-wrapper").css("display", "block");
+		   $.ajax({
+		        url: url_search,
+		        type: "post",
+		        data: $('#frmadvancesearch').serialize(),		
+				//cache: false,
+				//contentType: false,
+		        success: function(dataproduct){
+		        	$("#load-wrapper").css("display", "none");
+		        	document.getElementById('lbl_adsshow').innerHTML=dataproduct;					
+				},
+					error: function(err) {
+						 $("#load-wrapper").css("display", "none");
+						alert(err);
+					}
+				});
+		}	
+		
+	   var url_getcontrol = '<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'getcontroller'));?> ';
 	   function getControll(){
 		   var category_search = $('#category_search').val(); 
 			   $.ajax({

@@ -86,13 +86,21 @@ class ListadsController extends Zend_Controller_Action
 //      	$dbform = new Application_Model_DbTable_DbDynamicFormPostAds();
 //      	$this->view->form = $dbform->getAllFormSearchByCateid($cate['id'],1);
     }
+    function searchajaxAction(){
+    	if($this->getRequest()->isPost()){
+    		$data=$this->getRequest()->getPost();
+    		$db = new Application_Model_DbTable_DbGlobalselect();
+    		$rs = $db->getAllAdvanceSearch($data,1);
+    		print_r(($rs));
+    		exit();
+    	}
+    }
     function getcontrollerAction(){
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();
     		$dbform = new Application_Model_DbTable_DbDynamicFormPostAds();
     		$rs = $dbform->getAllFormSearchByCateid($data['category_id'],1);
     		print_r(($rs));
-    		//print_r(Zend_Json::encode($rs));
     		exit();
     	}	
     }

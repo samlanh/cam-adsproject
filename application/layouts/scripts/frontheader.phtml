@@ -58,7 +58,7 @@ $menu_items = $db_select->getMenuItems();
 														if(!empty($rscate)){
 															foreach($rscate as $rsc){
 														?>
-															<option value="<?php echo $rsc['id'];?>" <?php if($this->search['category_search']==$rsc['id']){ echo'selected="selected"';}?> ><?php echo $rsc['name'];?></option>
+															<option value="<?php echo $rsc['id'];?>" <?php //if($this->search['category_search']==$rsc['id']){ echo'selected="selected"';}?> ><?php echo $rsc['name'];?></option>
 														<?php }
 														} 
 													?>
@@ -80,7 +80,7 @@ $menu_items = $db_select->getMenuItems();
 														if(!empty($rslocation)){
 															foreach($rslocation as $rsl){
 														?>
-															<option value="<?php echo $rsl['id'];?>" <?php if($this->search['location_search']==$rsl['id']){ echo'selected="selected"';}?>><?php echo $rsl['province_name'];?></option>
+															<option value="<?php echo $rsl['id'];?>" <?php //if($this->search['location_search']==$rsl['id']){ echo'selected="selected"';}?>><?php echo $rsl['province_name'];?></option>
 														<?php }
 														} 
 													?>
