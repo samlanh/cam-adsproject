@@ -91,29 +91,14 @@
 										</div>
 									</div><!-- item-info -->
 									<div class="item-info">
+										<ul class="detail-ads">
+											<?php if(!empty($this->rsattr))foreach ($this->rsattr as $attr){?>
+									 		<li><span class="field-title"><?php echo $attr['control_name'];?></span> : <span class="field-value"><?php echo $attr['control_value'];?></span></li>
+									 		<?php }?>
+									 	</ul>
 										<h4>Description</h4>
 										<p><?php echo $ads['description'];?></p>
 									</div><!-- item-info -->
-									 <div class="item-info">
-										<h4>Other Info</h4>
-										<ul>
-										<?php if(!empty($this->rsattr))foreach ($this->rsattr as $attr){?>
-											<li><?php echo $attr['control_name'];?> : <?php echo $attr['control_value'];?></li>
-										<?php }?>
-											
-											<li>Sed do eiusmod tempor incididunt</li>
-											<li>Quis nostrud exercitation ullamco </li>
-											<li>Labore et dolore magna aliqua</li>
-											<li>Ut enim ad minim veniam</li>
-											<li>Consectetur adipisicing elit</li>
-											<li>Sed do eiusmod tempor incididunt</li>
-											<li>Quis nostrud exercitation ullamco </li>
-											<li>Labore et dolore magna aliqua</li>
-											<li>Ut enim ad minim veniam</li>
-											<li>Consectetur adipisicing elit</li>
-											<li>Sed do eiusmod tempor incididunt</li>
-										</ul>
-									</div>
 								</div>
 		    				</div><!-- item -->
 		    				<!--<div class="location-map">

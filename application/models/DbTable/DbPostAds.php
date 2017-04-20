@@ -100,7 +100,7 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 											'ads_id'=>$ads_id,
 											'control_name'=>$rscon['label_name'],
 								            'control_id'=>$rscon['id'],
-											'control_value'=>$data[$rscon['label_name']]);	
+											'control_value'=>$data[$rscon['title']]);	
 						$this->_name='vd_ads_detail';
 						$this->insert($data_detail);
 					}
