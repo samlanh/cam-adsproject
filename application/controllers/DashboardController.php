@@ -120,7 +120,22 @@ class DashboardController extends Zend_Controller_Action
 	function mypageAction(){
 	}
 	function mystoreAction(){
+		$client_session=new Zend_Session_Namespace('client');
+		$db = new Application_Model_DbTable_DbGlobalselect();
 		
+		$this->view->mystore = $db->getMyStore($client_session->client_id);
+	}
+	function storeAction(){
+		$param = $this->getRequest()->getParams();
+		$this->view->param = $param;
+		
+		$client_session=new Zend_Session_Namespace('client');
+		$db = new Application_Model_DbTable_DbGlobalselect();
+		if (!empty($param['store'])){
+			$store = $db->getMyStoreByAlias($client_session->client_id,$param['store']);
+			$this->view->store = $store;
+		}
+		$this->view->template = $db->getAlltemplate();
 	}
 	function policyAction(){
 		
