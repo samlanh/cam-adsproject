@@ -1069,19 +1069,27 @@ ul.tabs.horizontal li.active a {
 			vertical-align: top;
 			float: right;
 		}
+		ul.icon_menu {
+			padding: 0;
+		}
 		ul.icon_menu li {
 			display: block;
 			width: 100%;
 			margin-bottom: 3px;
 		}
 		ul.icon_menu li a {
+			font-size: 12px;
 			position: relative;
 			display: block;
 			padding: 5px 10px;
 			text-align: center;
-			color: blue;
-			background: rgba(249, 246, 246, 0.6);
+			color: white;
+			background: #4183d7;
 			border: solid 1px #ccc;
+		}
+		ul.icon_menu li a i {
+			padding-right: 5px;
+			font-size: 14px;
 		}
 		ul.icon_menu li a:hover {
 			background: rgba(232, 232, 255, 1);
@@ -1190,16 +1198,18 @@ input.btn_borwse_image {
 a.button {
     vertical-align: top;
     display: block;
-    padding: 5px 20px;
+    padding: 5px 10px;
     text-align: center;
     color: #ffffff;
     background: rgba(249, 246, 246, 0.6);
-    border: solid 1px #2a4c7a;
+    border: solid 1px #4183d7;
     font-size: 16px;
     cursor: pointer;
     background: #4183d7;
 }
-
+a.button i {
+    padding-right: 5px;
+}
 /*--------------------- Form  Popup----------------------------*/
 .pop-acc-info,
 .pop-addtional {
@@ -1771,4 +1781,61 @@ ul.pagination li.disable > a {
 }
 ul.pagination li.active a {
     pointer-events: none;
+}
+/**************--Store choose template--*****************/
+.sub-template {
+    text-align: left;
+}
+li.list-thum {
+    width: 40%;
+    display: inline-block;
+    padding: 10px;
+}
+li.list-thum figure {
+    display: block;
+    width: 100%;
+}
+figure a {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 4px;
+    border: 1px solid #D6D6D6;
+    line-height: normal;
+	cursor: pointer;
+}
+figure a:hover {
+    border-color: #00B2D8;
+    background-color: #FFFFFF;
+}
+figure a:hover .name {
+    display: block;
+    top: 1px;
+    left: 1px;
+}
+ul figure a:hover img {
+    opacity: 0.2;
+}
+ul figure .name,
+ul figure .posted{
+    display: none;
+    position: absolute;
+    width: 99%;
+    margin: 0;
+    padding: 8px 0;
+    text-align: center;
+	font-weight: 600;
+	font-size: 16px ;
+}
+ul figure a:hover .posted {
+    display: block;
+    bottom: 1px;
+    left: 1px;
+}
+/*li.list-thum .thum-image {
+    padding: 2px;
+	cursor: pointer;
+}*/
+ img.template-image {
+    max-width: 100%;
 }
