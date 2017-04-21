@@ -2,17 +2,19 @@
 <html lang="en-US">
 <?php 	
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	$profile = $this->client_info;
-	if (!empty($profile['photo'])){
-		$image = $profile['photo'];
-	}else{
-		$image = "profile.jpg";
+	$param = $this->param;
+	$title='';
+	if ($param['change']=="add"){
+		$title = $tr->translate("Add New Store");
+	}else if ($param['change']=="edit"){
+		$title = $tr->translate("Edite/Update Store");
 	}
 ?>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="UTF-8">
 	<title>Dashboard Management</title>	
+		<link rel="stylesheet" href="<?php echo $this->baseUrl();?>/template/colorpicker/css/colorpicker.css" type="text/css" />
 </head>
 <body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
 	<section class="container">
@@ -29,7 +31,7 @@
 									</span>
 								</a>
 							</li>
-							<li class="active">
+							<li>
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'myads')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-cart-plus" aria-hidden="true"></i>
@@ -37,7 +39,7 @@
 									</span>
 								</a>
 							</li>
-							<li>
+							<li class="active">
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'mystore')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-university" aria-hidden="true"></i>
@@ -92,59 +94,28 @@
 			</div>
 			<div class="conten-body-center right">
 				<div class="tab-content">
-						<div class="title">
-						<div data-dismiss="alert" class="alert mar_b20 msg_err">Delete Error
-							<div class="close">
-							<span aria-hidden="true">×</span>
-							</div>
-						</div>
-						<h4>My Ads <span class="right" ><a href="<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'choose-category'));?>" class="button right" title="Post Ads"><i class="fa fa-plus-circle" aria-hidden="true"></i><?php echo $tr->translate("POST_ADS");?></a></h4></div>
-						<?php if(!empty($this->myads))foreach($this->myads as $key =>$rsad){?>
-						<div class="blog-wrapper <?php if(count($this->myads)==$key+1){echo"last_record";}?>">
-							<div class="ads-left">
-								<a class="ad-image box" href="#" title="Finance officer for hotel" >
-										<?php if (!empty($rsad['images'])){?>
-											<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rsad['image_feature']; ?>" alt=""  />
-										<?php }else{?>
-											<img src="<?php echo $this->baseUrl()."/images/noimagefound.jpg"; ?>" alt=""  />
-										<?php }?>
-								</a>
-							</div>
-							<div class="ads-description">
-								<div class="title-ads"><h4><a target="_blank" href="<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'detail','ads'=>$rsad['alias']));?>"><?php echo $rsad['ads_title'];?></a></h4></div>
-								<div class="categories-ads"><h5><a href="#"><?php echo $rsad['category_name']?></a></h5></div>
-								<div class="description-ads"><p href="#">
-								<?php
-									$str1 = utf8_encode($rsad['description']);
-									$description = substr($str1, 0, 850);
-									echo utf8_decode($description); 
-								?>
-								</p></div>
-								<div class="footer-ads">
-									<span><i class="fa fa-calendar" aria-hidden="true"></i></span>
-									<span class="value"><?php echo date("d, M Y",strtotime($rsad['publish_date']));?></span>
-									<span><i class="fa fa-eye" aria-hidden="true"></i> </span>
-									<span class="value"><?php echo $rsad['viewer']; ?> Views</span>
-								</div>
-							</div>
-							<div class="icon_menu-right" style="margin-top:-5px;">
-								<ul class="icon_menu">
-									<li class="delete_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'delete','adsid'=>$rsad['id']));?>" title="Delete" onclick="return confirm('<?php echo $tr->translate("Do you sure to delete this ads ?");?>');"><i class="fa fa-times" aria-hidden="true"></i><?php echo $tr->translate('DELETE');?></a></li>
-									<li class="edit_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'update-post','adsid'=>$rsad['id']));?>" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><?php echo $tr->translate('EDIT');?></a></li>
-									<li class="renew_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'renew','adsid'=>$rsad['id']));?>" title="Renew"><i class="fa fa-refresh" aria-hidden="true"></i><?php echo $tr->translate('RENEW');?></a></li>
-								</ul>
-							</div>
-						</div>
-					<?php }?>
-					<div class="pager-section">
-							<ul class="pagination ">
-								<li <?php if($this->currentPage==1){echo 'class="disable"';}?> ><a  href="<?php echo $this->baseUrl()."/dashboard/myads/pages/".$this->previousPage;?>"><i class="fa fa-chevron-left"></i></a></li>
-								 <?php if (!empty($this->countPages)) $i=0; for( $i=1; $i<=$this->countPages; $i++){?>
-										<li <?php if($i==$this->currentPage){ echo 'class="active"';?> <?php } else {}?>><a   href="<?php echo $this->baseUrl()."/dashboard/myads/pages/".$i;?>"><?php echo $i;?></a></li>
-								 <?php }?>
-								<li <?php if($this->countPages==$this->currentPage){echo 'class="disable"';}?>><a href="<?php echo $this->baseUrl()."/dashboard/myads/pages/".$this->nextPage;?>"><i class="fa fa-chevron-right"></i></a></li>
-							</ul>
-						</div><!-- pager-section -->
+				<div class="title">
+					<h4><?php echo $title;?> <span class="right" ><a href="<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'choose-category'));?>" class="button right" title="Post Ads"><i class="fa fa-chevron-left" aria-hidden="true"></i><?php echo $tr->translate("Back");?></a></h4>
+					</div>
+					<div class="sub-template">
+						<ul class="sub-template">
+						<?php if (!empty($this->template)) foreach($this->template as $rs){?>
+							<li class="list-thum">
+								<figure>
+									<a title="<?php echo $rs['template_title'];?>"><!--  <span class="name">Acidus</span> -->
+									<img class="template-image"  src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="Acidus Free Website Template" title="View the Acidus Template Details"> 
+									<span class="posted"><?php echo $rs['template_title'];?></span></a>
+									</figure>
+								<!--  <div class="thum-image">
+									<img class="template-image" src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="" />
+								</div>-->
+							</li>
+							<?php }?>
+						</ul>
+					</div>
+					  <p id="colorpickerHolder">
+               		  </p>   
+               		   <input id="collllll" name="collllll" value="#ffff" />	
 				</div>
 			</div>
 		</div>
@@ -164,5 +135,26 @@
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/javascript/jquery.form.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/javascript/custome.js'></script>
 	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
+	
+		<script>
+		var sds='00ff1e';
+
+		function getColor(){
+			var lastcolor = $("#main_color").val();
+			$("#collllll").val('#'+lastcolor);
+			
+		}
+	</script>
+
+	<script type="text/javascript" src="<?php echo $this->baseUrl();?>/template/colorpicker/js/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl();?>/template/colorpicker/js/colorpicker.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/template/colorpicker/js/eye.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/template/colorpicker/js/layout.js?ver=1.0.2"></script>
+	<script>
+			jQuery(function ($) {
+				
+				 getColor();
+			});
+	</script>
 </body>
 </html>
