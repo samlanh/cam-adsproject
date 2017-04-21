@@ -130,7 +130,7 @@
 							<div class="icon_menu-right" style="margin-top:-5px;">
 								<ul class="icon_menu">
 									<li class="delete_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'delete','adsid'=>$rsad['id']));?>" title="Delete" onclick="return confirm('<?php echo $tr->translate("Do you sure to delete this ads ?");?>');"><?php echo $tr->translate('DELETE');?></a></li>
-									<li class="edit_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'edit','adsid'=>$rsad['id']));?>" title="Edit"><?php echo $tr->translate('EDIT');?></a></li>
+									<li class="edit_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'update-post','adsid'=>$rsad['id']));?>" title="Edit"><?php echo $tr->translate('EDIT');?></a></li>
 									<li class="renew_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'renew','adsid'=>$rsad['id']));?>" title="Renew"><?php echo $tr->translate('RENEW');?></a></li>
 								</ul>
 							</div>

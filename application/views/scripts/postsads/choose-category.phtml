@@ -51,8 +51,16 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 								<div class="tab-pane <!--active--> " id="<?php echo "c".$parent['alias_category'];?>">
 									<div class="sub-categories-list">
 										<ul class="sub-cate">
-											<?php if (!empty($subcate)) foreach ($subcate as $cate){?>
-											<li class="cate-list"><a href="<?php echo $this->baseUrl()."/postsads/write-post/category/".$cate['alias_category'];?>"><?php  echo $cate['name'];?></a></li>
+											<?php 
+											$link = $this->cateid;
+											if (!empty($subcate)) foreach ($subcate as $cate){
+												if(!empty($link)){
+													$url = $this->url(array("module"=>'default','controller'=>'postsads','action'=>'update-post','adsid'=>$link),null,true);
+												}
+												else{ $url = $this->url(array("module"=>'default','controller'=>'postsads','action'=>'write-post','category'=>$cate['alias_category']));
+												}
+											?>
+											<li class="cate-list"><a href="<?php echo $url;//echo $this->baseUrl()."/postsads/write-post/category/".$cate['alias_category'];?>"><?php  echo $cate['name'];?></a></li>
 											<?php }?>
 										</ul>
 									</div>

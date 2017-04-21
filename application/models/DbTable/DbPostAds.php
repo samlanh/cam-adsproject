@@ -32,8 +32,6 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 		$db = $this->getAdapter();
 		$db->beginTransaction();
 		try{
-// 			$photo = $_FILES['filePhoto1'];
-// 			$temp = explode(".", $photo["name"]);
 			$adsid = $this->getLastAdsId();
 			$adsidalias = $adsid.str_replace("'",'', $data['title']);
 			$arr = array(
@@ -92,6 +90,7 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			$dbg = new Application_Model_DbTable_DbVdGlobal();
 			$rscontrol = $dbg->getAllcontrollByCategoryId($data['category']);
 				if(!empty($rscontrol)){
+					$this->_name='vd_ads_detail';
 					foreach ($rscontrol as $rscon){
 						if(empty($data[$rscon['label_name']])){
 							$data[$rscon['label_name']]='';//check here more
@@ -101,7 +100,6 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 											'control_name'=>$rscon['label_name'],
 								            'control_id'=>$rscon['id'],
 											'control_value'=>$data[$rscon['title']]);	
-						$this->_name='vd_ads_detail';
 						$this->insert($data_detail);
 					}
 				}
@@ -112,6 +110,118 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			$db->rollBack();
 		}
+	}
+	function addUpdateAds($data){
+		$client_session=new Zend_Session_Namespace('client');
+		$client_id = $client_session->client_id;
+		$db = $this->getAdapter();
+		$db->beginTransaction();
+		try{
+			$ads_id = $data['adsid'];
+			
+			$rsreal = $this->getRealAdsByUser($ads_id,$client_id);
+			$old_cate = $data['category'];if(!empty($rsreal)){$old_cate = $rsreal['category_id'];}
+			
+			$adsid = $this->getLastAdsId();
+// 			$adsidalias = $adsid.str_replace("'",'', $data['title']);
+			$arr = array(
+					"ads_code"   =>$data['ads_code'],
+					"ads_title"  =>$data['title'],
+					"price"      =>$data['price'],
+					"old_price"      =>$data['price'],
+					'contact_name'=>$data['name'],
+					'is_whatapp'=>'',
+					'is_discount'=>0,
+					'is_showcontact'=>0,
+					'email'=>$data['name'],
+					'link'=>$data['name'],
+					'address'=>$data['adress'],
+					"category_id"=>$data['category'],
+					"date"       =>date("Y-m-d"),
+					"description"=>$data['description'],
+					"province_id"=>$data['location'],
+					"district_id"=>$data['district'],
+					"commune_id"=>$data['commune'],
+					"create_date"=>date("Y-m-d"),
+					"date_modified"=>date("Y-m-d"),
+					"publish_date" =>date("Y-m-d"),
+					"expired_date"=>date("Y-m-d", strtotime(" date('Y-m-d') +15 day")),
+					// 					"meta_description"=>$data['description'],
+			// 					"meta_keyword"    =>$data['description'],
+// 					"alias"           =>$adsidalias,//check later
+					"phone1"          =>$data['phone1'],
+					"phone2"          =>$data['phone2'],
+					"status"          =>1,
+					"user_id"          =>$client_id,
+			);
+			$str_img = '';
+			$arr['image_feature']='noimagefound.jpg';
+			for ($i=0; $i<=6; $i++){
+				$set_feature=0;
+				if(!empty($data['ads-image'.$i]) AND $set_feature==0){
+					$arr['image_feature']=$data['ads-image'.$i];
+					$set_feature=1;
+				}
+				if(empty($data['ads-image'.$i])){
+					continue;
+				}
+				if($i==0){
+					$str_img.=$data['ads-image'.$i].',';
+				}else{
+					$arr['images']=$data['ads-image'.$i];
+					$comma = ',';
+					if($i==6){
+						$comma='';
+					}
+					$str_img.=$data['ads-image'.$i].$comma;
+				}
+			}
+			$arr['images']=$str_img;
+			$this->_name='vd_ads';
+			
+			$where =" user_id=$client_id AND id = ".$data['adsid'];
+			$this->update($arr, $where);
+				
+			$data_detail=array();
+			
+			if(!empty($rsreal)){//if ads for 
+				$this->_name='vd_ads_detail';
+				if($data['category']!=$old_cate){
+					$where="ads_id = ".$ads_id;
+					$this->delete($where);//delete data from ads_detail if edit change category
+				}
+				
+				$dbg = new Application_Model_DbTable_DbVdGlobal();
+				$rscontrol = $dbg->getAllcontrollByCategoryId($data['category']);
+				if(!empty($rscontrol)){//if change category should delete detail first
+					
+					foreach ($rscontrol as $rscon){
+						if(empty($data[$rscon['label_name']])){
+							$data[$rscon['label_name']]='';//check here more
+						}
+						$data_detail=array(
+								'ads_id'=>$ads_id,
+								'control_name'=>$rscon['label_name'],
+								'control_id'=>$rscon['id'],
+								'control_value'=>$data[$rscon['title']]);
+						$where = "control_id = ".$rscon['id']." AND ads_id = ".$ads_id;//udpate by control_id to detail ads
+						$this->update($data_detail,$where);
+					}
+				}
+			}	
+			$db->commit();
+			return 1;
+		}catch(exception $e){
+			echo $e->getMessage();exit();
+			Application_Form_FrmMessage::message("Your Submit Error!");
+			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
+			$db->rollBack();
+		}
+	}
+	function getRealAdsByUser($adsid,$user_id){
+		$db = $this->getAdapter();
+		$sql="SELECT ad.id,ad.category_id FROM vd_ads AS ad,vd_ads_detail AS dt WHERE ad.id=dt.ads_id AND ad.id = $adsid AND ad.user_id = $user_id ";
+		return $db->fetchRow($sql);
 	}
 	function getLastAdsId(){
 		$db = $this->getAdapter();

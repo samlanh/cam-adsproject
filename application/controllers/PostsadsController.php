@@ -11,9 +11,13 @@ class PostsadsController extends Zend_Controller_Action
     	header('content-type: text/html; charset=utf8');  
     	
     }
-
+    function errorpageAction(){
+    	
+    }
     public function chooseCategoryAction(){ // choose category before go to write post ads
     	//$this->_helper->layout()->disableLayout();
+    	$paramid = $this->getRequest()->getParam('cateid');
+    	$this->view->cateid = $paramid;
     	$client_session=new Zend_Session_Namespace('client');
     	if(!empty($client_session->client_id)){ //check session has been have or not
 	    	$db = new Application_Model_DbTable_DbVdGlobal();
@@ -26,8 +30,6 @@ class PostsadsController extends Zend_Controller_Action
     	}
     }
     public function writePostAction(){ // write post ads and submit ads to finish
-    	
-    	//$this->_helper->layout()->disableLayout();
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();
     		$dbp = new Application_Model_DbTable_DbPostAds();
@@ -35,13 +37,10 @@ class PostsadsController extends Zend_Controller_Action
     		if(!empty($data['saveclose'])){
     			$this->_redirect("/dashboard/myads/".$result);
     		}else{
-//     			choose-category
     			$session_post=new Zend_Session_Namespace('postads');
     			$session_post->success=$result;
     			Application_Form_FrmMessage::Sucessfull("Your ad has been insert success", "/postsads/choose-category/");
-    			//$this->_redirect("/postsads/choose-category/".$result);
     		}
-    		
     	}
     	$client_session=new Zend_Session_Namespace('client');
     	if(!empty($client_session->client_id)){ //check session has been have or not
@@ -59,6 +58,45 @@ class PostsadsController extends Zend_Controller_Action
 	    	
 	    	$db = new Application_Model_DbTable_DbGlobalselect();
 	    	$this->view-> rslocation = $db->getAllLocation();
+    	}else{
+    		$this->_redirect("index/login");
+    	}
+    }
+    public function updatePostAction(){ // write post ads and submit ads to finish
+    	if($this->getRequest()->isPost()){
+    		$data=$this->getRequest()->getPost();
+    		$dbp = new Application_Model_DbTable_DbPostAds();
+    		
+//     		print_r($data);exit();
+    	    $result = $dbp->addUpdateAds($data);
+    		
+    		$session_post=new Zend_Session_Namespace('postads');
+    		$session_post->success=$result;
+    		Application_Form_FrmMessage::Sucessfull("Your ad has been insert success", "/dashboard/myads");
+    	}
+    	$client_session=new Zend_Session_Namespace('client');
+    	if(!empty($client_session->client_id)){ //check session has been have or not
+    		$paramid = $this->getRequest()->getParam('adsid');
+    		$db = new Application_Model_DbTable_DbVdGlobal();
+    		
+    		$dbform = new Application_Model_DbTable_DbDynamicFormPostAds();
+    		$rs_ads = $dbform->getAdsById($paramid);
+    		
+    		if(empty($rs_ads)){
+    			$this->_redirect("postsads/errorpage");
+    		}
+    		$this->view->rs_ads = $rs_ads;//result ads row
+    		
+    		$this->view->form = $dbform->getAllFormTypeCateid($rs_ads['category_id'],null,$rs_ads['id']);//get form controll
+    		
+    		$cate = $db->getCategoryIdbyAlias($rs_ads['cate_alias']);
+    		$this->view->cate = $cate;//get parent category for selected 
+    
+    		$db = new Application_Model_DbTable_DbClient();
+    		$this->view->client_info = $db->getClientInfo(null,$client_session->client_id);
+    
+    		$db = new Application_Model_DbTable_DbGlobalselect();
+    		$this->view-> rslocation = $db->getAllLocation();
     	}else{
     		$this->_redirect("index/login");
     	}

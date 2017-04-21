@@ -22,13 +22,12 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		);
 		$province = $province_field[$lang_id];
 		$sql=" SELECT *,
-		(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = `user_id` LIMIT 1) AS author,
-		(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
-		(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name
-		FROM `vd_ads` WHERE 1
-		";
+			(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = `user_id` LIMIT 1) AS author,
+			(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
+			(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name
+			FROM `vd_ads` WHERE 1 ";
 		$where='';
-		$where.=" AND STATUS =1 AND is_expired=0  ";
+		$where.=" AND STATUS =1 AND is_expired=0 ";
 		$order=' ORDER BY id DESC';
 		return $db->fetchAll($sql.$where.$order);
 	}
@@ -249,8 +248,8 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		(SELECT vc.address FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_address,
 		(SELECT vc.phone FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_phone,
 		(SELECT $province FROM `vd_province` WHERE id= ad.province_id LIMIT 1) as province_name,
-		(SELECT $province FROM `vd_province` WHERE id= ad.province_id LIMIT 1) as province_name,
-		(SELECT $province FROM `vd_province` WHERE id= ad.province_id LIMIT 1) as province_name,
+		(SELECT district_name FROM `ln_district` WHERE dis_id=ad.district_id LIMIT 1) as district_name,
+		(SELECT commune_name FROM `ln_commune` WHERE com_id=ad.commune_id) AS commune_name,
 		(SELECT title FROM `vd_category_detail` WHERE category_id= ad.category_id AND languageId=$lang_id LIMIT 1) as category_name
 		FROM $this->_name AS ad,vd_ads_detail as dt WHERE ad.status=1 AND ad.id=dt.ads_id ";
 		if(!empty($search['keywork_search'])){
@@ -320,7 +319,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 					$str.='<div class="additional-buttons">
 						<span class="quickview" onClick="getAdsDetail('.$rs['id'].');" ><i class="fa fa-search-plus"></i>'.$tr->translate("Quickview").'</span>
 							<div class="sold-by-container">
-								<a title="Channy" href="#"><span>.'.$tr->translate("Posted By").'</span>'.$rs['author'].'</a>
+								<a title="Channy" href="#"><span>'.$tr->translate("Posted By").'</span>'.$rs['author'].'</a>
 							</div>
 						</div>';
 					$str.='</div>
@@ -342,6 +341,8 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 							<ul>
 							   <li>'.$rs['category_name'].'</li>
 							   <li>'.$rs['province_name'].'</li>
+							   <li>'.$rs['district_name'].'</li>
+							   <li>'.$rs['commune_name'].'</li>
 							</ul>
 						</div>
 					</div><!-- item-description -->
