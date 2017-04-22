@@ -143,6 +143,26 @@ class DashboardController extends Zend_Controller_Action
 	function announceAction(){
 		
 	}
+	function addstoreAction(){
+		if($this->getRequest()->isPost()){
+			$data=$this->getRequest()->getPost();
+			$db = new Application_Model_DbTable_DbStore();
+			$store = $db->addStore($data);
+			
+			$this->_redirect("/dashboard/mystore");
+		}
+	}
+	function updatestoreAction(){
+		if($this->getRequest()->isPost()){
+			$paramid = $this->getRequest()->getParam('store');
+			$data=$this->getRequest()->getPost();
+			$data['alias'] = $paramid;
+			$db = new Application_Model_DbTable_DbStore();
+			$store = $db->updateStore($data);
+				
+			$this->_redirect("/dashboard/mystore");
+		}
+	}
 }
 
 

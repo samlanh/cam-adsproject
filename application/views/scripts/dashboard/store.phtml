@@ -93,37 +93,237 @@
 				</div>
 			</div>
 			<div class="conten-body-center right">
-				<div class="tab-content">
-				<div class="title">
-					<h4><?php echo $title;?> <span class="right" ><a href="<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'choose-category'));?>" class="button right" title="Post Ads"><i class="fa fa-chevron-left" aria-hidden="true"></i><?php echo $tr->translate("Back");?></a></h4>
+					<div class="title">
+						<h4><?php echo $title;?> 
+						<span class="right" ><a href="<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'choose-category'));?>" class="button right" title="Post Ads"><i class="fa fa-chevron-left" aria-hidden="true"></i><?php echo $tr->translate("Back");?></a></span>
+						</h4>
 					</div>
-					<div class="sub-template">
-						<ul class="sub-template">
-						<?php if (!empty($this->template)) foreach($this->template as $rs){?>
-							<li class="list-thum">
-								<figure>
-									<a title="<?php echo $rs['template_title'];?>"><!--  <span class="name">Acidus</span> -->
-									<img class="template-image"  src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="Acidus Free Website Template" title="View the Acidus Template Details"> 
-									<span class="posted"><?php echo $rs['template_title'];?></span></a>
-									</figure>
-								<!--  <div class="thum-image">
-									<img class="template-image" src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="" />
-								</div>-->
-							</li>
-							<?php }?>
-						</ul>
+					<div class="store_menu">
+						<div  class="pos-relative">
+							<ul class="nav nav-tabs tabs store-menu" id="tabs">
+								<li class='active'>
+									<a href="#storeinfo">
+										<span class="cat-tit">
+										<i class="fa fa-university"></i><br />
+											<?php echo $tr->translate("Store Information");?>
+										</span>
+									</a>
+								</li>
+								
+								<li class="<?php //echo $class;?>">
+									<a href="#template" onclick="return false;">
+										<span class="cat-tit">
+											<i class="fa fa-sticky-note"></i><br /><?php echo $tr->translate("Choose Template");?>
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
 					</div>
-					  <p id="colorpickerHolder">
-               		  </p>   
-               		   <input id="collllll" name="collllll" value="#ffff" />	
-				</div>
+					<?php 	if ($param['change']=="add"){?>
+					<form id="form-store-info" method="post" enctype="multipart/form-data" action='<?php echo $this->baseUrl();?>/dashboard/addstore' autocomplete="off">
+						<div class="tab-content">
+							<div class="tab-pane store-temp active " id="storeinfo">
+								<div class="form-template-info">
+									<div class="form-row">
+										<div class="form-label">
+											<label><?php echo $tr->translate("Store Phone");?> <span class="sign_req">*</span></label>
+										</div>
+										<div class="form-value">
+											<input type="text" placeholder="Phone Number" required="required"  name="phone" id="phone" class="form-control" style="    width: 350px;" />
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-label">
+											<label><?php echo $tr->translate("Store Address");?> <span class="sign_req">*</span></label>
+										</div>
+										<div class="form-value">
+											<textarea id="address" required="required" name="address" class="form-control form-store" style="margin: 0px 0px 10px; max-width: 350px; min-width: 350px; max-height: 131px; height: 102px; width: 350px;"></textarea>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-label">
+											<label><?php echo $tr->translate("About Store");?> <span class="sign_req">*</span></label>
+										</div>
+										<div class="form-value">
+											<textarea id="abouts" required="required" name="abouts" class="form-control form-store" style="margin: 0px 0px 10px; max-width: 350px; min-width: 350px; max-height: 131px; height: 102px; width: 350px;"></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="account-image">
+										<div class="image-box">
+											<img id="logo_view" src="<?php echo $this->baseUrl().'/images/no_logo.jpg'?>" alt=""  />
+										</div>
+										<div class="button_browse">
+										<div id='preview'></div>	
+											
+												<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
+												<input class="btn_borwse_image" type="file" id="logo_image" name="logo_image"  onchange="loadLogo(event)"/>
+										
+										</div>
+									</div>
+							</div>
+							<div class="tab-pane store-temp " id="template">
+								<div class="sub-template">
+									<div class="blog-store-color">
+										<div class="span-title">
+											<span>Choose Main Color For Store : </span>
+										</div>
+										<div class="span-value">
+											 <a onclick="showcolorbox(1);" ><span class="color" id="theme-olor"  style=" background: #2a328d;"></span></a>
+										</div>
+									</div>
+									<div class="blog-store-color">
+										<div class="span-title">
+											<span>Choose Font Color For Store : </span>
+										</div>
+										<div class="span-value">
+											 <a onclick="showcolorbox(2);"><span class="color" id="fonts-color" style=" background: #2a328d;"></span></a>
+										</div>
+									</div>
+									<div class="title">
+										<h4 class="sub-title"><?php echo $tr->translate("Click to set your template Store");?></h4>
+									</div>
+									<ul class="sub-template">
+									<?php if (!empty($this->template)) foreach($this->template as $rs){?>
+										<li class="list-thum">
+											<figure>
+												<a id="theme<?php echo $rs['id'];?>" onClick="selectTemplate(<?php echo $rs['id'];?>);" title="<?php echo $rs['template_title'];?>" <?php if ($rs['id']==1){echo 'class="active"';}?>><!--  <span class="name">Acidus</span> -->
+												<img class="template-image"  src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="Acidus Free Website Template" title="View the Acidus Template Details"> 
+												<span class="posted"><?php echo $rs['template_title'];?></span></a>
+												<input type="hidden" id="font-col<?php echo $rs['id'];?>" name="font-col<?php echo $rs['id'];?>" value="<?php echo $rs['template_main_color'];?>" />
+												<input type="hidden" id="them-col<?php echo $rs['id'];?>" name="them-col<?php echo $rs['id'];?>" value="<?php echo $rs['template_main_font_color'];?>" />
+												</figure>
+											<!--  <div class="thum-image">
+												<img class="template-image" src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="" />
+											</div>-->
+										</li>
+										<?php }?>
+									</ul>
+								</div>
+								<input type="hidden" id="templatess" name="templatess" value="1" />
+							</div>
+						</div>
+					<div class="form-row botton">
+						<input type="hidden" id="templatesscolor" name="templatesscolor" value="#2a328d" />
+						<input type="hidden" id="fontsscolor" name="fontsscolor" value="#2a328d" />
+							<input type="submit" class="button" name="submit-bt" value="<?php echo $tr->translate("Save");?>" />
+						</div>
+					</form>
+					<?php }else if ($param['change']=="edit"){ ?>
+						<form id="form-store-info" method="post" enctype="multipart/form-data" action='<?php echo $this->baseUrl()."/dashboard/updatestore?store=".$param['store'];?>' autocomplete="off">
+							<div class="tab-content">
+								<div class="tab-pane store-temp active " id="storeinfo">
+									<div class="form-template-info">
+										<div class="form-row">
+											<div class="form-label">
+												<label><?php echo $tr->translate("Store Phone");?> <span class="sign_req">*</span></label>
+											</div>
+											<div class="form-value">
+												<input type="text" placeholder="Phone Number" required="required" value="<?php echo $this->store['store_phone'];?>"  name="phone" id="phone" class="form-control" style="    width: 350px;" />
+											</div>
+										</div>
+										<div class="form-row">
+											<div class="form-label">
+												<label><?php echo $tr->translate("Store Address");?> <span class="sign_req">*</span></label>
+											</div>
+											<div class="form-value">
+												<textarea id="address" required="required" name="address" class="form-control form-store" style="margin: 0px 0px 10px; max-width: 350px; min-width: 350px; max-height: 131px; height: 102px; width: 350px;"><?php echo $this->store['store_address'];?></textarea>
+											</div>
+										</div>
+										<div class="form-row">
+											<div class="form-label">
+												<label><?php echo $tr->translate("About Store");?> <span class="sign_req">*</span></label>
+											</div>
+											<div class="form-value">
+												<textarea id="abouts" required="required" name="abouts" class="form-control form-store" style="margin: 0px 0px 10px; max-width: 350px; min-width: 350px; max-height: 131px; height: 102px; width: 350px;"><?php echo $this->store['store_about_us'];?></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="account-image">
+											<div class="image-box">
+												<?php if (!empty($this->store['logo_store'])){?>
+												<img id="logo_view" src="<?php echo $this->baseUrl().'/images/store/'.$this->store['logo_store'];?>" alt=""  />
+												<?php }else{?>
+												<img id="logo_view" src="<?php echo $this->baseUrl().'/images/no_logo.jpg'?>" alt=""  />
+												<?php }?>
+											</div>
+											<div class="button_browse">
+											<div id='preview'></div>	
+												
+													<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
+													<input class="btn_borwse_image" value="<?php echo $this->store['logo_store'];?>" type="file" id="logo_image" name="logo_image"  onchange="loadLogo(event)"/>
+											
+											</div>
+										</div>
+								</div>
+								<div class="tab-pane store-temp " id="template">
+									<div class="sub-template">
+										<div class="blog-store-color">
+											<div class="span-title">
+												<span>Choose Main Color For Store : </span>
+											</div>
+											<div class="span-value">
+												 <a onclick="showcolorbox(1);" ><span class="color" id="theme-olor"  style=" background: <?php echo $this->store['template_color'];?>;"></span></a>
+											</div>
+										</div>
+										<div class="blog-store-color">
+											<div class="span-title">
+												<span>Choose Font Color For Store : </span>
+											</div>
+											<div class="span-value">
+												 <a onclick="showcolorbox(2);"><span class="color" id="fonts-color" style=" background: <?php echo $this->store['font_color'];?>;"></span></a>
+											</div>
+										</div>
+										<div class="title">
+											<h4 class="sub-title"><?php echo $tr->translate("Click to set your template Store");?></h4>
+										</div>
+										<ul class="sub-template">
+										<?php if (!empty($this->template)) foreach($this->template as $rs){?>
+											<li class="list-thum">
+												<figure>
+													<a id="theme<?php echo $rs['id'];?>" onClick="selectTemplate(<?php echo $rs['id'];?>);" title="<?php echo $rs['template_title'];?>" <?php if ($rs['id']==$this->store['template_id']){echo 'class="active"';}?>><!--  <span class="name">Acidus</span> -->
+													<img class="template-image"  src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="Acidus Free Website Template" title="View the Acidus Template Details"> 
+													<span class="posted"><?php echo $rs['template_title'];?></span></a>
+													<input type="hidden" id="font-col<?php echo $rs['id'];?>" name="font-col<?php echo $rs['id'];?>" value="<?php echo $rs['template_main_color'];?>" />
+													<input type="hidden" id="them-col<?php echo $rs['id'];?>" name="them-col<?php echo $rs['id'];?>" value="<?php echo $rs['template_main_font_color'];?>" />
+													</figure>
+												<!--  <div class="thum-image">
+													<img class="template-image" src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="" />
+												</div>-->
+											</li>
+											<?php }?>
+										</ul>
+									</div>
+									<input type="hidden" id="templatess" name="templatess" value="<?php echo $this->store['template_id'];?>" />
+								</div>
+							</div>
+						<div class="form-row botton">
+							<input type="hidden" id="templatesscolor" name="templatesscolor" value="<?php echo $this->store['template_color'];?>" />
+							<input type="hidden" id="fontsscolor" name="fontsscolor" value="<?php echo $this->store['font_color'];?>" />
+								<input type="submit" class="button" name="submit-bt" value="<?php echo $tr->translate("Save");?>" />
+							</div>
+						</form>
+					<?php }?>
+					<div id="choose-color-pop" class="popup" style="display:none;">
+					
+						<div class="pop-content">
+							<div class="pop-content_header">
+						      <span id="close-color" class="close">×</span>
+						      <h2 id="pop-titlebar"><?php echo $tr->translate("Choose Color");?></h2>
+						    </div>
+							<p id="colorpickerHolder">
+	               		  				</p> 
+	               		  	<input type="hidden" id="collllll" name="collllll" value="#ffff" />
+	               		  		<a onclick="setColorTo();" class="button" title="Ok"><?php echo $tr->translate("Ok");?></a>	
+	               		  </div>
+					</div>
+					
 			</div>
 		</div>
 	</section>
 <script>
-	window.onload = function(e){ 
-		getBaseUrl('<?php echo $this->baseUrl();?>');
-	}
+
 </script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
@@ -136,17 +336,62 @@
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/javascript/custome.js'></script>
 	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
 	
-		<script>
-		var sds='00ff1e';
+	<script>
 
+	var loadLogo = function(event) {
+	    var output = document.getElementById('logo_view');
+	    output.src = URL.createObjectURL(event.target.files[0]);
+	  };
+		var alltem = <?php echo count($this->template);?>;
+		var optioncol=1;
+		function selectTemplate(index){
+			for(var i=1; i<= alltem; i++){
+				$("#theme"+i).removeClass("active");
+			}
+			$("#theme"+index).addClass("active");
+			
+			$("#templatess").val(index);
+			$("#templatesscolor").val($("#them-col"+index).val());
+			$("#fontsscolor").val($("#font-col"+index).val());
+			 $("#theme-olor").css("background", $("#them-col"+index).val());
+			 $("#fonts-color").css("background", $("#font-col"+index).val());
+		}
+		function showcolorbox(index){
+			$("#choose-color-pop").css("display", "block");
+			optioncol =index;
+		}
+		function closecolorbox() {
+			 $("#choose-color-pop").css("display", "none");
+		}
+		
+		jQuery("#close-color").live("click", closecolorbox);
+		window.onclick = function(event) {//When the user clicks anywhere outside of the modal, close it
+			if (event.target == document.getElementById("choose-color-pop")) {
+					closecolorbox();
+				}
+		}
+		
+		var sds='00ff1e';
 		function getColor(){
 			var lastcolor = $("#main_color").val();
 			$("#collllll").val('#'+lastcolor);
 			
 		}
+
+		function setColorTo(){
+			var lastcolor = $("#main_color").val();
+			sds = lastcolor;
+			if(optioncol==1){
+			 $("#theme-olor").css("background", '#'+sds);
+			 $("#templatesscolor").val('#'+sds);
+			}else{
+				 $("#fonts-color").css("background", '#'+sds);
+				 $("#fontsscolor").val('#'+sds);
+			}
+			 closecolorbox();
+		}
 	</script>
 
-	<script type="text/javascript" src="<?php echo $this->baseUrl();?>/template/colorpicker/js/jquery.js"></script>
 	<script type="text/javascript" src="<?php echo $this->baseUrl();?>/template/colorpicker/js/colorpicker.js"></script>
     <script type="text/javascript" src="<?php echo $this->baseUrl();?>/template/colorpicker/js/eye.js"></script>
     <script type="text/javascript" src="<?php echo $this->baseUrl();?>/template/colorpicker/js/layout.js?ver=1.0.2"></script>
