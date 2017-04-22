@@ -1783,8 +1783,15 @@ ul.pagination li.active a {
     pointer-events: none;
 }
 /**************--Store choose template--*****************/
+ul.tabs.store-menu li a {
+    border-radius: 0;
+}
+ul.tabs.store-menu li.active a {
+    color: #4183d7 !important;
+}
 .sub-template {
     text-align: left;
+	padding-left: 0;
 }
 li.list-thum {
     width: 40%;
@@ -1804,15 +1811,18 @@ figure a {
     line-height: normal;
 	cursor: pointer;
 }
+figure a.active,
 figure a:hover {
     border-color: #00B2D8;
     background-color: #FFFFFF;
 }
+figure a.active .name
 figure a:hover .name {
     display: block;
     top: 1px;
     left: 1px;
 }
+ul figure a.active img,
 ul figure a:hover img {
     opacity: 0.2;
 }
@@ -1827,6 +1837,7 @@ ul figure .posted{
 	font-weight: 600;
 	font-size: 16px ;
 }
+ul figure a.active .posted,
 ul figure a:hover .posted {
     display: block;
     bottom: 1px;
@@ -1838,4 +1849,48 @@ ul figure a:hover .posted {
 }*/
  img.template-image {
     max-width: 100%;
+}
+.blog-store-color {
+    text-align: left;
+	margin-top: 10px;
+}
+.blog-store-color .span-title {
+    display: inline-block;
+    height: 28px;
+    vertical-align: bottom;
+    margin-right: 25px;
+}
+.blog-store-color .span-value {
+    display: inline-block;
+}
+.blog-store-color  .span-value span.color {
+    width: 120px;
+    height: 35px;
+    display: block;
+    border: solid 1px #777;
+}
+div.tab-pane.store-temp{
+	    padding: 0 20px;
+}
+div#choose-color-pop .pop-content {
+    width: 360px;
+}
+div#choose-color-pop a.button {
+    width: 100px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+div.title h4.sub-title {
+    margin-top: 25px;
+    border-bottom: solid #4183d7;
+    color: #4183d7;
+}
+.form-template-info {
+    text-align: left;
+    padding: 10px 0;
+    display: inline-block;
+    width: 60%;
+}
+.form-row.botton input[type="submit"] {
+    float: none;
 }

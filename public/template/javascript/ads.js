@@ -96,9 +96,11 @@ var slideIndex = 1;
 
 jQuery("#close-detail").live("click", closeformdetail);
 window.onclick = function(event) {//When the user clicks anywhere outside of the modal, close it
+
 	if (event.target == document.getElementById("pop-ads-detail")) {
 		closeformdetail();
 	}
+	
 
 }
 function closeformdetail() {
