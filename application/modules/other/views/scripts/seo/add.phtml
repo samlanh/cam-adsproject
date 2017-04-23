@@ -1,0 +1,42 @@
+<title>Add SEO</title>
+<form id='add_seo' action="<?php echo $this->url(array('module'=>'other','controller'=>'seo','action'=>'add')); ?>" enctype="multipart/form-data" dojoType="dijit.form.Form" method="post">
+<script type="dojo/method" event="onSubmit">			
+	if(this.validate()) {
+				return true;
+			} else {
+				return false;
+			}
+</script>
+<table  width="100%" style="margin-top:-5px;">
+	<tr>
+		<td>
+		<fieldset>
+					<legend ><strong>Add Seo</strong></legend>
+					<table style="margin: 0 auto; width:100%;" cellspacing="10">
+						<tr>
+							<td>Url</td>
+						   	<td><input dojoType="dijit.form.TextBox" class="fullside" id="url" name="url" value="" type="text"></td>
+							<td>Key word</td>
+							<td><textarea dojoType="dijit.form.SimpleTextarea" required="true" class="fullside" style="width:96%;min-height:80px;" id="key_word" name="key_word"></textarea></td>
+							<td>Description</td>
+							<td><textarea dojoType="dijit.form.SimpleTextarea" required="true" class="fullside" style="width:96%;min-height:80px;" id="description" name="description"></textarea></td>
+						</tr>
+						<tr>
+							<td colspan="6" align="center">
+							<input type="reset" label="Clear" dojoType="dijit.form.Button" 
+								 iconClass="dijitIconClear" /> 
+						    <input type="submit" value="SAVE_CLOSE" label="Save&Close" id="save_close" dojoType="dijit.form.Button" name="save_close"
+								 iconClass="dijitEditorIcon dijitEditorIconSave" /> 
+							<input type="submit" value="SAVE_NEW" label="Save&New" id="save_new" dojoType="dijit.form.Button" name="save_new"
+								 iconClass="dijitEditorIcon dijitEditorIconSave"/> 
+							</td>
+						</tr>
+					</table>	
+		</fieldset>		
+		</td>
+	</tr>
+</table>	
+</form>
+<script type="text/javascript">
+dojo.require("dijit.form.Textarea"); 
+</script>

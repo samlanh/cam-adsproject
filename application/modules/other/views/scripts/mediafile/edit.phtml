@@ -1,0 +1,57 @@
+<script src="<?php echo $this->baseUrl();?>/ckeditor/ckeditor.js"></script>
+<script src="<?php echo $this->baseUrl();?>/ckeditor/samples/sample.js"></script>
+<link href="<?php echo $this->baseUrl();?>/ckeditor/samples/sample.css" rel="stylesheet">
+<form id='add_faq' action="<?php echo $this->url(array('module'=>'other','controller'=>'otherinformation','action'=>'edit')); ?>" enctype="application/x-www-form-urlencoded" dojoType="dijit.form.Form" method="post">
+<script type="dojo/method" event="onSubmit">			
+	if(this.validate()) {
+			return true;
+	}else{
+			return false;
+	}
+</script>
+<title>Other Information</title>
+<table  width="100%" style="margin-top:-5px;">
+	<tr>
+		<td>
+		<fieldset>
+					<legend ><strong>Edit Other Information</strong></legend>
+					<table style="margin: 0 auto; width:100%;" cellspacing="10">
+						
+						<tr>
+							<td>Title
+							<input dojoType="dijit.form.TextBox" type="hidden" id="id" name="id" value="<?php echo $this->row['id'];?>"/>
+							</td>
+							<td>
+							<input dojoType="dijit.form.ValidationTextBox" class="fullside" required="true" id="title" name="title" value="<?php echo $this->row['title']?>" type="text">
+							</td>
+							<td></td>
+							<td></td>
+							<td>Status</td>
+							<td><select name="status" id="status" dojoType="dijit.form.FilteringSelect" required="true"  class="fullside">
+								    <option value="1" <?php if($this->row['status']==1){echo'selected="selected"';}?>>Status</option>
+								    <option value="0" <?php if($this->row['status']==0){echo'selected="selected"';}?>>Deactive</option>
+								</select></td>
+						</tr>
+						<tr>
+							<td colspan="6">
+								<textarea class="ckeditor"  height="400px" style="width:96%;min-height:60px;" id="ckeditor4" name="note"><?php echo $this->row['description']?></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6" align="center">
+							<input type="reset" label="Clear" dojoType="dijit.form.Button" 
+								 iconClass="dijitIconClear" /> 
+							<input type="submit" value="SAVE_NEW" label="Edit" id="save_new" dojoType="dijit.form.Button" name="save_new"
+								 iconClass="dijitEditorIcon dijitEditorIconSave"/> 
+						   
+							</td>
+						</tr>
+					</table>	
+		</fieldset>		
+		</td>
+	</tr>
+</table>	
+</form>
+<script type="text/javascript">
+dojo.require("dijit.form.Textarea"); 
+</script>

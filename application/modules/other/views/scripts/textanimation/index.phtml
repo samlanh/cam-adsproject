@@ -1,0 +1,51 @@
+<?php
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
+<title><?php echo $tr->translate('ADD_NEW_PROMOTION');?></title>
+<form id='add_slide' action="<?php echo $this->url(array('module'=>'other','controller'=>'textanimation','action'=>'index')); ?>" enctype="multipart/form-data" dojoType="dijit.form.Form" method="post">
+<script type="dojo/method" event="onSubmit">			
+	if(this.validate()) {
+				return true;
+			} else {
+				return false;
+			}
+</script>
+<table  width="100%" style="margin-top:5px;">
+	<tr class="header">
+			<td><?php echo $tr->translate('LABEL_ANIMATION');?></td>
+	</tr>
+	<tr>
+		<td>
+		<fieldset>
+					<table style="margin: 0 auto; width:100%;" cellspacing="10">
+						<tr>
+							<td><?php echo $tr->translate('LABEL_ANIMATION');?></td>
+							<td><input dojoType="dijit.form.ValidationTextBox" required="true" class="fullside" id="title" name="title" value="<?php echo $this->label['text_value'];?>" type="text"></td>
+								
+						<tr>
+							<td><?php echo $tr->translate('STATUS');?></td>
+							<td><select name="status" id="status" dojoType="dijit.form.FilteringSelect">
+								    <option value="1" <?php if($this->label['status']==1){echo 'selected="Selected"';}?>><?php echo $tr->translate('បង្ហាញ');?></option>
+								    <option value="0" <?php if($this->label['status']==0){echo 'selected="Selected"';}?>><?php echo $tr->translate('មិនបង្ហាញ');?></option>
+								</select>
+							</td>
+						</tr>
+					</table>	
+		</fieldset>		
+		</td>
+	</tr>
+	<tr class="footer_button">
+		<td align="center">
+			<input type="reset" label="<?php echo $tr->translate('CLEAR');?>" dojoType="dijit.form.Button" 
+					iconClass="dijitIconClear" />
+			<input type="submit" value="SAVE_CLOSE" label="<?php echo $tr->translate('SAVE');?>" id="save_close" dojoType="dijit.form.Button" name="save_close"
+					iconClass="dijitEditorIcon dijitEditorIconSave" />  
+		</td>
+	</tr>
+</table>	
+</form>
+<script type="text/javascript">
+dojo.require("dijit.form.NumberTextBox"); 
+require(["dijit/Editor"]);
+</script>
+				

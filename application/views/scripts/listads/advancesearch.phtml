@@ -260,85 +260,79 @@ $menu_items = $db_select->getMenuItems();
 		});
 	var url_search = '<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'searchajax'));?> ';
 	   function advancesearch(){
-		   var formData = $('#frmadvancesearch').val(); 
-		 // var formData = document.getElementById("frmadvancesearch");
-		   //var formData = new FormData(myform);
-		   $("#load-wrapper").css("display", "block");
+	   var formData = $('#frmadvancesearch').val(); 
+	   $("#load-wrapper").css("display", "block");
+	   $.ajax({
+	        url: url_search,
+	        type: "post",
+	        data: $('#frmadvancesearch').serialize(),		
+	        success: function(dataproduct){
+	        	$("#load-wrapper").css("display", "none");
+	        	document.getElementById('lbl_adsshow').innerHTML=dataproduct;					
+			},
+				error: function(err) {
+					 $("#load-wrapper").css("display", "none");
+				}
+			});
+	}	
+   var url_getcontrol = '<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'getcontroller'));?> ';
+   function getControll(){
+	   var category_search = $('#category_search').val(); 
 		   $.ajax({
-		        url: url_search,
-		        type: "post",
-		        data: $('#frmadvancesearch').serialize(),		
-				//cache: false,
-				//contentType: false,
-		        success: function(dataproduct){
-		        	$("#load-wrapper").css("display", "none");
-		        	document.getElementById('lbl_adsshow').innerHTML=dataproduct;					
-				},
-					error: function(err) {
-						 $("#load-wrapper").css("display", "none");
-						alert(err);
-					}
-				});
-		}	
-		
-	   var url_getcontrol = '<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'getcontroller'));?> ';
-	   function getControll(){
-		   var category_search = $('#category_search').val(); 
-			   $.ajax({
-					url: url_getcontrol,
-					type: "post",
-					data:{'category_id':category_search},
-					success: function(data){
-						//alert(data);
-						
-						document.getElementById('lbl_controlsearch').innerHTML=data;
-						var noResult = jQuery(".form-select").data('noResult');
-						jQuery(".form-select").chosen({});
-					},
-					error:function(err){
-					}
-				});
-		}		
-		var url_changelang = '<?php echo $this->url(array('module'=>'default','controller'=>'index','action'=>'changelange'));?> ';
-		function changeLange(lang){
-			$.ajax({
-				url: url_changelang,
+				url: url_getcontrol,
 				type: "post",
-				data:{'lange':lang},
+				data:{'category_id':category_search},
 				success: function(data){
-					location.reload();
+					//alert(data);
+					
+					document.getElementById('lbl_controlsearch').innerHTML=data;
+					var noResult = jQuery(".form-select").data('noResult');
+					jQuery(".form-select").chosen({});
 				},
 				error:function(err){
 				}
 			});
+	}		
+var url_changelang = '<?php echo $this->url(array('module'=>'default','controller'=>'index','action'=>'changelange'));?> ';
+function changeLange(lang){
+	$.ajax({
+		url: url_changelang,
+		type: "post",
+		data:{'lange':lang},
+		success: function(data){
+			location.reload();
+		},
+		error:function(err){
 		}
+	});
+}
 	</script>
 	<script>
 var url_district = '<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'get-districtbyid'));?> ';
 function getAllDistrict(){
 	var pro_id = $('#location_search').val();
-		$.ajax({
-			url: url_district,
-			type: "post",
-			data:{'pro_id':pro_id},
-			success: function(data){
-				datars = $.parseJSON(data);
-				stringhtml='<select onchange="getCommuneById()" id="district" name="district" class="form-select">';
-				stringhtml+='<option value="0" selected="selected"><?php echo $tr->translate("Choose Distict");?></option>';
-				for(j=0;j<datars.length;j++){
-					stringhtml+='<option value="'+datars[j].id+'">'+datars[j].district_name+'</option>';
-				}
-				stringhtml+='</select';
-				document.getElementById('lbl_district').innerHTML=stringhtml;
-				stringcommune='<select id="commune" name="commune" class="form-select"><option><?php echo $tr->translate("Choose Commune");?></option></select>';
-				document.getElementById('lbl_commune').innerHTML=stringcommune;
-				var noResult = jQuery(".form-select").data('noResult');
-				jQuery(".form-select").chosen({});
-			},
-			error:function(err){
-				alert(err);
+	$.ajax({
+		url: url_district,
+		type: "post",
+		data:{'pro_id':pro_id},
+		success: function(data){
+			datars = $.parseJSON(data);
+			stringhtml='<select onchange="getCommuneById()" id="district" name="district" class="form-select">';
+			stringhtml+='<option value="0" selected="selected"><?php echo $tr->translate("Choose Distict");?></option>';
+			for(j=0;j<datars.length;j++){
+				stringhtml+='<option value="'+datars[j].id+'">'+datars[j].district_name+'</option>';
 			}
-		});
+			stringhtml+='</select';
+			document.getElementById('lbl_district').innerHTML=stringhtml;
+			stringcommune='<select id="commune" name="commune" class="form-select"><option><?php echo $tr->translate("Choose Commune");?></option></select>';
+			document.getElementById('lbl_commune').innerHTML=stringcommune;
+			var noResult = jQuery(".form-select").data('noResult');
+			jQuery(".form-select").chosen({});
+		},
+		error:function(err){
+			alert(err);
+		}
+	});
 }
 var url_commune = '<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'get-communebyid'));?> ';
 function getCommuneById(){

@@ -11,7 +11,6 @@ class Other_Model_DbTable_DbVillage extends Zend_Db_Table_Abstract
     }
 	public function addVillage($_data){
 		$_arr=array(
-				'code'	  => $_data['code'],
 				'commune_id'	  => $_data['commune_name'],
 				'village_name'	  => $_data['village_name'],
 				'village_namekh'	  => $_data['village_namekh'],
@@ -45,7 +44,7 @@ class Other_Model_DbTable_DbVillage extends Zend_Db_Table_Abstract
 	}
 	public function getVillageById($id){
 		$db = $this->getAdapter();
-		$sql=" SELECT v.vill_id,v.code,v.commune_id,v.village_name,v.village_namekh,v.displayby,v.modify_date,
+		$sql=" SELECT v.vill_id,v.commune_id,v.village_name,v.village_namekh,v.displayby,v.modify_date,
 					v.status,v.user_id,d.dis_id,d.pro_id FROM 
 			   `ln_village` AS v,ln_commune AS c,ln_district AS d
 			   WHERE v.commune_id=c.com_id AND v.vill_id AND c.district_id=d.dis_id AND
@@ -56,17 +55,17 @@ class Other_Model_DbTable_DbVillage extends Zend_Db_Table_Abstract
 	}
 	function getAllVillage($search=null){
 		$db = $this->getAdapter();
-// 		$sql =" CALL st_getAllVillage('',1) ";
-		$sql =" SELECT
+		$sql ="
+		 SELECT
 				v.vill_id,v.village_namekh,v.village_name,v.displayby,
 				(SELECT commune_name FROM ln_commune WHERE v.commune_id=com_id LIMIT 1) AS commune_name,
-				d.district_name,p.province_en_name,
-				v.modify_date,(SELECT name_en FROM ln_view WHERE TYPE=3 AND key_code=v.status LIMIT 1) AS status, 
+				d.district_name,p.province_en_name
+				,v.modify_date,v.status,
 				(SELECT first_name FROM rms_users WHERE id=v.user_id LIMIT 1) AS user_name
-				FROM ln_village AS v,`ln_commune` AS c, `ln_district` AS d , `ln_province` AS p
+				FROM $this->_name AS v,`ln_commune` AS c, `ln_district` AS d , `ln_province` AS p
 				WHERE v.commune_id = c.com_id AND c.district_id = d.dis_id AND d.pro_id = p.province_id ";
 		$where = '';
-        if($search['province_name']>=0){
+        if($search['province_name']>0){
         	$where.= " AND p.province_id = ".$search['province_name'];
         }
         if(!empty($search['district_name'])){
@@ -88,11 +87,6 @@ class Other_Model_DbTable_DbVillage extends Zend_Db_Table_Abstract
 		}
 		$order= ' ORDER BY v.vill_id DESC ';
 		return $db->fetchAll($sql.$where.$order);	
-	}
-       public function getAllvillagebyCommune($village_id){
-		$db = $this->getAdapter();
-		$sql = "SELECT vill_id AS id,village_namekh AS name FROM $this->_name WHERE village_name!='' AND status=1 AND commune_id=".$db->quote($village_id);
-		$rows=$db->fetchAll($sql);
-		return $rows;
 	}	
 }
+

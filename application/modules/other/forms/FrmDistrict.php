@@ -44,17 +44,12 @@ Class Other_Form_FrmDistrict extends Zend_Dojo_Form {
 		
 		$district_name = new Zend_Dojo_Form_Element_TextBox('district_name');
 		$district_name->setAttribs(array('dojoType'=>'dijit.form.ValidationTextBox',
-				'missingMessage'=>'Invalid Module!','class'=>'fullside'
+				'required'=>'true','missingMessage'=>'Invalid Module!','class'=>'fullside'
 				));
 		
 		$district_namekh = new Zend_Dojo_Form_Element_TextBox('district_namekh');
 		$district_namekh->setAttribs(array('dojoType'=>'dijit.form.ValidationTextBox',
 				'required'=>'true','missingMessage'=>'Invalid Module!','class'=>'fullside'
-		));
-		
-		$code = new Zend_Dojo_Form_Element_TextBox('code');
-		$code->setAttribs(array('dojoType'=>'dijit.form.ValidationTextBox',
-				'missingMessage'=>'Invalid Module!','class'=>'fullside'
 		));
 		
 		$popupdistrict_name = new Zend_Dojo_Form_Element_TextBox('pop_district_name');
@@ -114,7 +109,6 @@ Class Other_Form_FrmDistrict extends Zend_Dojo_Form {
 		$id = new Zend_Form_Element_Hidden('id');
 		if(!empty($data)){
 			$id->setValue($data['dis_id']);
-			$code->setValue($data['code']);
 			$district_name->setValue($data['district_name']);
 			$district_namekh->setValue($data['district_namekh']);
 			$_display->setValue($data['displayby']);
@@ -122,7 +116,7 @@ Class Other_Form_FrmDistrict extends Zend_Dojo_Form {
 			
 			$_status->setValue($data['status']);
 		}
-		$this->addElements(array($code,$pop_district_namekh,$_provincess,$_status_search,$_title,$id,$district_name,$popupdistrict_name,$district_namekh,$_display,$_province, $_status));
+		$this->addElements(array($pop_district_namekh,$_provincess,$_status_search,$_title,$id,$district_name,$popupdistrict_name,$district_namekh,$_display,$_province, $_status));
 		return $this;
 		
 	}

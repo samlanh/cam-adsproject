@@ -1,11 +1,12 @@
+<title>Add Holiday</title>
 <?php
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	echo $this->headTitle($tr->translate('ADD_HOLIDAY'));
+	//echo $this->headTitle($tr->translate('ADD_HOLIDAY'));
 ?>	
 <?php  $holiday= $this->frm_holiday;?>
 <script>
-       dojo.require("dijit.form.DateTextBox");
-       dojo.require("dijit/form/NumberTextBox");
+dojo.require("dijit.form.NumberTextBox");
+dojo.require("dijit.form.DateTextBox");
 </script>
 <form  id='add_techer' action="<?php echo $this->url(array('module'=>'other','controller'=>'holiday','action'=>'add')); ?>" dojoType="dijit.form.Form" method="post"
  enctype="application/x-www-form-urlencoded">
@@ -23,7 +24,7 @@
 					<legend align="center" ><strong><?php echo $tr->translate("ADD_HOLIDAY");?></strong></legend>
 					<table style="margin: 0 auto; width: 95%;" cellspacing="10">
 						<tr>
-							<td><?php echo $tr->translate("HOLIDAY_NAME")?></td>
+							<td><?php echo $tr->translate("Holiday Name")?></td>
 							<td><?php  echo $holiday->getElement('holiday_name');?></td>
 						</tr>
 						<tr>
@@ -65,6 +66,9 @@
 <script src="<?php echo $base_url;?>js/moment.min.js"  type="text/javascript"></script>
 <script>
 function CalculateDate(){
+	
+}
+function CalculateDate(){
 	pay_type = dijit.byId('start_date').value;
 	amount_day = dijit.byId('amount_day').get('value');
 	
@@ -74,9 +78,15 @@ function CalculateDate(){
 	}else{
 		start_date = dijit.byId("start_date").value;
 		var a = new Date(start_date);
-		
-		var mm = a.getMonth() + 1;
-		var dd = a.getDate()+parseInt(amount_day)-1;
+		/*if(pay_type==1){
+			mm = a.getMonth()+amount_month+1;
+		}else{*/
+			//a.setDate(a.getDate() + (amount_day)); 
+			var mm = a.getMonth() + 1;
+			
+		//}
+			//alert(a.getDate()+parseInt(amount_day));
+		var dd = a.getDate()+parseInt(amount_day);
 		 if(dd<10){
 			 dd = "0"+dd;
 		}

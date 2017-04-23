@@ -1,0 +1,25 @@
+<?php
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
+<title><?php echo $tr->translate('INFORMATION');?></title>
+<table width="100%" border='1' style="border:1px solid #ccc; border-collapse:collapse;">
+	  <tr>
+	    <th class="tdheader header"><?php echo $tr->translate('NUM');?></th>
+	    <th class="tdheader header"><?php echo $tr->translate('TITLE');?></th>
+	    <th class="tdheader header"><?php echo $tr->translate('PHOTO');?></th>
+	    <th class="tdheader header"><?php echo $tr->translate('STATUS');?></th>
+	  </tr>
+	  <?php 
+		if(!empty($this->row))foreach ($this->row as $key =>$row){
+	 ?>
+	  <tr  align="center">
+	  	<td style="border:1px solid #ccc;padding:1px;" align="center"><?php echo $key+1;?></td>
+	  	<td style="border:1px solid #ccc;padding:1px;"><a href="<?php echo $this->baseUrl().'/other/information/edit/id/'.$row['id'];?>"><?php echo $row['title'];?></a></td>
+	  	<td style="border:1px solid #ccc;padding:1px;text-align: center;" ><a href="<?php echo $this->baseUrl().'/other/information/edit/id/'.$row['id'];?>"><img src="<?php echo $this->baseUrl().'/images/promotion/'.$row['image'];?>"  style="max-height:50px;"/></a></td>
+	  	<td style="border:1px solid #ccc;padding:1px;"><?php echo $row['status'];?></td>
+	  </tr>
+	  <?php 
+		}
+		?>
+</table>
+

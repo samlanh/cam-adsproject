@@ -1,11 +1,13 @@
-<?php 
-$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-echo $this->headTitle($tr->translate("HOLIDAY_LIST"));
-$frm = $this->frm_holiday;
-?>
+<title>Public Holiday</title>
 <script>
+dojo.require("dijit.form.NumberTextBox");
 dojo.require("dijit.form.DateTextBox");
 </script>
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+//echo $this->headTitle($tr->translate("HOLIDAY_LIST"));
+$frm = $this->frm_holiday;
+?>
 <form id="list" name="list" action="<?php echo $this->url(array('module'=>'other','controller'=>'holiday','action'=>'index')); ?>" dojoType="dijit.form.Form" method="post">
    <table>
 	  <tr> 
@@ -17,4 +19,4 @@ dojo.require("dijit.form.DateTextBox");
    	  </tr>
    </table>
 </form>
-<?php echo $this->list;?>
+ <?php echo $this->list;?>

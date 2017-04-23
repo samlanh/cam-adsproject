@@ -1,10 +1,11 @@
+<title>Edit Holiday</title>
 <?php
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	echo $this->headTitle($tr->translate('EDIT_HOLIDAY'));
+	//echo $this->headTitle($tr->translate('EDIT_HOLIDAY'));
 ?>	
 <script>
+dojo.require("dijit.form.NumberTextBox");
 dojo.require("dijit.form.DateTextBox");
-dojo.require("dijit/form/NumberTextBox");
 </script>
 <?php  $holiday= $this->frm_holiday;?>
 <form  id='add_techer' action="<?php echo $this->url(array('module'=>'other','controller'=>'holiday','action'=>'edit')); ?>" dojoType="dijit.form.Form" method="post" enctype="application/x-www-form-urlencoded">
@@ -23,7 +24,7 @@ dojo.require("dijit/form/NumberTextBox");
 					
 					<table style="margin: 0 auto; width: 95%;" cellspacing="10">
 						<tr>
-							<td><?php echo $tr->translate("HOLIDAY_NAME")?></td>
+							<td><?php echo $tr->translate("Holiday Name")?></td>
 							<td><?php  echo $holiday->getElement('holiday_name');?>
 							<?php  echo $holiday->getElement('id');?></td>
 						</tr>
@@ -67,12 +68,20 @@ function CalculateDate(){
 	amount_day = dijit.byId('amount_day').get('value');
 	
 	if(isNaN(amount_day)){
+		//alert('សូមបញ្ចលចំនួនរយៈពេល​ !');
 		dijit.byId('amount_day').focus();
 	}else{
 		start_date = dijit.byId("start_date").value;
 		var a = new Date(start_date);
-		var mm = a.getMonth() + 1;
-		var dd = a.getDate()+parseInt(amount_day)-1;
+		/*if(pay_type==1){
+			mm = a.getMonth()+amount_month+1;
+		}else{*/
+			//a.setDate(a.getDate() + (amount_day)); 
+			var mm = a.getMonth() + 1;
+			
+		//}
+			//alert(a.getDate()+parseInt(amount_day));
+		var dd = a.getDate()+parseInt(amount_day);
 		 if(dd<10){
 			 dd = "0"+dd;
 		}

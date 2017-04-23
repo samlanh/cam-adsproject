@@ -1,0 +1,84 @@
+<?php
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
+<title><?php echo $tr->translate('EDIT_SLIDE_SHOW');?></title>
+<script type="text/javascript">
+	require(["dijit/form/DateTextBox"]);
+</script>
+<form id='add_slide' action="<?php echo $this->url(array('module'=>'other','controller'=>'slideshow','action'=>'edit')); ?>" enctype="multipart/form-data" dojoType="dijit.form.Form" method="post">
+<script type="dojo/method" event="onSubmit">			
+	if(this.validate()) {
+				return true;
+			} else {
+				return false;
+			}
+</script>
+<table  width="100%" style="margin-top:-5px;">
+	<tr class="header">
+			<td><?php echo $tr->translate('Edit Banner');?></td>
+	</tr>
+	<tr>
+		<td>
+		<fieldset>
+					<table style="margin: 0 auto; width:100%;" cellspacing="10">
+						<tr>
+							<td><?php echo $tr->translate('Banner Title');?>
+								<input dojoType="dijit.form.TextBox" class="fullside" id="id" name="id" value="<?php echo $this->row['id'];?>" type="hidden"></td>
+							<td><input dojoType="dijit.form.ValidationTextBox" required="true" class="fullside" id="title" name="title" value="<?php echo $this->row['banner_name'];?>" type="text"></td>
+							<td><?php echo $tr->translate('Banner Image');?></td>
+							<td>
+							<img src="<?php echo $this->baseUrl().'/images/slideshow/'.$this->row['image'];?>" style="max-height:40px;"/>
+							<input class="fullside" id="photo" name="photo" type="file">
+							<input id="old_photo" name="old_photo" type="hidden" value="<?php echo $this->row['image'];?>">
+							</td>	
+						</tr>
+						<tr>
+							<td><?php echo $tr->translate('Position');?></td>
+							<td>
+								<select name="position" id="position" dojoType="dijit.form.FilteringSelect">
+									<?php if(!empty($this->postion))foreach($this->postion as $rs){?>
+										<option value="<?php echo $rs['key_code'];?>"><?php echo $rs['name_en'];?></option>
+									<?php }?>
+								</select>
+							</td>
+							<td><?php echo $tr->translate('Page Asign');?></td>
+							<td><select name="page_asign" id="page_asign" dojoType="dijit.form.FilteringSelect">
+									<?php if(!empty($this->page))foreach($this->page as $rs){?>
+										<option value="<?php echo $rs['key_code'];?>"><?php echo $rs['name_en'];?></option>
+									<?php }?>
+								</select></td>
+						</tr>
+						<tr>
+							<td><?php echo $tr->translate('Start Date'); ?></td>
+							<td><input constraints="{datePattern:'dd/MM/yyyy'}" dojoType="dijit.form.DateTextBox" required="true" class="fullside" id="start_date" name="start_date" type="text"></td>
+							<td><?php echo $tr->translate('End Date');?></td>
+							<td><input constraints="{datePattern:'dd/MM/yyyy'}" dojoType="dijit.form.DateTextBox" required="true" class="fullside" id="end_date" name="end_date" type="text" value="<?php echo date("d/m/Y",strtotime($this->row['end_date']));?>"></td>
+						</tr>
+						<tr>
+							<td><?php echo $tr->translate('Ordering');?></td>
+							<td><input dojoType="dijit.form.TextBox" required="true" class="fullside" id="ordering" name="ordering" type="text" value="<?php echo $this->row['ordering'];?>"></td>
+							<td><?php echo $tr->translate('Status');?></td>
+							<td><select name="status" id="status" dojoType="dijit.form.FilteringSelect" class="fullside">
+								    <option value="1" <?php if($this->row['status']==1){echo'selected="selected"';}?> ><?php echo $tr->translate('ACTIVE');?></option>
+								    <option value="0" <?php if($this->row['status']==0){echo'selected="selected"';}?> ><?php echo $tr->translate('DEACTIVE');?></option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td><?php echo $tr->translate('Link Url');?></td>
+							<td colspan="3"><input dojoType="dijit.form.TextBox" class="fullside" id="link" name="link" value="<?php echo $this->row['link_url'];?>" type="text"></td>
+						</tr>
+					</table>	
+		</fieldset>		
+		</td>
+	</tr>
+	<tr class="footer_button">
+		<td align="center">
+			<input type="reset" label="<?php echo $tr->translate('CLEAR');?>" dojoType="dijit.form.Button" 
+				iconClass="dijitIconClear" />
+			<input type="submit" value="SAVE_CLOSE" label="<?php echo $tr->translate('SAVE_CLOSE');?>" id="save_close" dojoType="dijit.form.Button" name="save_close"
+					 iconClass="dijitEditorIcon dijitEditorIconSave" />  
+		</td>
+	</tr>
+</table>	
+</form>

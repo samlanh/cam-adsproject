@@ -1,0 +1,60 @@
+<?php
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
+<style>
+.cke_contents{ height: 200px !important;}
+</style>
+<script src="<?php echo $this->baseUrl();?>/ckeditor/ckeditor.js"></script>
+<script src="<?php echo $this->baseUrl();?>/ckeditor/samples/sample.js"></script>
+<link href="<?php echo $this->baseUrl();?>/ckeditor/samples/sample.css" rel="stylesheet">
+<title><?php echo $tr->translate('EDIT_FAQS');?></title>
+<form id='add_faq' action="<?php echo $this->url(array('module'=>'other','controller'=>'faq','action'=>'edit')); ?>" enctype="application/x-www-form-urlencoded" dojoType="dijit.form.Form" method="post">
+<script type="dojo/method" event="onSubmit">			
+	if(this.validate()) {
+			return true;
+	}else{
+			return false;
+	}
+</script>
+<table  width="100%" style="margin-top:-5px;">
+<tr class="header">
+			<td><?php echo $tr->translate('EDIT_FAQS');?></td>
+	</tr>
+	<tr>
+		<td>
+		<fieldset>
+					<table style="margin: 0 auto; width:100%;" cellspacing="10">
+						<tr>
+							<td><?php echo $tr->translate('QUESTION');?>
+								<input dojoType="dijit.form.TextBox" type="hidden" id="id" name="id" value="<?php echo $this->row['id'];?>"/>
+							</td>
+							<td><textarea class="ckeditor" style="width:96%;min-height:80px;" id="job_purpose" name="faq_question"><?php echo $this->row['question']?></textarea></td>
+						</tr>
+						<tr>
+							<td><?php echo $tr->translate('ANSWER');?></td>
+							<td><textarea  class="ckeditor" style="width:96%;min-height:80px;" id="job_requirement" name="faq_answer"><?php echo $this->row['answer']?></textarea></td>
+						</tr>
+						<tr>
+						<td><?php echo $tr->translate('STATUS');?></td>
+							<td><select name="status" id="status" dojoType="dijit.form.FilteringSelect" class="fullside">
+								    <option value="1" <?php if($this->row['status']==1){echo'selected="selected"';}?>><?php echo $tr->translate('ACTIVE');?></option>
+								    <option value="0" <?php if($this->row['status']==0){echo'selected="selected"';}?>><?php echo $tr->translate('DEACTIVE');?></option>
+								</select></td>
+						</tr>
+					</table>	
+		</fieldset>		
+		</td>
+	</tr>
+	<tr class="footer_button">
+		<td align="center">
+			<input type="reset" label="<?php echo $tr->translate('CLEAR');?>" dojoType="dijit.form.Button" 
+					iconClass="dijitIconClear" /> 
+			<input type="submit" value="SAVE_CLOSE" label="<?php echo $tr->translate('SAVE_CLOSE');?>" id="SAVE_CLOSE" dojoType="dijit.form.Button" name="save_new"
+					iconClass="dijitEditorIcon dijitEditorIconSave"/> 
+		</td>
+	</tr>
+</table>	
+</form>
+<script type="text/javascript">
+dojo.require("dijit.form.Textarea"); 
+</script>

@@ -1,0 +1,40 @@
+<title>Edit SEO</title>
+<form id='add_client' action="<?php echo $this->url(array('module'=>'other','controller'=>'seo','action'=>'edit')); ?>" enctype="multipart/form-data" dojoType="dijit.form.Form" method="post">
+<script type="dojo/method" event="onSubmit">			
+	if(this.validate()) {
+				return true;
+			} else {
+				return false;
+			}
+</script>
+<table  width="100%" style="margin-top:-5px;">
+	<tr>
+		<td>
+		<fieldset>
+					<legend ><strong>Edit Seo</strong></legend>
+					<table style="margin: 0 auto; width:100%;" cellspacing="10">
+						<tr>
+							<td>Url</td>
+						   	<td><input dojoType="dijit.form.TextBox" class="fullside" id="url" name="url" value="<?php echo $this->row['url'];?>" type="text"><input dojoType="dijit.form.TextBox" class="fullside" id="id" name="id" value="<?php echo $this->row['id'];?>" type="hidden"></td>
+							<td>Key Word</td>
+							<td><textarea dojoType="dijit.form.SimpleTextarea" required="true" class="fullside" style="width:96%;min-height:80px;" id="key_word" name="key_word"><?php echo $this->row['key_word'];?></textarea></td>
+							<td>Description</td>
+							<td><textarea dojoType="dijit.form.SimpleTextarea" required="true" class="fullside" style="width:96%;min-height:80px;" id="description" name="description"><?php echo $this->row['description'];?></textarea></td>
+						</tr>
+						<tr>
+							<td colspan="6" align="center">
+							<input type="reset" label="Clear" dojoType="dijit.form.Button" 
+								 iconClass="dijitIconClear" /> 
+						    <input type="submit" value="SAVE_CLOSE" label="Edit" id="save_close" dojoType="dijit.form.Button" name="save_close"
+								 iconClass="dijitEditorIcon dijitEditorIconSave" /> 
+							</td>
+						</tr>
+					</table>	
+		</fieldset>		
+		</td>
+	</tr>
+</table>	
+</form>
+<script type="text/javascript">
+dojo.require("dijit.form.Textarea"); 
+</script>			

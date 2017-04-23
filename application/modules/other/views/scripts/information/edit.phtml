@@ -1,0 +1,64 @@
+<?php
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
+<script src="<?php echo $this->baseUrl();?>/ckeditor/ckeditor.js"></script>
+<script src="<?php echo $this->baseUrl();?>/ckeditor/samples/sample.js"></script>
+<link href="<?php echo $this->baseUrl();?>/ckeditor/samples/sample.css" rel="stylesheet">
+<title><?php echo $tr->translate('EDIT_INFORMATION');?></title>
+<form id='add_help' action="<?php echo $this->url(array('module'=>'other','controller'=>'information','action'=>'edit')); ?>"  enctype="multipart/form-data" dojoType="dijit.form.Form" method="post">
+<script type="dojo/method" event="onSubmit">			
+	if(this.validate()) {
+				return true;
+			} else {
+				return false;
+			}
+</script>
+<table  width="100%" style="margin-top:-5px;">
+<tr class="header">
+			<td><?php echo $tr->translate('EDIT_INFORMATION');?></td>
+	</tr>
+	<tr>
+		<td>
+		<fieldset>
+					<table style="margin: 0 auto; width:100%;" cellspacing="10">
+						<tr>
+							<td valign="top"><?php echo $tr->translate('TITLE');?><input dojoType="dijit.form.TextBox" type="hidden" id="id" name="id" value="<?php echo $this->row['id'];?>"/></td>
+							<td valign="top" ><input dojoType="dijit.form.ValidationTextBox" required="true" class="fullside" id="help_title" name="help_title" value="<?php echo $this->row['title'];?>" type="text"></td>
+							<td valign="top"><?php echo $tr->translate('STATUS');?></td>
+							<td valign="top"><select name="status" id="status" dojoType="dijit.form.FilteringSelect" class="fullside">
+								    <option value="1" <?php if($this->row['status']==1){echo'selected="selected"';}?>><?php echo $tr->translate('ACTIVE');?></option>
+								    <option value="0" <?php if($this->row['status']==0){echo'selected="selected"';}?>><?php echo $tr->translate('DEACTIVE');?></option>
+								</select></td>
+						</tr>
+						<tr>
+							<td><?php echo $tr->translate("PHOTO")?> 1190x220px</td>
+							<td>
+								<img src="<?php echo $this->baseUrl().'/images/promotion/'.$this->row['image'];?>" style="max-height:40px;"/>
+							</td>
+							<td><input class="fullside" id="photo" name="photo" type="file">
+								<input id="old_photo" name="old_photo" type="hidden" value="<?php echo $this->row['image'];?>"></td>
+						</tr>	
+						<tr>
+							<td colspan="4">
+								<textarea class="ckeditor" dojoType="dijit.form.SimpleTextarea" class="fullside" style="width:96%;min-height:80px;" id="description" name="description"><?php echo $this->row['description'];?></textarea>
+							</td>
+						</tr>
+						
+					</table>	
+		</fieldset>		
+		</td>
+	</tr>
+	<tr class="footer_button">
+		<td align="center">
+			<input type="reset" label="<?php echo $tr->translate('CLEAR');?>" dojoType="dijit.form.Button" 
+				iconClass="dijitIconClear" /> 
+			<input type="submit" value="SAVE_NEW" label="<?php echo $tr->translate('SAVE_CLOSE');?>" id="save_new" dojoType="dijit.form.Button" name="save_new"
+				iconClass="dijitEditorIcon dijitEditorIconSave"/> 
+		</td>
+	</tr>
+</table>	
+</form>
+<script type="text/javascript">
+dojo.require("dijit.form.Textarea"); 
+</script>
+				

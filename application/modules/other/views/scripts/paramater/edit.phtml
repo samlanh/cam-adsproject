@@ -1,0 +1,64 @@
+<?php
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
+<title><?php echo $tr->translate('EDIT_PARAMETER');?></title>
+<style>
+.cke_contents{ height: 350px !important;}
+</style>
+<script src="<?php echo $this->baseUrl();?>/ckeditor/ckeditor.js"></script>
+<script src="<?php echo $this->baseUrl();?>/ckeditor/samples/sample.js"></script>
+<link href="<?php echo $this->baseUrl();?>/ckeditor/samples/sample.css" rel="stylesheet">
+<?php
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	echo $this->headTitle($tr->translate('PARAMATER'));
+	$row_p=$this->row_paramater;
+	
+?>	
+<form action="<?php echo $this->url(array('module'=>'other','controller'=>'paramater','action'=>'edit')); ?>" dojoType="dijit.form.Form" method="post" enctype="application/x-www-form-urlencoded">
+ <script type="dojo/method" event="onSubmit">			
+			if(this.validate()) {
+				return true;
+			} else {
+				return false;
+			}
+</script>
+<table cellspacing="10" width="100%" style="margin: 0 auto;">
+	<tr class="header">
+			<td><?php echo $tr->translate('EDIT_PARAMETER');?></td>
+	</tr>
+	<tr>
+		<td>
+		<fieldset>
+					
+					<table style="margin: 0 auto; width: 100%; white-space: nowrap;" cellspacing="10">
+					   <tr>
+							<td><?php echo $tr->translate('PARAMETER_NAME');?><input type="hidden" id='id' name="id" value="<?php echo $row_p['id']?>"/></td>
+							<td>
+								<input dojoType="dijit.form.ValidationTextBox" readonly="readonly" type="text" class="fullside" id="paramater" name="paramater" required="required" value="<?php echo $row_p['title']?>">
+							</td>
+						</tr>
+						<tr>
+						    <td>Value</td>
+							<td><textarea class="ckeditor"   height="400px" style="min-height:60px;" id="values" name="values"><?php echo stripslashes($row_p['value'])?></textarea></td>
+						</tr>
+						<tr>
+						    <td><?php echo $tr->translate('STATUS');?></td>
+							<td>
+							    <select name="status" id="status" dojoType="dijit.form.FilteringSelect" required="true"  class="fullside">
+								    <option value="1" <?php if($row_p['status']==1){echo'selected="selected"';}?>><?php echo $tr->translate('ACTIVE');?></option>
+								    <option value="0" <?php if($row_p['status']==0){echo'selected="selected"';}?>><?php echo $tr->translate('DEACTIVE');?></option>
+								</select></td>
+							</td>
+						</tr>
+			</table>	
+		</fieldset>		
+		</td>
+	</tr>
+	<tr class="footer_button">
+		<td align="center" >
+				<input type="submit" value="save_close" name="save_close" label="<?php echo $tr->translate('SAVE_CLOSE');?>" dojoType="dijit.form.Button" 
+					iconClass="dijitEditorIcon dijitEditorIconSave" />
+		</td>
+	</tr>
+</table>	
+</form>

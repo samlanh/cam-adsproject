@@ -1,0 +1,24 @@
+<?php
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
+<title><?php echo $tr->translate('LOGO');?></title>
+<table width="100%" border='1' style="border:1px solid #ccc; border-collapse:collapse;">
+	  <tr>
+	    <th class="tdheader header"><?php echo $tr->translate('NUMBER');?></th>
+	    <th class="tdheader header"><?php echo $tr->translate('TITLE');?></th>
+	    <th class="tdheader header"><?php echo $tr->translate('PHOTO');?></th>
+	    <th class="tdheader header"><?php echo $tr->translate('STATUS');?></th>
+	  </tr>
+	  <?php 
+		if(!empty($this->rows))foreach ($this->rows as $key =>$row){
+	 ?>
+	  <tr align="center">
+	  	<td style="border:1px solid #ccc;padding:1px;" align="center"><?php echo $key+1;?></td>
+	  	<td style="border:1px solid #ccc;padding:1px;text-align:left;">&nbsp;<a href="<?php echo $this->baseUrl().'/other/photo/edit/id/'.$row['id'];?>"><?php echo $row['title'];?></a></td>
+	  	<td style="border:1px solid #ccc;padding:1px;text-align: center;" ><a href="<?php echo $this->baseUrl().'/other/photo/edit/id/'.$row['id'];?>"><img src="<?php echo $this->baseUrl().'/slider/'.$row['photo_name'];?>"  style="max-height:50px;"/></a></td>
+	  	<td style="border:1px solid #ccc;padding:1px;"><?php echo $row['status'];?></td>
+	  </tr>
+	  <?php 
+		}
+		?>
+</table>

@@ -21,10 +21,6 @@
 							<td align="center" valign="top">
 								<table style="margin: 0 auto; width:100%;" cellspacing="10">
 									<tr>
-										<td><?php echo $tr->translate("PROVINCE_CODE")?></td>
-										<td><?php echo $province->getElement("code");?></td>
-									</tr>
-									<tr>
 										<td><?php echo $tr->translate("KH_PROVINCE")?></td>
 										<td><?php echo $province->getElement("kh_province");?></td>
 									</tr>
@@ -42,9 +38,9 @@
 									<tr>
 										<td colspan="2" align="center">
 											<input type="reset" value="សំអាត" label="<?php echo $tr->translate('CLEAR');?>"dojoType="dijit.form.Button" iconClass="dijitIconClear"/>
-											<input type="submit" value="save_close" name="save_close" label="<?php echo $tr->translate('SAVECLOSE');?>" dojoType="dijit.form.Button" 
+											<input type="submit" value="save_close" name="save_close" label="<?php echo $tr->translate('SAVENEW');?>" dojoType="dijit.form.Button" 
 												iconClass="dijitEditorIcon dijitEditorIconSave" />
-											<input type="submit" value="save_new" name="save_new" label="<?php echo $tr->translate('SAVENEW');?>" dojoType="dijit.form.Button" 
+											<input type="submit" value="save_new" name="save_new" label="<?php echo $tr->translate('SAVECLOSE');?>" dojoType="dijit.form.Button" 
 												iconClass="dijitEditorIcon dijitEditorIconSave" />
 										</td>
 									</tr>					
@@ -55,5 +51,6 @@
 				</fieldset>
 			</td>			
 		</tr>
+		
 	</table>	
 </form>

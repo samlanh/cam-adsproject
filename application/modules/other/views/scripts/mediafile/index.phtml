@@ -1,0 +1,75 @@
+<?php
+?>
+<?php
+function uploadimage($control_name)
+{
+	$source = $_FILES["$control_name"]["tmp_name"];
+	$destination = PUBLIC_PATH."/images/otherfile/".$_FILES["$control_name"]["name"];
+	move_uploaded_file($source, $destination);
+	Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS", "/other/mediafile");
+		
+}
+function uploadFile($control_name)
+{
+	$source = $_FILES["$control_name"]["tmp_name"];
+	$destination = "../../images/otherfile/".$_FILES["$control_name"]["name"];
+	move_uploaded_file($source, $destination);
+}
+function deleteFile($file_name)
+{
+	if(file_exists($file_name))
+	{
+		unlink($file_name);	
+	}
+}
+?>
+<head>
+	<link href="../css/login.css" rel="stylesheet" type="text/css" />
+</head>
+
+<div class="wrapper-upload">
+<!-- 	<div class="showallimage"> -->
+		<?php
+        $dir=opendir(PUBLIC_PATH.DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR."otherfile");
+        while(@$entitys=readdir($dir))
+        {
+            $arraydir[]=$entitys;
+        }
+        closedir($dir);
+        $contarray=count($arraydir);
+        for($all=0;$all<$contarray;$all++)
+        {
+            if($arraydir[$all] !=='..' and $arraydir[$all]!=="." )
+            {
+                $type=@filetype($arraydir[$all]);
+                if($type=="dir")
+                {
+                    echo"<img src='folder.jpeg' width='30px' />";
+                    echo"<a href='$arraydir[$all]' target='_blank'>$arraydir[$all]</a><br />";
+                }
+				else
+				{
+					echo"<div class='blockimagelink'>";
+				?>
+					<a target='_blank' style="float: left; padding:5px; " href='<?php echo $this->baseUrl()."/images/otherfile/".$arraydir[$all];?>'><img style="width:50px; height: 50px;border:1px solid #ccc;" title="<?php echo $arraydir[$all];?>" src="<?php echo $this->baseUrl()."/images/otherfile/".$arraydir[$all];?>" /></a>
+        		<?php
+					
+					echo"</div>";
+					
+				}    
+            }
+        }
+        if(isset($_POST['btnupload']))
+        {  
+            uploadimage(addslashes(trim("photo")));
+        }
+        ?> 
+<!--         </div> -->
+        <div style="clear: both;"></div>
+        <form enctype="multipart/form-data" action="" method="post">
+                   
+                    Photo: <input type="file" name="photo" />
+                    <button iconclass="dijitIconSearch" dojoType="dijit.form.Button" showLabel="true" type="submit" name="btnupload">Upload Now</button>
+                    
+                </form>
+</div>

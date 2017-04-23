@@ -50,9 +50,8 @@ $lang  = $session_lang->lang_id;
 			<div class="col-md-12 col-sm-12" >
 			<div class="block-title-cate">
 				<p class="b-title"><span><i class="fa fa-television"></i><?php echo $cate['name']?></span></p>
-				<p class="label-show-all"><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$cate['alias_category'];?>">Show all</a></p>
+				<p class="label-show-all"><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$cate['alias_category'];?>"> <?php echo $tr->translate("Show All");?></a></p>
 			</div>
-			
 			<div class="full">
 				<div class="pane">
 					<div class=" owl-carousel" data-items="5" data-items-tab-ls="2" data-items-tab="2" data-autoplay="false" data-gutter="4" data-autoplay-speed="1500" data-delay="1000" data-loop="true" data-nav="false"  data-dots="false">
@@ -90,7 +89,7 @@ $lang  = $session_lang->lang_id;
 								</div>
 								<div class="footerads" >
 									<ul >
-									   <li> <i class="fa fa-eye"></i><?php echo $rsad['viewer'];?> Views</li>
+									   <li> <i class="fa fa-eye"></i><?php echo $rsad['viewer'].' '.$tr->translate("Viewer");?></li>
 									   <li> <i class="fa fa-calendar"></i><?php echo date("M d, Y",strtotime($rsad['publish_date']));?></li>
 									</ul>
 								</div>

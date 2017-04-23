@@ -1,35 +1,36 @@
-<?php $db = new Application_Model_DbTable_DbVdGlobal();
+<?php 
+$db = new Application_Model_DbTable_DbVdGlobal();
 $db_select = new Application_Model_DbTable_DbGlobalselect();
 $lang =$db->getLaguage();
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
-
 $menu_items = $db_select->getMenuItems();
+
+$sess_search=new Zend_Session_Namespace('homesearch');
+$keywork_search = $sess_search->keywork_search;
+if(empty($sess_search)){
+	$keywork_search= $sess_search->keywork_search='';
+	$category_search = $sess_search->category_search=-1;
+	$location_search = $sess_search->location_search=-1;
+}else{
+	$keywork_search=@$this->search['keywork_search'];
+	$category_search = $this->search['category_search'];
+	$location_search = $this->search['location_search'];
+}
 ?>
 <head>
-	<meta charset="UTF-8">
-	<!-- <link rel="shortcut icon" href="wp-content/uploads/2016/04/favicon.jpg" type="image/x-icon" /> -->
-<!--[if lt IE 9]>
-<link rel='stylesheet' id='classiads-ie-css'  href='http://demo.designinvento.net/classiads5/wp-content/themes/classiads/css/ie.css?ver=2013-11-08' type='text/css' media='all' />
-<![endif]-->
-
-<script type='text/javascript' src="<?php echo $this->baseurl()."/js/jquery.min.js";?>"></script>
-<link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
-<link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
-
-<link rel='stylesheet' id='bxslider-style-css'  href='<?php echo $this->baseUrl();?>/template/css/jquery.bxslider.css' type='text/css' media='all' />
-<link rel='stylesheet' id='owl-carousel-css'  href='<?php echo $this->baseUrl();?>/template/css/owl.carousel.css' type='text/css' media='all' />
-
-<link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/custom.css' type='text/css' media='all' />
-
-
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery.js'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min.js'></script>
-
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fancybox.packe.js'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fitvidse.js'></script>
-
-<link rel='stylesheet' href='<?php echo $this->baseUrl();?>/template/css/style.css' type='text/css' />
+<meta charset="UTF-8">
+	<script type='text/javascript' src="<?php echo $this->baseurl()."/js/jquery.min.js";?>"></script>
+	<link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='bxslider-style-css'  href='<?php echo $this->baseUrl();?>/template/css/jquery.bxslider.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='owl-carousel-css'  href='<?php echo $this->baseUrl();?>/template/css/owl.carousel.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/custom.css' type='text/css' media='all' />
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fancybox.packe.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fitvidse.js'></script>
+	<link rel='stylesheet' href='<?php echo $this->baseUrl();?>/template/css/style.css' type='text/css' />
 </head>
 <section id="static-image2" class=" static-image-2" >
 			<div class="container search-bar search-bar-version4">
@@ -41,7 +42,7 @@ $menu_items = $db_select->getMenuItems();
 									<div class="views-widget">
 										<div class="control-group form-type-textfield form-item-search-api-views-fulltext form-item">
 											<div class="controls"> 
-												<input placeholder="<?php echo $tr->translate("Search your keyword here");?>..." type="text" id="edit-search-api-views-fulltext" name="keywork_search" value="<?php echo $this->search['keywork_search'];?>" size="30" maxlength="128" class="form-text">
+												<input placeholder="<?php echo $tr->translate("Search your keyword here");?>..." type="text" id="edit-search-api-views-fulltext" name="keywork_search" value="<?php echo $keywork_search;?>" size="30" maxlength="128" class="form-text">
 											</div>
 										</div>
 									</div>
@@ -58,11 +59,10 @@ $menu_items = $db_select->getMenuItems();
 														if(!empty($rscate)){
 															foreach($rscate as $rsc){
 														?>
-															<option value="<?php echo $rsc['id'];?>" <?php //if($this->search['category_search']==$rsc['id']){ echo'selected="selected"';}?> ><?php echo $rsc['name'];?></option>
+															<option value="<?php echo $rsc['id'];?>" <?php if($category_search==$rsc['id']){ echo'selected="selected"';}?> ><?php echo $rsc['name'];?></option>
 														<?php }
 														} 
 													?>
-													
 												</select>
 											</div>
 										</div>
@@ -80,7 +80,7 @@ $menu_items = $db_select->getMenuItems();
 														if(!empty($rslocation)){
 															foreach($rslocation as $rsl){
 														?>
-															<option value="<?php echo $rsl['id'];?>" <?php //if($this->search['location_search']==$rsl['id']){ echo'selected="selected"';}?>><?php echo $rsl['province_name'];?></option>
+															<option value="<?php echo $rsl['id'];?>" <?php if($location_search==$rsl['id']){ echo'selected="selected"';}?>><?php echo $rsl['province_name'];?></option>
 														<?php }
 														} 
 													?>
@@ -112,6 +112,7 @@ $menu_items = $db_select->getMenuItems();
 								<li class='active'>
 									<a href="#homepage">
 										<span class="cat-tit">
+										<i class="fa fa-home" aria-hidden="true"></i><br />
 											<?php 
 											$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 											echo $tr->translate("HOME");?>
@@ -128,7 +129,8 @@ $menu_items = $db_select->getMenuItems();
 								<li class="<?php //echo $class;?>">
 									<a href="<?php echo "#".$rs['alias_category']?>" onclick="return false;">
 										<span class="cat-tit">
-											<i class="fa fa-home"></i><br />
+											<i class="fa <?php echo $rs['fontawsome_icon'];?>"></i>
+											<br />
 											<?php echo $rs['name'];?>									
 										</span>
 									</a>
@@ -229,27 +231,9 @@ $menu_items = $db_select->getMenuItems();
 					location.reload();
 				},
 				error:function(err){
-					
-				   
 				}
 			});
-			
-			/*dojo.xhrPost({
-				url: url_changelang,
-			    content :{ 
-					    'lange':lang,
-				},	
-				handleAs:"json",
-				load: function(data) {
-					
-				},
-				error: function(err) {
-					
-				}
-			});*/
 		}
-
-		
 		<?php if ($lang==1){?>
 			var monthNames = [
 			                  "Jan", "Feb", "Mar",
@@ -266,5 +250,4 @@ $menu_items = $db_select->getMenuItems();
 		                ];
 	      <?php }?>
 	      var baseurl = '<?php echo $this->baseUrl();?>';
-	  
 	</script>

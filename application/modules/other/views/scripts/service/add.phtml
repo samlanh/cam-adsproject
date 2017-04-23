@@ -1,0 +1,42 @@
+<title>Add Service</title>
+<form id='add_client' action="<?php echo $this->url(array('module'=>'other','controller'=>'service','action'=>'add')); ?>" enctype="multipart/form-data" dojoType="dijit.form.Form" method="post">
+<script type="dojo/method" event="onSubmit">			
+	if(this.validate()) {
+				return true;
+			} else {
+				return false;
+			}
+</script>
+<table  width="100%" style="margin: 0 auto;">
+	<tr>
+		<td>
+		<fieldset>
+					<legend ><strong>Add Service</strong></legend>
+					<table style="margin: 0 auto; width:100%;" cellspacing="10">
+						<tr>
+							<td>Title</td>
+							<td><input dojoType="dijit.form.ValidationTextBox" required="true" class="fullside" id="service_title" name="service_title" value="" type="text"></td>
+							<td>Status</td>
+							<td><select name="status" id="status" dojoType="dijit.form.FilteringSelect" class="fullside">
+								    <option value="1">Active</option>
+								    <option value="0">Deactive</option>
+								</select></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="6" align="center">
+							<input type="reset" label="Clear" dojoType="dijit.form.Button" 
+								 iconClass="dijitIconClear" /> 
+							<input type="submit" value="SAVE_CLOSE" label="Save&Close" id="save_close" dojoType="dijit.form.Button" name="save_close"
+								 iconClass="dijitEditorIcon dijitEditorIconSave" /> 
+							<input type="submit" value="SAVE_NEW" label="Save&New" id="save_new" dojoType="dijit.form.Button" name="save_new"
+								 iconClass="dijitEditorIcon dijitEditorIconSave"/> 
+							</td>
+						</tr>
+					</table>	
+		</fieldset>		
+		</td>
+	</tr>
+</table>	
+</form>				

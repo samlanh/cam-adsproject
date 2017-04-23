@@ -9,7 +9,6 @@ class Application_Model_DbTable_DbGlobal extends Zend_Db_Table_Abstract
 		$session_user=new Zend_Session_Namespace('auth');
 		return $session_user->user_id;
 	}
-	
 	function  getAllBranchByUser(){
 		$db = $this->getAdapter();
 		$sql = 'select br_id as id,project_name as name from ln_project where 1 and project_name!="" ORDER BY br_id DESC ';

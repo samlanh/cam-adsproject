@@ -38,13 +38,20 @@ class ListadsController extends Zend_Controller_Action
     	}else{
     		$data = array(
     				'keywork_search'=>'',
-    				'category_id'=>-1,
-    				'province_id'=>-1,
+    				'category_search'=>-1,
+    				'location_search'=>-1,
     				);
     	}
+    	
+    	$sess_search=new Zend_Session_Namespace('homesearch');
+    	$sess_search->keywork_search=empty($data['keywork_search'])?'':$data['keywork_search'];
+    	$sess_search->category_search=empty($data['category_search'])?'':$data['category_search'];
+    	$sess_search->location_search=empty($data['location_search'])?'':$data['location_search'];
+    		
     	$this->view-> search= $data;
     	$db = new Application_Model_DbTable_DbGlobalselect();
     	$this->view->rsads = $db->getSearchHomePage($data);
+    	
     }
     function advresultAction(){
     	if($this->getRequest()->isPost()){
@@ -90,6 +97,10 @@ class ListadsController extends Zend_Controller_Action
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();
     		$db = new Application_Model_DbTable_DbGlobalselect();
+    		$data['district'] = empty($data['district'])?-1:$data['district'];
+    		$data['commune'] = empty($data['commune'])?-1:$data['commune'];
+    		$data['location_search'] = empty($data['location_search'])?-1:$data['location_search'];
+    		$data['category_search'] = empty($data['category_search'])?-1:$data['category_search'];
     		$rs = $db->getAllAdvanceSearch($data,1);
     		print_r(($rs));
     		exit();

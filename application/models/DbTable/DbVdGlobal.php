@@ -13,6 +13,14 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		$session_lang=new Zend_Session_Namespace('lang');
 		return $session_lang->lang_id;
 	}
+	function getStringProvince(){
+		$lang_id = $this->getCurrentLang();
+		$province_field = array(
+				"1"=>"province_en_name",
+				"2"=>"province_kh_name"
+		);
+		return $province_field[$lang_id];
+	}
 	public function getLaguage(){// get language active for front and backend
 		$db = $this->getAdapter();
 		$sql="SELECT * FROM `vd_language` AS l WHERE l.`status`=1";
@@ -99,12 +107,13 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 	}
 	function  getAllAdsToHomepage($category_id){
 		$db = $this->getAdapter();
+		$province = $this->getStringProvince();
 		$lang_id = $this->getCurrentLang();
 		$sql=" SELECT *,
 		(SELECT customer_name FROM `vd_client` WHERE id=1 LIMIT 1) as suppliyer_name,
 		(SELECT id FROM `vd_client` WHERE id=1 LIMIT 1) as suppliyerid,
 		(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
-		(SELECT province_en_name FROM `vd_province` WHERE id=vd_ads.province_id LIMIT 1 ) as province_name
+		(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id LIMIT 1 ) as province_name
 		FROM `vd_ads` WHERE
 		(select  vdc.parent from vd_category as vdc where vdc.id = category_id LIMIT 1)=$category_id
 		AND STATUS =1 AND is_expired=0 ORDER BY id DESC LIMIT 15 ";

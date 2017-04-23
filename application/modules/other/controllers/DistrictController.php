@@ -20,14 +20,17 @@ class Other_DistrictController extends Zend_Controller_Action {
 						'search_status' => -1);
 			}
 			$rs_rows= $db->getAllDistrict($search);
+			$glClass = new Application_Model_GlobalClass();
+			$rs_rows = $glClass->getImgActive($rs_rows, BASE_URL, true,null,1);
 			$list = new Application_Form_Frmtable();
-			$collumns = array("DISTRICT_CODE","DISTRICT_KH","DISTRICT_ENG","DISPLAY_BY","PROVINCE","DATE","STATUS","BY");
+			$collumns = array("DISTRICT_KH","DISTRICT_ENG","DISPLAY_BY","PROVINCE","DATE","STATUS","BY");
 			$link=array(
 					'module'=>'other','controller'=>'district','action'=>'edit',
 			);
-			$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('code'=>$link,'district_name'=>$link,'district_namekh'=>$link));
+			$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('district_name'=>$link,'district_namekh'=>$link));
 		}catch (Exception $e){
 			Application_Form_FrmMessage::message("Application Error");
+			echo $e->getMessage();
 			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 		}
 		
@@ -89,26 +92,6 @@ class Other_DistrictController extends Zend_Controller_Action {
 			$db_district = new Other_Model_DbTable_DbDistrict();
 			$id = $db_district->addDistrict($data);
 			print_r(Zend_Json::encode($id));
-			exit();
-		}
-	}
-	function getDistrictAction(){
-		if($this->getRequest()->isPost()){
-			$data = $this->getRequest()->getPost();
-			$db_district = new Other_Model_DbTable_DbDistrict();
-			$rows = $db_district->getDistrictByIdProvince($data['pro_id']);
-			array_unshift($rows, array ( 'id' => -1, 'name' => 'បន្ថែម​អ្នក​ទទួល​ថ្មី') );
-			print_r(Zend_Json::encode($rows));
-			exit();
-		}
-	}
-	function addDistrictAction(){
-		if($this->getRequest()->isPost()){
-			$data = $this->getRequest()->getPost();
-			$db_district = new Other_Model_DbTable_DbDistrict();
-			$rows = $db_district->addDistrictByAjax($data);
-// 			array_unshift($rows, array ( 'id' => -1, 'name' => 'បន្ថែម​អ្នក​ទទួល​ថ្មី') );
-			print_r(Zend_Json::encode($rows));
 			exit();
 		}
 	}

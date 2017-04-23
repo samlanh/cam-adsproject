@@ -1,0 +1,65 @@
+<?php
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
+<title><?php echo $tr->translate('ADD_NEW_CONTACT');?></title>
+<script src="<?php echo $this->baseUrl();?>/ckeditor/ckeditor.js"></script>
+<script src="<?php echo $this->baseUrl();?>/ckeditor/samples/sample.js"></script>
+<link href="<?php echo $this->baseUrl();?>/ckeditor/samples/sample.css" rel="stylesheet">
+<form id="add_location" action="<?php echo $this->url(array('module'=>'other','controller'=>'contact','action'=>'add')); ?>" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
+	 <script type="dojo/method" event="onSubmit">			
+			if(this.validate()) {
+				 if(dijit.byId('record_row').get('value')==''){
+                    alert('Can not submit without record !');
+                    return false;
+                 }
+				return true;
+			} else {
+				return false;
+			}
+	</script>
+	<table cellspacing="10" style="margin: 0 auto; width: 100%">
+		<tr class="header">
+				<td><?php echo $tr->translate('ADD_NEW_CONTACT');?></td>
+		</tr>
+		<tr>
+			<td>
+				<fieldset>
+					<table  width="100%" >
+						<tr>
+							<td align="center" valign="top">
+								<table style="margin: 0 auto; width:100%;" cellspacing="10">
+									<tr>
+										<td><?php echo $tr->translate('TITLE');?></td>
+										<td><input dojoType="dijit.form.ValidationTextBox" class="fullside" required="true" id="title" name="title" value="" type="text"></td>
+										<td></td>
+										<td></td>
+										<td><?php echo $tr->translate('STATUS');?></td>
+										<td><select name="status" id="status" dojoType="dijit.form.FilteringSelect" required="true"  class="fullside">
+											    <option value="1" label="Active"><?php echo $tr->translate('ACTIVE');?></option>
+											    <option value="0" label="Deactive"><?php echo $tr->translate('DEACTIVE');?></option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="6">
+											<textarea class="ckeditor" height="400px" style="width:96%;min-height:60px;" id="editor4" name="note"> </textarea>
+										</td>
+									</tr>
+								</table>
+							</td>							
+						</tr>
+					</table>	
+				</fieldset>
+			</td>			
+		</tr>
+		<tr class="footer_button">
+			<td align="center">
+				<input type="reset" value="សំអាត" label="<?php echo $tr->translate('CLEAR');?>"dojoType="dijit.form.Button" iconClass="dijitIconClear"/>
+				<input type="submit" value="save_new" name="save_new" label="<?php echo $tr->translate('SAVE_CLOSE');?>" dojoType="dijit.form.Button" 
+					iconClass="dijitEditorIcon dijitEditorIconSave" />
+				<input type="submit" value="save_close" name="save_close" label="<?php echo $tr->translate('SAVE_NEW');?>" dojoType="dijit.form.Button" 
+					iconClass="dijitEditorIcon dijitEditorIconSave" />
+			</td>
+		</tr>	
+	</table>	
+</form>

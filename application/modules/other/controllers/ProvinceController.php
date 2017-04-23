@@ -28,12 +28,15 @@ class Other_ProvinceController extends Zend_Controller_Action {
 			$db = new Other_Model_DbTable_DbProvince();
 			$rs_rows= $db->getAllProvince($search);
 		
+			$glClass = new Application_Model_GlobalClass();
+			$rs = $glClass->getImgActive($rs_rows, BASE_URL, true,null,1);
+		
 			$list = new Application_Form_Frmtable();
-			$collumns = array("PROVINCE_CODE","EN_PROVINCE","KH_PROVINCE","DISPLAY_BY","MODIFY_DATE","STATUS","BY_USER");
+			$collumns = array("EN_PROVINCE","KH_PROVINCE","DISPLAY_BY","MODIFY_DATE","STATUS","BY_USER");
 			$link=array(
 					'module'=>'other','controller'=>'province','action'=>'edit',
 			);
-			$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('code'=>$link,'province_kh_name'=>$link,'province_en_name'=>$link));
+			$this->view->list=$list->getCheckList(0, $collumns, $rs,array('province_kh_name'=>$link,'province_en_name'=>$link));
 		}catch (Exception $e){
 			Application_Form_FrmMessage::message("Application Error");
 			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
@@ -70,12 +73,13 @@ class Other_ProvinceController extends Zend_Controller_Action {
 	function editAction(){
 		$id=$this->getRequest()->getParam("id");
 		$db=new Other_Model_DbTable_DbProvince();
+		$row=$db->getProvinceById($id);
 		if($this->getRequest()->isPost())
 		{
 			$data = $this->getRequest()->getPost();
 			$db = new Other_Model_DbTable_DbProvince();
 			try {
-				$db->updateProvince($data,$id);
+			$db->updateProvince($data,$id);
 				Application_Form_FrmMessage::Sucessfull($this->tr->translate("EDIT_SUCCESS"),self::REDIRECT_URL . "/province/index");
 			}catch (Exception $e){
 				Application_Form_FrmMessage::message($this->tr->translate("EDIT_FAIL"));
@@ -83,7 +87,6 @@ class Other_ProvinceController extends Zend_Controller_Action {
 				Application_Model_DbTable_DbUserLog::writeMessageError($err);
 			}
 		}
-		$row=$db->getProvinceById($id);
 		$frm= new Other_Form_FrmProvince();
 		$update=$frm->FrmProvince($row);
 		$this->view->frm_province=$update;

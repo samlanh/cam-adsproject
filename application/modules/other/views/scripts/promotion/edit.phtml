@@ -1,0 +1,55 @@
+<?php
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
+<title><?php echo $tr->translate('EDIT_PROMOTION');?></title>
+<form id='add_slide' action="<?php echo $this->url(array('module'=>'other','controller'=>'promotion','action'=>'edit')); ?>" enctype="multipart/form-data" dojoType="dijit.form.Form" method="post">
+<script type="dojo/method" event="onSubmit">			
+	if(this.validate()) {
+				return true;
+			} else {
+				return false;
+			}
+</script>
+<table  width="100%" style="margin-top:5px;">
+	<tr class="header">
+			<td><?php echo $tr->translate('EDIT_PROMOTION');?></td>
+	</tr>
+	<tr>
+		<td>
+		<fieldset>
+					<table style="margin: 0 auto; width:100%;" cellspacing="10">
+						<tr>
+							<td><?php echo $tr->translate('TITLE');?></td>
+							<td><input dojoType="dijit.form.ValidationTextBox" required="true" class="fullside" id="title" name="title" value="<?php echo $this->row['title'];?>" type="text"></td>
+							<td><?php echo $tr->translate('PHOTO');?> (width:970px)</td>
+							<td>
+								<img src="<?php echo $this->baseUrl().'/images/promotion/'.$this->row['image_promotion'];?>" style="max-height:40px;"/>
+								<input class="fullside" id="photo" name="photo" type="file">
+								<input id="old_photo" name="old_photo" type="hidden" value="<?php echo $this->row['image_promotion'];?>">
+							</td>	
+							</tr>
+						<tr>
+							<td><?php echo $tr->translate('STATUS');?></td>
+							<td><select name="status" id="status" dojoType="dijit.form.FilteringSelect" class="fullside">
+								    <option value="1" <?php if ($this->row['status']==1) { echo "selected='selected'"; }?>><?php echo $tr->translate('ACTIVE');?></option>
+								    <option value="0" <?php if ($this->row['status']==0) { echo "selected='selected'"; }?>><?php echo $tr->translate('DEACTIVE');?></option>
+								</select></td>
+						</tr>
+					</table>	
+		</fieldset>		
+		</td>
+	</tr>
+	<tr class="footer_button">
+		<td align="center">
+			<input type="reset" label="Clear" dojoType="dijit.form.Button" 
+					iconClass="dijitIconClear" />
+			<input type="submit" value="SAVE_CLOSE" label="<?php echo $tr->translate('SAVE_CLOSE');?>" id="save_close" dojoType="dijit.form.Button" name="save_close"
+					iconClass="dijitEditorIcon dijitEditorIconSave" />  
+		</td>
+	</tr>
+</table>	
+</form>
+<script type="text/javascript">
+dojo.require("dijit.form.NumberTextBox"); 
+require(["dijit/Editor"]);
+</script>
