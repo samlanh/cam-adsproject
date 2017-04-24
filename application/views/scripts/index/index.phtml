@@ -60,7 +60,7 @@ $lang  = $session_lang->lang_id;
 						foreach($rsads as $rsad) {?>
 							<div class="ad-box ">
 								<div class="ads-img-wrapper">
-									<a class="ad-image box" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rsad['alias'];?>" title="Finance officer for hotel" >
+									<a class="ad-image box" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rsad['alias'];?>" title="<?php echo $rsad['ads_title'];?>" >
 									<?php if (!empty($rsad['image_feature'])){?>
 										<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rsad['image_feature']; ?>" alt=""  />
 									<?php }else{?>

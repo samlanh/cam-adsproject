@@ -463,17 +463,17 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 			return $rows;
 		}
 	}	
-// 	function getMyStore($client_id){
-// 		$db = $this->getAdapter();
-// 		$sql="SELECT cs.*,c.`customer_name`,st.`template_main_color`,st.`template_main_font_color`
-// 			,st.`template_title`,st.`image_theme`
-// 			FROM `vd_client_store` AS cs,
-// 			`vd_client` AS c,
-// 			`vd_sub_template` AS st
-// 			WHERE cs.`status`=1 AND c.`id`=cs.`client_id`
-// 			AND st.`id`=cs.`template_id` AND cs.`client_id`=$client_id";
-// 		return $db->fetchAll($sql);
-// 	}
+	function getMyStore($client_id){
+		$db = $this->getAdapter();
+		$sql="SELECT cs.*,c.`customer_name`,st.`template_main_color`,st.`template_main_font_color`
+			,st.`template_title`,st.`image_theme`
+			FROM `vd_client_store` AS cs,
+			`vd_client` AS c,
+			`vd_sub_template` AS st
+			WHERE cs.`status`=1 AND c.`id`=cs.`client_id`
+			AND st.`id`=cs.`template_id` AND cs.`client_id`=$client_id";
+		return $db->fetchAll($sql);
+	}
 	function getMyStoreByAlias($client_id,$alias){
 		$db = $this->getAdapter();
 		$sql="SELECT cs.*,c.`customer_name`,st.`template_main_color`,st.`template_main_font_color`

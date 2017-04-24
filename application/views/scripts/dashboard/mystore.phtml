@@ -122,7 +122,7 @@
 							<div class="icon_menu-right" style="margin-top:-5px;">
 								<ul class="icon_menu">
 									<li><a href="<?php echo $this->baseUrl()."/dashboard/store?change=edit&store=".$rsad['alias_store'];?>" title="<?php echo $tr->translate('Change Theme');?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><?php echo $tr->translate('Change Theme');?></a></li>
-									<li><a href="<?php //echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'renew','adsid'=>$rsad['id']));?>" title="<?php echo $tr->translate('View Store');?>"><i class="fa fa-paper-plane-o" aria-hidden="true"></i><?php echo $tr->translate('View Store');?></a></li>
+									<li><a href="<?php echo $this->baseUrl()."/store/index?store=".$rsad['alias_store'].".html";?>" title="<?php echo $tr->translate('View Store');?>"><i class="fa fa-paper-plane-o" aria-hidden="true"></i><?php echo $tr->translate('View Store');?></a></li>
 								</ul>
 							</div>
 						</div>
