@@ -110,7 +110,7 @@ class ListadsController extends Zend_Controller_Action
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();
     		$dbform = new Application_Model_DbTable_DbDynamicFormPostAds();
-    		$rs = $dbform->getAllFormSearchByCateid($data['category_id'],1);
+    		$rs = $dbform->getAllFormSearchByCateid($data['category_id'],1,3);
     		print_r(($rs));
     		exit();
     	}	

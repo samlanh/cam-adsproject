@@ -16,6 +16,10 @@ if(empty($sess_search)){
 	$category_search = $this->search['category_search'];
 	$location_search = $this->search['location_search'];
 }
+	$request=Zend_Controller_Front::getInstance()->getRequest()->getParam("cateid");
+	$db = new Application_Model_DbTable_DbGlobalselect();
+	$maincatealia = $db->getCategoryInfo($request);
+	$parent_alia = $maincatealia['parent_alias_category'];
 ?>
 <head>
 <meta charset="UTF-8">
@@ -109,7 +113,7 @@ if(empty($sess_search)){
 					<div id="main-category">
 						<div  class="pos-relative">
 							<ul class="nav nav-tabs tabs cat-list" id="tabs">
-								<li class='active'>
+								<li class='<?php if($parent_alia=='')echo"active";?>'>
 									<a href="#homepage">
 										<span class="cat-tit">
 										<i class="fa fa-home" aria-hidden="true"></i><br />
@@ -124,9 +128,9 @@ if(empty($sess_search)){
 								$rscate = $db->getCategoryParent();
 								if(!empty($rscate)){foreach($rscate as $index => $rs){
 										$class='';
-										if($index==0){$class='active';}
+										if($parent_alia==$rs['alias_category']){$class='active';}
 								?>
-								<li class="<?php //echo $class;?>">
+								<li class="<?php echo $class;?>">
 									<a href="<?php echo "#".$rs['alias_category']?>" onclick="return false;">
 										<span class="cat-tit">
 											<i class="fa <?php echo $rs['fontawsome_icon'];?>"></i>
@@ -141,7 +145,7 @@ if(empty($sess_search)){
 						</div>
 					</div>
 					<div class="tab-content">
-						<div class="tab-pane active subcategory-menu" id="homepage">
+						<div class="tab-pane subcategory-menu <?php if($parent_alia=='')echo"active";?>" id="homepage">
 							<div class="list-dropdow-category" >
 								<div class="banner-left-blog">
 									<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
@@ -162,7 +166,12 @@ if(empty($sess_search)){
 								$db = new Application_Model_DbTable_DbVdGlobal();
 								$rscate = $db->getCategoryParent(1);
 								$parent = '';
+								
 								if(!empty($rscate)){foreach($rscate as $index => $rs){
+									$classactive='';
+									if($parent_alia==$rs['parent_alias']){
+										$classactive='active';
+									}
 								?>
 								<?php if($parent!=$rs['parent']){
 								       if($index >0 ){
@@ -171,7 +180,7 @@ if(empty($sess_search)){
 									</div>
 								  </div>
 							 	</div>
-							 	<div class="tab-pane subcategory-menu" id="<?php echo $rs['parent_alias'];?>">
+							 	<div class="tab-pane subcategory-menu <?php echo $classactive;?>" id="<?php echo $rs['parent_alias'];?>">
 									<div class="list-dropdow-category" >
 									<!-- <div class="banner-left-blog">
 										<img src="images/camapplogo.png" alt="Logo">
@@ -185,7 +194,7 @@ if(empty($sess_search)){
 									<div class="<?php echo $classli;?>">
 										<ul class="menu-list-cate">
 								<?php }else{?>
-								<div class="tab-pane subcategory-menu" id="<?php echo $rs['parent_alias']?>">
+								<div class="tab-pane subcategory-menu <?php echo $classactive;?>" id="<?php echo $rs['parent_alias']?>">
 									<div class="list-dropdow-category" >
 									<div class="banner-left-blog">
 										<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>

@@ -93,6 +93,13 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$db = $this->getAdapter();
 		return $db->fetchAll($sql);
 	}
+	function getAllStoreByUser(){
+		$client_session=new Zend_Session_Namespace('client');
+		$user_id = $client_session->client_id;
+		$sql = " SELECT id,alias_store AS store_name FROM `vd_client_store` WHERE STATUS=1 AND client_id=$user_id ";
+		$db = $this->getAdapter();
+		return $db->fetchAll($sql);
+	}
 	 
 	function getAdsDetail($alias){ // for page ads detail
 		$db = $this->getAdapter();

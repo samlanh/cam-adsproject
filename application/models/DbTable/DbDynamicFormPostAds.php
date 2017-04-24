@@ -114,7 +114,7 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 		$string.='</div>';
 		return $string;
 	}
-	function getAllFormSearchByCateid($cate_id,$search=null){// old test form
+	function getAllFormSearchByCateid($cate_id,$search=null,$colspan=4){// old test form
 		$db = $this->getAdapter();
 		$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 		$sql="SELECT * FROM `vd_field_type` AS ft WHERE FIND_IN_SET($cate_id,ft.`category`) AND ft.`status`=1 ";
@@ -132,11 +132,15 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 			}
 			$isreq='';
 			$sigrequir='';
+			$classspan="col-md-3";
+			if($colspan==4){
+				$classspan="col-md-4";
+			}
 			if ($rs["type"]=="select"){
 				$label = $tr->translate("Choose").$tr->translate($rs["label_name"]);
-				$form.=$this->OptionSelectSearch($rs["id"],$rs["title"],$rs["is_require"],$label);
+				$form.=$this->OptionSelectSearch($rs["id"],$rs["title"],$rs["is_require"],$label,$colspan);
 			}elseif ($rs["type"]=="cascade"){
-				$form.='<div class="col-md-3 col-sm-3">';
+				$form.="<div class=' $classspan col-sm-3'>";
 				//$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
 				//$form.='<div class="form-value">';
 				$form.='<select onChange="getCascadeValue('.$rs["title"].')"  id="'.$rs["title"].'" name="'.$rs["title"].'" '.$isreq.' class="form-select">';
@@ -144,28 +148,28 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 				//$form.='</div>';
 				$form.='</div>';
 			}elseif ($rs["type"]=="text"){
-				$form.='<div class="col-md-3 col-sm-3">';
+				$form.="<div class=' $classspan col-sm-3'>";
 				//$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
 				//$form.='<div class="form-values">';
 				$form.='<input class="form-control " type="text" value="" placeholder="'.$tr->translate($rs["label_name"]).'"  '.$isreq.' id="'.$rs["title"].'" name="'.$rs["title"].'" />';
 				//$form.='</div>';
 				$form.='</div>';
 			}elseif ($rs["type"]=="number"){
-				$form.='<div class="col-md-3">';
+				$form.="<div class=' $classspan col-sm-3'>";
 				//$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
 				//$form.='<div class="form-values">';
 				$form.='<input class="form-control " onkeypress="return isNumber(event);" type="text" value="" placeholder="'.$tr->translate($rs["label_name"]).'"  '.$isreq.' id="'.$rs["title"].'" name="'.$rs["title"].'" />';
 				//$form.='</div>';
 				$form.='</div>';
 			}elseif ($rs["type"]=="textarea"){
-				$form.='<div class="col-md-3">';
+				$form.="<div class=' $classspan col-sm-3'>";
 				//$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
 				//$form.='<div class="form-value">';
 				$form.=' <textarea class="form-control " id="'.$rs["title"].'" placeholder="'.$tr->translate($rs["label_name"]).'"  name="'.$rs["title"].'" '.$isreq.' ></textarea>';
 				//$form.='</div>';
 				$form.='</div>';
 			}elseif ($rs["type"]=="emailaddress"){
-				$form.='<div class="col-md-3">';
+				$form.="<div class=' $classspan col-sm-3'>";
 				//$form.='<div class="form-label"> <label>'.$rs["label_name"].$sigrequir.'</label> </div>';
 				//$form.='<div class="form-value">';
 				$form.=' <input type="email" id="'.$rs["title"].'" name="'.$rs["title"].'" '.$isreq.' autocomplete="off" placeholder="'.$tr->translate($rs["label_name"]).'" />';
@@ -225,7 +229,15 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 // 		}
 // 		return $form;
 	}
-	function OptionSelectSearch($fielid,$name,$require,$labelname){ // old form test
+	function OptionSelectSearch($fielid,$name,$require,$labelname,$colspan){ // old form test
+		
+// 		getAllFormSearchByCateid
+		$request=Zend_Controller_Front::getInstance()->getRequest();
+		$controller = $request->getControllerName();
+		$span_col='col-md-4';
+		if($colspan==3){
+			$span_col='col-md-3';
+		}
 		if($require==1){
 			$sigrequir='<span class="sign_req">*</span>';
 		}else{ $sigrequir='';
@@ -238,7 +250,7 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 		}
 		$value = $this->getValueofOption($fielid);
 		$string='';
-		$string.='	<div class="col-md-3 col-sm-7">';
+		$string.="	<div class=' $span_col col-sm-7 '>";
 		//$string.='<div class="form-label"><label>'.$labelname.$sigrequir.'</label> </div>';
 		//$string.='<div class="form-value formsearch">';
 		$string.='<select '.$functionOnchage.'   id="'.$name.'" name="'.$name.'" '.$isreq.' class="form-select" >';

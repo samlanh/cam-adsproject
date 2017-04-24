@@ -5,7 +5,6 @@
 var url_district = '<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'get-districtbyid'));?> ';
 function getAllDistrict(){
 	var pro_id = $('#location').val();
-	alert(pro_id);
 		$.ajax({
 			url: url_district,
 			type: "post",
@@ -99,36 +98,43 @@ function getCommuneById(){
 								<div class="col-md-12">
 									<div class="catgorylist-title">
 										<form action="<?php echo $this->url(array("module"=>'default','controller'=>'listads','action'=>'advresult'));?>" method="post" enctype="multipart/form-data">
+											<div class="form-value" style="width: 100%;">
 											<?php echo $this->form;?>
-											<div style="clear:both;"></div>
+												<div class="form-row" style="clear: both; padding-top: 10px;">
+													<div class="col-md-4">
+															<select id="location" name="location" class="form-select" onchange="getAllDistrict();">
+																<option value="-1" selected="selected"><?php echo $tr->translate("Choose Location");?></option>
+																<?php 
+																	if(!empty($this->rslocation)){
+																		foreach($this->rslocation as $rsl){
+																	?>
+																		<option value="<?php echo $rsl['id'];?>" ><?php echo $rsl['province_name'];?></option>
+																	<?php }
+																	} 
+																?>
+															</select>
+														</div>
+														<div class="col-md-4">
+															<label id="lbl_district">
+																<select id="district" name="district" class="form-select">
+																	<option value="-1" selected="selected"><?php echo $tr->translate("Choose Distict");?></option>
+																</select>
+															</label>
+														</div>
+														<div class="col-md-4">
+															<label id="lbl_commune">
+																<select id="commune" name="commune" class="form-select">
+																	<option value="-1" selected="selected"><?php echo $tr->translate("Choose Commune");?></option>
+																</select>
+															</label>
+														</div>
+													
+													</div>
+											
+											</div>
+											
 											<div class="form-row">
-												<div class="form-value">
-													<select id="location" name="location" class="form-select" onchange="getAllDistrict();">
-														<option value="-1" selected="selected"><?php echo $tr->translate("Choose Location");?></option>
-														<?php 
-															if(!empty($this->rslocation)){
-																foreach($this->rslocation as $rsl){
-															?>
-																<option value="<?php echo $rsl['id'];?>" ><?php echo $rsl['province_name'];?></option>
-															<?php }
-															} 
-														?>
-													</select>
-												</div>
-												<div class="form-value">
-													<label id="lbl_district">
-														<select id="district" name="district" class="form-select">
-															<option value="-1" selected="selected"><?php echo $tr->translate("Choose Distict");?></option>
-														</select>
-													</label>
-												</div>
-												<div class="form-value">
-													<label id="lbl_commune">
-														<select id="commune" name="commune" class="form-select">
-															<option value="-1" selected="selected"><?php echo $tr->translate("Choose Commune");?></option>
-														</select>
-													</label>
-												</div>
+												
 											</div>
 											<div class="col-md-4">
 											

@@ -9,9 +9,7 @@ class IndexController extends Zend_Controller_Action
     {
         /* Initialize action controller here */
     	header('content-type: text/html; charset=utf8');  
-    	
     }
-
     public function indexAction()
     {
     	//$this->_helper->layout()->disableLayout();
@@ -21,9 +19,7 @@ class IndexController extends Zend_Controller_Action
     public function administratorAction()
     {
     	// action body
-    	 
     	/* set this to login page to change the character charset of browsers to Utf-8  ...*/
-    
     	$this->_helper->layout()->disableLayout();
     	$form=new Application_Form_FrmLogin();
     	$form->setAction('index');
@@ -32,13 +28,9 @@ class IndexController extends Zend_Controller_Action
     	$this->view->form=$form;
     	$key = new Application_Model_DbTable_DbKeycode();
     	$this->view->data=$key->getKeyCodeMiniInv(TRUE);
-    
-    
     	if($this->getRequest()->isPost())
     	{
-    			
     		$formdata=$this->getRequest()->getPost();
-    			
     		if($form->isValid($formdata))
     		{
     			$session_lang=new Zend_Session_Namespace('lang');
@@ -142,9 +134,11 @@ class IndexController extends Zend_Controller_Action
         	
         	$log=new Application_Model_DbTable_DbUserLog();
 			$log->insertLogout($session_user->user_id);
-			
-        	$session_user->unsetAll();       	
-	           	         	 
+        	$session_user->unsetAll();  
+
+        	$requestpost=new Zend_Session_Namespace('requestpost');
+        	$requestpost->unsetAll();
+        	
         	Application_Form_FrmMessage::redirectUrl("/");
         	exit();
         } 
@@ -276,7 +270,13 @@ class IndexController extends Zend_Controller_Action
 	    			$client_session->client_name = $cus_infor['user_name'];
 	    			$client_session->is_verify = $cus_infor['is_verify_acc'];
 	    			
-	    			$this->_redirect("dashboard/");
+	    			$requestpost=new Zend_Session_Namespace('requestpost');
+	    			$requestpost=$requestpost->requestpost;
+	    			if($requestpost==1){
+	    				$this->_redirect("postsads/choose-category");
+	    			}else{
+	    				$this->_redirect("dashboard/");
+	    			}
 	    		}else{
 	    			$this->view->message = 'Invalid user name and password. Please check and try again.';
 	    		}
@@ -284,7 +284,7 @@ class IndexController extends Zend_Controller_Action
     	}else{
     		$this->_redirect("dashboard/");
     	}
-    
+    	
     }
     function registerAction(){
     	$client_session=new Zend_Session_Namespace('client');

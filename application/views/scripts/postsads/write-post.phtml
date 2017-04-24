@@ -33,6 +33,21 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 				  <span id="alertMessage"></span>
 				</div><!-- return validateFormAds(this); -->
 					<form id="postads_form" onsubmit="return validateFormAds(this)" method="post" enctype="multipart/form-data" action="<?php echo $this->baseUrl()."/postsads/write-post";?>">
+						<?php if(count($this->rsstore)>1){?>
+						<div class="form-row">
+							<div class="form-label">
+								<label><?php echo $tr->translate("Choose My Store");?><span class="sign_req">*</span></label>
+							</div>
+							<div class="form-value">
+								<select id="store" name="store" class="form-select" >
+									<?php if(!empty($this->rsstore) AND count($this->rsstore)>1)foreach($this->rsstore as $rstore){?>
+									<option <?php echo $rstore['id'];?>><?php echo $rstore['store_name'];?></option>
+									<?php }?>
+								</select>
+							</div>
+						</div>
+						<?php }?>
+						
 						<div class="form-row">
 							<div class="form-label">
 								<label><?php echo $tr->translate("Title");?><span class="sign_req">*</span></label>

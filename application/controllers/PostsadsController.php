@@ -26,6 +26,8 @@ class PostsadsController extends Zend_Controller_Action
 	    	$session_post=new Zend_Session_Namespace('postads');
 	    	$this->view->success = $session_post->success;
     	}else{
+    		$requestpost=new Zend_Session_Namespace('requestpost');
+    		$requestpost->requestpost = 1;
     		$this->_redirect("index/login");
     	}
     }
@@ -39,7 +41,8 @@ class PostsadsController extends Zend_Controller_Action
     		}else{
     			$session_post=new Zend_Session_Namespace('postads');
     			$session_post->success=$result;
-    			Application_Form_FrmMessage::Sucessfull("Your ad has been insert success", "/postsads/choose-category/");
+    			$this->_redirect("/postsads/choose-category/".$result);
+    			//Application_Form_FrmMessage::Sucessfull("Your ad has been insert success", "/postsads/choose-category/");
     		}
     	}
     	$client_session=new Zend_Session_Namespace('client');
@@ -58,6 +61,7 @@ class PostsadsController extends Zend_Controller_Action
 	    	
 	    	$db = new Application_Model_DbTable_DbGlobalselect();
 	    	$this->view-> rslocation = $db->getAllLocation();
+	    	$this->view->rsstore = $db->getAllStoreByUser();
     	}else{
     		$this->_redirect("index/login");
     	}
@@ -97,6 +101,8 @@ class PostsadsController extends Zend_Controller_Action
     
     		$db = new Application_Model_DbTable_DbGlobalselect();
     		$this->view-> rslocation = $db->getAllLocation();
+    		
+    		$this->view->rsstore = $db->getAllStoreByUser();
     	}else{
     		$this->_redirect("index/login");
     	}
