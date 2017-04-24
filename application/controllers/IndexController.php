@@ -266,6 +266,8 @@ class IndexController extends Zend_Controller_Action
 	    	{
 	    		$data=$this->getRequest()->getPost();
 	    		$db = new Application_Model_DbTable_DbClient();
+	    		$data['user_name'] = empty($data['user_name'])?'-1':$data['user_name'];
+	    		$data['password'] = empty($data['password'])?'-1':$data['password'];
 	    		if($db->cusAuthenticate($data['user_name'],$data['password'])){
 	    			$cus_infor = $db->getClientInfo($data);
 	    			$client_session=new Zend_Session_Namespace('client');
@@ -289,6 +291,12 @@ class IndexController extends Zend_Controller_Action
     	if(empty($client_session->client_id)){ //check session has been have or not
 	    	if($this->getRequest()->isPost()){
 	    		$data=$this->getRequest()->getPost();
+	    		
+	    		$data['user_name'] = empty($data['user_name'])?'':$data['user_name'];
+	    		$data['email'] = empty($data['email'])?'':$data['email'];
+	    		$data['password'] = empty($data['password'])?'':$data['password'];
+	    		$data['c_password'] = empty($data['c_password'])?'':$data['c_password'];
+	    		
 	    		$db = new Application_Model_DbTable_DbClient();
 	    		$data['code_random']= rand(1000,9999); // generate security code 4 charecter
 	    		if (!empty($data)){
