@@ -368,7 +368,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 	}
 	function getBannerByPosition($position){
 		$db = $this->getAdapter();
-		$sql=" SELECT * FROM `ln_banneravert` WHERE STATUS=1 AND position_id=$position ";
+		$sql=" SELECT * FROM `vd_banneravertise` WHERE STATUS=1 AND position_id=$position ";
 		return $db->fetchAll($sql);
 	}
 	function getAdsByUserid($user_id){
@@ -387,7 +387,6 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.user_id = $user_id ";
 		return $db->fetchAll($sql);
 	} 
-	
 	function getMenuItems(){ //  for menu front
 		$db = $this->getAdapter();
 		$lang_id = $this->getCurrentLang();
@@ -399,18 +398,6 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 	function getMenuItemsByAlias($alias){ //  for Controler page index
 		$db = $this->getAdapter();
 		$sql="SELECT * FROM `vd_menu` AS m WHERE m.`alias_menu`='$alias' limit 1";
-		
-// 		$row = $db->fetchRow($sql);
-// 		$result='';
-// 		if ($row['menu_type_id']==1){ //category blog
-		
-// 		}elseif ($row['menu_type_id']==2){//category list
-		
-// 		}elseif ($row['menu_type_id']==3){//sigle aticle
-		
-// 		}elseif ($row['menu_type_id']==4){//contacts
-		
-// 		}
 		return $db->fetchRow($sql);
 	}
 	function getArcticleByCate($cateId){ //  for Controler page index
@@ -419,7 +406,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$sql="SELECT *,
 			(SELECT ad.title FROM `vd_article_detail` AS ad WHERE ad.articleId = a.`id` AND ad.language_id=$lang_id LIMIT 1) AS title,
 			(SELECT ad.description FROM `vd_article_detail` AS ad WHERE ad.articleId = a.`id` AND ad.language_id=$lang_id LIMIT 1) AS description
-			FROM `vd_article` AS a WHERE a.`status`=1 AND a.`category_id`=$cateId ";
+			 FROM `vd_article` AS a WHERE a.`status`=1 AND a.`category_id`=$cateId ";
 		return $db->fetchAll($sql); 
 	}
 	function deleteMyadsById($adsid){
@@ -446,18 +433,40 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 				);
 		 $this->update($arr, $where);
 	}
-	
-	function getMyStore($client_id){
+	public function getVewOptoinTypeByType($type=null,$option = null,$limit =null,$first_option =null){
 		$db = $this->getAdapter();
-		$sql="SELECT cs.*,c.`customer_name`,st.`template_main_color`,st.`template_main_font_color`
-			,st.`template_title`,st.`image_theme`
-			FROM `vd_client_store` AS cs,
-			`vd_client` AS c,
-			`vd_sub_template` AS st
-			WHERE cs.`status`=1 AND c.`id`=cs.`client_id`
-			AND st.`id`=cs.`template_id` AND cs.`client_id`=$client_id";
-		return $db->fetchAll($sql);
-	}
+		$sql="SELECT id,key_code,CONCAT(name_en) AS name_en ,displayby FROM `vd_view` WHERE status =1 AND name_en!='' ";//just concate
+		if($type!=null){
+			$sql.=" AND type = $type ";
+		}
+		if($limit!=null){
+			$sql.=" LIMIT $limit ";
+		}
+		$rows = $db->fetchAll($sql);
+		if($option!=null){
+			$options=array();
+			if($first_option==null){//if don't want to get first select
+				$options=array(''=>"-----ជ្រើសរើស-----",-1=>"Add New",);
+			}
+			if(!empty($rows))foreach($rows AS $row){
+				$options[$row['key_code']]=$row['name_en'];//($row['displayby']==1)?$row['name_kh']:$row['name_en'];
+			}
+			return $options;
+		}else{
+			return $rows;
+		}
+	}	
+// 	function getMyStore($client_id){
+// 		$db = $this->getAdapter();
+// 		$sql="SELECT cs.*,c.`customer_name`,st.`template_main_color`,st.`template_main_font_color`
+// 			,st.`template_title`,st.`image_theme`
+// 			FROM `vd_client_store` AS cs,
+// 			`vd_client` AS c,
+// 			`vd_sub_template` AS st
+// 			WHERE cs.`status`=1 AND c.`id`=cs.`client_id`
+// 			AND st.`id`=cs.`template_id` AND cs.`client_id`=$client_id";
+// 		return $db->fetchAll($sql);
+// 	}
 	function getMyStoreByAlias($client_id,$alias){
 		$db = $this->getAdapter();
 		$sql="SELECT cs.*,c.`customer_name`,st.`template_main_color`,st.`template_main_font_color`
