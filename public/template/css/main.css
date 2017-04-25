@@ -1055,7 +1055,8 @@ a, .topbar a,
 .tab-view {
 	float: right;
 	font-size: 20px;
-     width:100% !important;
+    width:100% !important;
+	text-align: right;
 }
 
 .tab-view li {
