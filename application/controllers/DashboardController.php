@@ -132,7 +132,7 @@ class DashboardController extends Zend_Controller_Action
 		$this->view->mystore = $db->getMyStore($client_session->client_id);
 	}
 	function storeAction(){
-		$this->_helper->layout()->disableLayout();
+// 		$this->_helper->layout()->disableLayout();
 		$param = $this->getRequest()->getParams();
 		$this->view->param = $param;
 		
