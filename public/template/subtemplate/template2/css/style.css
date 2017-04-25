@@ -374,7 +374,7 @@ footer{position: relative;}
 .products-swiper:before, .products-swiper:after{position: absolute; left: 0; top: 0; width: 21.25px; height: 100%; background: #fff; content: ""; z-index: 2;}
 .products-swiper:after{right: -3px; left: auto;}
 .products-swiper .paddings-container{padding: 0  16.25px;}
-.product-slide-entry{max-width: 210px; margin: 0 auto; margin-bottom: 50px;}
+.product-slide-entry{max-width: 210px;margin: 0 auto;margin-bottom: 10px;}
 .product-image-label{border-radius: 50%; -webkit-border-radius: 50%; position: absolute; z-index: 1;}
 .product-image-label span{position: absolute; width: 100%; left: 0; top: 50%; transform: translateY(-50%); -moz-transform: translateY(-50%); -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); font-size: 11px; line-height: 12px; color: #fff; font-weight: 700; text-transform: uppercase; text-align: center;}
 .product-image-label.type-1{left: 7px; top: 7px; width: 40px; height: 40px; background: #93b92c;}
@@ -408,7 +408,7 @@ footer{position: relative;}
 .product-image:hover .top-line-a.left{left: 10px;}
 .product-image .top-line-a.right{right: -100px;}
 .product-image:hover .top-line-a.right{right: 10px;}
-.product-slide-entry .tag{font-size: 14px;line-height: 14px;color: #8b8b8b;text-transform: uppercase;display: block;font-weight: 500;margin-bottom: 7px;}
+.product-slide-entry .tag{font-size: 14px;line-height: 14px;color: #8b8b8b;/* text-transform: uppercase; */display: block;font-weight: 500;margin-bottom: 7px;}
 .product-slide-entry .tag:hover{color: #2e2e2e;}
 .product-slide-entry .title{display: block; font-size: 15px; line-height: 18px; color: #2e2e2e; font-weight: 600; margin-bottom: 10px;}
 .product-slide-entry .title b{font-weight: 700;}
@@ -561,7 +561,7 @@ body.style-5 .button.style-4{background: #f17e0e; border-color: #f17e0e;}
 
 .footer-wrapper.style-9 footer.type-2 .footer-links a{color: #3d3d3d;}
 .footer-wrapper.style-9 footer.type-2 .footer-links a:hover{color: #c19f00;}
-.footer-wrapper.style-9 footer.type-2 .copyright a{color: #c19f00;}
+.footer-wrapper.style-9 footer.type-2 .copyright a{color: #ffffff;}
 .footer-wrapper.style-9 footer.type-2 .copyright a:hover{color: #3d3d3d!important;}
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 /* 14 - TEMPLATE PRODUCTS */

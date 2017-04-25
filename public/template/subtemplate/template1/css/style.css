@@ -287,7 +287,7 @@ footer{position: relative;}
 .product-image:hover .top-line-a.left{left: 10px;}
 .product-image .top-line-a.right{right: -100px;}
 .product-image:hover .top-line-a.right{right: 10px;}
-.product-slide-entry .tag{font-size: 14px; line-height: 14px; color: #8b8b8b; text-transform: uppercase; display: block; font-weight: 500; margin-bottom: 7px;}
+.product-slide-entry .tag{font-size: 14px;line-height: 14px;color: #8b8b8b;/* text-transform: uppercase; */display: block;font-weight: 500;margin-bottom: 7px;}
 .product-slide-entry .tag:hover{color: #2e2e2e;}
 .product-slide-entry .title{display: block; font-size: 15px; line-height: 18px; color: #2e2e2e; font-weight: 600; margin-bottom: 10px;}
 .product-slide-entry .title b{font-weight: 700;}
@@ -490,7 +490,7 @@ body:not(.mobile) a.sale-entry:hover .sale-price, body:not(.mobile) a.sale-entry
 footer.type-2 .footer-logo{display: inline-block;vertical-align: bottom;/* margin-bottom: 30px; */    width: 200px;  height: 85px;}
 footer.type-2 .footer-links a{color: #fff;border-color: #ffffff;}
 footer.type-2 .footer-links a:hover{color: #f17e0e;}
-footer.type-2 .copyright a{color: #f17e0e;}
+footer.type-2 .copyright a{color: #ffffff;}
 #content-block footer.type-2 .copyright a:hover{color: #fff;}
 @media (max-width: 767px) {
     footer.type-2{padding: 50px 0 50px 0;}

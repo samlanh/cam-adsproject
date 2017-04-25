@@ -32,7 +32,7 @@ function getAdsDetail(index){ /* get detail ads */
 			document.getElementById('pop-price').innerHTML = "$ "+parseFloat(val.price).toFixed(3);
 
 			document.getElementById('pop-description').innerHTML = val.description;
-			document.getElementById('pop-author').innerHTML = '<a href="'+baseurl+'/index/store/user/'+val.user_id+'" >'+val.author+'</a>';
+			document.getElementById('pop-author').innerHTML = '<a href="'+baseurl+'/store/index?store='+val.store_alias+'" >'+val.author+'</a>';
 			document.getElementById('pop-category').innerHTML = val.parent_cateogry_title;
 			document.getElementById('pop-location').innerHTML = val.province;
 		
