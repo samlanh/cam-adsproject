@@ -33,7 +33,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$order=' ORDER BY id DESC';
 		return $db->fetchAll($sql.$where.$order);
 	}
-	function  getAllAdsByName($cagetory_name){
+	function getAllAdsByName($cagetory_name){
 		$db = $this->getAdapter();
 		$category_id = $this->categoryIdByName($cagetory_name);
 		$lang_id = $this->getCurrentLang();
@@ -42,20 +42,21 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 				"2"=>"province_kh_name"
 		);
 		$province = $province_field[$lang_id];
-		$sql=" SELECT *,
-			(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = `user_id` LIMIT 1) AS author,
-			(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
-			(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name,
-			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = vd_ads.store_id LIMIT 1 ) AS store_alias
-			FROM `vd_ads` WHERE 
-			category_id=$category_id";
+		$sql=" SELECT ad.*,
+			(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author,
+			(SELECT vc.package_id FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS package_id,
+			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ad.store_id LIMIT 1 ) AS store_alias,
+			(SELECT title FROM `vd_category_detail` WHERE ad.category_id=ad.category_id AND languageId=$lang_id LIMIT 1) as category_name,
+			(SELECT $province FROM `vd_province` WHERE id=ad.province_id ) as province_name
+			FROM `vd_ads` AS ad WHERE ad.category_id=$category_id ";
+
 		$where='';
 		$parent = $this->checkCateparent($category_id);
 		if ($parent['parent']==0){
-			$where.=" OR (SELECT c.`parent` FROM `vd_category` AS c WHERE c.`id` = category_id LIMIT 1)  = $category_id";
+			$where.=" OR (SELECT c.`parent` FROM `vd_category` AS c WHERE c.`id` = ad.category_id LIMIT 1)  = $category_id ";
 		}
-		$where.=" AND STATUS =1 AND is_expired=0  ";
-		$order=' ORDER BY id DESC'; 
+		$where.=" AND ad.status =1 AND ad.is_expired=0  And ad.is_suspend=0 ";
+		$order=' ORDER BY package_id DESC '; 
 		return $db->fetchAll($sql.$where.$order);
 	}
 	function checkCateparent($id){
@@ -548,6 +549,19 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 			}
 		}
 		return 2;
+	}
+	public function getDistrictByIdProvince($pro_id){
+		$db = $this->getAdapter();
+		$sql = "SELECT dis_id AS id ,district_namekh AS name FROM ln_district WHERE status=1 AND pro_id =1 ";//.$db->quote($pro_id);
+		$rows=$db->fetchAll($sql);
+		return $rows;
+	}
+	public function getCommuneBydistrict($distict_id){
+		$db = $this->getAdapter();
+		$this->_name='ln_commune';
+		$sql = "SELECT com_id AS id ,commune_namekh AS name FROM $this->_name  WHERE status=1 AND commune_name!='' AND  $this->_name.district_id=".$db->quote($distict_id);
+		$rows=$db->fetchAll($sql);
+		return $rows;
 	}
 }
 ?>
