@@ -15,7 +15,7 @@ class PostsadsController extends Zend_Controller_Action
     	
     }
     public function chooseCategoryAction(){ // choose category before go to write post ads
-    	//$this->_helper->layout()->disableLayout();
+    	$this->_helper->layout()->disableLayout();
     	$paramid = $this->getRequest()->getParam('cateid');
     	$this->view->cateid = $paramid;
     	$client_session=new Zend_Session_Namespace('client');

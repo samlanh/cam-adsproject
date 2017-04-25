@@ -15,6 +15,9 @@
 	<title>Dashboard Management</title>	
 </head>
 <body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
+	<?php 
+		echo $this->render('header.phtml');
+	?>
 	<section class="container">
 		<div class="conten-body">
 			<div class="conten-body-left">
@@ -213,6 +216,9 @@
 	    </div>
 	  </div>
 	</div>
+<?php 
+	echo $this->render('sideright.phtml');
+?>
 <script>
 	window.onload = function(e){ 
 		getBaseUrl('<?php echo $this->baseUrl();?>');

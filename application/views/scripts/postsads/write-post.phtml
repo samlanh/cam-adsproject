@@ -20,17 +20,9 @@
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 ?>
 <body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
-	<section class="container " style="background: #dfe9f6;">	
-		<header class="public-head-layout wrapper" style="margin-bottom: 0px">
-		    <div style="padding: 10px;">
-				<div class="header-item">
-					<a href="<?php echo $this->baseUrl();?>/index">
-						<img src="<?php echo $this->baseUrl();?>/images/logo.png" class="logo" style=" margin-top: 10px;">
-					</a>
-				</div>
-			</div>
-		</header>
-	</section>
+	<?php 
+		echo $this->render('header.phtml');
+	?>
 	<section class="container">
 		<div class="conten-body">
 			<div class="conten-body-left">

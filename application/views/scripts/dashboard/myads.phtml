@@ -15,6 +15,9 @@
 	<title>Dashboard Management</title>	
 </head>
 <body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
+	<?php 
+		echo $this->render('header.phtml');
+	?>
 	<section class="container">
 		<div class="conten-body">
 			<div class="conten-body-left">
@@ -98,7 +101,7 @@
 							<span aria-hidden="true">×</span>
 							</div>
 						</div>
-						<h4>My Ads <span class="right" ><a href="<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'choose-category'));?>" class="button right" title="Post Ads"><i class="fa fa-plus-circle" aria-hidden="true"></i><?php echo $tr->translate("POST_ADS");?></a></h4></div>
+						<h4>My Ads <span class="right" ><a href="<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'choose-category'));?>" class="button right" title="Post Ads"><i class="fa fa-plus-circle" aria-hidden="true"></i><?php echo $tr->translate("Post Ads");?></a></h4></div>
 						<?php if(!empty($this->myads))foreach($this->myads as $key =>$rsad){?>
 						<div class="blog-wrapper <?php if(count($this->myads)==$key+1){echo"last_record";}?>">
 							<div class="ads-left">
@@ -149,6 +152,9 @@
 			</div>
 		</div>
 	</section>
+<?php 
+	echo $this->render('sideright.phtml');
+?>
 <script>
 	window.onload = function(e){ 
 		getBaseUrl('<?php echo $this->baseUrl();?>');

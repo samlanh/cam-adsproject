@@ -2,6 +2,7 @@
 
 class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 {
+	protected $_name = 'vd_ads';
 	public function setName($name){
 		$this->_name=$name;
 	}
@@ -489,6 +490,59 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$db = $this->getAdapter();
 		$sql="SELECT * FROM `vd_sub_template` AS t WHERE t.`status`=1";
 		return $db->fetchAll($sql);
+	}
+	function insertproductByCate(){
+// 		$db = $this->getAdapter();
+// 		$sql="SELECT * FROM vd_category_detail WHERE languageId=1 ";
+// 		$rsc = $db->fetchAll($sql);
+// 		$i=200;
+// 		if(!empty($rsc))foreach($rsc as $rscc){
+// 			$sql="SELECT * FROM `vd_ads` WHERE category_id= ".$rscc['category_id']." LIMIT 1 ";
+// 			$data = $db->fetchRow($sql);
+// 			if(!empty($data))
+				
+// 				for ($j=0;$j<10;$j++){
+// 				$i =$i+1;
+// 				$adsidalias = $i.$data['ads_title'];
+// 				$arr = array(
+// 					'store_id'   =>1,
+// 					"ads_code"   =>empty($data['ads_code'])?'':$data['ads_code'],
+// 					"ads_title"  =>empty($data['ads_title'])?'':$data['ads_title'], $data['ads_title'],
+// 					"price"      =>empty($data['price'])?'':$data['price'],$data['price'],
+// 					"old_price"  =>empty($data['old_price'])?'':$data['old_price'],$data['old_price'],
+// 					'contact_name'=>empty($data['contact_name'])?'':$data['contact_name'],$data['contact_name'],
+// 					'is_whatapp'=>'',
+// 					'is_discount'=>0,
+// 					'is_showcontact'=>0,
+// 					'email'=>empty($data['email'])?'':$data['email'],
+// 					'link'=>empty($data['link'])?'':$data['link'],
+// 					'address'=>empty($data['adress'])?'':$data['adress'],
+// 					"category_id"=>empty($data['category_id'])?'':$data['category_id'],
+// 					"date"       =>date("Y-m-d"),
+// // 					"description"=>empty($data['description'])?'':$data['description'],
+// 					"province_id"=>empty($data['province_id'])?'':$data['province_id'],
+// 					"district_id"=>empty($data['district_id'])?'':$data['district_id'],
+// 					"commune_id"=>empty($data['commune_id'])?'':$data['commune_id'],
+// 					"create_date"=>date("Y-m-d"),
+// 					"date_modified"=>date("Y-m-d"),
+// 					"publish_date" =>date("Y-m-d"),
+// 					"expired_date"=>date("Y-m-d", strtotime(" date('Y-m-d') +15 day")),
+// // 					"meta_description"=>$data['description'],
+// // 					"meta_keyword"    =>$data['description'],
+// 					"alias"           =>$adsidalias,//check later
+// 					"phone1"          =>empty($data['phone1'])?'':$data['phone1'],
+// 					"phone2"          =>empty($data['phone2'])?'':$data['phone2'],
+// 					"status"          =>1,
+// 					"user_id"          =>1,
+// 			);
+// // 				print_r($arr);exit();
+// 				$this->_name='vd_ads';
+// 				$this->insert($arr);
+// // 				$db->insert("vd_ads",$arr);
+// 			}
+			
+// 		}
+// 		return 2;
 	}
 }
 ?>

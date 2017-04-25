@@ -102,7 +102,7 @@ function getCommuneById(){
 		<div class="all-categories section">
 			<div class="container">
 				<div class="row clearpadding">
-					<div class="col-md-2 col-sm-3 leftblog" style="height:500px;background:#fff;">
+					<div class="col-md-2 col-sm-3 leftblog" style="background:#fff;">
 						<?php if(!empty($this->rsbannerleft)){
 						 		  foreach($this->rsbannerleft  as $rsimg){?>
 									<a href="<?php echo $rsimg['link_url'];?>" target="_blank">
@@ -151,7 +151,7 @@ function getCommuneById(){
 														<button type="button" onclick="advancesearch();" class="btn btn-primary form-submit" id="btn_advsearch" name="btn_advsearch">&nbsp;<?php echo $tr->translate("Search Now");?>&nbsp;<i class="fa fa-search"></i></button>
 													</div>
 													<div class="col-md-4">
-														<h4 class="title-page"><?php echo $this->cate_info['cate_name'];?></h4>
+														<!-- <h4 class="title-page"><?php //echo $this->cate_info['cate_name'];?></h4> -->
 													</div>
 													<div class="col-md-4">
 														<div class="tab-view"><ul class="list-inline">
