@@ -67,13 +67,14 @@ class StoreController extends Zend_Controller_Action
 	    		$adsdetail = $dbadsstore->getAdsDetail($alias[0]);
 	    		$this->view->ads_detail = $adsdetail;
 	    		if (!empty($adsdetail['id'])){
-	    			
 	    			$this->view->rsattr = $db->getAdsDetailById($adsdetail['id']);
 	    			$this->view->relate_pro = $dbadsstore->getRelatedAds($adsdetail,$store['id']);
+	    			$db_addview = new Application_Model_DbTable_DbGlobalselect();
+	    			$db->addCountView($alias[0]);
 	    		}
-    		}else{
-    			$this->_redirect("/index");
-    		}
+	    		}else{
+	    			$this->_redirect("/index");
+	    		}
     	}else{
     		$this->_redirect("/index");
     	}
