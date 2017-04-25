@@ -2,6 +2,112 @@
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 ?>
 <title>Slide Show</title>
+<script src="<?php echo $this->baseUrl();?>/js/help.js"  type="text/javascript"></script>
+<script type="text/javascript">
+dojo.require("dojo.data.ObjectStore");
+dojo.require("dojo.data.ItemFileWriteStore");  
+dojo.require("dijit.form.DateTextBox");
+dojo.require("dijit.form.CheckBox");
+dojo.require("dijit.Dialog");
+var district_store = getDataStorefromJSON('id','name', <?php print_r(Zend_Json::encode(array()));?> );
+var commune_store  = getDataStorefromJSON('id','name', <?php print_r(Zend_Json::encode(array()));?> );
+var village_store  = getDataStorefromJSON('id','name', <?php print_r(Zend_Json::encode(array()));?> );
+dojo.ready(function(){
+	new dijit.form.FilteringSelect({
+		store: district_store,
+		autoComplete: true,
+		required: false,		           
+		name: "district",
+		id: "district",
+		searchAttr: "name",
+		class: 'fullside',
+		missingMessage:"អ្នក​ភ្លេច​បំពេញ​ ឈ្មោះ ស្រុក/ខ័ណ្ឌ!",	
+			onChange: function() {
+				district = dijit.byId('district').get('value');
+				if(district==-1){
+					showPopupdistrict();
+					}
+					filterCommune();
+			}  
+		}, "district");
+		 
+		new dijit.form.FilteringSelect({
+		store: commune,
+		autoComplete: true,
+		required: false,		           
+		name: "commune",
+		id: "commune",
+		searchAttr: "name",
+		class: 'fullside',
+		missingMessage:"អ្នក​ភ្លេច​បំពេញ​ ឃុំ/សង្កាត់",	
+			onChange: function() {
+				commune = dijit.byId('commune').get('value');
+				if(commune==-1){
+					showPopupCommune();
+				}
+				else{
+					filterVillage();
+				}
+	  }
+		}, "commune");
+		new dijit.form.FilteringSelect({
+		store: village_store,
+		autoComplete: true,
+		required: false,		           
+		name: "village",
+		id: "village",
+		searchAttr: "name",
+		class: 'fullside',
+		missingMessage:"អ្នក​ភ្លេច​បំពេញ​ ឈ្មោះភូមិ!",	
+			onChange: function() {
+				vill = dijit.byId('village').get('value');
+				if(vill==-1){
+					showPopupVillage();
+				}
+			}
+		}, "village");
+});
+url_getdistrict = '<?php echo $this->url(array('module'=>'other','controller'=>'district','action'=>'get-district'));?>';
+function filterDistrict(){
+	pro_id = dijit.byId('province').get('value');
+	if(pro_id==0){
+		return false;}
+	dojo.xhrPost({
+		url:url_getdistrict,	
+		content:{ 
+			'pro_id': pro_id
+		},
+		handleAs:"json",
+		load: function(data) {	
+			district_store  = getDataStorefromJSON('id','name', data);		
+		    dijit.byId('district').set('store', district_store);
+		},
+		error: function(err) {
+			alert(err);
+		}
+	});	
+}
+url_getcommune = '<?php echo $this->url(array('module'=>'other','controller'=>'commune','action'=>'get-commune'));?>';
+function filterCommune(){
+	distict_id = dijit.byId('district').get('value');
+	if(distict_id==0){
+		return false;}
+		dojo.xhrPost({
+		url:url_getcommune,	
+		content:{ 
+			'district_id': distict_id
+		},
+		handleAs:"json",
+		load: function(data) {	
+			commune_store  = getDataStorefromJSON('id','name', data);		
+		    dijit.byId('commune').set('store', commune_store);
+		},
+		error: function(err) {
+			alert(err);
+		}
+	});
+}
+</script>
 <style>
 .slideshow a{color: #333333;}
 </style>
@@ -42,9 +148,50 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 		</tr>
 		</table>
 		</form>
-		</div> ';
+		</div>';
 ?>
 <form name="list">
+	<table width="100%;">
+		<tr>
+			<td><input dojoType="dijit.form.TextBox" class="fullside" placeholder="Search..." id="advance_search" name="advance_search" value="" type="text"></td>
+			<td>
+				<select dojoType="dijit.form.FilteringSelect" id="edit-field-category" name="category_search" class="">												
+					<option value="-1" selected="selected"><?php echo $tr->translate("Choose Category");?></option>
+					<?php 
+						if(!empty($this->rscate)){
+							foreach($this->rscate as $rsc){
+						?>
+							<option value="<?php echo $rsc['id'];?>" <?php //if($category_search==$rsc['id']){ echo'selected="selected"';}?> ><?php echo $rsc['name'];?></option>
+						<?php }
+						} 
+					?>
+				</select>
+			</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<select  dojoType="dijit.form.FilteringSelect" id="province" name="province" onchange="filterDistrict();">
+					<option value="-1"><?php echo $tr->translate("Choose Location");?></option>
+					<?php 
+						if(!empty($this->rslocation)){
+							foreach($this->rslocation as $rsl){
+						?>
+							<option value="<?php echo $rsl['id'];?>" <?php //if($location_search==$rsl['id']){ echo'selected="selected"';}?>><?php echo $rsl['province_name'];?></option>
+						<?php }
+						} 
+					?>
+				</select>
+			</td>
+			<td><input id="district" ></td>
+      		<td><input id="commune" ></td>
+      		<td><button iconclass="dijitIconSearch" dojoType="dijit.form.Button" showLabel="true" type="submit">Search</button></td>
+		</tr>
+	</table>
+</form>
  <div >
   <table class="collape tablesorter" id="exportExcel" width="100%">
 	   <thead>
@@ -93,7 +240,6 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
      </tbody>
      </table>
    </div>
-  </form>
   <div class="footer_list"><?php echo $stringPagination; ?><span class="row_num"><?php echo $tr->translate('NUM-RECORD')." ".count($this->row)?></span></div>
     <?php }else{?>
     	</table></div><center style="font-size:18pt;"><label id="data_table">No record</label></center></form>

@@ -84,6 +84,17 @@ class Other_DistrictController extends Zend_Controller_Action {
 		Application_Model_Decorator::removeAllDecorator($frm);
 		$this->view->frm_district = $frm;
 	}
+	function getDistrictAction(){
+		if($this->getRequest()->isPost()){
+			$data = $this->getRequest()->getPost();
+			$db_district = new Application_Model_DbTable_DbGlobalselect();
+			$rows='asdfaaaaaaaaaaaaaa';
+			$rows = $db_district->getDistrictByIdProvince($data['pro_id']);
+			//array_unshift($rows, array ( 'id' => -1, 'name' => 'បន្ថែម​អ្នក​ទទួល​ថ្មី') );
+			print_r(Zend_Json::encode($rows));
+			exit();
+		}
+	}
 	public function addNewdistrictAction(){
 		if($this->getRequest()->isPost()){
 			$data = $this->getRequest()->getPost();

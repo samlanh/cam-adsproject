@@ -89,6 +89,17 @@ class Other_CommuneController extends Zend_Controller_Action {
 		$db= new Application_Model_DbTable_DbGlobal();
 		$this->view->district = $db->getAllDistricts();
 	}
+	function getCommuneAction(){
+		if($this->getRequest()->isPost()){
+			$data = $this->getRequest()->getPost();
+			$db = new Application_Model_DbTable_DbGlobalselect();
+// 			$rows="33333333333333";
+			$rows = $db->getCommuneBydistrict($data['district_id']);
+			//array_unshift($rows, array ( 'id' => -1, 'name' => 'បន្ថែម​អ្នក​ទទួល​ថ្មី') );
+			print_r(Zend_Json::encode($rows));
+			exit();
+		}
+	}
 	public function addNewcommuneAction(){
 		if($this->getRequest()->isPost()){
 			$data = $this->getRequest()->getPost();

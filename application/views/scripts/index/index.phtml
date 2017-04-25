@@ -48,7 +48,7 @@ $lang  = $session_lang->lang_id;
 		<div class="container" >
 			<div class="col-md-12 col-sm-12" >
 			<div class="block-title-cate">
-				<p class="b-title"><span><i class="fa fa-television"></i><?php echo $cate['name']?></span></p>
+				<p class="b-title"><span><i class="fa <?php echo $cate['fontawsome_icon'];?>"></i><?php echo $cate['name']?></span></p>
 				<p class="label-show-all"><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$cate['alias_category'];?>"> <?php echo $tr->translate("Show All");?></a></p>
 			</div>
 			<div class="full">

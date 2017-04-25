@@ -11,29 +11,34 @@ class MenuManager_AdsController extends Zend_Controller_Action {
 	public function indexAction(){
 		try{
 			$db = new MenuManager_Model_DbTable_Dbads();
-		    if($this->getRequest()->isPost()){
- 				$search = $this->getRequest()->getPost();
- 				
- 			}
-			else{
-				$search= array(
-						'status_search'=>'',
-						);
+			if($this->getRequest()->isPost()){
+				$data = $this->getRequest()->getPost();
+			}else{
+				$data = array(
+						'keywork_search'=>'',
+						'location_search'=>-1,
+						'category_search'=>-1,
+						'province_id'=>-1,
+						'district'=>-1,
+						'commune'=>-1,
+				);
 			}
-			$this->view-> rsads = $db->getAllAds($search);
-// 			$this->view->row = $rs_rows;
-// 			$glClass = new Application_Model_GlobalClass();
-// 			$rs_rows = $glClass->getImgActive($rs_rows, BASE_URL, true);
-// 			$list = new Application_Form_Frmtable();
-// 			$collumns = array("TITLE","DESCRIPTION","ALL","ACTIVE","DACTIVE","STATUS");
-// 			$link_info=array('module'=>'menu-manager','controller'=>'index','action'=>'edit',);
-// 			$this->view->list=$list->getCheckList(4, $collumns, $rs_rows,array('title'=>$link_info,),0);
+			$this->view->search= $data;
+			$this->view-> rsads = $db->getAllAds($data);
+			
+// 			$db = new Application_Model_DbTable_DbGlobalselect();
+// 			$this->view->rsads = $db->getAllAdvanceSearch($data);
+			
+			$dbg = new Application_Model_DbTable_DbVdGlobal();
+			$this->view->rscate = $dbg->getCategory();
+			
+			$dbl = new Application_Model_DbTable_DbGlobalselect();
+			$this->view->rslocation =$dbl->getAllLocation();
 			
 		}catch (Exception $e){
 			Application_Form_FrmMessage::message("Application Error");
 			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 		}	
-		
 		$frm = new MenuManager_Form_FrmMenu();
 		$frm_manager=$frm->FrmMenuManager();
 		Application_Model_Decorator::removeAllDecorator($frm_manager);
@@ -94,6 +99,7 @@ class MenuManager_AdsController extends Zend_Controller_Action {
   		Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
   	}
   }
+  
   
 }
 

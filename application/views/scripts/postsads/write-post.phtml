@@ -73,7 +73,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 							<div class="form-value" style="margin-left:-3px;">
 								<select id="store" name="store" class="form-select" >
 									<?php if(!empty($this->rsstore) AND count($this->rsstore)>1)foreach($this->rsstore as $rstore){?>
-									<option <?php echo $rstore['id'];?>><?php echo $rstore['store_name'];?></option>
+									<option value="<?php echo $rstore['id'];?>"><?php echo $rstore['store_name'];?></option>
 									<?php }?>
 								</select>
 							</div>
