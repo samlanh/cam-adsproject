@@ -11,7 +11,11 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 	}
 	static function getCurrentLang(){
 		$session_lang=new Zend_Session_Namespace('lang');
-		return $session_lang->lang_id;
+		$lang = $session_lang->lang_id;
+		if(empty($lang)){
+			$session_lang->lang_id=1;
+			return 1;
+		}else{return $lang;}
 	}
 	function getStringProvince(){
 		$lang_id = $this->getCurrentLang();

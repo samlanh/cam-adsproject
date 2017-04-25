@@ -137,7 +137,7 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 				$classspan="col-md-4";
 			}
 			if ($rs["type"]=="select"){
-				$label = $tr->translate("Choose").$tr->translate($rs["label_name"]);
+				$label = $tr->translate("Choose").' '.$tr->translate($rs["label_name"]);
 				$form.=$this->OptionSelectSearch($rs["id"],$rs["title"],$rs["is_require"],$label,$colspan);
 			}elseif ($rs["type"]=="cascade"){
 				$form.="<div class=' $classspan col-sm-3'>";

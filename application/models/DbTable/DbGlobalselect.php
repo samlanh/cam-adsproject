@@ -269,7 +269,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 // 			$s_where[] = " street LIKE '%{$s_search}%'";
 			$sql .=' AND ('.implode(' OR ',$s_where).')';
 		}
-		if($search['category_search']>-1){
+		if($search['category_search']>0){
 			$sub_cate = $this->getAllSubcategory('ad.category_id',$search['category_search']);
 			if(!empty($sub_cate)){//parent
 				$sql.= " ".$sub_cate;

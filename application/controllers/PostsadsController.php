@@ -32,6 +32,7 @@ class PostsadsController extends Zend_Controller_Action
     	}
     }
     public function writePostAction(){ // write post ads and submit ads to finish
+    	$this->_helper->layout()->disableLayout();
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();
     		$dbp = new Application_Model_DbTable_DbPostAds();

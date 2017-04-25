@@ -2,6 +2,24 @@
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 ?>
 <script>
+var url_search = '<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'searchcategoryajax'));?> ';
+	   function advancesearch(){
+	   var formData = $('#frmadvancesearch').val(); 
+	   $("#load-wrapper").css("display", "block");
+	   $.ajax({
+	        url: url_search,
+	        type: "post",
+	        data: $('#frmadvancesearch').serialize(),		
+	        success: function(dataproduct){
+	        	$("#load-wrapper").css("display", "none");
+	        	document.getElementById('lbl_adsshow').innerHTML=dataproduct;					
+			},
+				error: function(err) {
+					 $("#load-wrapper").css("display", "none");
+				}
+			});
+	}
+		
 var url_district = '<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'get-districtbyid'));?> ';
 function getAllDistrict(){
 	var pro_id = $('#location').val();
@@ -97,10 +115,10 @@ function getCommuneById(){
 							<div id="category-tab">
 								<div class="col-md-12">
 									<div class="catgorylist-title">
-										<form action="<?php echo $this->url(array("module"=>'default','controller'=>'listads','action'=>'advresult'));?>" method="post" enctype="multipart/form-data">
+										<form id="frmadvancesearch" name="frmadvancesearch" action="<?php echo $this->url(array("module"=>'default','controller'=>'listads','action'=>'advresult'));?>" method="post" enctype="multipart/form-data">
 											<div class="form-value" style="width: 100%;">
 											<?php echo $this->form;?>
-												<div class="form-row" style="clear: both; padding-top: 10px;">
+												<div class="form-row" style="clear: both;">
 													<div class="col-md-4">
 															<select id="location" name="location" class="form-select" onchange="getAllDistrict();">
 																<option value="-1" selected="selected"><?php echo $tr->translate("Choose Location");?></option>
@@ -128,29 +146,23 @@ function getCommuneById(){
 																</select>
 															</label>
 														</div>
-													
 													</div>
-											
-											</div>
-											
-											<div class="form-row">
-												
-											</div>
-											<div class="col-md-4">
-											
-											</div>
-											<div class="col-md-4">
-												<button type="submit" class="btn btn-primary form-submit" id="btn_advsearch" name="btn_advsearch">&nbsp;<?php echo $tr->translate("Search Now");?>&nbsp;<i class="fa fa-search"></i></button>
+													<div class="col-md-4">
+														<button type="button" onclick="advancesearch();" class="btn btn-primary form-submit" id="btn_advsearch" name="btn_advsearch">&nbsp;<?php echo $tr->translate("Search Now");?>&nbsp;<i class="fa fa-search"></i></button>
+													</div>
+													<div class="col-md-4">
+														<h4 class="title-page"><?php echo $this->cate_info['cate_name'];?></h4>
+													</div>
+													<div class="col-md-4">
+														<div class="tab-view"><ul class="list-inline">
+															<!-- <li class="grid-view-tab"><i class="fa fa-th-large" aria-hidden="true"></i></li> -->
+															<li class="small-view-tab active"><i class="fa fa-th" aria-hidden="true"></i></li>
+															<li class="list-view-tab"><i class="fa fa-th-list" aria-hidden="true"></i></li>
+														</ul>
+														</div>
+													</div>
 											</div>
 										</form>
-									</div>
-									<div class="tab-view">
-										<div style="float: left;"><h4 class="title-page"><?php echo $this->cate_info['cate_name'];?></h4></div>
-										<ul class="list-inline">
-											<!-- <li class="grid-view-tab"><i class="fa fa-th-large" aria-hidden="true"></i></li> -->
-											<li class="small-view-tab active"><i class="fa fa-th" aria-hidden="true"></i></li>
-											<li class="list-view-tab"><i class="fa fa-th-list" aria-hidden="true"></i></li>
-										</ul>
 									</div>
 								</div>
 								<div class="category-tab" >
@@ -158,6 +170,7 @@ function getCommuneById(){
 								  	<div class="tab-content small-view-tab">
 								    	<div role="tabpanel" class="tab-pane active" id="recent">
 								    		<ul>
+								    		<label id="lbl_adsshow" style="width: 100%;">
 											<?php 
 											if(!empty($this->rsads))foreach($this->rsads as $rs){?>
 								    			<li class="item-wrap">
@@ -199,9 +212,7 @@ function getCommuneById(){
 																	
 // 																	$description = mb_substr($rs['description'], 0, 400, 'UTF-8');
 // 																	echo utf8_decode($description);
-																	
 																	?></p>
-																	
 																	<ul>
 																	   <li ><?php echo $rs['category_name'];?></li>
 																	   <li> <?php echo $rs['province_name'];?></li>
@@ -217,6 +228,7 @@ function getCommuneById(){
 														</div><!-- item -->
 								    			</li><!-- item-wrap -->
 								    			<?php }?>
+								    			</label>
 								    		</ul>
 								    	</div> <!--tab-pane-->
 								  	</div>

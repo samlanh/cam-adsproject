@@ -106,6 +106,19 @@ class ListadsController extends Zend_Controller_Action
     		exit();
     	}
     }
+    function searchcategoryajaxAction(){
+    	if($this->getRequest()->isPost()){
+    		$data=$this->getRequest()->getPost();
+    		$db = new Application_Model_DbTable_DbGlobalselect();
+    		$data['district'] = empty($data['district'])?-1:$data['district'];
+    		$data['commune'] = empty($data['commune'])?-1:$data['commune'];
+    		$data['location_search'] = empty($data['location'])?-1:$data['location'];
+    		$data['category_search'] = empty($data['category_search'])?-1:$data['category_search'];
+    		$rs = $db->getAllAdvanceSearch($data,1);
+    		print_r(($rs));
+    		exit();
+    	}
+    }
     function getcontrollerAction(){
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();

@@ -2,13 +2,35 @@
 <html lang="en-US">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<meta charset="UTF-8">
-	<title>Write Posts</title>
+<meta charset="UTF-8">
+	<script type='text/javascript' src="<?php echo $this->baseurl()."/js/jquery.min.js";?>"></script>
+	<link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='bxslider-style-css'  href='<?php echo $this->baseUrl();?>/template/css/jquery.bxslider.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='owl-carousel-css'  href='<?php echo $this->baseUrl();?>/template/css/owl.carousel.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/custom.css' type='text/css' media='all' />
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fancybox.packe.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fitvidse.js'></script>
+	<link rel='stylesheet' href='<?php echo $this->baseUrl();?>/template/css/style.css' type='text/css' />
 </head>
 <?php 
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 ?>
 <body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
+	<section class="container " style="background: #dfe9f6;">	
+		<header class="public-head-layout wrapper" style="margin-bottom: 0px">
+		    <div style="padding: 10px;">
+				<div class="header-item">
+					<a href="<?php echo $this->baseUrl();?>/index">
+						<img src="<?php echo $this->baseUrl();?>/images/logo.png" class="logo" style=" margin-top: 10px;">
+					</a>
+				</div>
+			</div>
+		</header>
+	</section>
 	<section class="container">
 		<div class="conten-body">
 			<div class="conten-body-left">
@@ -20,7 +42,25 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 						<li class=" boxed"><span>Finish</span></li>
 					</ul>
 				</div>
+				<ul style="
+	width: 235px;
+    font-size: 13px;
+    padding: 10px;
+    background-color: #FFFBF6;
+    border: 1px solid #fee6d7;text-align: left;
+">
+					<li style="
+    color: #e61313;
+    font-size: 18px;
+    margin-bottom: 10px;
+"> Posting Rule</li>
+					<li>No posting of same ad or similar ad to multiple categories and inappropriate category</li>
+					<li>No posting of false, inaccurate, misleading, defamatory content</li>
+					<li>You must honestly and accurately describe the item for which you are posting an ad.</li>
+					<li>khmer24.com assumes no responsibility for the accuracy of any advertisements posted on the site</li>
+				</ul>
 			</div>
+			
 			<div class="conten-body-center right post-ads">
 				<div class="title">
 					<h4><span style='border: 1px dashed #b0c2d8;padding: 5px;font-size: 14px;'>
@@ -38,7 +78,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 							<div class="form-label">
 								<label><?php echo $tr->translate("Choose My Store");?><span class="sign_req">*</span></label>
 							</div>
-							<div class="form-value">
+							<div class="form-value" style="margin-left:-3px;">
 								<select id="store" name="store" class="form-select" >
 									<?php if(!empty($this->rsstore) AND count($this->rsstore)>1)foreach($this->rsstore as $rstore){?>
 									<option <?php echo $rstore['id'];?>><?php echo $rstore['store_name'];?></option>
@@ -257,7 +297,9 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 			</div>
 		</div>
 	</section>
-	
+	<?php 
+		echo $this->render('sideright.phtml');
+	?>
 </body>
 <script src="<?php echo $this->baseUrl();?>/template/javascript/validate.js"></script>
 <script src="<?php echo $this->baseUrl();?>/template/javascript/custome.js"></script>
@@ -324,4 +366,13 @@ function getCommuneById(){
 	});
 }
 </script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.bxslider.mine.js'></script> <!--form search-->
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/custome.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.isotope.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/owl.carousel.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.tools.mine.js'></script>
+	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
+	
 </html>
