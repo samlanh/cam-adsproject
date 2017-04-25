@@ -1,0 +1,100 @@
+<?php
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
+<title>Slide Show</title>
+<style>
+.slideshow a{color: #333333;}
+</style>
+<?php 
+		$stringPagination = '<script type="text/javascript">
+		$(document).ready(function(){
+		$("#exportExcel").tablesorter();
+		 
+		$("#exportExcel").tablesorter().tablesorterPager({container: $("#pagination_exportExcel"),size: 50});
+		$("input:.pagedisplay").focus(function(){ this.blur(); });
+		 
+		function changeColor(){
+		alert("change color on mouse over");
+		}
+		});
+		</script>
+		<div id="pagination_exportExcel" class="pager" >
+		<form >
+		<table  style="width: 200px;"><tr>
+		<td><img src="'.BASE_URL.'/images/first.gif" class="first"/></td>
+		<td><img src="'.BASE_URL.'/images/previous.gif" class="prev"/></td>
+		<td><input type="text" class="pagedisplay"/></td>
+		<td><img src="'.BASE_URL.'/images/next.gif" class="next"/></td>
+		<td><img src="'.BASE_URL.'/images/last.gif" class="last"/></td>
+		<td><select class="pagesize" >
+		<option value="10">10</option>
+		<option value="20">20</option>
+		<option value="30">30</option>
+		<option value="40">40</option>
+		<option selected="selected" value="50">50</option>
+		<option value="60">60</option>
+		<option value="70">70</option>
+		<option value="80">80</option>
+		<option value="90">90</option>
+		<option value="100">100</option>
+		</select>
+		</td>
+		</tr>
+		</table>
+		</form>
+		</div> ';
+?>
+<form name="list">
+ <div >
+  <table class="collape tablesorter" id="exportExcel" width="100%">
+	   <thead>
+		    <tr>
+			    <th class="tdheader header"><?php echo $tr->translate('No');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('Ads Code');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('Title');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('Price');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('User');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('Phone');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('Category');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('Location');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('Start Date');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('End Date');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('Status');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('Image');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('Publish');?></th>
+		      </tr>
+	     </thead>
+     	</tbody>
+     <?php $r=0; if(!empty($this->rsads)){foreach ($this->rsads as $key =>$row){
+	      if($r%2==0)$attb='normal';
+	      else $attb='alternate';
+     	  $r++;
+      	?>
+	       <tr align="center" class='slideshow <?php echo $attb; ?>'>
+			  	<td style="border:1px solid #ccc;padding:1px;" align="center"><?php echo $key+1;?></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><a href="<?php echo $this->baseUrl().'/other/slideshow/edit/ads/'.$row['alias'];?>"><?php echo $row['ads_code'];?></a></td>
+			  	<?php 
+				  	$str1 = utf8_encode($row['ads_title']);
+				  	$title = substr($str1, 0, 120);
+			  	?>
+			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><?php echo utf8_decode($title);?></a></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><?php echo $row['price'];?></a></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><?php echo $row['customer_name'];?></a></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><?php echo $row['phone1'];?></a></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><?php echo $row['category_name'];?></a></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><?php echo $row['province_name'];?></a></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><?php echo date("d/m/Y",strtotime($row['publish_date']));?></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><?php echo date("d/m/Y",strtotime($row['expired_date']));?></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><?php echo $row['status'];?></td>
+			  	<td style="border:1px solid #ccc;padding:1px;text-align: center;" ><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><img src="<?php echo $this->baseUrl().'/images/adsimg/'.$row['image_feature'];?>"  style="max-height:30px;"/></a></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><?php echo $row['status_use'];?></td>
+		  </tr>
+      <?php }?>
+     </tbody>
+     </table>
+   </div>
+  </form>
+  <div class="footer_list"><?php echo $stringPagination; ?><span class="row_num"><?php echo $tr->translate('NUM-RECORD')." ".count($this->row)?></span></div>
+    <?php }else{?>
+    	</table></div><center style="font-size:18pt;"><label id="data_table">No record</label></center></form>
+    <?php }?> 

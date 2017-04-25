@@ -40,10 +40,10 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			$adsid = $this->getLastAdsId();
 			$adsidalias = $adsid.str_replace(" ",'', $data['title']);
 			
-			$db = new Application_Model_DbTable_DbGlobalselect();
-			$rsstore = $db->getAllStoreByUser();
+			$dbs = new Application_Model_DbTable_DbGlobalselect();
+			$rsstore = $dbs->getAllStoreByUser();
 			if(count($rsstore)>1){
-				$store_id=empty($data['store_id'])?'':$data['store_id'];
+				$store_id=empty($data['store_id'])?'':$data['store_id'];//check if not real store
 			}else{
 				$store_id = $rsstore[0]['id'];
 			}
@@ -80,7 +80,11 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			);
 			$str_img = '';
 			$arr['image_feature']='noimagefound.jpg';
-			for ($i=0; $i<=6; $i++){
+			
+			$dbg = new Application_Model_DbTable_DbGlobalsetting();
+			$rsallowimg  =  $dbg->getSystemSetting('allow_image',1);
+			
+		    for ($i=0; $i<=$rsallowimg; $i++){
 				$set_feature=0;
 				if(!empty($data['ads-image'.$i]) AND $set_feature==0){
 					$data['ads-image'.$i] = empty($data['ads-image'.$i])?'noimagefound.jpg':$data['ads-image'.$i];

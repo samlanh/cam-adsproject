@@ -16,6 +16,9 @@ class PostsadsController extends Zend_Controller_Action
     }
     public function chooseCategoryAction(){ // choose category before go to write post ads
     	$this->_helper->layout()->disableLayout();
+    	$dbg = new Application_Model_DbTable_DbGlobalsetting();
+    	$allow_post = $dbg->getSystemSetting('allow_post');
+    	
     	$paramid = $this->getRequest()->getParam('cateid');
     	$this->view->cateid = $paramid;
     	$client_session=new Zend_Session_Namespace('client');
@@ -66,6 +69,8 @@ class PostsadsController extends Zend_Controller_Action
     	}else{
     		$this->_redirect("index/login");
     	}
+    	$dbg = new Application_Model_DbTable_DbGlobalsetting();
+    	$this->view->rsallowimg  =  $dbg->getSystemSetting('allow_image',1);
     }
     public function updatePostAction(){ // write post ads and submit ads to finish
     	if($this->getRequest()->isPost()){
