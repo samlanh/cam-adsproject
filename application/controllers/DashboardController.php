@@ -85,7 +85,7 @@ class DashboardController extends Zend_Controller_Action
 		$client_session=new Zend_Session_Namespace('client');
 		
 		$db = new Application_Model_DbTable_DbGlobalselect();
-		$db->insertproductByCate();
+// 		$db->insertproductByCate();
 		
 		$ads = $db->getAdsByUserid($client_session->client_id);
 		
