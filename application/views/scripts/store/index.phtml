@@ -12,7 +12,7 @@
 ?>	
 <?php if ($store['template_id']==1){ //check template?>
 	<?php if ($page[0]=="contacts-us"){?>
-	<title><?php echo "About | Store ".$store['alias_store'];?></title>
+	<title><?php echo "Contact | Store ".$store['alias_store'];?></title>
 	  <div id="content-block">
 	  		<div class="content-center fixed-header-margin">
             <div class="content-push">
@@ -230,7 +230,7 @@
       <?php }?>
  <?php }else if ($store['template_id']==2){ //check template?>
  		<?php if ($page[0]=="contacts-us"){?>
-	<title><?php echo "About | Store ".$store['alias_store'];?></title>
+	<title><?php echo "Contact | Store ".$store['alias_store'];?></title>
 	  <div id="content-block">
             <div class="content-push">
                 <div class="contact-spacer"></div>
@@ -261,6 +261,7 @@
 	  </div>
 	  <?php }else if($page[0]=="about-us"){?>
 	<?php }else{?>
+	<title><?php echo "Store | ".$store['alias_store'];?></title>
    <div class="content-push">
    		<div class="information-blocks">
             <div class="row">
