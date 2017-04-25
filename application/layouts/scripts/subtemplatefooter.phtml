@@ -12,7 +12,7 @@ $request=Zend_Controller_Front::getInstance()->getRequest();
 $param = $request->getParams();
 if (!empty($param['store'])){
 	$temp = explode(".", $param['store']);
-	$store = $db->getMyStoreByAlias($client_session->client_id,$temp[0]);
+	$store = $db->getMyStoreByAlias($temp[0]);
 }
 ?>
 <?php if ($store['template_id']==1){?>

@@ -12,7 +12,7 @@ $request=Zend_Controller_Front::getInstance()->getRequest();
 $param = $request->getParams();
 if (!empty($param['store'])){
 	$temp = explode(".", $param['store']);
-	$store = $db->getMyStoreByAlias($client_session->client_id,$temp[0]);
+	$store = $db->getMyStoreByAlias($temp[0]);
 }else{
 	
 }
@@ -172,7 +172,7 @@ if (!empty($param['page'])){
 	                <header class="type-4">
 	                    <div class="header-top">
 	                        <div class="header-top-entry hidden-xs">
-	                            <div class="title"><i class="fa fa-phone"></i> <a href="tel:+987123654"><b>070899871</b></a></div>
+	                            <div class="title"><i class="fa fa-phone"></i> <a href="tel:+987123654"><b><?php echo $store['store_phone'];?></b></a></div>
 	                        </div>
 	                         <div class="header-top-entry hidden-xs">
 								<div class="title"><i class="fa fa-envelope-o"></i> <a href="tel:+987123654"><b>phanvandy11@gmail.com</b></a></div>

@@ -114,10 +114,11 @@ class Application_Model_DbTable_DbVdGlobal extends Zend_Db_Table_Abstract
 		$province = $this->getStringProvince();
 		$lang_id = $this->getCurrentLang();
 		$sql=" SELECT *,
-		(SELECT customer_name FROM `vd_client` WHERE id=1 LIMIT 1) as suppliyer_name,
+		(SELECT customer_name FROM `vd_client` WHERE id=`vd_ads`.user_id LIMIT 1) as suppliyer_name,
 		(SELECT id FROM `vd_client` WHERE id=1 LIMIT 1) as suppliyerid,
 		(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
-		(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id LIMIT 1 ) as province_name
+		(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id LIMIT 1 ) as province_name,
+		(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = vd_ads.store_id LIMIT 1 ) AS store_alias
 		FROM `vd_ads` WHERE
 		(select  vdc.parent from vd_category as vdc where vdc.id = category_id LIMIT 1)=$category_id
 		AND STATUS =1 AND is_expired=0 ORDER BY id DESC LIMIT 15 ";

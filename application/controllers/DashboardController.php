@@ -139,7 +139,7 @@ class DashboardController extends Zend_Controller_Action
 		$client_session=new Zend_Session_Namespace('client');
 		$db = new Application_Model_DbTable_DbGlobalselect();
 		if (!empty($param['store'])){
-			$store = $db->getMyStoreByAlias($client_session->client_id,$param['store']);
+			$store = $db->getMyStoreByAlias($param['store'],$client_session->client_id);
 			$this->view->store = $store;
 		}
 		$this->view->template = $db->getAlltemplate();

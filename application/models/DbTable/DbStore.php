@@ -123,7 +123,7 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 		);
 		return $province_field[$lang_id];
 	}
-	function getAdsByUserid($user_id,$most_view=null,$feature=null,$store_id=null){
+	function getAdsByUserid($most_view=null,$feature=null,$store_id=null){
 		$this->_name='vd_ads';
 		$db = $this->getAdapter();
 		$lang_id = $this->getCurrentLang();
@@ -136,7 +136,7 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 		(SELECT title FROM `vd_category_detail` WHERE category_id= ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
 		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$lang_id LIMIT 1)  AS parent_category_name,
 		(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name
-		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.user_id = $user_id  AND ads.store_id = $store_id";
+		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id`   AND ads.store_id = $store_id";
 		$order='';
 		if (!empty($most_view)){ // for use in store
 			$order.=" ORDER BY ads.viewer DESC LIMIT 10";
@@ -147,7 +147,7 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 		return $db->fetchAll($sql.$order);
 	}
 	
-	function  getAllAdsByName($client,$cagetory_name,$store_id){
+	function  getAllAdsByName($cagetory_name,$store_id){
 		$db = $this->getAdapter();
 		$category_id = $this->categoryIdByName($cagetory_name);
 		$lang_id = $this->getCurrentLang();
@@ -160,7 +160,7 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 		(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = `user_id` LIMIT 1) AS author,
 		(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
 		(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name
-		FROM `vd_ads` WHERE `user_id` = $client AND store_id=$store_id AND
+		FROM `vd_ads` WHERE store_id=$store_id AND
 		category_id=$category_id";
 		$where='';
 		$parent = $this->checkCateparent($category_id);
@@ -186,7 +186,7 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 		return $cate_id;
 	}
 	
-	function getParentCategory($user_id,$store_id){ // for get Category for store page
+	function getParentCategory($store_id){ // for get Category for store page
 		$db = $this->getAdapter();
 		$lang_id = $this->getCurrentLang();
 		$sql="SELECT 
@@ -199,7 +199,7 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 			`vd_category_detail` AS catd
 			WHERE cat.`id` = ad.`category_id` AND
 			catd.`category_id` = cat.`parent` AND catd.`languageId`=$lang_id
-			AND ad.`user_id`=$user_id AND ad.store_id = $store_id
+			AND ad.store_id = $store_id
 			GROUP BY cat.`parent`";
 		return $db->fetchAll($sql);
 	}

@@ -10,14 +10,14 @@ class StoreController extends Zend_Controller_Action
        	$param = $this->getRequest()->getParams();
 		if (!empty($param['store'])){
 	       	$temp = explode(".", $param['store']);
-			$store = $db->getMyStoreByAlias($client_session->client_id,$temp[0]);
+			$store = $db->getMyStoreByAlias($temp[0]);
 	      	$this->view->store = $store;
 	      	if (!empty($store)){
 		      	$dbadsstore = new Application_Model_DbTable_DbStore();
-		       $this->view->myadsmostview = $dbadsstore->getAdsByUserid($client_session->client_id,1,null,$store['id']);
-		       $this->view->myadsfeature = $dbadsstore->getAdsByUserid($client_session->client_id,null,1,$store['id']);
+		       $this->view->myadsmostview = $dbadsstore->getAdsByUserid(1,null,$store['id']);
+		       $this->view->myadsfeature = $dbadsstore->getAdsByUserid(null,1,$store['id']);
 		       
-		       $this->view->parent_cate = $dbadsstore->getParentCategory($client_session->client_id,$store['id']);
+		       $this->view->parent_cate = $dbadsstore->getParentCategory($store['id']);
 	      	}else{
     			$this->_redirect("/index");
     		}
@@ -34,16 +34,16 @@ class StoreController extends Zend_Controller_Action
     	$param = $this->getRequest()->getParams();
     	if (!empty($param['store'])){
     		$temp = explode(".", $param['store']);
-    		$store = $db->getMyStoreByAlias($client_session->client_id,$temp[0]);
+    		$store = $db->getMyStoreByAlias($temp[0]);
     		$this->view->store = $store;
     		if (!empty($store)){
 	    		$dbadsstore = new Application_Model_DbTable_DbStore();
-	    		$this->view->parent_cate = $dbadsstore->getParentCategory($client_session->client_id,$store['id']);
+	    		$this->view->parent_cate = $dbadsstore->getParentCategory($store['id']);
 	    		$page = explode(".", $param['page']);
 	    		if ($page[0]=="allads"){
-	    			$this->view->myadsfeature = $dbadsstore->getAdsByUserid($client_session->client_id,null,null,$store['id']);
+	    			$this->view->myadsfeature = $dbadsstore->getAdsByUserid(null,null,$store['id']);
 	    		}else{
-	    			$this->view->myadsfeature = $dbadsstore->getAllAdsByName($client_session->client_id,$page[0],$store['id']);
+	    			$this->view->myadsfeature = $dbadsstore->getAllAdsByName($page[0],$store['id']);
 	    		}
     		}else{
     			$this->_redirect("/index");
@@ -59,7 +59,7 @@ class StoreController extends Zend_Controller_Action
     	$param = $this->getRequest()->getParams();
     	if (!empty($param['store'])){
     		$temp = explode(".", $param['store']);
-    		$store = $db->getMyStoreByAlias($client_session->client_id,$temp[0]);
+    		$store = $db->getMyStoreByAlias($temp[0]);
     		$this->view->store = $store;
     		if (!empty($store)){
 	    		$dbadsstore = new Application_Model_DbTable_DbStore();

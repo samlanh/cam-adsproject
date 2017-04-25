@@ -25,7 +25,8 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$sql=" SELECT *,
 			(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = `user_id` LIMIT 1) AS author,
 			(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
-			(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name
+			(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name,
+			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = vd_ads.store_id LIMIT 1 ) AS store_alias
 			FROM `vd_ads` WHERE 1 ";
 		$where='';
 		$where.=" AND STATUS =1 AND is_expired=0 ";
@@ -44,7 +45,8 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$sql=" SELECT *,
 			(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = `user_id` LIMIT 1) AS author,
 			(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
-			(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name
+			(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name,
+			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = vd_ads.store_id LIMIT 1 ) AS store_alias
 			FROM `vd_ads` WHERE 
 			category_id=$category_id";
 		$where='';
@@ -120,7 +122,8 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 			cat.alias_category,
 			(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$lang_id LIMIT 1)  AS parent_category_name,
 			(select parent.alias_category from vd_category as parent  where parent.id = cat.`parent` LIMIT 1 ) AS parent_alias_category,
-			(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name
+			(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name,
+			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_alias
  		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.`alias`='$alias' LIMIT 1";
 		return $db->fetchRow($sql); 
 	}
@@ -475,7 +478,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 			AND st.`id`=cs.`template_id` AND cs.`client_id`=$client_id";
 		return $db->fetchAll($sql);
 	}
-	function getMyStoreByAlias($client_id,$alias){
+	function getMyStoreByAlias($alias,$client_id=null){
 		$db = $this->getAdapter();
 		$sql="SELECT cs.*,c.`customer_name`,st.`template_main_color`,st.`template_main_font_color`
 		,st.`template_title`,st.`image_theme`
@@ -483,7 +486,12 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		`vd_client` AS c,
 		`vd_sub_template` AS st
 		WHERE cs.`status`=1 AND c.`id`=cs.`client_id`
-		AND st.`id`=cs.`template_id` AND cs.`client_id`=$client_id and cs.`alias_store`= '$alias' ";
+		AND st.`id`=cs.`template_id` AND  cs.`alias_store`= '$alias' ";
+		if (!empty($client_id)){
+			$sql.=" AND cs.`client_id`=$client_id";
+		}
+		$sql.=" LIMIT 1";
+		
 		return $db->fetchRow($sql);
 	}
 	function getAlltemplate(){
