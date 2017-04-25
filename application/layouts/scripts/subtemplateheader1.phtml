@@ -1,0 +1,228 @@
+<?php $db = new Application_Model_DbTable_DbVdGlobal();
+$lang =$db->getLaguage();
+$session_lang=new Zend_Session_Namespace('lang');
+$session_lang->lang_id;
+
+$client_session=new Zend_Session_Namespace('client');
+$clentid = $client_session->client_id;
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+
+$db = new Application_Model_DbTable_DbGlobalselect();
+$request=Zend_Controller_Front::getInstance()->getRequest();
+$param = $request->getParams();
+if (!empty($param['store'])){
+	$temp = explode(".", $param['store']);
+	$store = $db->getMyStoreByAlias($client_session->client_id,$temp[0]);
+}else{
+	
+}
+$page = array();
+$page[0]='';
+if (!empty($param['page'])){
+	$page = explode(".", $param['page']);
+}
+
+?>
+<?php if ($store['template_id']==1){?>
+<html>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
+    <link href="<?php echo $this->baseUrl();?>/template/subtemplate/template1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $this->baseUrl();?>/template/subtemplate/template1/css/idangerous.swiper.css" rel="stylesheet" type="text/css" />
+    <link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+    <link href="<?php echo $this->baseUrl();?>/template/subtemplate/template1/css/style.css" rel="stylesheet" type="text/css" />
+  
+  	<style>
+		header{margin-bottom: 25px;/* position: absolute; *//* z-index: 5; */background: <?php echo $store['template_color'];?>;/* padding: 0 70px; *//* top: 0; *//* left: 0; */width: 100%;}
+		.header-wrapper.style-10 header:not(.fixed-header) nav>ul>li>a{color: <?php echo $store['font_color'];?>;}
+		.header-wrapper.style-10 header:not(.fixed-header) .nav-overflow {border-bottom: solid 3px <?php echo $store['template_color'];?>;}
+		footer.type-2{background: <?php echo $store['template_color'];?>;text-align: center;padding: 20px 0;}
+		.product-slide-entry .title:hover{color: <?php echo $store['font_color'];?>;}		
+		.swiper-tabs .block-title:before{position: absolute;left: 0;height: 3px;bottom: -2px;content: "";background: <?php echo $store['template_color'];?>;width: 0;}
+			.square-button:hover, .square-button.active{background: <?php echo $store['template_color'];?>; border-color: <?php echo $store['template_color'];?>; color: #fff;}
+		.footer-wrapper.style-10 .footer-columns-entry{background: <?php echo $store['template_color'];?>;padding-left: 20px;padding-right: 20px;border: none;}}
+    </style>
+<body class="style-10">
+    <!-- LOADER -->
+    <div id="loader-wrapper">
+        <div class="bubbles">
+            <div class="title">loading</div>
+            <span></span>
+            <span id="bubble2"></span>
+            <span id="bubble3"></span>
+        </div>
+    </div>
+	<!-- HEADER -->
+            <div class="header-wrapper style-10">
+                <header class="type-1">
+
+                    <div class="header-product">
+                        <div class="logo-wrapper">
+                            <a href="<?php echo $this->baseUrl()."/store/index?store=".$store['alias_store'].".html";?>" id="logo">
+                            <?php if (!empty($store['logo_store'])){?>
+                           	 <img alt="" src="<?php echo $this->baseUrl()."/images/store/".$store['logo_store'];?>">
+                           	 <?php }else{?>
+                           	 	<h2 class="logo_charecter"><?php echo $store['customer_name'];?></h2>
+                           	 <?php }?>
+                            </a>
+                        </div>
+						  <div class="product-header-message">
+                            FREE SHIPPING ON ALL UK ORDERS this week
+                        </div>
+                       <div class="product-header-content">
+                            <div class="line-entry">
+                                <div class="header-top-entry increase-icon-responsive">
+                                    <div class="title"><i class="fa fa-facebook"></i></div>
+                                </div>
+								<div class="header-top-entry increase-icon-responsive">
+                                    <div class="title"><i class="fa fa-twitter"></i> </div>
+                                </div>
+								<div class="header-top-entry increase-icon-responsive">
+                                    <div class="title"><i class="fa fa-google-plus"></i> </div>
+                                </div>
+								<div class="header-top-entry increase-icon-responsive">
+                                    <div class="title"><i class="fa fa-youtube"></i> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="close-header-layer"></div>
+                    <div class="navigation">
+                        <div class="nav-overflow">
+                            <nav>
+                                <ul>
+                                    <li class="full-width">
+                                        <a href="<?php echo $this->baseUrl()."/store/index?store=".$store['alias_store'].".html";?>" <?php if (empty($page[0])){ echo 'class="active"';}?> >Home</a>
+                                    </li>
+									<li class="full-width">
+                                        <a href="<?php echo $this->baseUrl()."/store/ads?store=".$store['alias_store']."&page=allads.html";?>" <?php if ($page[0]=="allads"){ echo 'class="active"';}?>>All Ads</a>
+                                    </li>
+                                    <li class="simple-list">
+                                        <a <?php if ($page[0]=="about-us"){ echo 'class="active"';}?> href="<?php echo $this->baseUrl()."/store/index?store=".$store['alias_store']."&page=about-us.html";?> ">About Us</a>
+                                    </li>
+                                    <li class="full-width-columns">
+                                        <a  <?php if ($page[0]=="contacts-us"){ echo 'class="active"';}?> href="<?php echo $this->baseUrl()."/store/index?store=".$store['alias_store']."&page=contacts-us.html";?>">Contact Us</a>
+                                    </li>
+                                </ul>
+
+                                <div class="clear"></div>
+                            </nav>                           
+                           
+                        </div>
+                    </div>
+                </header>
+                <div class="clear"></div>
+            </div>
+   
+   <?php }else if($store['template_id']==2){?>
+   	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	    <meta name="format-detection" content="telephone=no" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
+	    <link href="<?php echo $this->baseUrl();?>/template/subtemplate/template2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	    <link href="<?php echo $this->baseUrl();?>/template/subtemplate/template2/css/idangerous.swiper.css" rel="stylesheet" type="text/css" />
+	    <link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+	    <link href="<?php echo $this->baseUrl();?>/template/subtemplate/template2/css/style.css" rel="stylesheet" type="text/css" />
+	    <style>
+			header.type-4 .header-top:before{background: <?php echo $store['template_color'];?>;}      
+			.navigation{background: <?php echo $store['template_color'];?>; border-bottom: 2px <?php echo $store['template_color'];?> solid;} 
+			nav>ul>li>a{color: <?php echo $store['font_color'];?>;}
+			 header.type-4 .header-top-entry .title .fa,
+			header.type-4 .header-top-entry.hidden-xs a{color: <?php echo $store['font_color'];?>;}
+			@media (min-width: 1200px){  
+			   header.type-4 .header-functionality-entry{color: <?php echo $store['font_color'];?>;}
+			   }  		  
+			header.type-4 .header-functionality-entry:hover{color: #e3e3e3;}
+			.footer-wrapper.style-9 footer.type-2{background:<?php echo $store['template_color'];?>;}
+			body.style-12 .product-slide-entry .title:hover{color: <?php echo $store['template_color'];?>;}		
+			 header.type-4 .header-functionality-entry,
+			.header-top-entry .title{border-left: 1px <?php echo $store['font_color'];?> solid;}
+			.column-article-entry .title:hover{color: <?php echo $store['template_color'];?>;}
+			.swiper-tabs .block-title:before{position: absolute;left: 0;height: 3px;bottom: -2px;content: "";background: <?php echo $store['template_color'];?>;width: 0;}
+			a#logo h2 {
+			    font-size: 30px;
+			    color: #2e2e2e;
+			    text-transform: uppercase;
+			    font-weight: bold;
+			    border-bottom: solid 5px <?php echo $store['template_color'];?>;
+			}
+			.square-button:hover, .square-button.active{background: <?php echo $store['template_color'];?>; border-color: <?php echo $store['template_color'];?>; color: #fff;}		
+	 </style>
+	</head>
+	<body class="style-12">
+	
+	    <!-- LOADER -->
+	    <div id="loader-wrapper">
+	        <div class="bubbles">
+	            <div class="title">loading</div>
+	            <span></span>
+	            <span id="bubble2"></span>
+	            <span id="bubble3"></span>
+	        </div>
+	    </div>
+	    <div id="content-block">
+	        <div class="content-center fixed-header-margin">
+	            <!-- HEADER -->
+	            <div class="header-wrapper style-12">
+	                <header class="type-4">
+	                    <div class="header-top">
+	                        <div class="header-top-entry hidden-xs">
+	                            <div class="title"><i class="fa fa-phone"></i> <a href="tel:+987123654"><b>070899871</b></a></div>
+	                        </div>
+	                         <div class="header-top-entry hidden-xs">
+								<div class="title"><i class="fa fa-envelope-o"></i> <a href="tel:+987123654"><b>phanvandy11@gmail.com</b></a></div>
+	                        </div>
+	                   
+	                        <div class="clear"></div>
+	                    </div>
+	
+	                    <div class="header-middle">
+	                        <div class="logo-wrapper">
+	                        <a href="<?php echo $this->baseUrl()."/store/index?store=".$store['alias_store'].".html";?>" id="logo">
+	                            <?php if (!empty($store['logo_store'])){?>
+	                           	 <img alt="" src="<?php echo $this->baseUrl()."/images/store/".$store['logo_store'];?>">
+	                           	 <?php }else{?>
+	                           	 	<h2 class="logo_charecter"><?php echo $store['customer_name'];?></h2>
+	                           	 <?php }?>
+	                            </a>
+	                        </div>
+	
+	                        <div class="right-entries">
+	                            <a class="header-functionality-entry" href="#"><i class="fa fa-facebook"></i></a>
+								 <a class="header-functionality-entry" href="#"><i class="fa fa-twitter"></i></a>
+								 <a class="header-functionality-entry" href="#"><i class="fa fa-google-plus"></i></a>
+	                            <a class="header-functionality-entry" href="#"><i class="fa fa-youtube"></i></a>
+	                        </div>
+	                    </div>
+	                    <div class="navigation">
+	                        <div class="nav-overflow">
+	                            <nav>
+								  <ul>
+	                                    <li class="full-width">
+	                                        <a <?php if (empty($page[0])){ echo 'class="active"';}?> href="<?php echo $this->baseUrl()."/store/index?store=".$store['alias_store'].".html";?>" >Home</a>
+	                                    </li>
+										<li class="full-width">
+	                                        <a href="<?php echo $this->baseUrl()."/store/ads?store=".$store['alias_store']."&page=allads.html";?>" <?php if ($page[0]=="allads"){ echo 'class="active"';}?>>All Ads</a>
+	                                    </li>
+	                                    <li class="simple-list">
+	                                        <a <?php if ($page[0]=="about-us"){ echo 'class="active"';}?> href="<?php echo $this->baseUrl()."/store/index?store=".$store['alias_store']."&page=about-us.html";?> ">About Us</a>
+	                                    </li>
+	                                    <li class="full-width-columns">
+	                                        <a  <?php if ($page[0]=="contacts-us"){ echo 'class="active"';}?> href="<?php echo $this->baseUrl()."/store/index?store=".$store['alias_store']."&page=contacts-us.html";?>">Contact Us</a>
+	                                    </li>
+	                                </ul>
+	
+	                                <div class="clear"></div>
+	                            </nav>
+	                        </div>
+	                        
+	                    </div>
+	                </header>
+	                <div class="clear"></div>
+	            </div>
+   <?php }?>

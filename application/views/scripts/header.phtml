@@ -1,3 +1,7 @@
+<?php $db = new Application_Model_DbTable_DbVdGlobal();
+$db_select = new Application_Model_DbTable_DbGlobalselect();
+$lang =$db->getLaguage();
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();?>
 <head>
 <meta charset="UTF-8">
 	<script type='text/javascript' src="<?php echo $this->baseurl()."/js/jquery.min.js";?>"></script>
@@ -27,3 +31,34 @@
 		</div>
 	</div>
 	</section>
+	<script>		
+		var url_changelang = '<?php echo $this->url(array('module'=>'default','controller'=>'index','action'=>'changelange'));?> ';
+		function changeLange(lang){
+			$.ajax({
+				url: url_changelang,
+				type: "post",
+				data:{'lange':lang},
+				success: function(data){
+					location.reload();
+				},
+				error:function(err){
+				}
+			});
+		}
+		<?php if ($lang==1){?>
+			var monthNames = [
+			                  "Jan", "Feb", "Mar",
+			                  "Apr", "May", "Jun", "Jul",
+			                  "Aug", "September", "Oct",
+			                  "Nov", "Dec"
+			                ];
+	      <?php }else{?>
+	      var monthNames = [
+		                  "មករា", "កុម្ភៈ", "មិនា",
+		                  "មេសា", "ឧសភា", "មិថុនា", "កក្កដា",
+		                  "សីហា", "កញ្ញា", "តុលា",
+		                  "វិច្ឆិការ", "ធ្នូ"
+		                ];
+	      <?php }?>
+	      var baseurl = '<?php echo $this->baseUrl();?>';
+	</script>

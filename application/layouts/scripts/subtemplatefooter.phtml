@@ -1,0 +1,72 @@
+<?php $db = new Application_Model_DbTable_DbVdGlobal();
+$lang =$db->getLaguage();
+$session_lang=new Zend_Session_Namespace('lang');
+$session_lang->lang_id;
+
+$client_session=new Zend_Session_Namespace('client');
+$clentid = $client_session->client_id;
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+
+$db = new Application_Model_DbTable_DbGlobalselect();
+$request=Zend_Controller_Front::getInstance()->getRequest();
+$param = $request->getParams();
+if (!empty($param['store'])){
+	$temp = explode(".", $param['store']);
+	$store = $db->getMyStoreByAlias($client_session->client_id,$temp[0]);
+}
+?>
+<?php if ($store['template_id']==1){?>
+<div class="clear"></div>
+		  <!-- FOOTER -->
+            <div class="footer-wrapper style-9">
+                <footer class="type-2">
+                    <div class="position-center">
+                      <?php if (!empty($store['logo_store'])){?>
+                        <img alt="" src="<?php echo $this->baseUrl()."/images/store/".$store['logo_store'];?>" class="footer-logo">
+                           	 <?php }else{?>
+                           	 <h2 class="logo_charecter footer"><?php echo $store['customer_name'];?></h2>
+                         <?php }?>
+                        <div class="footer-links">
+                            <a href="<?php echo $this->baseUrl()."/store/index?store=".$store['alias_store'].".html";?>">Home</a>
+                            <a href="<?php echo $this->baseUrl()."/store/index?store=".$store['alias_store']."&page=about-us.html";?>">About us</a>
+                            <a href="<?php echo $this->baseUrl()."/store/index?store=".$store['alias_store']."&page=contacts-us.html";?>">Contact Us</a>
+                        </div>
+                        <div class="copyright">Created with by <a href="#">8theme</a>. All right reserved</div>
+                    </div>
+                </footer>
+            </div>
+       </div>
+
+  
+    <script type='text/javascript' src="<?php echo $this->baseurl()."/js/jquery.min.js";?>"></script>
+    <script src="<?php echo $this->baseUrl();?>/template/subtemplate/template1/js/idangerous.swiper.min.js"></script>
+    <script src="<?php echo $this->baseUrl();?>/template/subtemplate/template1/js/global.js"></script>
+
+    <!-- custom scrollbar -->
+    <script src="<?php echo $this->baseUrl();?>/template/subtemplate/template1/js/jquery.mousewheel.js"></script>
+    <script src="<?php echo $this->baseUrl();?>/template/subtemplate/template1/js/jquery.jscrollpane.min.js"></script>
+</body>
+</html>
+ <?php }else if($store['template_id']==2){?>
+  </div>
+ <div class="clear"></div>
+    <!-- FOOTER -->
+            <div class="footer-wrapper style-9">
+                <footer class="type-2">
+                    <div class="position-center">
+                        <div class="copyright">Created with by <a href="#">8theme</a>. All right reserved</div>
+                    </div>
+                </footer>
+            </div>
+    </div>
+    <script type='text/javascript' src="<?php echo $this->baseurl()."/js/jquery.min.js";?>"></script>
+    <script src="<?php echo $this->baseUrl();?>/template/subtemplate/template2/js/idangerous.swiper.min.js"></script>
+    <script src="<?php echo $this->baseUrl();?>/template/subtemplate/template2/js/global.js"></script>
+
+    <!-- custom scrollbar -->
+    <script src="<?php echo $this->baseUrl();?>/template/subtemplate/template2/js/jquery.mousewheel.js"></script>
+    <script src="<?php echo $this->baseUrl();?>/template/subtemplate/template2/js/jquery.jscrollpane.min.js"></script>
+</body>
+
+</html>
+<?php }?>

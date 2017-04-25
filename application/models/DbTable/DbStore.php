@@ -23,9 +23,10 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 		$sql="SELECT COUNT(cs.`id`) FROM `vd_client_store` AS cs WHERE cs.`status`=1 and cs.`client_id` = $client_id";
 		return $db->fetchOne($sql);
 	}
-	function generateStoreAlias(){
+	function generateStoreAlias($client_id){
 		$db = new Application_Model_DbTable_DbClient();
-		$client= $db->getClientInfo(null,$this->getClientID());
+		$client= $db->getClientInfo(null,$client_id);
+	print_r($client);exit();
 		$title = str_replace(' ','',$client['user_name']);
 		return $title.$client['id'].($this->countStoreByClient()+1);
 	}
@@ -44,7 +45,7 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 				move_uploaded_file($_FILES["logo_image"]["tmp_name"], $part . $newName);
 			}
 			$arr = array(
-					'alias_store'=>$this->generateStoreAlias(),
+					'alias_store'=>$this->generateStoreAlias($client_id),
 					'client_id'=>$client_id,
 					'template_id'=>$data['templatess'],
 					'logo_store'=>$newName,

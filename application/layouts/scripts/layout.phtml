@@ -140,13 +140,19 @@
             </table>
     </body>
 <?php }else{
-	if ($module=="default"  AND ($action!="login" && $action!="register") ){
-		echo $this->render('frontheader.phtml');
-		echo $this->render('sideright.phtml');
+	if ($module=="default"  AND $controller=="store"){
+		echo $this->render('subtemplateheader1.phtml');
+		echo $this->layout()->content;
+		echo $this->render('subtemplatefooter.phtml');
+	}else{
+		if ($module=="default"  AND ($action!="login" && $action!="register") ){
+			echo $this->render('frontheader.phtml');
+			echo $this->render('sideright.phtml');
+		}
+		echo $this->layout()->content;
+		
+		echo $this->render('frontbottom.phtml');
 	}
-	echo $this->layout()->content;
-	
-	echo $this->render('frontbottom.phtml');
 }?>
 <iframe name=print_frame width=0 height=0 frameborder=0 src=about:blank></iframe>
 <?php if($module=='report' AND $action!='index'){?>

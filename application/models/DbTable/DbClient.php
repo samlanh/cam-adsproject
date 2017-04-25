@@ -22,7 +22,24 @@ class Application_Model_DbTable_DbClient extends Zend_Db_Table_Abstract
     		);
     		$this->_name = "vd_client";
     		$row= $this->insert($arr);
-    		$db->commit();
+    		
+    		// add default store
+//     		$db_store = new Application_Model_DbTable_DbStore();
+    		$title = str_replace(' ','',$data['user_name']);
+    		$arr_store = array(
+					'alias_store'=>$title.$row."1",
+					'client_id'=>$row,
+					'template_id'=>1,
+					'status'=>1,
+					'template_color'=>"#2a328d",
+					'font_color'=>"#2a328d",
+					'create_date'=>date("Y-m-d"),
+					'modify_date'=>date("Y-m-d"),
+					);
+			$this->_name="vd_client_store";
+			$this->insert($arr_store);
+    		
+			$db->commit();
     		return $row;
     	}catch(exception $e){
     		Application_Form_FrmMessage::message("Application Error");
