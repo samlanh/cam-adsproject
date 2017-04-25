@@ -374,6 +374,26 @@ input:-moz-placeholder{
 	min-height: 390px;
 	/*---z-index: 9;---*/
 }
+#static-imageheader{
+	/*---height: 744px;---*/
+	position: relative;
+	transform: translateX(0px);
+	-webkit-transform: translateX(0px);
+	-moz-transform: translateX(0px);
+	-o-transform: translateX(0px);
+	min-height: 250px;
+	background-position: 0px -231px;
+opacity:0.7;
+	/*---z-index: 9;---*/
+}
+.static-imageheader{
+	background-color:#fff;
+	background-image:url("../staticbanner.jpg");
+	background-repeat:;
+	background-position:;
+	background-size:;
+	background-attachment:;
+	}
 .banner-text-container2{
 	position:relative;
 	top:50%;

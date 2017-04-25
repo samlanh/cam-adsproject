@@ -344,7 +344,7 @@ background: #f8f8f8;
 
 
 .static-image-2{
-		background-color:#fff;
+	background-color:#fff;
 	background-image:url("../staticbanner.jpg");
 	background-repeat:;
 	background-position:;
@@ -1082,7 +1082,7 @@ ul.tabs.horizontal li.active a {
 			position: relative;
 			display: block;
 			padding: 5px 10px;
-			text-align: center;
+			text-align: left;
 			color: white;
 			background: #4183d7;
 			border: solid 1px #ccc;
