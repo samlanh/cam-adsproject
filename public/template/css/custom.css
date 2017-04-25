@@ -364,6 +364,16 @@ input:-moz-placeholder{
 	min-height: 390px;
 	/*---z-index: 9;---*/
 }
+#static-image2{
+	/*---height: 744px;---*/
+	position: relative;
+	transform: translateX(0px);
+	-webkit-transform: translateX(0px);
+	-moz-transform: translateX(0px);
+	-o-transform: translateX(0px);
+	min-height: 390px;
+	/*---z-index: 9;---*/
+}
 .banner-text-container2{
 	position:relative;
 	top:50%;

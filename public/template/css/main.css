@@ -168,7 +168,7 @@ textarea {
 }
 
 .btn.btn-primary {
-	font-size: 18px;
+	font-size: 16px;
     font-weight: 400;
     text-transform: capitalize;
     background-color: #4282d4;
@@ -1061,13 +1061,13 @@ a, .topbar a,
 .tab-view li {
 	color: #6f6f6f;
 	background-color: #fff;
-	padding: 10px 16px;
+	padding: 0px 9px;
 	border: 1px solid #f1f1f1;
 	border-bottom: 1px solid #ddd;
 	margin-left: 7px;
 	cursor: pointer;
 }
-.tab-view ul{ float: right;margin-top:10px;}
+.tab-view ul{ margin-top:10px;}
 
 .view-all-ads {
 	margin-top: 65px;
@@ -1967,7 +1967,7 @@ ul.breadcrumb > li + li:before {
 }
 .breadcrumb li.active, .breadcrumb li a {
 	color: #4183d7;
-    font-size: 16px;
+    font-size: 14px;
 }
 .breadcrumb li a i {
     padding-right: 5px;
