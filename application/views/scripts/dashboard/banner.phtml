@@ -2,12 +2,9 @@
 <html lang="en-US">
 <?php 	
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	$profile = $this->client_info;
-	if (!empty($profile['photo'])){
-		$image = $profile['photo'];
-	}else{
-		$image = "profile.jpg";
-	}
+	$store = $this->store;
+	$client_session=new Zend_Session_Namespace('client');
+	$db = new Application_Model_DbTable_DbGlobalselect();
 ?>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
@@ -91,18 +88,86 @@
 				</div>
 			</div>
 			<div class="conten-body-center right">
-				<div class="tab-content">
-					<div>
-					  my banner
-					</div>
+			<div class="title">
+				<h4>Manage Banner In Store</h4>
+			</div>
+			<div class="store_menu">
+				<div  class="pos-relative">
+					<ul class="nav nav-tabs tabs store-menu" id="tabs">
+					<?php if (!empty($store)) foreach ($store as $key=> $rs){?>
+						<li <?php if ($key==0){?>class='active'<?php }?>>
+							<a href="<?php echo "#".$rs['alias_store'];?>">
+								<span class="cat-tit">
+								<!-- <i class="fa fa-university"></i><br /> -->
+									<?php echo $rs['store_title'];?>
+								</span>
+							</a>
+						</li>
+					<?php }?>
+						
+					</ul>
 				</div>
+			</div>
+			<form id="form-banner" method="post" enctype="multipart/form-data"  action="<?php echo $this->baseUrl();?>/dashboard/managebanner">
+			<div class="tab-content">
+				<?php if (!empty($store)) foreach ($store as $key=> $rs){
+					$storerow = $db->getMyStoreByAlias($rs['alias_store'],$client_session->client_id);
+					?>
+					<div class="tab-pane banner <?php if ($key==0){echo 'active';}?> " id="<?php echo $rs['alias_store'];?>">
+							<div class="label_title">
+								<label>Home Page Banner (1170x100px) :</label>
+							</div>
+							<div class="row_form">
+								<div class="bannerview">
+									<?php if (!empty($storerow['banner_home'])){?>
+										<img id="bannerhome_view<?php echo $rs['alias_store'];?>" src="<?php echo $this->baseUrl()."/images/store/banner/".$storerow['banner_home'];?>"/>
+									<?php }else{?>
+										<img id="bannerhome_view<?php echo $rs['alias_store'];?>" src="<?php echo $this->baseUrl()."/images/banner/store_banner.jpg"?>"/>
+									<?php }?>
+								</div>
+								<div class="button-browse-image">
+									<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
+									<input class="btn_borwse_image" type="file" id="bannerhome<?php echo $rs['alias_store'];?>" name="bannerhome<?php echo $rs['alias_store'];?>"  onchange="uploadbanner('<?php echo $rs['alias_store'];?>',1)"/>
+								</div>
+							</div>
+							<div class="label_title">
+								<label>Page Detail ads Banner (230x300px) :</label>
+							</div>
+							<div class="row_form">
+								<div class="bannerview">
+								<?php if (!empty($storerow['banner_detail'])){?>
+									<img id="bannerdetail_view<?php echo $rs['alias_store'];?>" src="<?php echo $this->baseUrl()."/images/store/banner/".$storerow['banner_detail'];?>"/>
+								<?php }else{?>
+									<img id="bannerdetail_view<?php echo $rs['alias_store'];?>" src="<?php echo $this->baseUrl()."/images/banner/banner_ads_detail.jpg"?>"/>
+								<?php }?>
+									<div class="button-browse-image">
+										<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
+										<input class="btn_borwse_image" value="" type="file" id="bannerdetail<?php echo $rs['alias_store'];?>" name="bannerdetail<?php echo $rs['alias_store'];?>"  onchange="uploadbanner('<?php echo $rs['alias_store'];?>',2)"/>
+									</div>
+								</div>
+							</div>
+						</div>
+				<?php }?>
+			</div>
+			<div class="form-row botton">
+				<input type="submit" class="button" name="submit-bt" value="<?php echo $tr->translate("Save");?>" />
+			</div>
+			</form>
 			</div>
 		</div>
 	</section>
 <script>
-	window.onload = function(e){ 
-		getBaseUrl('<?php echo $this->baseUrl();?>');
-	}
+	function uploadbanner (index,type) {
+	
+		if(type==1){
+	    	var output = document.getElementById('bannerhome_view'+index);
+	    	output.src = URL.createObjectURL(event.target.files[0]);
+		}else if(type==2){
+			var output = document.getElementById('bannerdetail_view'+index);
+	    	output.src = URL.createObjectURL(event.target.files[0]);
+		}
+		
+  }
 </script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>

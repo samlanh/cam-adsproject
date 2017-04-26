@@ -39,7 +39,7 @@
 																<div class="item-image">
 																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'];?>">
 																	<?php if (!empty($rs['images'])){?>
-																		<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rs['images']; ?>" alt=""  />
+																		<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rs['image_feature']; ?>" alt=""  />
 																	<?php }else{?>
 																		<img src="<?php echo $this->baseUrl()."/images/noimagefound.jpg"; ?>" alt=""  />
 																	<?php }?>
@@ -47,7 +47,7 @@
 																	<div class="additional-buttons">
 																		<span class="quickview" onClick="getAdsDetail('<?php echo $rs['id'];?>');" ><i class="fa fa-search-plus"></i><?php echo $tr->translate("Quickview");?></span>
 																		<div class="sold-by-container">
-																			<a title="Channy" href="#"><span><?php echo $tr->translate("Posted By");?> </span><?php echo $rs['author'];?></a>
+																			<a title="<?php echo $rs['store_title'];?>" href="<?php echo $this->baseUrl()."/store/index?store=".$rs['store_alias'].".html";?>"><span><?php echo $tr->translate("Store");?> </span> : <?php echo $rs['store_title'];?></a>
 																		</div>
 																	</div>
 																</div>

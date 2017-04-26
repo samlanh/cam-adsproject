@@ -75,7 +75,19 @@ class DashboardController extends Zend_Controller_Action
 		
 	}	
 	function bannerAction(){
-		
+		$client_session=new Zend_Session_Namespace('client');
+		$db = new Application_Model_DbTable_DbGlobalselect();
+		$store = $db->getAllStoreByClient($client_session->client_id);
+		$this->view->store = $store;
+	}
+	function managebannerAction(){
+		if($this->getRequest()->isPost()){
+			$data=$this->getRequest()->getPost();
+			$db = new Application_Model_DbTable_DbStore();
+			
+			$db->updateBannerToStore($data);
+			$this->_redirect("/dashboard/banner");
+		}
 	}
 	function myaccountAction(){
 		$this->_helper->layout()->disableLayout();
@@ -143,7 +155,7 @@ class DashboardController extends Zend_Controller_Action
 			$this->view->store = $store;
 		}
 		$this->view->template = $db->getAlltemplate();
-	}
+	} 
 	function policyAction(){
 		
 	}

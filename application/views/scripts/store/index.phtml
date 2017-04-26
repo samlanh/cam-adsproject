@@ -180,6 +180,13 @@
 						</div>
 					</div>
 				</div>
+				<?php if (!empty($store['banner_home'])){?>
+				 <div class="information-blocks">
+		            <div class="banner-home">
+		              		<img src="<?php echo $this->baseUrl()."/images/store/banner/".$store['banner_home'];?>" />
+		            </div>
+		        </div>
+		        <?php }?>
 				<div class="information-blocks">
 					<div class="tabs-container">
 						<div class="swiper-tabs tabs-switch">
@@ -333,6 +340,13 @@
                   </div>
               </div>
         </div>
+        <?php if (!empty($store['banner_home'])){?>
+			 <div class="information-blocks">
+	            <div class="banner-home">
+	              		<img src="<?php echo $this->baseUrl()."/images/store/banner/".$store['banner_home'];?>" />
+	            </div>
+	        </div>
+	        <?php }?>
         <div class="information-blocks">
 			<div class="tabs-container">
 				<div class="swiper-tabs tabs-switch">

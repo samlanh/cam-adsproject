@@ -26,7 +26,8 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 			(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = `user_id` LIMIT 1) AS author,
 			(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
 			(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name,
-			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = vd_ads.store_id LIMIT 1 ) AS store_alias
+			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = vd_ads.store_id LIMIT 1 ) AS store_alias,
+			(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = vd_ads.store_id LIMIT 1 ) AS store_title
 			FROM `vd_ads` WHERE 1 ";
 		$where='';
 		$where.=" AND STATUS =1 AND is_expired=0 ";
@@ -46,6 +47,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 			(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author,
 			(SELECT vc.package_id FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS package_id,
 			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ad.store_id LIMIT 1 ) AS store_alias,
+			(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = ad.store_id LIMIT 1 ) AS store_title,
 			(SELECT title FROM `vd_category_detail` WHERE ad.category_id=ad.category_id AND languageId=$lang_id LIMIT 1) as category_name,
 			(SELECT $province FROM `vd_province` WHERE id=ad.province_id ) as province_name
 			FROM `vd_ads` AS ad WHERE ad.category_id=$category_id ";
@@ -124,7 +126,10 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 			(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$lang_id LIMIT 1)  AS parent_category_name,
 			(select parent.alias_category from vd_category as parent  where parent.id = cat.`parent` LIMIT 1 ) AS parent_alias_category,
 			(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name,
-			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_alias
+			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_alias,
+			(SELECT cs.store_address FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_address,
+			(SELECT cs.store_phone FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_phone,
+			(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_title
  		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.`alias`='$alias' LIMIT 1";
 		return $db->fetchRow($sql); 
 	}
@@ -184,7 +189,9 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		(SELECT vc.address FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_address,
 		(SELECT vc.phone FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_phone,
 		(SELECT $province FROM `vd_province` WHERE id= ad.province_id ) as province_name,
-		(SELECT title FROM `vd_category_detail` WHERE category_id= ad.category_id AND languageId=$lang_id LIMIT 1) as category_name
+		(SELECT title FROM `vd_category_detail` WHERE category_id= ad.category_id AND languageId=$lang_id LIMIT 1) as category_name,
+		(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ad.store_id LIMIT 1 ) AS store_alias,
+		(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = ad.store_id LIMIT 1 ) AS store_title
 		 FROM $this->_name AS ad WHERE ad.status=1 ";
 		/*if(!empty($search['keywork_search'])){
 			$s_where = array();
@@ -262,7 +269,9 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		(SELECT $province FROM `vd_province` WHERE id= ad.province_id LIMIT 1) as province_name,
 		(SELECT district_name FROM `ln_district` WHERE dis_id=ad.district_id LIMIT 1) as district_name,
 		(SELECT commune_name FROM `ln_commune` WHERE com_id=ad.commune_id) AS commune_name,
-		(SELECT title FROM `vd_category_detail` WHERE category_id= ad.category_id AND languageId=$lang_id LIMIT 1) as category_name
+		(SELECT title FROM `vd_category_detail` WHERE category_id= ad.category_id AND languageId=$lang_id LIMIT 1) as category_name,
+		(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ad.store_id LIMIT 1 ) AS store_alias,
+		(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = ad.store_id LIMIT 1 ) AS store_title
 		FROM $this->_name AS ad,vd_ads_detail as dt WHERE ad.status=1 AND ad.id=dt.ads_id ";
 		if(!empty($search['keywork_search'])){
 		 $s_where = array();
@@ -322,7 +331,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 				<div class='item-image'>";
 				$base_url=Zend_Controller_Front::getInstance()->getBaseUrl();
 				$str.='<a href="'.$base_url.'/listads/detail/ads/'.$rs["alias"].'">';
-					if (!empty($rs['image_wfeature'])){
+					if (!empty($rs['image_feature'])){
 						$str.="<img src=".$base_url.'/images/adsimg/'.$rs['image_feature']." />";
 					}else{
 						$str.="<img src=".$base_url.'/images/adsimg/noimagefound.jpg'." />";
@@ -331,7 +340,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 					$str.='<div class="additional-buttons">
 						<span class="quickview" onClick="getAdsDetail('.$rs['id'].');" ><i class="fa fa-search-plus"></i>'.$tr->translate("Quickview").'</span>
 							<div class="sold-by-container">
-								<a title="Channy" href="#"><span>'.$tr->translate("Posted By").'</span>'.$rs['author'].'</a>
+								<a title="'.$rs['store_title'].'" href="'.$base_url.'/store/index?store='.$rs['store_alias'].'"><span>'.$tr->translate("Store").'</span> : '.$rs['store_title'].'</a>
 							</div>
 						</div>';
 					$str.='</div>
@@ -560,6 +569,13 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$db = $this->getAdapter();
 		$this->_name='ln_commune';
 		$sql = "SELECT com_id AS id ,commune_namekh AS name FROM $this->_name  WHERE status=1 AND commune_name!='' AND  $this->_name.district_id=".$db->quote($distict_id);
+		$rows=$db->fetchAll($sql);
+		return $rows;
+	}
+	function getAllStoreByClient($client_id){
+		$db = $this->getAdapter();
+		$this->_name='vd_client_store';
+		$sql = "SELECT * FROM $this->_name AS cs WHERE cs.`client_id`=$client_id AND cs.`status`=1";
 		$rows=$db->fetchAll($sql);
 		return $rows;
 	}

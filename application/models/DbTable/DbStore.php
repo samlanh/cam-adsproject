@@ -23,12 +23,44 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 		$sql="SELECT COUNT(cs.`id`) FROM `vd_client_store` AS cs WHERE cs.`status`=1 and cs.`client_id` = $client_id";
 		return $db->fetchOne($sql);
 	}
-	function generateStoreAlias($client_id){
+	function generateStoreAlias($client_id,$store_title){
 		$db = new Application_Model_DbTable_DbClient();
 		$client= $db->getClientInfo(null,$client_id);
-	print_r($client);exit();
-		$title = str_replace(' ','',$client['user_name']);
-		return $title.$client['id'].($this->countStoreByClient()+1);
+	
+	$sepacial_char = array(
+			0=>" ",
+			1=>".",
+			2=>"?",
+			3=>":",
+			4=>",",
+			5=>"/",
+			6=>";",
+			7=>"%",
+			8=>"&",
+			9=>"$",
+			10=>"@",
+			11=>"!",
+			12=>"#",
+			13=>"^",
+			14=>"*",
+			15=>"(",
+			16=>")",
+			17=>"",
+			18=>"=",
+			19=>"+",
+			20=>"[",
+			21=>"]",
+			22=>"{",
+			23=>"}",
+			22=>"<",
+			23=>">",
+			);
+		$title=$store_title;
+		foreach($sepacial_char as $key => $rr){
+			$title = str_replace($rr,'',$title);
+		}
+		//$title = str_replace(' ','',$client['user_name']);
+		return $title.$client['id'].date("Y").date("m").date("d").round(microtime(true)).($this->countStoreByClient()+1);
 	}
 	function addStore($data){
 		$client_id = $this->getClientID();
@@ -44,13 +76,16 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 				$newName = "store".date("Y").date("m").date("d").round(microtime(true)).$client_id.'.'.end($temp);
 				move_uploaded_file($_FILES["logo_image"]["tmp_name"], $part . $newName);
 			}
+			//$this->generateStoreAlias($client_id,$data['store_title']);
 			$arr = array(
-					'alias_store'=>$this->generateStoreAlias($client_id),
+					'store_title'=>$data['store_title'],
+					'alias_store'=>$this->generateStoreAlias($client_id,$data['store_title']),
 					'client_id'=>$client_id,
 					'template_id'=>$data['templatess'],
 					'logo_store'=>$newName,
 					'store_address'=>$data['address'],
 					'store_phone'=>$data['phone'],
+					'store_email'=>$data['email'],
 					'store_about_us'=>$data['abouts'],
 					'status'=>1,
 					'template_color'=>$data['templatesscolor'],
@@ -89,12 +124,12 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 				move_uploaded_file($_FILES["logo_image"]["tmp_name"], $part . $newName);
 			}
 			$arr = array(
-					//'alias_store'=>$this->generateStoreAlias(),
 					'client_id'=>$client_id,
 					'template_id'=>$data['templatess'],
 					'logo_store'=>$newName,
 					'store_address'=>$data['address'],
 					'store_phone'=>$data['phone'],
+					'store_email'=>$data['email'],
 					'store_about_us'=>$data['abouts'],
 					'status'=>1,
 					'template_color'=>$data['templatesscolor'],
@@ -102,6 +137,10 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 // 					'create_date'=>date("Y-m-d"),
 					'modify_date'=>date("Y-m-d"),
 			);
+			if ($alias['store_title']!=$data['store_title']){
+				$arr['store_title']=$data['store_title'];
+				$arr['alias_store']=$this->generateStoreAlias($client_id,$data['store_title']);
+			}
 			$this->_name="vd_client_store";
 			$where = ' id = '.$alias['id'];
 			$this->update($arr, $where);
@@ -261,6 +300,67 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 		(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name
 		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.`user_id`=$client AND ads.`store_id`=$store_id AND ads.`category_id`=$category AND ads.id < $adsid  LIMIT 10";
 		return $db->fetchAll($sql);
+	}
+	
+	function updateBannerToStore($data){
+		$client_id = $this->getClientID();
+		$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
+		$part= PUBLIC_PATH.'/images/store/banner/';
+		$db = $this->getAdapter();
+	
+		try{
+			
+			$dbstore = new Application_Model_DbTable_DbGlobalselect();
+			$store = $dbstore->getAllStoreByClient($client_id);
+			
+			if (!empty($store)) foreach ($store as $key=> $rs){
+				$db->beginTransaction();
+				$bannerhome_name = $_FILES['bannerhome'.$rs['alias_store']]['name'];
+				$bannerhom_size = $_FILES['bannerhome'.$rs['alias_store']]['size'];
+				
+				$bannerdetail_name = $_FILES['bannerdetail'.$rs['alias_store']]['name'];
+				$bannerdetail_size = $_FILES['bannerdetail'.$rs['alias_store']]['size'];
+				
+				$bannerhome= $rs['banner_home'];
+				$bannerdetail= $rs['banner_detail'];
+					list($txt, $ext) = explode(".", $bannerhome_name);
+					if(in_array($ext,$valid_formats)) {//check ext
+						
+							if($bannerhome_name!=""){
+								$temp = explode(".", $bannerhome_name);
+								$newnamefile = "banner1".date("Y").date("m").date("d").round(microtime(true)).'.'.$ext;
+								if(file_exists("$part.$newnamefile")) unlink("$part.$newnamefile");
+								move_uploaded_file($_FILES['bannerhome'.$rs['alias_store']]["tmp_name"], $part . $newnamefile);
+								$bannerhome = $newnamefile;
+							}
+					}
+					list($txt, $ext) = explode(".", $bannerdetail_name);
+					if(in_array($ext,$valid_formats)) {//check ext
+						if($bannerdetail_name!=""){
+							$temp = explode(".", $bannerdetail_name);
+							$newnamefile1 = "banner2".date("Y").date("m").date("d").round(microtime(true)).'.'.$ext;
+							if(file_exists("$part.$newnamefile1")) unlink("$part.$newnamefile1");
+							move_uploaded_file($_FILES['bannerdetail'.$rs['alias_store']]["tmp_name"], $part . $newnamefile1);
+							$bannerdetail = $newnamefile1;
+						}
+					}
+					$arr = array(
+							'banner_home'=>$bannerhome,
+							'banner_detail'=>$bannerdetail,
+							'modify_date'=>date("Y-m-d"),
+					);
+					$where=" client_id = $client_id AND id=".$rs['id'];
+					$this->_name="vd_client_store";
+					$this->update($arr, $where);
+					$db->commit();
+			}
+			
+			return 1;
+		}catch(exception $e){
+			Application_Form_FrmMessage::message("Your Submit Error!");
+			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
+			$db->rollBack();
+		}
 	}
 }
 ?>

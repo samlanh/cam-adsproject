@@ -24,7 +24,7 @@ if (!empty($param['store'])){
                       <?php if (!empty($store['logo_store'])){?>
                         <img alt="" src="<?php echo $this->baseUrl()."/images/store/".$store['logo_store'];?>" class="footer-logo">
                            	 <?php }else{?>
-                           	 <h2 class="logo_charecter footer"><?php echo $store['customer_name'];?></h2>
+                           	 <h2 class="logo_charecter footer"><?php echo $store['store_title'];?></h2>
                          <?php }?>
                         <div class="footer-links">
                             <a href="<?php echo $this->baseUrl()."/store/index?store=".$store['alias_store'].".html";?>">Home</a>

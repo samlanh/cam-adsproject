@@ -8,11 +8,25 @@ $menu_items = $db_select->getMenuItems();
 <head>
 	<meta charset="UTF-8">
 	<title>Cam App Technology</title>	
-	<link rel="shortcut icon" href="wp-content/uploads/2016/04/favicon.jpg" type="image/x-icon" />
-<!--[if lt IE 9]>
-<link rel='stylesheet' id='classiads-ie-css'  href='http://demo.designinvento.net/classiads5/wp-content/themes/classiads/css/ie.css?ver=2013-11-08' type='text/css' media='all' />
-<![endif]-->
-<link href="https://fonts.googleapis.com/css?family=Hanuman|Montserrat" rel="stylesheet">
+
+<script>
+var baseurl = '<?php echo $this->baseUrl();?>';
+<?php if ($lang==1){?>
+var monthNames = [
+                  "Jan", "Feb", "Mar",
+                  "Apr", "May", "Jun", "Jul",
+                  "Aug", "September", "Oct",
+                  "Nov", "Dec"
+                ];
+<?php }else{?>
+var monthNames = [
+              "មករា", "កុម្ភៈ", "មិនា",
+              "មេសា", "ឧសភា", "មិថុនា", "កក្កដា",
+              "សីហា", "កញ្ញា", "តុលា",
+              "វិច្ឆិការ", "ធ្នូ"
+            ];
+<?php }?>
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
 <link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
@@ -167,7 +181,7 @@ $menu_items = $db_select->getMenuItems();
 																<div class="item-image">
 																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'];?>">
 																	<?php if (!empty($rs['images'])){?>
-																		<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rs['images']; ?>" alt=""  />
+																		<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rs['image_feature']; ?>" alt=""  />
 																	<?php }else{?>
 																		<img src="<?php echo $this->baseUrl()."/images/noimagefound.jpg"; ?>" alt=""  />
 																	<?php }?>
@@ -175,7 +189,7 @@ $menu_items = $db_select->getMenuItems();
 																	<div class="additional-buttons">
 																		<span class="quickview" onClick="getAdsDetail('<?php echo $rs['id'];?>');" ><i class="fa fa-search-plus"></i><?php echo $tr->translate("Quickview");?></span>
 																		<div class="sold-by-container">
-																			<a title="Channy" href="#"><span><?php echo $tr->translate("Posted By");?> </span><?php echo $rs['author'];?></a>
+																			<a title="<?php echo $rs['store_title'];?>" href="<?php echo $this->baseUrl()."/store/index?store=".$rs['store_alias'].".html";?>"><span><?php echo $tr->translate("Store");?> </span> : <?php echo $rs['store_title'];?></a>
 																		</div>
 																	</div>
 																</div>
@@ -248,7 +262,8 @@ $menu_items = $db_select->getMenuItems();
 	</div>
 	<?php
    $page = $this->baseurl();
-	echo $this->render('sideright.phtml');?>
+	echo $this->render('sideright.phtml');
+	echo $this->render('frontbottom.phtml');?>
 	<script>
 	jQuery(document).ready(function($){
 		<?php if($this->search['category_search']>0){ ?>

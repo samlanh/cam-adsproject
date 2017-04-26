@@ -41,9 +41,43 @@ class StoreController extends Zend_Controller_Action
 	    		$this->view->parent_cate = $dbadsstore->getParentCategory($store['id']);
 	    		$page = explode(".", $param['page']);
 	    		if ($page[0]=="allads"){
-	    			$this->view->myadsfeature = $dbadsstore->getAdsByUserid(null,null,$store['id']);
+	    			 $store_ads = $dbadsstore->getAdsByUserid(null,null,$store['id']);
 	    		}else{
-	    			$this->view->myadsfeature = $dbadsstore->getAllAdsByName($page[0],$store['id']);
+	    			$store_ads = $dbadsstore->getAllAdsByName($page[0],$store['id']);
+	    		}
+// 	    		$this->view->myadsfeature =$store_ads;
+	    		
+	    		$paginator = Zend_Paginator::factory($store_ads);
+	    		$paginator->setDefaultItemCountPerPage(5);
+	    		$allItems = $paginator->getTotalItemCount();
+	    		$countPages= $paginator->count();
+	    		$p = $this->getRequest()->getParam('pages');
+	    		
+	    		if(isset($p))
+	    		{
+	    			$paginator->setCurrentPageNumber($p);
+	    		} else $paginator->setCurrentPageNumber(1);
+	    			
+	    		$currentPage = $paginator->getCurrentPageNumber();
+	    			
+	    		$this->view->myadsfeature = $paginator;
+	    		$this->view->countItems = $allItems;
+	    		$this->view->countPages = $countPages;
+	    		$this->view->currentPage = $currentPage;
+	    			
+	    		if($currentPage == $countPages)
+	    		{
+	    			$this->view->nextPage = $countPages;
+	    			$this->view->previousPage = $currentPage-1;
+	    		}
+	    		else if($currentPage == 1)
+	    		{
+	    			$this->view->nextPage = $currentPage+1;
+	    			$this->view->previousPage = 1;
+	    		}
+	    		else {
+	    			$this->view->nextPage = $currentPage+1;
+	    			$this->view->previousPage = $currentPage-1;
 	    		}
     		}else{
     			$this->_redirect("/index");
@@ -51,6 +85,7 @@ class StoreController extends Zend_Controller_Action
     	}else{
     		$this->_redirect("/index");
     	}
+    	$this->view->param = $param;
     }
     function detailsAction(){
 //     	$this->_helper->layout()->disableLayout();

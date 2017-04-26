@@ -72,17 +72,11 @@
                                 <div class="col-md-12">
                                     <div class="information-blocks production-logo">
                                         <div class="background">
-                                            <div class="logo"><img src="<?php echo $this->baseUrl();?>/template/subtemplate/template1/img/production-logo.png" alt="" /></div>
-                                            <a href="#">Review this producent</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="information-blocks">
-                                        <div class="information-entry products-list">
-                                            <h3 class="block-title inline-product-column-title">Featured products</h3>
-
-
+                                          <?php if (!empty($store['banner_detail'])){?>
+                                        	 <div class="banner-deatil">
+								              		<img src="<?php echo $this->baseUrl()."/images/store/banner/".$store['banner_detail'];?>" />
+								            </div>
+								           <?php }?>
                                         </div>
                                     </div>
                                 </div>
@@ -203,19 +197,13 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="information-blocks production-logo">
-                                        <div class="background">
-                                            <div class="logo"><img src="<?php echo $this->baseUrl();?>/template/subtemplate/template1/img/production-logo.png" alt="" /></div>
-                                            <a href="#">Review this producent</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="information-blocks">
-                                        <div class="information-entry products-list">
-                                            <h3 class="block-title inline-product-column-title">Featured products</h3>
-
-
-                                        </div>
+                                     <div class="background">
+	                                    <?php if (!empty($store['banner_detail'])){?>
+                                        	 <div class="banner-deatil">
+								              		<img src="<?php echo $this->baseUrl()."/images/store/banner/".$store['banner_detail'];?>" />
+								            </div>
+								           <?php }?>
+							            </div>
                                     </div>
                                 </div>
                             </div>

@@ -337,7 +337,8 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = ads.`category_id`  AND catd.languageId =$language LIMIT 1)  AS cateogry_title,
 			(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$language LIMIT 1)  AS parent_cateogry_title,
 			(SELECT province.$province FROM `vd_province` AS province WHERE province.id = ads.`province_id` LIMIT 1) AS province,
-			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_alias
+			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_alias,
+			(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_title
 			FROM `vd_ads` AS ads,
 			`vd_category` AS cat
 			 WHERE cat.`id` = ads.`category_id` AND ads.`id`=$ads_id LIMIT 1";

@@ -46,7 +46,7 @@ if (!empty($param['page'])){
 			.square-button:hover, .square-button.active{background: <?php echo $store['template_color'];?>; border-color: <?php echo $store['template_color'];?>; color: #fff;}
 		.footer-wrapper.style-10 .footer-columns-entry{background: <?php echo $store['template_color'];?>;padding-left: 20px;padding-right: 20px;border: none;}}
     </style>
-<body class="style-10">
+<body class="style-15">
     <!-- LOADER -->
     <div id="loader-wrapper">
         <div class="bubbles">
@@ -66,12 +66,12 @@ if (!empty($param['page'])){
                             <?php if (!empty($store['logo_store'])){?>
                            	 <img alt="" src="<?php echo $this->baseUrl()."/images/store/".$store['logo_store'];?>">
                            	 <?php }else{?>
-                           	 	<h2 class="logo_charecter"><?php echo $store['customer_name'];?></h2>
+                           	 	<h2 class="logo_charecter"><?php echo $store['store_title'];?></h2>
                            	 <?php }?>
                             </a>
                         </div>
 						  <div class="product-header-message">
-                            FREE SHIPPING ON ALL UK ORDERS this week
+                            
                         </div>
                        <div class="product-header-content">
                             <div class="line-entry">
@@ -171,13 +171,16 @@ if (!empty($param['page'])){
 	            <div class="header-wrapper style-12">
 	                <header class="type-4">
 	                    <div class="header-top">
+	                    	<?php if (!empty($store['store_phone'])){?>
 	                        <div class="header-top-entry hidden-xs">
 	                            <div class="title"><i class="fa fa-phone"></i> <a href="tel:+987123654"><b><?php echo $store['store_phone'];?></b></a></div>
 	                        </div>
+	                        <?php }?>
+	                        <?php if (!empty($store['store_email'])){?>
 	                         <div class="header-top-entry hidden-xs">
-								<div class="title"><i class="fa fa-envelope-o"></i> <a href="tel:+987123654"><b>phanvandy11@gmail.com</b></a></div>
+								<div class="title"><i class="fa fa-envelope-o"></i> <a href="tel:+987123654"><b><?php echo $store['store_email'];?></b></a></div>
 	                        </div>
-	                   
+	                   		<?php }?>
 	                        <div class="clear"></div>
 	                    </div>
 	
@@ -187,7 +190,7 @@ if (!empty($param['page'])){
 	                            <?php if (!empty($store['logo_store'])){?>
 	                           	 <img alt="" src="<?php echo $this->baseUrl()."/images/store/".$store['logo_store'];?>">
 	                           	 <?php }else{?>
-	                           	 	<h2 class="logo_charecter"><?php echo $store['customer_name'];?></h2>
+	                           	 	<h2 class="logo_charecter"><?php echo $store['store_title'];?></h2>
 	                           	 <?php }?>
 	                            </a>
 	                        </div>

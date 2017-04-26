@@ -3,6 +3,13 @@
 	$store = $this->store;
 	
 	$db = new Application_Model_DbTable_DbStore();
+	
+	$param = $this->param;
+	$page = array();
+	$page[0]='';
+	if (!empty($param['page'])){
+		$page = explode(".", $param['page']);
+	}
 ?>
 <?php if ($store['template_id']==1){ //check template?>
 <title>Store <?php echo $store['alias_store'];?></title>
@@ -53,16 +60,25 @@
                                 </div>
 								<?php }?>
                             </div>
+                            <?php if($this->countPages>1){?>
                             <div class="page-selector">
                                 <div class="pages-box">
-                                    <a href="#" class="square-button active">1</a>
-                                    <a href="#" class="square-button">2</a>
+                                <?php if($this->currentPage >1){?>
+                                	<a href="<?php echo $this->baseUrl()."/store/ads?store=".$store['alias_store']."&page=".$page[0].".html?pages=".$this->previousPage;?>" class="square-button"><i class="fa fa-angle-left"></i></a>
+                                	<?php }?>
+                                 <?php if (!empty($this->countPages)) $i=0; for( $i=1; $i<=$this->countPages; $i++){?>
+                                    <a href="<?php echo $this->baseUrl()."/store/ads?store=".$store['alias_store']."&page=".$page[0].".html?pages=".$i;?>" class="square-button <?php if($i==$this->currentPage){ echo 'active';?> <?php } else {}?> "><?php echo $i;?></a>
+                                 <?php }?>
+                                    <!-- <a href="#" class="square-button">2</a>
                                     <a href="#" class="square-button">3</a>
-                                    <div class="divider">...</div>
-                                    <a href="#" class="square-button"><i class="fa fa-angle-right"></i></a>
+                                    <div class="divider">...</div> -->
+                                   <?php if($this->countPages>$this->currentPage){?>
+                                    <a href="<?php echo $this->baseUrl()."/store/ads?store=".$store['alias_store']."&page=".$page[0].".html?pages=".$this->nextPage;?>" class="square-button"><i class="fa fa-angle-right"></i></a>
+                                    <?php }?>
                                 </div>
                                 <div class="clear"></div>
                             </div>
+                            <?php }?>
                         </div>
                         <div class="col-md-3 col-md-pull-9 col-sm-4 col-sm-pull-8 blog-sidebar">
                             <div class="information-blocks categories-border-wrapper">
@@ -136,16 +152,25 @@
                                 </div>
 								<?php }?>
                             </div>
+                            <?php if($this->countPages>1){?>
                             <div class="page-selector">
                                 <div class="pages-box">
-                                    <a href="#" class="square-button active">1</a>
-                                    <a href="#" class="square-button">2</a>
+                                <?php if($this->currentPage >1){?>
+                                	<a href="<?php echo $this->baseUrl()."/store/ads?store=".$store['alias_store']."&page=".$page[0].".html?pages=".$this->previousPage;?>" class="square-button"><i class="fa fa-angle-left"></i></a>
+                                	<?php }?>
+                                 <?php if (!empty($this->countPages)) $i=0; for( $i=1; $i<=$this->countPages; $i++){?>
+                                    <a href="<?php echo $this->baseUrl()."/store/ads?store=".$store['alias_store']."&page=".$page[0].".html?pages=".$i;?>" class="square-button <?php if($i==$this->currentPage){ echo 'active';?> <?php } else {}?> "><?php echo $i;?></a>
+                                 <?php }?>
+                                    <!-- <a href="#" class="square-button">2</a>
                                     <a href="#" class="square-button">3</a>
-                                    <div class="divider">...</div>
-                                    <a href="#" class="square-button"><i class="fa fa-angle-right"></i></a>
+                                    <div class="divider">...</div> -->
+                                   <?php if($this->countPages>$this->currentPage){?>
+                                    <a href="<?php echo $this->baseUrl()."/store/ads?store=".$store['alias_store']."&page=".$page[0].".html?pages=".$this->nextPage;?>" class="square-button"><i class="fa fa-angle-right"></i></a>
+                                    <?php }?>
                                 </div>
                                 <div class="clear"></div>
                             </div>
+                            <?php }?>
                         </div>
                         <div class="col-md-3 col-md-pull-9 col-sm-4 col-sm-pull-8 blog-sidebar">
                             <div class="information-blocks categories-border-wrapper">

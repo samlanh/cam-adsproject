@@ -104,18 +104,17 @@
 						<div  class="pos-relative">
 							<ul class="nav nav-tabs tabs store-menu" id="tabs">
 								<li class='active'>
+									<a href="#template" onclick="return false;">
+										<span class="cat-tit">
+											<i class="fa fa-sticky-note"></i><br /><?php echo $tr->translate("Choose Template");?>
+										</span>
+									</a>
+								</li>
+								<li >
 									<a href="#storeinfo">
 										<span class="cat-tit">
 										<i class="fa fa-university"></i><br />
 											<?php echo $tr->translate("Store Information");?>
-										</span>
-									</a>
-								</li>
-								
-								<li class="<?php //echo $class;?>">
-									<a href="#template" onclick="return false;">
-										<span class="cat-tit">
-											<i class="fa fa-sticky-note"></i><br /><?php echo $tr->translate("Choose Template");?>
 										</span>
 									</a>
 								</li>
@@ -125,51 +124,12 @@
 					<?php 	if ($param['change']=="add"){?>
 					<form id="form-store-info" method="post" enctype="multipart/form-data" action='<?php echo $this->baseUrl();?>/dashboard/addstore' autocomplete="off">
 						<div class="tab-content">
-							<div class="tab-pane store-temp active " id="storeinfo">
-								<div class="form-template-info">
-									<div class="form-row">
-										<div class="form-label">
-											<label><?php echo $tr->translate("Store Phone");?> <span class="sign_req">*</span></label>
-										</div>
-										<div class="form-value">
-											<input type="text" placeholder="Phone Number" required="required"  name="phone" id="phone" class="form-control" style="    width: 350px;" />
-										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-label">
-											<label><?php echo $tr->translate("Store Address");?> <span class="sign_req">*</span></label>
-										</div>
-										<div class="form-value">
-											<textarea id="address" required="required" name="address" class="form-control form-store" style="margin: 0px 0px 10px; max-width: 350px; min-width: 350px; max-height: 131px; height: 102px; width: 350px;"></textarea>
-										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-label">
-											<label><?php echo $tr->translate("About Store");?> <span class="sign_req">*</span></label>
-										</div>
-										<div class="form-value">
-											<textarea id="abouts" required="required" name="abouts" class="form-control form-store" style="margin: 0px 0px 10px; max-width: 350px; min-width: 350px; max-height: 131px; height: 102px; width: 350px;"></textarea>
-										</div>
-									</div>
-								</div>
-								<div class="account-image">
-										<div class="image-box">
-											<img id="logo_view" src="<?php echo $this->baseUrl().'/images/no_logo.jpg'?>" alt=""  />
-										</div>
-										<div class="button_browse">
-										<div id='preview'></div>	
-											
-												<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
-												<input class="btn_borwse_image" type="file" id="logo_image" name="logo_image"  onchange="loadLogo(event)"/>
-										
-										</div>
-									</div>
-							</div>
-							<div class="tab-pane store-temp " id="template">
+							
+							<div class="tab-pane store-temp active" id="template">
 								<div class="sub-template">
 									<div class="blog-store-color">
 										<div class="span-title">
-											<span>Choose Main Color For Store : </span>
+											<span>Template Color For Store : </span>
 										</div>
 										<div class="span-value">
 											 <a onclick="showcolorbox(1);" ><span class="color" id="theme-olor"  style=" background: #2a328d;"></span></a>
@@ -177,7 +137,7 @@
 									</div>
 									<div class="blog-store-color">
 										<div class="span-title">
-											<span>Choose Font Color For Store : </span>
+											<span>Font Color For Store : </span>
 										</div>
 										<div class="span-value">
 											 <a onclick="showcolorbox(2);"><span class="color" id="fonts-color" style=" background: #2a328d;"></span></a>
@@ -205,6 +165,62 @@
 								</div>
 								<input type="hidden" id="templatess" name="templatess" value="1" />
 							</div>
+							
+							<div class="tab-pane store-temp  " id="storeinfo">
+								<div class="form-template-info">
+									<div class="form-row">
+										<div class="form-label">
+											<label><?php echo $tr->translate("Store Name");?> <!-- <span class="sign_req">*</span> --></label>
+										</div>
+										<div class="form-value">
+											<input type="text" placeholder="Store Name"  value=""  name="store_title" id="store_title" class="form-control" style="    width: 500px;" />
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-label">
+											<label><?php echo $tr->translate("Store Phone");?> <!-- <span class="sign_req">*</span> --></label>
+										</div>
+										<div class="form-value">
+											<input type="text" placeholder="Phone Number"   name="phone" id="phone" class="form-control" style="width: 170px;" />
+										</div>
+										<div class="form-label">
+											<label><?php echo $tr->translate("Store Email");?> <!-- <span class="sign_req">*</span> --></label>
+										</div>
+										<div class="form-value">
+											<input type="text" placeholder="Email"   name="email" id="email" class="form-control" style=" width: 170px;" />
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-label">
+											<label><?php echo $tr->translate("Store Address");?> <!-- <span class="sign_req">*</span> --></label>
+										</div>
+										<div class="form-value">
+											<textarea id="address"  name="address" class="form-control form-store" style="margin: 0px 0px 10px; max-width: 500px; min-width: 500px; max-height: 131px; height: 102px; width: 500px;"></textarea>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-label">
+											<label><?php echo $tr->translate("About Store");?> <!-- <span class="sign_req">*</span> --></label>
+										</div>
+										<div class="form-value">
+											<textarea id="abouts"  name="abouts" class="form-control form-store" style="margin: 0px 0px 10px; max-width: 500px; min-width: 500px; max-height: 131px; height: 102px; width: 500px;"></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="account-image">
+										<div class="image-box">
+											<img id="logo_view" src="<?php echo $this->baseUrl().'/images/no_logo.jpg'?>" alt=""  />
+										</div>
+										<div class="button_browse">
+										<div id='preview'></div>	
+											
+												<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
+												<input class="btn_borwse_image" type="file" id="logo_image" name="logo_image"  onchange="loadLogo(event)"/>
+										
+										</div>
+									</div>
+							</div>
+							
 						</div>
 					<div class="form-row botton">
 						<input type="hidden" id="templatesscolor" name="templatesscolor" value="#2a328d" />
@@ -215,55 +231,11 @@
 					<?php }else if ($param['change']=="edit"){ ?>
 						<form id="form-store-info" method="post" enctype="multipart/form-data" action='<?php echo $this->baseUrl()."/dashboard/updatestore?store=".$param['store'];?>' autocomplete="off">
 							<div class="tab-content">
-								<div class="tab-pane store-temp active " id="storeinfo">
-									<div class="form-template-info">
-										<div class="form-row">
-											<div class="form-label">
-												<label><?php echo $tr->translate("Store Phone");?> <span class="sign_req">*</span></label>
-											</div>
-											<div class="form-value">
-												<input type="text" placeholder="Phone Number" required="required" value="<?php echo $this->store['store_phone'];?>"  name="phone" id="phone" class="form-control" style="    width: 350px;" />
-											</div>
-										</div>
-										<div class="form-row">
-											<div class="form-label">
-												<label><?php echo $tr->translate("Store Address");?> <span class="sign_req">*</span></label>
-											</div>
-											<div class="form-value">
-												<textarea id="address" required="required" name="address" class="form-control form-store" style="margin: 0px 0px 10px; max-width: 350px; min-width: 350px; max-height: 131px; height: 102px; width: 350px;"><?php echo $this->store['store_address'];?></textarea>
-											</div>
-										</div>
-										<div class="form-row">
-											<div class="form-label">
-												<label><?php echo $tr->translate("About Store");?> <span class="sign_req">*</span></label>
-											</div>
-											<div class="form-value">
-												<textarea id="abouts" required="required" name="abouts" class="form-control form-store" style="margin: 0px 0px 10px; max-width: 350px; min-width: 350px; max-height: 131px; height: 102px; width: 350px;"><?php echo $this->store['store_about_us'];?></textarea>
-											</div>
-										</div>
-									</div>
-									<div class="account-image">
-											<div class="image-box">
-												<?php if (!empty($this->store['logo_store'])){?>
-												<img id="logo_view" src="<?php echo $this->baseUrl().'/images/store/'.$this->store['logo_store'];?>" alt=""  />
-												<?php }else{?>
-												<img id="logo_view" src="<?php echo $this->baseUrl().'/images/no_logo.jpg'?>" alt=""  />
-												<?php }?>
-											</div>
-											<div class="button_browse">
-											<div id='preview'></div>	
-												
-													<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
-													<input class="btn_borwse_image" value="<?php echo $this->store['logo_store'];?>" type="file" id="logo_image" name="logo_image"  onchange="loadLogo(event)"/>
-											
-											</div>
-										</div>
-								</div>
-								<div class="tab-pane store-temp " id="template">
+								<div class="tab-pane store-temp active" id="template">
 									<div class="sub-template">
 										<div class="blog-store-color">
 											<div class="span-title">
-												<span>Choose Main Color For Store : </span>
+												<span>Template Color For Store : </span>
 											</div>
 											<div class="span-value">
 												 <a onclick="showcolorbox(1);" ><span class="color" id="theme-olor"  style=" background: <?php echo $this->store['template_color'];?>;"></span></a>
@@ -271,7 +243,7 @@
 										</div>
 										<div class="blog-store-color">
 											<div class="span-title">
-												<span>Choose Font Color For Store : </span>
+												<span>Font Color For Store : </span>
 											</div>
 											<div class="span-value">
 												 <a onclick="showcolorbox(2);"><span class="color" id="fonts-color" style=" background: <?php echo $this->store['font_color'];?>;"></span></a>
@@ -299,6 +271,66 @@
 									</div>
 									<input type="hidden" id="templatess" name="templatess" value="<?php echo $this->store['template_id'];?>" />
 								</div>
+								
+								<div class="tab-pane store-temp  " id="storeinfo">
+									<div class="form-template-info">
+										<div class="form-row">
+											<div class="form-label">
+												<label><?php echo $tr->translate("Store Name");?> <!-- <span class="sign_req">*</span> --></label>
+											</div>
+											<div class="form-value">
+												<input type="text" placeholder="Store Name"  value="<?php echo $this->store['store_title'];?>"  name="store_title" id="store_title" class="form-control" style="    width: 500px;" />
+											</div>
+										</div>
+										<div class="form-row">
+											<div class="form-label">
+												<label><?php echo $tr->translate("Store Phone");?> <!-- <span class="sign_req">*</span> --></label>
+											</div>
+											<div class="form-value">
+												<input type="text" placeholder="Phone Number"  value="<?php echo $this->store['store_phone'];?>"  name="phone" id="phone" class="form-control" style="    width: 170px;" />
+											</div>
+											<div class="form-label">
+												<label><?php echo $tr->translate("Store Email");?> <!-- <span class="sign_req">*</span> --></label>
+											</div>
+											<div class="form-value">
+												<input type="text" placeholder="Email" value="<?php echo $this->store['store_email'];?>"   name="email" id="email" class="form-control" style=" width: 170px;" />
+											</div>
+										</div>
+										<div class="form-row">
+											<div class="form-label">
+												<label><?php echo $tr->translate("Store Address");?> <!-- <span class="sign_req">*</span> --></label>
+											</div>
+											<div class="form-value">
+												<textarea id="address"  name="address" class="form-control form-store" style="margin: 0px 0px 10px; max-width: 500px; min-width: 350px; max-height: 131px; height: 102px; width: 500px;"><?php echo $this->store['store_address'];?></textarea>
+											</div>
+										</div>
+										<div class="form-row">
+											<div class="form-label">
+												<label><?php echo $tr->translate("About Store");?> <!-- <span class="sign_req">*</span> --></label>
+											</div>
+											<div class="form-value">
+												<textarea id="abouts" name="abouts" class="form-control form-store" style="margin: 0px 0px 10px; max-width: 500px; min-width: 350px; max-height: 131px; height: 102px; width: 500px;"><?php echo $this->store['store_about_us'];?></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="account-image">
+											<div class="image-box">
+												<?php if (!empty($this->store['logo_store'])){?>
+												<img id="logo_view" src="<?php echo $this->baseUrl().'/images/store/'.$this->store['logo_store'];?>" alt=""  />
+												<?php }else{?>
+												<img id="logo_view" src="<?php echo $this->baseUrl().'/images/no_logo.jpg'?>" alt=""  />
+												<?php }?>
+											</div>
+											<div class="button_browse">
+											<div id='preview'></div>	
+												
+													<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
+													<input class="btn_borwse_image" value="<?php echo $this->store['logo_store'];?>" type="file" id="logo_image" name="logo_image"  onchange="loadLogo(event)"/>
+											
+											</div>
+										</div>
+								</div>
+								
 							</div>
 						<div class="form-row botton">
 							<input type="hidden" id="templatesscolor" name="templatesscolor" value="<?php echo $this->store['template_color'];?>" />
@@ -363,6 +395,7 @@
 			optioncol =index;
 		}
 		function closecolorbox() {
+			
 			 $("#choose-color-pop").css("display", "none");
 		}
 		

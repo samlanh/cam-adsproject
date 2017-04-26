@@ -153,7 +153,7 @@
 						<div class="col-sm-5 col-md-4">
 							<div class="side-bar">
 								<div class="item-author widget">
-									<h4>Author Information</h4>
+									<h4>Store Information</h4>
 									<div class="row">
 										<div class="col-md-4">
 											<div class="seller-image">
@@ -162,12 +162,22 @@
 										</div>
 										<div class="col-md-8">
 											<div class="seller-info">
-												<p><span>Author:</span> <a class="author" href="#"><?php echo $ads['author'];?></a></p>
+												<p><span>Store:</span> <a class="author" href="#"><?php echo $ads['store_title'];?></a></p>
 												<address>
-													<span>Address:</span> <?php echo $ads['author_address'];?>
+													<?php if (!empty($ads['store_address'])){?>
+														<span>Address:</span> <?php echo $ads['store_address'];?>
+													<?php }else{?>
+														<span>Address:</span> <?php echo $ads['author_address'];?>
+													<?php }?>
 												</address>
-												<p><span>Phone :</span> <?php echo $ads['author_phone'];?> </p>
-												<p><a href="<?php echo $this->baseUrl()."/store/index?store=".$ads['store_alias'].".html";?>">Visit Store</a></p>
+												<p>
+													<?php if (!empty($ads['store_phone'])){?>
+														<span>Phone :</span> <?php echo $ads['store_phone'];?> 
+													<?php }else{?>
+														<span>Phone :</span> <?php echo $ads['author_phone'];?> 
+													<?php }?>
+												</p>
+												<p>Visit <a href="<?php echo $this->baseUrl()."/store/index?store=".$ads['store_alias'].".html";?>"><?php echo $ads['store_title'];?> </a>Store</p>
 											</div>
 										</div>
 									</div>

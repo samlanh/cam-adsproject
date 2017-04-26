@@ -27,7 +27,8 @@ class Application_Model_DbTable_DbClient extends Zend_Db_Table_Abstract
 //     		$db_store = new Application_Model_DbTable_DbStore();
     		$title = str_replace(' ','',$data['user_name']);
     		$arr_store = array(
-					'alias_store'=>$title.$row."1",
+    				'store_title'=>$title,
+					'alias_store'=>$title.$row.date("Y").date("m").date("d").round(microtime(true))."1",
 					'client_id'=>$row,
 					'template_id'=>1,
 					'status'=>1,
