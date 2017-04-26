@@ -222,7 +222,7 @@ font-size: 16px;
 .thumnail-image-slide {
     width: 16.5%;
     display: inline-block;
-    height: 100%;
+   
     border: solid 1px #ccc;
     padding: 2px;
     margin-bottom: 5px;
@@ -910,7 +910,7 @@ dl.language a.lang.km {
 .form-value {
     display: inline-block;
     /*width: 300px;*/
-    padding-left: 15px;
+    padding-left: 7px;
 }
 .form-value .form-control {
     display: initial;
@@ -1853,10 +1853,12 @@ ul figure a:hover .posted {
 .blog-store-color {
     text-align: left;
 	margin-top: 10px;
+	display: inline-block;
 }
 .blog-store-color .span-title {
     display: inline-block;
     height: 28px;
+	font-weight: bold;
     vertical-align: bottom;
     margin-right: 25px;
 }
@@ -1889,8 +1891,44 @@ div.title h4.sub-title {
     text-align: left;
     padding: 10px 0;
     display: inline-block;
-    width: 60%;
+    width: 75%;
 }
 .form-row.botton input[type="submit"] {
     float: none;
+}
+/*---
+-
+- my banner
+*/
+div.tab-pane.banner {
+    padding: 10px;
+}
+.row_form ,
+.label_title {
+    text-align: left;
+}
+.bannerview {
+    width: 620px;
+    display: inline-block;
+}
+.bannerview img {
+    max-width: 100%;
+	border: solid 1px #ccc;
+}
+.button-browse-image {
+    /*margin-top: 10px;*/
+    position: relative;
+	    text-align: center;
+    overflow: hidden;
+    width: 120px;
+    height: 38px;
+    background: #fbf9f9;
+    border: 1px solid #e8e8e8;
+	vertical-align: bottom;
+	display: inline-block;
+}
+.button-browse-image span {
+    line-height: 33px;
+    font-weight: 600;
+    cursor: pointer;
 }

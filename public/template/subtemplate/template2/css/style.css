@@ -82,7 +82,7 @@ body{font-family: sans-serif,'Hanuman'; font-weight: 400; font-size: 14px; line-
     .wide-center{padding: 0 15px;}    
 }
 /*simple block and its title*/
-.information-blocks{margin-bottom: 70px;}
+.information-blocks{margin-bottom: 20px;}
 #content-block .sidebar-column .information-blocks{margin-bottom: 40px;}
 .block-title{font-size: 20px; line-height: 24px; color: #2e2e2e; font-weight: 600; padding-bottom: 15px; border-bottom: 1px #ebebeb solid; margin-bottom: 25px;}
 .block-title.size-1{font-size: 16px;}
@@ -666,7 +666,7 @@ header .line-entry{white-space: nowrap;}
 .product-sidebar .block-title{font-size: 18px;}
 .product-sidebar .inline-product-entry:last-child{border-bottom: none;}
 .production-logo{text-align: center; margin-bottom: 30px; padding-bottom: 15px;}
-.production-logo .background{background: #fafafa; margin-bottom: 15px; padding: 45px 25px 30px 25px;}
+.production-logo .background{background: #fafafa; margin-bottom: 15px; padding: 10px 25px;}
 .production-logo .logo{padding-bottom: 15px; border-bottom: 2px #e6e6e6 solid; margin-bottom: 12px;}
 .production-logo .logo img{max-width: 100%; height: auto; display: inline-block;}
 .production-logo a{font-size: 12px; line-height: 14px; color: #ca1515; font-weight: 600;}
@@ -989,4 +989,12 @@ _:-ms-input-placeholder, :root .simple-drop-down select{padding-right: 10px;}
 .addresses-block iframe {
     max-width: 100%;
     max-height: 100%;
+}
+.banner-home img {
+    width: 100%;
+    height: 100px;
+}
+.banner-deatil img {
+    width: 100%;
+    height: 300px;
 }
