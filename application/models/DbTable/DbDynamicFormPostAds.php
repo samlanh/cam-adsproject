@@ -250,7 +250,7 @@ class Application_Model_DbTable_DbDynamicFormPostAds extends Zend_Db_Table_Abstr
 		}
 		$value = $this->getValueofOption($fielid);
 		$string='';
-		$string.="	<div class=' $span_col col-sm-7 '>";
+		$string.="	<div class=' $span_col col-sm-7 marginbottom'>";
 		//$string.='<div class="form-label"><label>'.$labelname.$sigrequir.'</label> </div>';
 		//$string.='<div class="form-value formsearch">';
 		$string.='<select '.$functionOnchage.'   id="'.$name.'" name="'.$name.'" '.$isreq.' class="form-select" >';

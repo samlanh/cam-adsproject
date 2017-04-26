@@ -2,7 +2,24 @@
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 ?>
 <title>Slide Show</title>
+<link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
+<link href="https://fonts.googleapis.com/css?family=Hanuman|Montserrat" rel="stylesheet">
+<link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
+<link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/custom.css' type='text/css' media='all' />
+<link rel='stylesheet' href='<?php echo $this->baseUrl();?>/template/css/style.css' type='text/css' />
+
 <script src="<?php echo $this->baseUrl();?>/js/help.js"  type="text/javascript"></script>
+<style>
+td {
+    font-size: 16px;
+    padding: 0px; 
+    border-left: none;
+    border-top: none;
+    text-align: center;
+}
+</style>
 <script type="text/javascript">
 dojo.require("dojo.data.ObjectStore");
 dojo.require("dojo.data.ItemFileWriteStore");  
@@ -20,7 +37,7 @@ dojo.ready(function(){
 		name: "district",
 		id: "district",
 		searchAttr: "name",
-		class: 'fullside',
+		//class: 'fullside',
 		missingMessage:"អ្នក​ភ្លេច​បំពេញ​ ឈ្មោះ ស្រុក/ខ័ណ្ឌ!",	
 			onChange: function() {
 				district = dijit.byId('district').get('value');
@@ -38,7 +55,7 @@ dojo.ready(function(){
 		name: "commune",
 		id: "commune",
 		searchAttr: "name",
-		class: 'fullside',
+		//class: 'fullside',
 		missingMessage:"អ្នក​ភ្លេច​បំពេញ​ ឃុំ/សង្កាត់",	
 			onChange: function() {
 				commune = dijit.byId('commune').get('value');
@@ -150,37 +167,45 @@ function filterCommune(){
 		</form>
 		</div>';
 ?>
-<form name="list">
-	<table width="100%;">
+<form method="post" enctype="application/x-www-form-urlencoded">
+	<table width="100%" >
 		<tr>
-			<td><input dojoType="dijit.form.TextBox" class="fullside" placeholder="Search..." id="advance_search" name="advance_search" value="" type="text"></td>
+			<?php $search = $this->search;
+			?>
+			<td><input dojoType="dijit.form.TextBox"  placeholder="Search..." id="advance_search" name="advance_search" value="<?php echo $search['advance_search'];?>" type="text" class='fullside'></td>
 			<td>
-				<select dojoType="dijit.form.FilteringSelect" id="edit-field-category" name="category_search" class="">												
+				<select onchange="getControll();" dojoType="dijit.form.FilteringSelect" id="category_search" name="category_search" class='fullside'>												
 					<option value="-1" selected="selected"><?php echo $tr->translate("Choose Category");?></option>
 					<?php 
 						if(!empty($this->rscate)){
 							foreach($this->rscate as $rsc){
 						?>
-							<option value="<?php echo $rsc['id'];?>" <?php //if($category_search==$rsc['id']){ echo'selected="selected"';}?> ><?php echo $rsc['name'];?></option>
+							<option <?php if($search['category_search']==$rsc['id']){echo "selected";}?> value="<?php echo $rsc['id'];?>" ><?php echo $rsc['name'];?></option>
 						<?php }
 						} 
 					?>
 				</select>
 			</td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
+			<td><input dojoType="dijit.form.DateTextBox"  id="start_date" name="start_date" value="<?php echo $search['start_date'];?>" type="text" class='fullside'></td>
+			<td><input dojoType="dijit.form.DateTextBox"  id="end_date" name="end_date" value="<?php echo $search['end_date'];?>" type="text" class='fullside'></td>
+      		<td></td>
+      	</tr>
 		<tr>
-			<td></td>
 			<td>
-				<select  dojoType="dijit.form.FilteringSelect" id="province" name="province" onchange="filterDistrict();">
+				<select dojoType="dijit.form.FilteringSelect" id="status_used" name="status_used" class='fullside'>
+					<option value="-1"><?php echo $tr->translate("Choose Status");?></option>
+					<option <?php if($search['status_used']==1){echo "selected";}?> value="1"><?php echo $tr->translate("Publish");?></option>
+					<option <?php if($search['status_used']==0){echo "selected";}?> value="0"><?php echo $tr->translate("Suspended");?></option>
+				</select>
+			</td>
+			<td>
+				<select dojoType="dijit.form.FilteringSelect" id="province" name="province" onchange="filterDistrict();" class='fullside'>
 					<option value="-1"><?php echo $tr->translate("Choose Location");?></option>
 					<?php 
 						if(!empty($this->rslocation)){
 							foreach($this->rslocation as $rsl){
 						?>
-							<option value="<?php echo $rsl['id'];?>" <?php //if($location_search==$rsl['id']){ echo'selected="selected"';}?>><?php echo $rsl['province_name'];?></option>
+							<option <?php if($search['province']==$rsl['id']){echo'selected="selected"';}?> value="<?php echo $rsl['id'];?>"><?php echo $rsl['province_name'];?></option>
 						<?php }
 						} 
 					?>
@@ -190,7 +215,13 @@ function filterCommune(){
       		<td><input id="commune" ></td>
       		<td><button iconclass="dijitIconSearch" dojoType="dijit.form.Button" showLabel="true" type="submit">Search</button></td>
 		</tr>
+		<tr>
+			<td colspan="5">
+				<div class="form-value" style="width:100%; margin-left: -25px;"><label id="lbl_controlsearch" style="width:100%"></label></div>
+			</td>
+		</tr>
 	</table>
+	
 </form>
  <div >
   <table class="collape tablesorter" id="exportExcel" width="100%">
@@ -209,6 +240,7 @@ function filterCommune(){
 			    <th class="tdheader header"><?php echo $tr->translate('Status');?></th>
 			    <th class="tdheader header"><?php echo $tr->translate('Image');?></th>
 			    <th class="tdheader header"><?php echo $tr->translate('Publish');?></th>
+			    <th class="tdheader header"><?php echo $tr->translate('Viewer');?></th>
 		      </tr>
 	     </thead>
      	</tbody>
@@ -235,6 +267,7 @@ function filterCommune(){
 			  	<td style="border:1px solid #ccc;padding:1px;"><?php echo $row['status'];?></td>
 			  	<td style="border:1px solid #ccc;padding:1px;text-align: center;" ><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><img src="<?php echo $this->baseUrl().'/images/adsimg/'.$row['image_feature'];?>"  style="max-height:30px;"/></a></td>
 			  	<td style="border:1px solid #ccc;padding:1px;"><?php echo $row['status_use'];?></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><?php echo $row['viewer'];?></td>
 		  </tr>
       <?php }?>
      </tbody>
@@ -244,3 +277,22 @@ function filterCommune(){
     <?php }else{?>
     	</table></div><center style="font-size:18pt;"><label id="data_table">No record</label></center></form>
     <?php }?> 
+  <script>
+   var url_getcontrol = '<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'getcontroller'));?> ';
+   function getControll(){
+	   var category_search = dijit.byId('category_search').get("value"); 
+		   $.ajax({
+				url: url_getcontrol,
+				type: "post",
+				data:{'category_id':category_search},
+				success: function(data){
+					document.getElementById('lbl_controlsearch').innerHTML=data;
+					var noResult = jQuery(".form-select").data('noResult');
+					jQuery(".form-select").chosen({});
+				},
+				error:function(err){
+					alert(err);
+				}
+			});
+	}	
+  </script>

@@ -15,16 +15,20 @@ class MenuManager_AdsController extends Zend_Controller_Action {
 				$data = $this->getRequest()->getPost();
 			}else{
 				$data = array(
-						'keywork_search'=>'',
-						'location_search'=>-1,
+						'advance_search'=>'',
+						'province'=>-1,
 						'category_search'=>-1,
 						'province_id'=>-1,
 						'district'=>-1,
 						'commune'=>-1,
+						'status_used'=>-1,
+						'start_date'=>date("Y-m-d"),
+						'end_date'=>date("Y-m-d"),
+						
 				);
 			}
 			$this->view->search= $data;
-			$this->view-> rsads = $db->getAllAds($data);
+			$this->view->rsads= $db->getAllAds($data);
 			
 // 			$db = new Application_Model_DbTable_DbGlobalselect();
 // 			$this->view->rsads = $db->getAllAdvanceSearch($data);
