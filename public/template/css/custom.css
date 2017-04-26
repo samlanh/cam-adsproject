@@ -1999,7 +1999,7 @@ ul.links .service-links-facebook-share{
 	background:none;
 	border: solid 1px #eee;
 	height: 46px;
-	z-index: 9999;
+	/*z-index: 9999;*/
 	color:#fff;
 }
 
@@ -5741,3 +5741,5 @@ footer .wp-caption .wp-caption-text{    color: #a4a4a4;}
 #form_user_avatar{
 	display:none;
 }
+.marginbottom{margin-bottom: 10px;}
+#frmadvancesearch .form-control{margin-bottom: 0px !important;}
