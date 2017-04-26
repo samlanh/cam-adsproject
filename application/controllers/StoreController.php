@@ -54,12 +54,12 @@ class StoreController extends Zend_Controller_Action
 	    		$p = $this->getRequest()->getParam('pages');
 	    		
 	    		if(isset($p))
-	    		{
-	    			$paginator->setCurrentPageNumber($p);
-	    		} else $paginator->setCurrentPageNumber(1);
+				{
+					$paginator->setCurrentPageNumber($p);
+				} else $paginator->setCurrentPageNumber(1);
 	    			
 	    		$currentPage = $paginator->getCurrentPageNumber();
-	    			
+	    		
 	    		$this->view->myadsfeature = $paginator;
 	    		$this->view->countItems = $allItems;
 	    		$this->view->countPages = $countPages;

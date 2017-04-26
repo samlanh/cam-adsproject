@@ -116,7 +116,7 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 			$alias = $this->getIdStoreByAlias($data['alias']);
 			$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
 			$part= PUBLIC_PATH.'/images/store/';
-			$newName='';
+			$newName=$alias['logo_store'];
 			if (!empty($_FILES["logo_image"]["tmp_name"])){
 				$photo = $_FILES["logo_image"];
 				$temp = explode(".", $photo["name"]);
