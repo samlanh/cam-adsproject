@@ -257,11 +257,11 @@ function filterCommune(){
 				  	$title = substr($str1, 0, 120);
 			  	?>
 			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><?php echo utf8_decode($title);?></a></td>
-			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><?php echo $row['price'];?></a></td>
-			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><?php echo $row['customer_name'];?></a></td>
-			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><?php echo $row['phone1'];?></a></td>
-			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><?php echo $row['category_name'];?></a></td>
-			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/default/listads/detail/ads/'.$row['alias'];?>"><?php echo $row['province_name'];?></a></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/menu-manager/ads/update-post/adsid/'.$row['id'];?>"><?php echo $row['price'];?></a></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/menu-manager/ads/update-post/adsid/'.$row['id'];?>"><?php echo $row['customer_name'];?></a></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/menu-manager/ads/update-post/adsid/'.$row['id'];?>"><?php echo $row['phone1'];?></a></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/menu-manager/ads/update-post/adsid/'.$row['id'];?>"><?php echo $row['category_name'];?></a></td>
+			  	<td style="border:1px solid #ccc;padding:1px;"><a target='_blank' href="<?php echo $this->baseUrl().'/menu-manager/ads/update-post/adsid/'.$row['id'];?>"><?php echo $row['province_name'];?></a></td>
 			  	<td style="border:1px solid #ccc;padding:1px;"><?php echo date("d/m/Y",strtotime($row['publish_date']));?></td>
 			  	<td style="border:1px solid #ccc;padding:1px;"><?php echo date("d/m/Y",strtotime($row['expired_date']));?></td>
 			  	<td style="border:1px solid #ccc;padding:1px;"><?php echo $row['status'];?></td>

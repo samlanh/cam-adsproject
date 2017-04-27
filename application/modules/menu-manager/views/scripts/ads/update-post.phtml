@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-<head>
 <meta charset="UTF-8">
 	<script type='text/javascript' src="<?php echo $this->baseurl()."/js/jquery.min.js";?>"></script>
 	<link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
@@ -20,9 +19,6 @@
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 ?>
 <body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
-	<?php 
-		//echo $this->render('header.phtml');
-	?>
 	<section class="container">
 		<div class="conten-body">
 			<div class="conten-body-left">
@@ -34,58 +30,41 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 						<li class=" boxed"><span>Finish</span></li>
 					</ul>
 				</div>
-				<ul style="
-	width: 235px;
-    font-size: 13px;
-    padding: 10px;
-    background-color: #FFFBF6;
-    border: 1px solid #fee6d7;text-align: left;
-">
-					<li style="
-    color: #e61313;
-    font-size: 18px;
-    margin-bottom: 10px;
-"> Posting Rule</li>
-					<li>No posting of same ad or similar ad to multiple categories and inappropriate category</li>
-					<li>No posting of false, inaccurate, misleading, defamatory content</li>
-					<li>You must honestly and accurately describe the item for which you are posting an ad.</li>
-					<li>khmer24.com assumes no responsibility for the accuracy of any advertisements posted on the site</li>
-				</ul>
 			</div>
-			
 			<div class="conten-body-center right post-ads">
+			 <?php $rsads = $this->rs_ads;?>
 				<div class="title">
 					<h4><span style='border: 1px dashed #b0c2d8;padding: 5px;font-size: 14px;'>
 						<?php if (!empty($this->cate['parent_name'])){ echo $this->cate['parent_name'].'<i class="fa fa-angle-double-right" aria-hidden="true"></i>';} echo $this->cate['name']?>
-						<a style="background:#e2c636;color:#fff;padding:5px;" href="<?php echo $this->baseUrl()."/postsads/choose-category";?>"> Change Category</a></span></h4> 
+						<a style="background:#e2c636;color:#fff;padding:5px;" href="<?php echo $this->baseUrl()."/postsads/choose-category/cateid/".$rsads['id'];?>"> Change Category</a></span></h4> 
 				</div>
 				<div class="form-post-ads">
 				<div id="alert" class="alert message">
 				  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
 				  <span id="alertMessage"></span>
 				</div><!-- return validateFormAds(this); -->
-					<form id="postads_form" onsubmit="return validateFormAds(this)" method="post" enctype="multipart/form-data" action="<?php echo $this->url(array("module"=>'menu-manager','controller'=>'','action'=>'add'));?>">
+					<form id="postads_form" onsubmit="return validateFormAds(this)" method="post" enctype="multipart/form-data" action="<?php echo $this->baseUrl()."/menu-manager/ads/update-post";?>">
 						<?php if(count($this->rsstore)>1){?>
 						<div class="form-row">
 							<div class="form-label">
 								<label><?php echo $tr->translate("Choose My Store");?><span class="sign_req">*</span></label>
 							</div>
-							<div class="form-value" style="margin-left:-3px;">
+							<div class="form-value">
 								<select id="store" name="store" class="form-select" >
 									<?php if(!empty($this->rsstore) AND count($this->rsstore)>1)foreach($this->rsstore as $rstore){?>
-									<option value="<?php echo $rstore['id'];?>"><?php echo $rstore['store_name'];?></option>
+									<option <?php if($rsads['store_id']==$rstore['id']){echo "selected";}?> <?php echo $rstore['id'];?>><?php echo $rstore['store_name'];?></option>
 									<?php }?>
 								</select>
 							</div>
 						</div>
 						<?php }?>
-						
 						<div class="form-row">
 							<div class="form-label">
 								<label><?php echo $tr->translate("Title");?><span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<input type="text" placeholder="Title"  name="title" id="title"  class="form-control" />
+								<input type="text" placeholder="Title" value="<?php echo $rsads['ads_title'];?>"  name="title" id="title"  class="form-control" />
+								<input type="hidden" name="adsid" id="adsid" value="<?php echo $rsads['id'];?>"/>
 							</div>
 						</div>
 						<div class="form-row">
@@ -93,7 +72,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 								<label><?php echo $tr->translate("Ads Code");?></label>
 							</div>
 							<div class="form-value">
-								<input type="text" placeholder="Your Product Code"  name="ads_code" id="ads_code" class="form-control" />
+								<input type="text" placeholder="Your Product Code" value="<?php echo $rsads['ads_code'];?>" name="ads_code" id="ads_code" class="form-control" />
 							</div>
 						</div>
 						<?php echo $this->form;?>
@@ -102,7 +81,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 								<label><?php echo $tr->translate("Price");?> <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<input type="text" placeholder="Price"  name="price" id="price"   class="form-control" onkeypress="return isNumber(event);" />
+								<input type="text" placeholder="Price"  value="<?php echo $rsads['price'];?>" name="price" id="price"   class="form-control" onkeypress="return isNumber(event);" />
 							</div>
 						</div>
 						<div class="form-row">
@@ -110,7 +89,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 								<label><?php echo $tr->translate("Description");?> <span class="sign_req">*</span></label>
 							</div>
 							<div class="form-value">
-								<textarea id="description" required="1" name="description" class="form-control textareadesc" placeholder="Description..."></textarea>
+								<textarea id="description" required="1" name="description" class="form-control textareadesc" placeholder="Description..."><?php echo $rsads['description'];?></textarea>
 							</div>
 						</div>
 						<div class="form-row">
@@ -118,7 +97,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 								<label><?php echo $tr->translate("Link");?></label>
 							</div>
 							<div class="form-value">
-								<input type="text" placeholder="Your Website"  name="link" id="link" class="form-control" />
+								<input type="text" placeholder="Your Website"  name="link" id="link" value="<?php echo $rsads['link'];?>" class="form-control" />
 							</div>
 						</div>
 						<div class="form-row">
@@ -127,24 +106,13 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 							</div>
 							<div class="form-value">
 								<ul class="sortable grid">
-								<?php $string=''; 
+								<?php 
+								$images = $rsads['images'];
+								$image = explode(',', $images);
+								$string=''; 
 								$imageview="";
 								$imageloadin = '<img src="'.$this->baseUrl().'/images/loader.gif" alt="Uploading...."/>';
-								for($i=0;$i<$this->rsallowimg;$i++){
-								//for ($i=0; $i<=6; $i++){ 
-// 										$string.="
-// 										jQuery('#filePhoto$i').click(function(e){
-// 										var imageLoader$i = document.getElementById('filePhoto$i');
-// 											imageLoader$i.addEventListener('change', handleImage$i, false);
-										
-// 											function handleImage$i(e) {
-// 											var reader = new FileReader();
-// 											reader.onload = function (event) {
-// 												jQuery('#uploader$i img').attr('src',event.target.result);
-// 												}
-// 											reader.readAsDataURL(e.target.files[0]);
-// 											}
-// 										})";
+								for ($i=0; $i<=6; $i++){ 
 									$string.="
 										jQuery('#filePhoto$i').change(function() {
 											var file = this.files[0];
@@ -172,8 +140,15 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 									<li>
 										<div id="uploader<?php echo $i;?>" class="uploader">
 											<div id='preview<?php echo $i;?>'></div>
-											<img id="image_wiew<?php echo $i;?>" src="<?php echo $this->baseUrl();?>/images/broweimage.png"/>
-											<input type="hidden" id="ads-image<?php echo $i;?>" name="ads-image<?php echo $i;?>" />
+											<?php 
+											$str_img='images/broweimage.png';
+											$image_name='';
+											if(!empty($image[$i])){
+												$image_name = $image[$i];
+												$str_img = "images/adsimg/".$image_name;
+											}?>
+											<img id="image_wiew<?php echo $i;?>" src="<?php echo $this->baseUrl()."/".$str_img;?> "/>
+											<input type="hidden" id="ads-image<?php echo $i;?>" name="ads-image<?php echo $i;?>" value="<?php echo $image_name;?>" />
 											<input class="filephoto" type="file" name="filePhoto<?php echo $i;?>"  id="filePhoto<?php echo $i;?>" accept="image/jpeg,image/gif,image/png" value='' onchange="loadFile<?php echo $i;?>(event)" />
 										</div>
 									</li>
@@ -193,7 +168,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 										if(!empty($this->rslocation)){
 											foreach($this->rslocation as $rsl){
 										?>
-											<option value="<?php echo $rsl['id'];?>" ><?php echo $rsl['province_name'];?></option>
+											<option <?php if($rsads['province_id']==$rsl['id']){echo"selected";}?> value="<?php echo $rsl['id'];?>" ><?php echo $rsl['province_name'];?></option>
 										<?php }
 										} 
 									?>
@@ -208,7 +183,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 							<div class="form-value">
 								<label id="lbl_district">
 									<select id="district" name="district" class="form-select">
-										<option value="-1" selected="selected"><?php echo $tr->translate("Choose Distict");?></option>
+										<option value="-1" ><?php echo $tr->translate("Choose Distict");?></option>
 									</select>
 								</label>
 								<label><?php echo $tr->translate("Commune");?><span class="sign_req"></span></label>
@@ -228,16 +203,15 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 							</div>
 							<div class="col-md-3">
 								<input type="hidden"  name="index" id="index"  />
-								<input type="text" placeholder="Name" name="name" id="name" value="<?php echo $this->client_info['customer_name'];?>" class="form-control" />
+								<input type="text" placeholder="Name" name="name" id="name" value="<?php echo $rsads['contact_name'];?>" class="form-control" />
 							</div>
 							<div class="col-md-2">
 								<label><?php echo $tr->translate("Phone 1");?><span class="sign_req">*</span></label>
 							</div>
 							<div class="col-md-3">
-								<input type="text" placeholder="Phone"  name="phone1" id="phone1" value="<?php echo $this->client_info['phone'];?>"  required="required" class="form-control" />
+								<input type="text" placeholder="Phone"  name="phone1" id="phone1" value="<?php echo $rsads['phone1'];?>"  required="required" class="form-control" />
 							</div>
 							<div class="col-md-2">
-							
 							</div>
 						</div>
 						<div class="col-md-12">
@@ -245,13 +219,13 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 								<label><?php echo $tr->translate("Phone 2");?></label>
 							</div>
 							<div class="col-md-3">
-								<input type="text" placeholder="Phone"  name="phone2" id="phone2" class="form-control" />
+								<input type="text" placeholder="Phone"  name="phone2" id="phone2" value="<?php echo $rsads['phone2'];?>" class="form-control" />
 							</div>
 							<div class="col-md-2">
 								<label><?php echo $tr->translate("Email");?></label>
 							</div>
 							<div class="col-md-3">
-								<input type="text" placeholder="Email"  name="email" id="email" value="<?php echo $this->client_info['email'];?>"  class="form-control" />
+								<input type="text" placeholder="Email"  name="email" id="email" value="<?php echo $rsads['email'];?>"  class="form-control" />
 							</div>
 							<div class="col-md-2"></div>
 						</div>
@@ -260,27 +234,17 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 								<label><?php echo $tr->translate("Address");?></label>
 							</div>
 							<div class="col-md-8">
-								<textarea id="adress" name="adress"  class="form-control " placeholder="Address..."><?php echo $this->client_info['address'];?></textarea>
+								<textarea id="adress" name="adress"  class="form-control " placeholder="Address..."><?php echo $rsads['address'];?></textarea>
 							</div>
 						</div>
-						<!-- <div class="form-row">
-							<div class="col-md-4">
-							</div>
-							<div class="col-md-4">
-								<label><?php //echo $tr->translate("Use in LINE");?></label><input type="checkbox" name='is_whatapp' class=""  >
-								<label><?php //echo $tr->translate("Use in WhatsApp");?><i style="color:green;font-size: 16px;" class="fa fa-whatsapp" aria-hidden="true"></i></label><input type="checkbox" name='is_whatapp' class=""  >
-							</div>
-							<div class="col-md-4">
-							</div>
-						</div> -->
 						<div class="form-row ">
 							<div class="col-md-3">
 							</div>
 							<div class="col-md-3">
-								<input type="submit" name='saveclose' class="loginBtn register" value='<?php echo $tr->translate('Save And Close');?>' label='Submit My Ads'>
+								<input type="button" name='saveclose' class="loginBtn register" value='<?php echo $tr->translate('Cancle');?>' label='Submit My Ads'>
 							</div>
 							<div class="col-md-3">
-								<input type="submit" name='savenew' class="loginBtn register" value='<?php echo $tr->translate('Save And New');?>' label='Submit My Ads'>
+								<input type="submit" name='savenew' class="loginBtn register" value='<?php echo $tr->translate('Update');?>' label='Submit My Ads'>
 							</div>
 							<div class="col-md-3">
 							</div>
@@ -290,12 +254,21 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 			</div>
 		</div>
 	</section>
-	<?php 
-	?>
+	
 </body>
 <script src="<?php echo $this->baseUrl();?>/template/javascript/validate.js"></script>
 <script src="<?php echo $this->baseUrl();?>/template/javascript/custome.js"></script>
 <script>
+jQuery(document).ready(function($){
+	<?php if($rsads['province_id']>0){ ?>
+		getAllDistrict();
+		var district_id = $('#district').val();
+		//if(district_id>0){
+			
+		//}
+	<?php }?>
+	});
+	
 var url_district = '<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'get-districtbyid'));?> ';
 function getAllDistrict(){
 	var pro_id = $('#location').val();
@@ -312,10 +285,16 @@ function getAllDistrict(){
 				}
 				stringhtml+='</select';
 				document.getElementById('lbl_district').innerHTML=stringhtml;
+				
 				stringcommune='<select id="commune" name="commune" class="form-select"><option><?php echo $tr->translate("Choose Commune");?></option></select>';
 				document.getElementById('lbl_commune').innerHTML=stringcommune;
+				
+				$('#district').val(<?php echo $rsads['district_id'];?>);
 				var noResult = jQuery(".form-select").data('noResult');
 				jQuery(".form-select").chosen({});
+				
+				getCommuneById();
+				
 			},
 			error:function(err){
 				alert(err);
@@ -339,6 +318,8 @@ function getCommuneById(){
 			}
 			stringhtml+='</select';
 			document.getElementById('lbl_commune').innerHTML=stringhtml;
+
+			$('#commune').val(<?php echo $rsads['commune_id'];?>);
 			var noResult = jQuery(".form-select").data('noResult');
 			jQuery(".form-select").chosen({});
 		},
@@ -347,13 +328,37 @@ function getCommuneById(){
 	});
 }
 </script>
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.bxslider.mine.js'></script> <!--form search-->
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/custome.js'></script>
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.isotope.mine.js'></script>
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/owl.carousel.mine.js'></script>
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.tools.mine.js'></script>
-	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
-	
+<script>		
+	var url_changelang = '<?php echo $this->url(array('module'=>'default','controller'=>'index','action'=>'changelange'));?> ';
+	function changeLange(lang){
+		$.ajax({
+			url: url_changelang,
+			type: "post",
+			data:{'lange':lang},
+			success: function(data){
+				location.reload();
+			},
+			error:function(err){
+			}
+		});
+	}
+	<?php if ($lang==1){?>
+		var monthNames = [
+		                  "Jan", "Feb", "Mar",
+		                  "Apr", "May", "Jun", "Jul",
+		                  "Aug", "September", "Oct",
+		                  "Nov", "Dec"
+		                ];
+      <?php }else{?>
+      var monthNames = [
+	                  "មករា", "កុម្ភៈ", "មិនា",
+	                  "មេសា", "ឧសភា", "មិថុនា", "កក្កដា",
+	                  "សីហា", "កញ្ញា", "តុលា",
+	                  "វិច្ឆិការ", "ធ្នូ"
+	                ];
+      <?php }?>
+      var baseurl = '<?php echo $this->baseUrl();?>';
+</script>
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
+<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
 </html>

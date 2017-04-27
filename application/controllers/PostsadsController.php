@@ -8,7 +8,7 @@ class PostsadsController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
-    	header('content-type: text/html; charset=utf8');  
+    	header('content-type: text/html; charshttp://localhost/cam-adsproject/trunk/public/menu-manager/ads/addet=utf8');  
     	
     }
     function errorpageAction(){

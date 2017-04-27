@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<?php $parentcate = $this->parentcate;
+$db = new Application_Model_DbTable_DbVdGlobal();
+?>
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
+	<?php 
+		echo $this->render('header.phtml');
+	?>
+	<section class="container">
+		<div class="conten-body">
+			<div class="conten-body-left">
+				<!--<h4 class="title-content"><span class="title">Choose category :</span></h4>-->
+				<div class="step-blog">
+					<ul class="SteppedProgress Vertical">
+						<li class="complete boxed"><span>Post Ads</span></li>
+						<li class="complete current"><span>Choose category</span></li>
+						<li class=" boxed"><span>Description</span></li>
+						<li class=" boxed"><span>Finish</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="conten-body-center right post-ads">
+				<div class="choose-category-blog">
+					<div class="main-category-blog">
+						<h4 class="title-content"><span class="number_list">1</span> <span class="title">Select a category :</span></h4>
+						<div class="tab-left">
+							<div  class="pos-relative">
+								<ul class="nav nav-tabs tabs horizontal" id="tabs">
+									<?php if (!empty($parentcate)) foreach ($parentcate as $parent){ ?>
+									<li class="<!--active-->">
+										<a href="<?php echo "#c".$parent['alias_category'];?>">
+											<span class="dash-title">
+												<?php if (!empty($parentcate)){?>
+												<i class="fa <?php echo $parent['fontawsome_icon'];?>" aria-hidden="true"></i>
+												<?php } echo $parent['name'];?>							
+											</span>
+										</a>
+									</li>
+									<?php }?>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="sub-categories-blog">
+						<h4 class="title-content"><span class="number_list">2</span> <span class="title">Select a subcategory :</span></h4>
+						<div class="tab-content">
+							<?php if (!empty($parentcate)) foreach ($parentcate as $parent){ 
+								$subcate = $db->getSubCateByParent($parent['id']);
+								?>
+								<div class="tab-pane <!--active--> " id="<?php echo "c".$parent['alias_category'];?>">
+									<div class="sub-categories-list">
+										<ul class="sub-cate">
+											<?php 
+											$link = $this->cateid;
+											if (!empty($subcate)) foreach ($subcate as $cate){
+												if(!empty($link)){
+													$url = $this->url(array("module"=>'menu-manager','controller'=>'ads','action'=>'edit','adsid'=>$link),null,true);
+												}
+												else{ $url = $this->url(array("module"=>'menu-manager','controller'=>'ads','action'=>'add','category'=>$cate['alias_category']));
+												}
+											?>
+											<li class="cate-list"><a href="<?php echo $url;//echo $this->baseUrl()."/postsads/write-post/category/".$cate['alias_category'];?>"><?php  echo $cate['name'];?></a></li>
+											<?php }?>
+										</ul>
+									</div>
+								</div>
+							<?php }?>
+						</div>
+					 </div>
+				</div>
+			</div>
+		</div>
+		</section>
+<?php 
+	//echo $this->render('sideright.phtml');
+?>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
+	
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.bxslider.mine.js'></script> <!--form search-->
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/custome.js'></script>
+	
+	
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.isotope.mine.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/owl.carousel.mine.js'></script>
+
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.tools.mine.js'></script>
+	
+	<!-- softable -->
+	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
+	
+</body>
+</html>

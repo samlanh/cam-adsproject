@@ -72,14 +72,14 @@ class MenuManager_AdsController extends Zend_Controller_Action {
   		$this->_helper->layout()->disableLayout();
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();
-    		$dbp = new MenuManager_Model_DbTable_Dbads();
+    		$dbp = new Application_Model_DbTable_DbPostAds();
     		$result = $dbp->addPostsAds($data);
     		if(!empty($data['saveclose'])){
-    			$this->_redirect("/menu-manager/ads/".$result);
+    			$this->_redirect("/dashboard/myads/".$result);
     		}else{
     			$session_post=new Zend_Session_Namespace('postads');
     			$session_post->success=$result;
-    			$this->_redirect("/menu-manager/ads/choose-category/".$result);
+    			$this->_redirect("/postsads/choose-category/".$result);
     			//Application_Form_FrmMessage::Sucessfull("Your ad has been insert success", "/postsads/choose-category/");
     		}
     	}
@@ -95,7 +95,7 @@ class MenuManager_AdsController extends Zend_Controller_Action {
 	    	$this->view->form = $dbform->getAllFormTypeCateid($cate['id']);
 	    	
 	    	$db = new Application_Model_DbTable_DbClient();
-	    	$this->view->client_info = $db->getClientInfo(null);
+	    	$this->view->client_info = $db->getClientInfo(null,$client_session->client_id);
 	    	
 	    	$db = new Application_Model_DbTable_DbGlobalselect();
 	    	$this->view-> rslocation = $db->getAllLocation();
@@ -107,48 +107,26 @@ class MenuManager_AdsController extends Zend_Controller_Action {
     	$this->view->rsallowimg  =  $dbg->getSystemSetting('allow_image',1);
   
   }
-  public function updatePostAction(){ // write post ads and submit ads to finish
-  	if($this->getRequest()->isPost()){
-  		$data=$this->getRequest()->getPost();
-  		$dbp = new Application_Model_DbTable_DbPostAds();
-  
-  		//     		print_r($data);exit();
-  		$result = $dbp->addUpdateAds($data);
-  
-  		$session_post=new Zend_Session_Namespace('postads');
-  		$session_post->success=$result;
-  		Application_Form_FrmMessage::Sucessfull("Your ad has been insert success", "/menu-manager/ads");
-  	}
-  	$client_session=new Zend_Session_Namespace('client');
-  	if(!empty($client_session->client_id)){ //check session has been have or not
-  		$paramid = $this->getRequest()->getParam('adsid');
-  		$db = new Application_Model_DbTable_DbVdGlobal();
-  
-  		$dbform = new Application_Model_DbTable_DbDynamicFormPostAds();
-  		$rs_ads = $dbform->getAdsById($paramid);
-  
-  		if(empty($rs_ads)){
-  			$this->_redirect("postsads/errorpage");
+  public function editAction(){
+  	$id = $this->getRequest()->getParam('id');
+  	try{
+  		$db = new MenuManager_Model_DbTable_DbMenuManager();
+  		if($this->getRequest()->isPost()){
+  			$_data = $this->getRequest()->getPost();
+  			$_data['id']=$id;
+  			$db->addMainMenu($_data);
+  			Application_Form_FrmMessage::Sucessfull("UPDATE_SUCCESS","/menu-manager/index");
   		}
-  		$this->view->rs_ads = $rs_ads;//result ads row
-  
-  		$this->view->form = $dbform->getAllFormTypeCateid($rs_ads['category_id'],null,$rs_ads['id']);//get form controll
-  
-  		$cate = $db->getCategoryIdbyAlias($rs_ads['cate_alias']);
-  		$this->view->cate = $cate;//get parent category for selected
-  
-  		$db = new Application_Model_DbTable_DbClient();
-  		$this->view->client_info = $db->getClientInfo(null,$client_session->client_id);
-  
-  		$db = new Application_Model_DbTable_DbGlobalselect();
-  		$this->view-> rslocation = $db->getAllLocation();
-  
-  		$this->view->rsstore = $db->getAllStoreByUser();
-  	}else{
-  		$this->_redirect("index/login");
+  		$row = $db->getMainMenuById($id);
+  		$frm = new MenuManager_Form_FrmMenu();
+  		$frm_manager=$frm->FrmMenuManager($row);
+  		Application_Model_Decorator::removeAllDecorator($frm_manager);
+  		$this->view->frm = $frm_manager;
+  	}catch (Exception $e){
+  		Application_Form_FrmMessage::message("Application Error");
+  		Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
   	}
   }
-  
   public function deleteAction(){
   	try{
   		$id = $this->getRequest()->getParam('id');
