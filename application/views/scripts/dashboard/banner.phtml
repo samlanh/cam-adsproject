@@ -18,11 +18,11 @@
 				<div class="tab-left">
 					<div  class="pos-relative">
 						<ul class="nav nav-tabs tabs horizontal">
-							<li >
+							<li>
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'myaccount')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-user" aria-hidden="true"></i>
-										My Account									
+										<?php echo $tr->translate("My Account");?>									
 									</span>
 								</a>
 							</li>
@@ -30,15 +30,15 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'myads')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-cart-plus" aria-hidden="true"></i>
-										My Ads									
+										<?php echo $tr->translate("My Ads");?>									
 									</span>
 								</a>
 							</li>
-							<li>
+							<li class="active">
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'mystore')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-university" aria-hidden="true"></i>
-										 My Store							
+										 <?php echo $tr->translate("My Store");?>							
 									</span>
 								</a>
 							</li>
@@ -46,7 +46,7 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'mypage')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-bullhorn" aria-hidden="true"></i>
-										My Page						
+										<?php echo $tr->translate("My Page");?>						
 									</span>
 								</a>
 							</li>
@@ -54,16 +54,16 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'mypage')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-map-marker" aria-hidden="true"></i>
-										Contact Us					
+										<?php echo $tr->translate("Contact Us");?>					
 									</span>
 								</a>
 							</li>
 							
-							<li class="active">
+							<li>
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'banner')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-picture-o" aria-hidden="true"></i>
-										 Manage Banner							
+										 <?php echo $tr->translate("Manage Banner");?>							
 									</span>
 								</a>
 							</li>
@@ -71,7 +71,7 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'policy')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-newspaper-o" aria-hidden="true"></i>
-										Policy								
+										<?php echo $tr->translate("Policy");?>							
 									</span>
 								</a>
 							</li>
@@ -79,7 +79,7 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'announce')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-comment-o" aria-hidden="true"></i>
-										Anouncement								
+										<?php echo $tr->translate("Anouncement");?>								
 									</span>
 								</a>
 							</li>
@@ -89,7 +89,7 @@
 			</div>
 			<div class="conten-body-center right">
 			<div class="title">
-				<h4>Manage Banner In Store</h4>
+				<h4><?php echo $tr->translate("Manage Banner In Store");?></h4>
 			</div>
 			<div class="store_menu">
 				<div  class="pos-relative">
@@ -115,7 +115,7 @@
 					?>
 					<div class="tab-pane banner <?php if ($key==0){echo 'active';}?> " id="<?php echo $rs['alias_store'];?>">
 							<div class="label_title">
-								<label>Home Page Banner (1170x100px) :</label>
+								<label><?php echo $tr->translate("Home Page Banner");?> (1170 X 100px) :</label>
 							</div>
 							<div class="row_form">
 								<div class="bannerview">
@@ -131,7 +131,7 @@
 								</div>
 							</div>
 							<div class="label_title">
-								<label>Page Detail ads Banner (230x300px) :</label>
+								<label><?php echo $tr->translate("Page Detail ads Banner");?>(230 X 300px) :</label>
 							</div>
 							<div class="row_form">
 								<div class="bannerview">
@@ -141,7 +141,7 @@
 									<img id="bannerdetail_view<?php echo $rs['alias_store'];?>" src="<?php echo $this->baseUrl()."/images/banner/banner_ads_detail.jpg"?>"/>
 								<?php }?>
 									<div class="button-browse-image">
-										<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
+										<span><?php echo $tr->translate("Upload");?> <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
 										<input class="btn_borwse_image" value="" type="file" id="bannerdetail<?php echo $rs['alias_store'];?>" name="bannerdetail<?php echo $rs['alias_store'];?>"  onchange="uploadbanner('<?php echo $rs['alias_store'];?>',2)"/>
 									</div>
 								</div>
