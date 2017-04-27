@@ -22,10 +22,23 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 				"2"=>"province_kh_name"
 		);
 		$province = $province_field[$lang_id];
+		
+		$district_field = array(
+				"1"=>"district_name",
+				"2"=>"district_namekh"
+		);
+		$district = $district_field[$lang_id];
+		$commune_field = array(
+				"1"=>"commune_name",
+				"2"=>"commune_namekh"
+		);
+		$commune = $commune_field[$lang_id];
 		$sql=" SELECT *,
 			(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = `user_id` LIMIT 1) AS author,
 			(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
 			(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name,
+			(SELECT $district FROM `ln_district` WHERE dis_id=vd_ads.district_id LIMIT 1) as district_name,
+			(SELECT $commune FROM `ln_commune` WHERE com_id= vd_ads.commune_id LIMIT 1) AS commune_name,
 			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = vd_ads.store_id LIMIT 1 ) AS store_alias,
 			(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = vd_ads.store_id LIMIT 1 ) AS store_title
 			FROM `vd_ads` WHERE 1 ";
@@ -43,13 +56,26 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 				"2"=>"province_kh_name"
 		);
 		$province = $province_field[$lang_id];
+		
+		$district_field = array(
+				"1"=>"district_name",
+				"2"=>"district_namekh"
+		);
+		$district = $district_field[$lang_id];
+		$commune_field = array(
+				"1"=>"commune_name",
+				"2"=>"commune_namekh"
+		);
+		$commune = $commune_field[$lang_id];
 		$sql=" SELECT ad.*,
 			(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author,
 			(SELECT vc.package_id FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS package_id,
 			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ad.store_id LIMIT 1 ) AS store_alias,
 			(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = ad.store_id LIMIT 1 ) AS store_title,
 			(SELECT title FROM `vd_category_detail` WHERE ad.category_id=ad.category_id AND languageId=$lang_id LIMIT 1) as category_name,
-			(SELECT $province FROM `vd_province` WHERE id=ad.province_id ) as province_name
+			(SELECT $province FROM `vd_province` WHERE id= ad.province_id LIMIT 1) as province_name,
+			(SELECT $district FROM `ln_district` WHERE dis_id=ad.district_id LIMIT 1) as district_name,
+			(SELECT $commune FROM `ln_commune` WHERE com_id=ad.commune_id LIMIT 1) AS commune_name
 			FROM `vd_ads` AS ad WHERE ad.category_id=$category_id ";
 
 		$where='';
@@ -102,7 +128,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 	function getAllStoreByUser(){
 		$client_session=new Zend_Session_Namespace('client');
 		$user_id = $client_session->client_id;
-		$sql = " SELECT id,alias_store AS store_name FROM `vd_client_store` WHERE STATUS=1 AND client_id=$user_id ";
+		$sql = " SELECT id,alias_store, store_title AS store_name FROM `vd_client_store` WHERE STATUS=1 AND client_id=$user_id ";
 		$db = $this->getAdapter();
 		return $db->fetchAll($sql);
 	}
@@ -261,14 +287,25 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$lang_id = $this->getCurrentLang();
 		$db = $this->getAdapter();
 		$province = $this->getStringProvince();
+		
+		$district_field = array(
+				"1"=>"district_name",
+				"2"=>"district_namekh"
+		);
+		$district = $district_field[$lang_id];
+		$commune_field = array(
+				"1"=>"commune_name",
+				"2"=>"commune_namekh"
+		);
+		$commune = $commune_field[$lang_id];
 		$sql="SELECT ad.*,
 		(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author,
 		(SELECT vc.photo FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_photo,
 		(SELECT vc.address FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_address,
 		(SELECT vc.phone FROM `vd_client` vc WHERE vc.id = ad.`user_id` LIMIT 1) AS author_phone,
 		(SELECT $province FROM `vd_province` WHERE id= ad.province_id LIMIT 1) as province_name,
-		(SELECT district_name FROM `ln_district` WHERE dis_id=ad.district_id LIMIT 1) as district_name,
-		(SELECT commune_name FROM `ln_commune` WHERE com_id=ad.commune_id) AS commune_name,
+		(SELECT $district FROM `ln_district` WHERE dis_id=ad.district_id LIMIT 1) as district_name,
+		(SELECT $commune FROM `ln_commune` WHERE com_id=ad.commune_id) AS commune_name,
 		(SELECT title FROM `vd_category_detail` WHERE category_id= ad.category_id AND languageId=$lang_id LIMIT 1) as category_name,
 		(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ad.store_id LIMIT 1 ) AS store_alias,
 		(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = ad.store_id LIMIT 1 ) AS store_title
@@ -326,6 +363,14 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 			$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 			$str='';
 			 foreach($result as $rs){
+			 	$alias="'".$rs['alias']."'";
+			 	$list='';
+			 	if (!empty($rs['commune_name'])){
+			 		$list.=' <li class="list_view">'.$rs['commune_name'].' ,</li>';
+			 	}
+			 	if (!empty($rs['district_name'])){
+			 		$list.='<li class="list_view">'.$rs['district_name'].' ,</li>';
+			 	}
 				$str.= "<li class='item-wrap'>
 				<div class='item ad-box'>
 				<div class='item-image'>";
@@ -338,7 +383,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 					}
 					$str.='</a>';
 					$str.='<div class="additional-buttons">
-						<span class="quickview" onClick="getAdsDetail('.$rs['id'].');" ><i class="fa fa-search-plus"></i>'.$tr->translate("Quickview").'</span>
+						<span class="quickview" onClick="getAdsDetail('.$alias.');" ><i class="fa fa-search-plus"></i>'.$tr->translate("Quickview").'</span>
 							<div class="sold-by-container">
 								<a title="'.$rs['store_title'].'" href="'.$base_url.'/store/index?store='.$rs['store_alias'].'"><span>'.$tr->translate("Store").'</span> : '.$rs['store_title'].'</a>
 							</div>
@@ -360,10 +405,8 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 							 utf8_decode($description); 
 					$str.='</p>
 							<ul>
-							   <li>'.$rs['category_name'].'</li>
-							   <li>'.$rs['province_name'].'</li>
-							   <li>'.$rs['district_name'].'</li>
-							   <li>'.$rs['commune_name'].'</li>
+							   <li >'.$rs['category_name'].'</li>'.$list.'
+							    <li class="province">'.$rs['province_name'].'</li>
 							</ul>
 						</div>
 					</div><!-- item-description -->

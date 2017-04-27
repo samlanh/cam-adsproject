@@ -43,9 +43,10 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			$dbs = new Application_Model_DbTable_DbGlobalselect();
 			$rsstore = $dbs->getAllStoreByUser();
 			if(count($rsstore)>1){
-				$store_id=empty($data['store_id'])?'':$data['store_id'];//check if not real store
+				$store_id=empty($data['store'])?'':$data['store'];//check if not real store
 			}else{
 				$store_id = $rsstore[0]['id'];
+				echo 2;exit();
 			}
 			$arr = array(
 					'store_id'   =>$store_id,

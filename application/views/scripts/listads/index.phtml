@@ -88,8 +88,8 @@ function getCommuneById(){
 		<div class="breadcrumb">
 			<div class="container">
 				<ul class="breadcrumb">
-				  <li><a href="<?php echo $this->baseUrl()."/index"?>"><i class="fa fa-home"></i>Home</a></li>
-				   <li><a href="<?php echo $this->baseUrl()."//listads/index"?>">All Categories</a></li>
+				  <li><a href="<?php echo $this->baseUrl()."/index"?>"><i class="fa fa-home"></i><?php echo $tr->translate("Home");?></a></li>
+				   <li><a href="<?php echo $this->baseUrl()."//listads/index"?>"><?php echo $tr->translate("All Categories");?></a></li>
 				  <?php if (!empty($this->cate_info['parent_cate_name'])){?>
 				  <li><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$this->cate_info['parent_alias_category'];?>"><?php echo $this->cate_info['parent_cate_name'];?></a></li>
 				  <?php }?>
@@ -184,7 +184,7 @@ function getCommuneById(){
 																	<?php }?>
 																	</a>
 																	<div class="additional-buttons">
-																		<span class="quickview" onClick="getAdsDetail('<?php echo $rs['id'];?>');" ><i class="fa fa-search-plus"></i><?php echo $tr->translate("Quickview");?></span>
+																		<span class="quickview" onClick="getAdsDetail('<?php echo $rs['alias'];?>');" ><i class="fa fa-search-plus"></i><?php echo $tr->translate("Quickview");?></span>
 																		<div class="sold-by-container">
 																			<a title="Channy" href="<?php echo $this->baseUrl()."/store/index?store=".$rs['store_alias'].".html";?>"><span><?php echo $tr->translate("Store");?> </span> : <?php echo $rs['store_title'];?></a>
 																		</div>
@@ -215,7 +215,13 @@ function getCommuneById(){
 																	?></p>
 																	<ul>
 																	   <li ><?php echo $rs['category_name'];?></li>
-																	   <li> <?php echo $rs['province_name'];?></li>
+																	   <?php if (!empty($rs['commune_name'])){?>
+																     	<li class="list_view"> <?php echo $rs['commune_name']." ,";?></li>
+																     	<?php }?>
+																	   <?php if (!empty($rs['district_name'])){?>
+																   		<li class="list_view"> <?php echo $rs['district_name']." ,";?></li>
+																   		<?php }?>
+																     	<li class="province"> <?php echo $rs['province_name'];?></li>
 																	</ul>
 																</div>
 															</div><!-- item-description -->

@@ -63,7 +63,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 				 </div>
 				 <div class="viewer" >
 					<ul >
-					   <li> <i class="fa fa-eye"></i><span id="pop-viewer">100</span> Views</li>
+					   <li> <i class="fa fa-eye"></i><span id="pop-viewer">100</span> <?php echo $tr->translate("Views");?></li>
 					   <li> <i class="fa fa-clock-o"></i><span id="pop-date">12, Mar 2017</span></li>
 					</ul>
 				</div>
@@ -76,13 +76,13 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 				 	</p>
 				 </div>
 				 <div class="postedby"> 
-				 	<p>Store : <span class="bold" id="pop-author"><a href="#">Sok Chandara</a></span></p>
+				 	<p><?php echo $tr->translate("Store");?> : <span class="bold" id="pop-author"><a href="#">Sok Chandara</a></span></p>
 				 </div>
 				 <div class="item-info">
 					<ul style="font-size: 10px;">
-					   <li >Category : </li>
+					   <li ><?php echo $tr->translate("Category");?> : </li>
 					   <li class="value" id="pop-category">Houses & Lands</li>
-					   <li > Location : </li>
+					   <li > <?php echo $tr->translate("Location");?> : </li>
 					   <li class="value" id="pop-location"> Phnom Penh</li>
 					</ul>
 				</div>

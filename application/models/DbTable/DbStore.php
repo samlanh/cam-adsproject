@@ -236,12 +236,12 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$lang_id LIMIT 1)  AS parent_category_name,
 		(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name
 		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id`   AND ads.store_id = $store_id";
-		$order='';
+		$order =' ORDER BY ads.id DESC';
 		if (!empty($most_view)){ // for use in store
-			$order.=" ORDER BY ads.viewer DESC LIMIT 10";
+			$order =" ORDER BY ads.viewer DESC LIMIT 10";
 		}
 		if (!empty($feature)){ // for use in store
-			$order.=" ORDER BY ads.id DESC LIMIT 10";
+			$order =" ORDER BY ads.id DESC LIMIT 10";
 		}
 		return $db->fetchAll($sql.$order);
 	}

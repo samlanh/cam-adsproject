@@ -13,11 +13,13 @@ class StoreController extends Zend_Controller_Action
 			$store = $db->getMyStoreByAlias($temp[0]);
 	      	$this->view->store = $store;
 	      	if (!empty($store)){
+	      		if (empty($param['page'])){
 		      	$dbadsstore = new Application_Model_DbTable_DbStore();
-		       $this->view->myadsmostview = $dbadsstore->getAdsByUserid(1,null,$store['id']);
-		       $this->view->myadsfeature = $dbadsstore->getAdsByUserid(null,1,$store['id']);
+		       	$this->view->myadsmostview = $dbadsstore->getAdsByUserid(1,null,$store['id']);
+		       	$this->view->myadsfeature = $dbadsstore->getAdsByUserid(null,1,$store['id']);
 		       
-		       $this->view->parent_cate = $dbadsstore->getParentCategory($store['id']);
+		      	 $this->view->parent_cate = $dbadsstore->getParentCategory($store['id']);
+	      		}
 	      	}else{
     			$this->_redirect("/index");
     		}

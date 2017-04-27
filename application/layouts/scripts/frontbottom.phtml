@@ -1,9 +1,12 @@
+<?php 
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+?>
 <footer  class="footer">
 		<div class="container">					
 			<div class="row">
 				<div class="col-md-4 col-sm-6 left-blog">
 					<div class="block-content ">
-						<h4><span class="footer-title">About Us</span></h4>
+						<h4><span class="footer-title"><?php echo $tr->translate("About Us");?></span></h4>
 						<p>
 						<span class="value">Cam App Technology is the company provide the best IT solutions in Cambodia it was found by professional humane resource of information technology members.Moreover we have many experience with design and develop  professional website.We are focus on the following:Reliability,Security,Competitive market price. Flexibility,Accessibility ,Competence and skillful human resource,Quantity is our concern. </span></p>
 					</div>
@@ -17,7 +20,7 @@
 						</div>
 						<div class="textwidget text-description">
 							<p>
-							All copyrights reserved &#x00040; 2017 <a href="http://cam-app.com/">Cam App Technology</a>					
+							<?php echo $tr->translate("All copyrights reserved");?> &#x00040; <?php echo $tr->translate("2017");?> <a href="http://cam-app.com/">Cam App Technology</a>					
 
 							</p>
 						</div>
@@ -33,7 +36,7 @@
 				</div>		
 				<div class="col-md-4 col-sm-6 right-blog">
 					<div class="block-content ">
-						<h4><span class="footer-title">Contats Us </span></h4>
+						<h4><span class="footer-title"><?php echo $tr->translate("Contats Us");?></span></h4>
 						<p>
 							<span class="value">info@cam-app.com </span>
 							<br>
@@ -41,7 +44,7 @@
 						</p>
 					</div>
 					<div class="block-content ">
-						<h4><span class="footer-title">Address</span></h4>
+						<h4><span class="footer-title"><?php echo $tr->translate("Address");?></span></h4>
 						<p>
 						<span class="value">#188ZB, Street 156,Sangkat Teuk Laak II, Khan Toul Kork ,Phnom Penh </span></p>
 					</div>

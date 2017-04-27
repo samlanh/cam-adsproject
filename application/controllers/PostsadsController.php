@@ -173,7 +173,9 @@ class PostsadsController extends Zend_Controller_Action
     public function adsDetailAction(){ //get ads detail for display on popup
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();
-    		$db = new Application_Model_DbTable_DbPostAds();
+//     		$db = new Application_Model_DbTable_DbPostAds();
+//     		$rs = $db->getAdsDetail($data['ads_code']);
+    		$db = new Application_Model_DbTable_DbGlobalselect();
     		$rs = $db->getAdsDetail($data['ads_code']);
     		print_r(Zend_Json::encode($rs));
     		exit();

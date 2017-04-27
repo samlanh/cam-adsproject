@@ -27,22 +27,20 @@ var monthNames = [
             ];
 <?php }?>
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
-<link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
-
-<link rel='stylesheet' id='bxslider-style-css'  href='<?php echo $this->baseUrl();?>/template/css/jquery.bxslider.css' type='text/css' media='all' />
-<link rel='stylesheet' id='owl-carousel-css'  href='<?php echo $this->baseUrl();?>/template/css/owl.carousel.css' type='text/css' media='all' />
-
-<link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/custom.css' type='text/css' media='all' />
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+<script type='text/javascript' src="<?php echo $this->baseurl()."/js/jquery.min.js";?>"></script>
+	<link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='bxslider-style-css'  href='<?php echo $this->baseUrl();?>/template/css/jquery.bxslider.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/custom.css' type='text/css' media='all' />
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fancybox.packe.js'></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fitvidse.js'></script>
+	<link rel='stylesheet' href='<?php echo $this->baseUrl();?>/template/css/style.css' type='text/css' />
 <link rel='stylesheet' id='main-style-custom-css'  href='<?php echo $this->baseUrl();?>/template/css/main.css' type='text/css' media='all' />
 
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery.js'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/include/js/jquery/jquery-migrate.min.js'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fancybox.packe.js'></script>
-<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/fitvidse.js'></script>
-<link rel='stylesheet' href='<?php echo $this->baseUrl();?>/template/css/style.css' type='text/css' />
 </head>
 <section id="static-image2" class=" static-image-2" >
 			<div class="container search-bar search-bar-version4">
@@ -141,34 +139,38 @@ var monthNames = [
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.bxslider.mine.js'></script> <!--form search-->
-	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/custome.js'></script>
+	
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.isotope.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/owl.carousel.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.tools.mine.js'></script>
 	<script src="<?php echo $this->baseUrl();?>/template/javascript/jquery.sortable.js"></script>
+	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/custome.js'></script>
+	<script src="<?php echo $this->baseUrl()."/template/js/custom.js";?>"></script>
+	<script src="<?php echo $this->baseUrl()."/template/js/bootstrap.min.js"; ?>"></script>
 	<div class="page">
 		<div class="breadcrumb">
 			<div class="container">
+				<ul class="breadcrumb">
+				  <li><a href="<?php echo $this->baseUrl()."/index"?>"><i class="fa fa-home"></i><?php echo $tr->translate("Home");?></a></li>
+				   <li><a href="<?php echo $this->baseUrl()."//listads/index"?>"><?php echo $tr->translate("All Categories");?></a></li>
+				  <li><?php echo $tr->translate("Advance Search");?></li>
+				</ul>
 			</div>
 		</div>
 		<div class="all-categories section">
 			<div class="container">
 				<div class="row clearpadding">
-					<div class="col-md-2 col-sm-3 leftblog" style="height:500px;background:#fff;">
+					<div class="col-md-2 col-sm-3 leftblog" style=" height:500px;background:#fff;">
 						<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
 					</div><!-- col-sm-4 -->
 					<div class="col-md-8 col-sm-7" style="border-left:1px solid #eee;border-right:1px solid #eee;">
 						<div class="category-adds">
-							<div id="category-tab">
-								<div class="category-tab-top">
 									<div class="tab-view" style="width:100%;">
-										<ul class="list-inline">
-											<!-- <li class="grid-view-tab"><i class="fa fa-th-large" aria-hidden="true"></i></li> -->
-											<li class="small-view-tab active"><i class="fa fa-th" aria-hidden="true"></i></li>
-											<li class="list-view-tab"><i class="fa fa-th-list" aria-hidden="true"></i></li>
+										<ul class="list-inline advance">
+											<li class="small-view-tab active"><i class="fa fa-th"></i></li>
+											<li class="list-view-tab"><i class="fa fa-th-list"></i></li>
 										</ul>
 									</div>
-								</div>
 								<div class="category-tab"  >
 								  	<div class="tab-content small-view-tab">
 								    	<div role="tabpanel" class="tab-pane active" id="recent">
@@ -187,7 +189,7 @@ var monthNames = [
 																	<?php }?>
 																	</a>
 																	<div class="additional-buttons">
-																		<span class="quickview" onClick="getAdsDetail('<?php echo $rs['id'];?>');" ><i class="fa fa-search-plus"></i><?php echo $tr->translate("Quickview");?></span>
+																		<span class="quickview" onClick="getAdsDetail('<?php echo $rs['alias'];?>');" ><i class="fa fa-search-plus"></i><?php echo $tr->translate("Quickview");?></span>
 																		<div class="sold-by-container">
 																			<a title="<?php echo $rs['store_title'];?>" href="<?php echo $this->baseUrl()."/store/index?store=".$rs['store_alias'].".html";?>"><span><?php echo $tr->translate("Store");?> </span> : <?php echo $rs['store_title'];?></a>
 																		</div>
@@ -212,7 +214,13 @@ var monthNames = [
 																	?></p>
 																	<ul>
 																	   <li ><?php echo $rs['category_name'];?></li>
-																	   <li> <?php echo $rs['province_name'];?></li>
+																	  <?php if (!empty($rs['commune_name'])){?>
+																     	<li class="list_view"> <?php echo $rs['commune_name']." ,";?></li>
+																     	<?php }?>
+																	   <?php if (!empty($rs['district_name'])){?>
+																   		<li class="list_view"> <?php echo $rs['district_name']." ,";?></li>
+																   		<?php }?>
+																     	<li class="province"> <?php echo $rs['province_name'];?></li>
 																	</ul>
 																</div>
 															</div><!-- item-description -->
@@ -230,7 +238,6 @@ var monthNames = [
 								    	</div> <!--tab-pane-->
 								  	</div>
 								</div>
-							</div><!-- category-tab-->	
 						</div>
 						<div class="pager-section">
 							<ul class="pagination ">
@@ -247,7 +254,7 @@ var monthNames = [
 						</div><!-- pager-section -->
 					</div><!-- end blog center -->
 					<div class="col-md-2 col-sm-3" style="height:500px;background:#fff;border-right:1px solid #eee;">
-						Blog right
+						<img src="<?php echo $this->baseUrl()."/images/minyuan.gif"; ?>" />
 					</div><!-- col-sm-4 -->
 				</div>
 			</div>
@@ -260,6 +267,7 @@ var monthNames = [
 			</div>
 		</div>
 	</div>
+	
 	<?php
    $page = $this->baseurl();
 	echo $this->render('sideright.phtml');

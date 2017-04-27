@@ -30,8 +30,8 @@
 		<div class="breadcrumb">
 			<div class="container">
 				<ul class="breadcrumb">
-				  <li><a href="<?php echo $this->baseUrl()."/index"?>"><i class="fa fa-home"></i>Home</a></li>
-				  <li><a href="<?php echo $this->baseUrl()."//listads/index"?>">All Categories</a></li>
+				  <li><a href="<?php echo $this->baseUrl()."/index"?>"><i class="fa fa-home"></i><?php echo $tr->translate("Home");?></a></li>
+				  <li><a href="<?php echo $this->baseUrl()."//listads/index"?>"><?php echo $tr->translate("All Categories");?></a></li>
 				  <?php if (!empty($ads['parent_category_name'])){?>
 				  <li><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$ads['parent_alias_category'];?>"><?php echo $ads['parent_category_name'];?></a></li>
 				  <?php }?>
@@ -80,7 +80,7 @@
 										</div>
 										<div class="viewer">
 											<div class="item-post-date">
-												<span><i class="fa fa-eye"></i><?php echo $ads['viewer'];?> Views </span> 
+												<span><i class="fa fa-eye"></i><?php echo $ads['viewer'];?> <?php echo $tr->translate("Views");?> </span> 
 												<span><i class="fa fa-calendar"></i><?php echo date("d-m-Y",strtotime($ads['date_modified']));?></span> 
 											</div>
 											<div class="social-share">
@@ -94,7 +94,7 @@
 									 		<li><span class="field-title"><?php echo $attr['control_name'];?></span> : <span class="field-value"><?php echo $attr['control_value'];?></span></li>
 									 		<?php }?>
 									 	</ul>
-										<h4>Description</h4>
+										<h4><?php echo $tr->translate("Description");?></h4>
 										<p><?php echo $ads['description'];?></p>
 									</div><!-- item-info -->
 								</div>
@@ -106,7 +106,7 @@
 		    				<?php if (!empty($this->relate_pro)){?>
 		    				<div class="full">
 		    					<div class="block-title-cate">
-										<p class="b-title"><span><i class="fa fa-link"></i>Related Ads</span></p>
+										<p class="b-title"><span><i class="fa fa-link"></i><?php echo $tr->translate("Related Ads");?> </span></p>
 								</div>
 								<div class="pane">
 					    				<div class=" owl-carousel" data-items="3" data-items-tab-ls="2" data-items-tab="2" data-autoplay="false" data-gutter="4" data-autoplay-speed="1500" data-delay="1000" data-loop="true" data-nav="false"  data-dots="false">
@@ -143,7 +143,7 @@
 											</div>
 											<div class="footerads" >
 												<ul >
-												   <li> <i class="fa fa-eye"></i><?php echo $relate['viewer'];?> Views</li>
+												   <li> <i class="fa fa-eye"></i><?php echo $relate['viewer'];?> <?php echo $tr->translate("Views");?></li>
 												   <li> <i class="fa fa-calendar"></i><?php echo date("d-m-Y", strtotime($relate['date_modified']));?></li>
 												</ul>
 											</div>
@@ -157,7 +157,7 @@
 						<div class="col-sm-5 col-md-4">
 							<div class="side-bar">
 								<div class="item-author widget">
-									<h4>Store Information</h4>
+									<h4><?php echo $tr->translate("Store Information");?></h4>
 									<div class="row">
 										<div class="col-md-4">
 											<div class="seller-image">
@@ -166,28 +166,28 @@
 										</div>
 										<div class="col-md-8">
 											<div class="seller-info">
-												<p><span>Store:</span> <a class="author" href="#"><?php echo $ads['store_title'];?></a></p>
+												<p><span><?php echo $tr->translate("Store");?> :</span> <a class="author" href="#"><?php echo $ads['store_title'];?></a></p>
 												<address>
 													<?php if (!empty($ads['store_address'])){?>
-														<span>Address:</span> <?php echo $ads['store_address'];?>
+														<span><?php echo $tr->translate("Address");?> :</span> <?php echo $ads['store_address'];?>
 													<?php }else{?>
-														<span>Address:</span> <?php echo $ads['author_address'];?>
+														<span><?php echo $tr->translate("Address");?> :</span> <?php echo $ads['author_address'];?>
 													<?php }?>
 												</address>
 												<p>
 													<?php if (!empty($ads['store_phone'])){?>
-														<span>Phone :</span> <?php echo $ads['store_phone'];?> 
+														<span><?php echo $tr->translate("Phone");?> :</span> <?php echo $ads['store_phone'];?> 
 													<?php }else{?>
-														<span>Phone :</span> <?php echo $ads['author_phone'];?> 
+														<span><?php echo $tr->translate("Phone");?> :</span> <?php echo $ads['author_phone'];?> 
 													<?php }?>
 												</p>
-												<p>Visit <a href="<?php echo $this->baseUrl()."/store/index?store=".$ads['store_alias'].".html";?>"><?php echo $ads['store_title'];?> </a>Store</p>
+												<p><?php echo $tr->translate("Visit Store");?></p>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="contact-seller widget">
-									<h4>Contact Seller</h4>
+									<h4><?php echo $tr->translate("Contact Seller");?></h4>
 									<form id="contact-form" class="contact-form" name="contact-form" method="post" action="#">
 										<div class="row">
 											<div class="col-md-6">
@@ -213,7 +213,7 @@
 											</div>     
 										</div>
 										<div class="form-group">
-											<button type="submit" class="btn btn-primary">Submit Message</button>
+											<button type="submit" class="btn btn-primary"><?php echo $tr->translate("Submit Message");?></button>
 										</div>
 
 									</form>
