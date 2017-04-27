@@ -1887,10 +1887,21 @@ div#choose-color-pop a.button {
     display: inline-block;
     margin-bottom: 5px;
 }
+div.tab-pane.store-temp div.title {
+    text-align: left;
+    padding: 10px 0;
+    margin: 0;
+    vertical-align: top;
+    margin: 10px 0;
+	    border-bottom: solid 1px #4183d7;
+}
 div.title h4.sub-title {
-    margin-top: 25px;
-    border-bottom: solid #4183d7;
-    color: #4183d7;
+        /* margin-top: 25px; */
+    /* border-bottom: solid #4183d7; */
+    color: #ffffff;
+    background: #4183d7;
+    display: initial;
+    padding: 10px;
 }
 .form-template-info {
     text-align: left;
@@ -1900,6 +1911,26 @@ div.title h4.sub-title {
 }
 .form-row.botton input[type="submit"] {
     float: none;
+	min-width: 200px;
+}
+
+.store-slide .row_form {
+    border: solid 1px #ccc;
+    margin: 10px 20px;
+    width: 55%;
+}
+.image_slidview {
+    display: inline-block;
+    width: 73%;
+    padding: 10px;
+}
+.image_slidview img {
+   width: 100%;
+    height: 80px;
+	border: solid 1px #ccc;
+}
+.store-slide .button-browse-image {
+    vertical-align: middle;
 }
 /*---
 -

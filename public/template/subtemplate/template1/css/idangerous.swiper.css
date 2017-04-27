@@ -64,7 +64,7 @@ Basic Swiper Styles
 
 	cursor:url(../img/drag.png) 16 9, ew-resize!important;
 	margin: 0 auto;
-	height: inherit!important;
+	height: 350px !important;
 	float: left;
 }
 .pagination-hidden .swiper-wrapper{
