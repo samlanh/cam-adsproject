@@ -931,6 +931,12 @@ a, .topbar a,
 /* ==========================================================================
  	#category-tab 
  ========================================================================== */
+ .item-wrap .item .item-title {
+    min-height: 50px;
+}
+ul.list-inline.advance{
+    border-bottom: solid 2px #4183d7;
+}
 .all-categories {
  	margin-bottom: 0;
 }
@@ -1062,14 +1068,24 @@ a, .topbar a,
 .tab-view li {
 	color: #6f6f6f;
 	background-color: #fff;
-	padding: 0px 9px;
+	padding: 8px;
 	border: 1px solid #f1f1f1;
 	border-bottom: 1px solid #ddd;
 	margin-left: 7px;
 	cursor: pointer;
 }
 .tab-view ul{ margin-top:10px;}
-
+ul.list-inline li i {
+    font-size: 18px;
+    font-weight: 300;
+}
+.tab-content.small-view-tab li.list_view{
+	display: none;
+}
+.tab-content.list-view-tab li.province,
+.tab-content.list-view-tab li.list_view {
+    display: inline-block;
+}
 .view-all-ads {
 	margin-top: 65px;
 }
@@ -1201,7 +1217,9 @@ a, .topbar a,
 	right:0px;
 	opacity: 1;
 }
-
+p.description {
+    font-weight: 500;
+}
 
 /* ==========================================================================
  	#bog-section

@@ -33,8 +33,8 @@ function getAdsDetail(index){ /* get detail ads */
 
 			document.getElementById('pop-description').innerHTML = val.description;
 			document.getElementById('pop-author').innerHTML = '<a href="'+baseurl+'/store/index?store='+val.store_alias+'" >'+val.store_title+'</a>';
-			document.getElementById('pop-category').innerHTML = val.parent_cateogry_title;
-			document.getElementById('pop-location').innerHTML = val.province;
+			document.getElementById('pop-category').innerHTML = val.parent_category_name;
+			document.getElementById('pop-location').innerHTML = val.province_name;
 		
 			var identity = val.images;
 			var arrays = identity.split(',');
