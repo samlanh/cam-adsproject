@@ -43,6 +43,9 @@ class Other_SlideshowController extends Zend_Controller_Action {
 			$db = new Application_Model_DbTable_DbGlobalselect();
 			$this->view->postion = $db->getVewOptoinTypeByType(2,null,null,null);
 			$this->view->page = $db->getVewOptoinTypeByType(3,null,null,null);
+			
+			$db = new Application_Model_DbTable_DbVdGlobal();
+			$this->view->rscate = $db->getCategoryParent(0,1);
 	}
 	function editAction()
 	{

@@ -46,6 +46,7 @@ class Other_Model_DbTable_DbSlideshow extends Zend_Db_Table_Abstract
     			'asign_page'=>$_data['page_asign'],
     			'start_date'=>$_data['start_date'],
     			'end_date'=>$_data['end_date'],
+    			'category'=>$_data['category'],
     			'image'=>$imgs,
     			'link_url'=>$_data['link'],
     			'status'=>$_data['status'],

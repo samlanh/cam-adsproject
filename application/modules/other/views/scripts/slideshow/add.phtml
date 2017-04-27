@@ -49,16 +49,28 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 						<tr>
 							<td><?php echo $tr->translate('Ordering');?></td>
 							<td><input dojoType="dijit.form.TextBox" value="1" required="true" class="fullside" id="ordering" name="ordering" type="text"></td>
-							<td><?php echo $tr->translate('Status');?></td>
+							<td><?php echo $tr->translate('Category');?></td>
 							<td>
-								<select name="status" id="status" dojoType="dijit.form.FilteringSelect" class="fullside">
-								    <option value="1"><?php echo $tr->translate('ACTIVE');?></option>
-								    <option value="0"><?php echo $tr->translate('DEACTIVE');?></option>
+								<select id="category" name="category" dojoType="dijit.form.FilteringSelect">
+									<option value="-1">Select Category</option>
+								<?php 
+									if(!empty($this->rscate))foreach($this->rscate as $cate){
+								?>
+										<option value="<?php echo $cate['id'];?>"><?php echo $cate['name'];?></option>
+								<?php }?>
 								</select>
+							</td>
 						</tr>
 						<tr>
 							<td><?php echo $tr->translate('Link Url');?></td>
-							<td colspan="3"><input dojoType="dijit.form.TextBox" class="fullside" id="link" name="link" type="text"></td>
+							<td><input dojoType="dijit.form.TextBox" class="fullside" id="link" name="link" type="text"></td>
+							<td><?php echo $tr->translate('Status');?></td>
+							<td><select name="status" id="status" dojoType="dijit.form.FilteringSelect" class="fullside">
+								    <option value="1"><?php echo $tr->translate('ACTIVE');?></option>
+								    <option value="0"><?php echo $tr->translate('DEACTIVE');?></option>
+								</select>
+							</td>
+						
 						</tr>
 					</table>	
 		</fieldset>		

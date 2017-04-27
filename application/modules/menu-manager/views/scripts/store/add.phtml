@@ -1,0 +1,86 @@
+<?php
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	echo $this->headTitle($tr->translate('Add Store')); 
+?>
+<script>
+dojo.require("dijit.form.Textarea");
+dojo.require("dijit.form.DateTextbox");
+</script>
+<form action="<?php echo $this->url(array('module'=>'menu-manager','controller'=>'store','action'=>'add')); ?>" dojoType="dijit.form.Form" method="post" enctype="application/x-www-form-urlencoded">
+	 <script type="dojo/method" event="onSubmit">			
+			if(this.validate()) {
+				return true;
+			} else {
+				return false;
+			}
+	</script>
+	<table cellspacing="10" style="margin: 0 auto; width:100%">
+		<tr>
+			<td>
+				<fieldset>
+					<legend align="center"><strong><?php echo $tr->translate("Add New Store");?></strong></legend>
+					<table cellspacing="20" width="100%" >
+						<tr>
+							<td align="center" valign="top">
+								<table width="100%" cellspacing="10">
+									<tr>
+										<td><?php echo $tr->translate("Store Name")?></td>
+										<td><input dojoType="dijit.form.TextBox" id="store_name" name="store_name" value="" type="text" class='fullside'></td>
+										<td><?php echo $tr->translate("Client");?></td>
+									    <td><input dojoType="dijit.form.TextBox" id="client" name="client" value="" type="text" class='fullside'></td>
+										<td><?php echo $tr->translate("Logo")?></td>
+										<td><input type="file" name="logo" id="logo" /></td>
+									</tr>
+									<tr>
+										<td><?php echo $tr->translate("Template Name")?></td>
+										<td><input dojoType="dijit.form.TextBox" id="template_id" name="template_id" value="" type="text" class='fullside'></td>
+										<td><?php echo $tr->translate("Store Phone")?></td>
+										<td><input dojoType="dijit.form.TextBox" id="client_id" name="client_id" value="" type="text" class='fullside'></td>
+										<td><?php echo $tr->translate("Industry Type");?></td>
+									    <td><input dojoType="dijit.form.TextBox" id="store_industry_type" name="store_industry_type" value="" type="text" class='fullside'></td>
+									</tr>
+									<tr>
+										<td><?php echo $tr->translate("Banner Detail")?></td>
+										<td><input dojoType="dijit.form.TextBox" id="banner_detail" name="banner_detail" value="" type="text" class='fullside'></td>
+										<td><?php echo $tr->translate("Store Policy")?></td>
+										<td><input dojoType="dijit.form.TextBox" id="store_policy" name="store_policy" value="" type="text" class='fullside'></td>
+										<td><?php echo $tr->translate("Template Color");?></td>
+									    <td><input dojoType="dijit.form.TextBox" id="template_color" name="template_color" value="" type="text" class='fullside'></td>
+									</tr>
+									<tr>
+										<td><?php echo $tr->translate("Font Color")?></td>
+										<td><input dojoType="dijit.form.TextBox" id="font_color" name="font_color" value="" type="text" class='fullside'></td>
+										<td><?php echo $tr->translate("Store Phone")?></td>
+										<td><input dojoType="dijit.form.TextBox" id="store_phone" name="store_phone" value="" type="text" class='fullside'></td>
+										<td><?php echo $tr->translate("Email Store");?></td>
+									    <td><input dojoType="dijit.form.TextBox" id="store_email" name="store_email" value="" type="text" class='fullside'></td>
+									</tr>
+									<tr>
+										<td><?php echo $tr->translate("Address")?></td>
+										<td colspan="5">
+											<textarea class='fullside' dojoType="dijit.form.Textarea" style='width:100%;min-height:100px; font-size:18px; font-family:"Kh Battambang"' ></textarea>
+										</td>
+									</tr>
+									<tr>
+										<td><?php echo $tr->translate("About")?></td>
+										<td colspan="5"><textarea rows="4" cols="4" dojoType="dijit.form.Textarea" style='width:100%;min-height:100px; font-size:18px; font-family:"Kh Battambang"'></textarea></td>
+									</tr>
+									<tr>
+										<td colspan="6" align="center">
+											<input type="reset" value="សំអាត" label="<?php echo $tr->translate('CLEAR');?>" dojoType="dijit.form.Button" iconClass="dijitIconClear" />
+											<input type="submit" value="save_close" name="save_close" label="<?php echo $tr->translate('SAVECLOSE');?>" dojoType="dijit.form.Button" 
+												iconClass="dijitEditorIcon dijitEditorIconSave" />
+											<input type="submit" value="save_new" name="save_new" label="<?php echo $tr->translate('SAVENEW');?>" dojoType="dijit.form.Button" 
+												iconClass="dijitEditorIcon dijitEditorIconSave" />
+										</td>
+									</tr>					
+								</table>
+							</td>							
+						</tr>
+					</table>	
+				</fieldset>
+			</td>			
+		</tr>
+		
+	</table>	
+</form>

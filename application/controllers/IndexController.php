@@ -15,6 +15,9 @@ class IndexController extends Zend_Controller_Action
     	//$this->_helper->layout()->disableLayout();
     	$db = new Application_Model_DbTable_DbVdGlobal();
     	$this->view->rscate = $db->getCategoryParent(0,1);
+    	
+    	$db = new Application_Model_DbTable_DbGlobalselect();
+    	$this->view->rsbannerhome = $db->getBannerByPosition(4,3); //home page top
     }
     public function administratorAction()
     {

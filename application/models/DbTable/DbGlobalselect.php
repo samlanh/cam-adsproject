@@ -387,9 +387,12 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		}
 		return $db->fetchAll($sql);
 	}
-	function getBannerByPosition($position){
+	function getBannerByPosition($position,$assign=1,$cate_id=null){
 		$db = $this->getAdapter();
-		$sql=" SELECT * FROM `vd_banneravertise` WHERE STATUS=1 AND position_id=$position ";
+		$sql=" SELECT * FROM `vd_banneravertise` WHERE status=1 AND position_id=$position AND asign_page=$assign ";
+		if($cate_id!=null){
+			$sql.=" AND category = ".$cate_id;
+		}
 		return $db->fetchAll($sql);
 	}
 	function getAdsByUserid($user_id){

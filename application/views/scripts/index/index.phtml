@@ -13,8 +13,14 @@ $lang  = $session_lang->lang_id;
 	<section class="featured-slider-3 blog-cateory-items-slide ">
 		<div class="container" >
 			<div class="col-md-12 col-sm-12" >
-			<div class="banner-top" style="width:100; height:100px;border:1px solid #ccc;">
-			<img src="<?php echo $this->baseUrl()."/images/banner/watashi_cc3a1f.gif"?>" />
+			<div class="banner-top" style="width:100;margin-top:-10px;">
+			<?php if(!empty($this->rsbannerhome)){
+			 		  foreach($this->rsbannerhome  as $rsimg){?>
+						<a href="<?php echo $rsimg['link_url'];?>" target="_blank">
+						   <img style='max-width:100%; margin-top: 10px;' src="<?php echo $this->baseUrl()."/images/banner/".$rsimg['image']; ?>"  />
+						</a>
+			<?php }}?>
+						
 			</div>
 			</div>
 		</div>
@@ -24,6 +30,8 @@ $lang  = $session_lang->lang_id;
 	?>
 	<?php 
 	$db = new Application_Model_DbTable_DbVdGlobal();
+	$dbbanner = new Application_Model_DbTable_DbGlobalselect();
+	 //home page top
 				
 	if(!empty($this->rscate))foreach($this->rscate as $cate) {?>
 	<section class="featured-slider-3 blog-cateory-items-slide ">
@@ -64,8 +72,8 @@ $lang  = $session_lang->lang_id;
 								 </div>
 								  <div class="item-info">
 									<ul>
-									   <li ><?php echo $rsad['category_name'];?></li>
-									   <li > <?php echo $rsad['province_name'];?></li>
+									   <li><?php echo $rsad['category_name'];?></li>
+									   <li><?php echo $rsad['province_name'];?></li>
 									</ul>
 								</div>
 								<div class="footerads" >
@@ -76,50 +84,26 @@ $lang  = $session_lang->lang_id;
 								</div>
 							</div>
 						<?php }?>
-						<?php for($j=0;$j<=10;$j++){?>
-							
-							<?php }?>
-							
-						<!--  <div class="ad-box ">
-							<div class="ads-img-wrapper">
-								<a class="ad-image box" href="#" title="Account need urgently" >
-									<img src="<?php //echo $this->baseUrl();?>/template/imagedemo/job2-400x2801-30o7lr9ve46edz5vboegp6-31dc1phlynzmn2f7wc3cwa.jpg" alt="" />
-								</a>		
-								<div class="additional-buttons">
-									<span class="quickview"><i class="fa fa-search-plus"></i> Quickview</span>
-									<div class="sold-by-container">
-										<span>Posted By: </span>
-										<a title="Channy" href="#">Channy</a>
-									</div>
-								</div>	
-							</div>							
-							<div class="ads-title">
-								
-								<h4><a class="ads-title" href="#" >Lexux RX300</a></h4>
-							 </div>
-							 <div class="ads-price">
-								<h4><a class="ads-price" href="#" >$ 2000</a></h4>
-							 </div>
-							 <div class="notify-new red">
-								<span class="notify-new">NEW</span>
-							</div>
-						</div>-->
-						
+						<?php //for($j=0;$j<=10;$j++){?>
+						<?php //}?>
 					</div>
 				</div>
+			  </div>
 			</div>
-		
-			</div>
-			
-			
 		</div>
 	</section>
 	<section class="featured-slider-3 blog-cateory-items-slide ">
 		<div class="container" >
 			<div class="col-md-12 col-sm-12" >
 			<div class="banner-top" style="width:100; height:100px;border:1px solid #ccc;">
-				<img src="<?php echo $this->baseUrl()."/images/banner/camappbanner.gif"?>" />
-				<!-- <h2 align="center">1170x100(px)</h2> -->
+				<?php  
+				 $banner = $dbbanner->getBannerByPosition(3,3,$cate['id']); 
+				 if(!empty($banner)){
+			 		  foreach($banner  as $rsimg){?>
+						<a href="<?php echo $rsimg['link_url'];?>" target="_blank">
+						   <img style='max-width:100%;' src="<?php echo $this->baseUrl()."/images/banner/".$rsimg['image']; ?>"  />
+						</a>
+			   <?php }}?>
 			</div>
 			</div>
 		</div>
