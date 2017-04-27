@@ -145,11 +145,16 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 				move_uploaded_file($_FILES["logo_image"]["tmp_name"], $part . $newName);
 			}
 			$slideimage='';
+			$oldimage = explode(",", $alias['images_slide']);
+			$txt='';
+			$ext='';
 			if ($data['templatess']!=2){
 				$partslide= PUBLIC_PATH.'/images/store/slide/';
 				for ($l=1; $l<=3; $l++){
 					$slide = $_FILES['slideimage'.$l]['name'];
-					list($txt, $ext) = explode(".", $slide);
+					if (!empty($slide)){
+						list($txt, $ext) = explode(".", $slide);
+					}
 					if(in_array($ext,$valid_formats)) {//check ext
 						if($slide!=""){
 							$temp = explode(".", $slide);
@@ -159,10 +164,21 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 							if (empty($slideimage)){
 								$slideimage=$newnamefile;
 							}else{
-								$slideimage = $slideimage.",".$newnamefile;
+								if (!empty($newnamefile)){
+									$slideimage = $slideimage.",".$newnamefile;
+								}
 							}
 						}
-					}
+					}else{
+							$newnamefile=$oldimage[$l-1];
+							if (empty($slideimage)){
+								$slideimage=$newnamefile;
+							}else{
+								if (!empty($newnamefile)){
+								$slideimage = $slideimage.",".$newnamefile;
+								}
+							}
+						}
 				}
 			}
 			
@@ -179,6 +195,7 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 					'font_color'=>$data['fontsscolor'],
 // 					'create_date'=>date("Y-m-d"),
 					'modify_date'=>date("Y-m-d"),
+					'images_slide'=>$slideimage
 			);
 			if ($alias['store_title']!=$data['store_title']){
 				$arr['store_title']=$data['store_title'];
