@@ -1063,6 +1063,11 @@ ul.tabs.horizontal li.active a {
 		div.categories-ads h5,
 		div.title-ads h4 {
 			margin: 0;
+			display: inline-block;
+			padding-right: 10px;
+		}
+		div.categories-ads h5.store {
+			font-weight: bold;
 		}
 		.icon_menu-right {
 			display: inline-block;

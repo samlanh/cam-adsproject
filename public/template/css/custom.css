@@ -383,8 +383,8 @@ input:-moz-placeholder{
 	-o-transform: translateX(0px);
 	min-height: 250px;
 	background-position: 0px -231px;
-opacity:0.7;
-	/*---z-index: 9;---*/
+/*opacity:0.7;
+	---z-index: 9;---*/
 }
 .static-imageheader{
 	background-color:#fff;
@@ -394,6 +394,9 @@ opacity:0.7;
 	background-size:;
 	background-attachment:;
 	}
+.container.search-bar.search-bar-version4.header-bar {
+    padding: 30px 0;
+}
 .banner-text-container2{
 	position:relative;
 	top:50%;
@@ -565,7 +568,7 @@ filter: alpha(opacity=0);
 	float: left;
 	width: 100%;
 	overflow: hidden;
-	position: relative;
+	/*position: relative;*/
 
 	-webkit-transition: all 0.2s ease;
 	-moz-transition: all 0.2s ease;
