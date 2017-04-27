@@ -76,7 +76,27 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 				$newName = "store".date("Y").date("m").date("d").round(microtime(true)).$client_id.'.'.end($temp);
 				move_uploaded_file($_FILES["logo_image"]["tmp_name"], $part . $newName);
 			}
-			//$this->generateStoreAlias($client_id,$data['store_title']);
+			$slideimage="";
+			if ($data['templatess']!=2){
+				$partslide= PUBLIC_PATH.'/images/store/slide/';
+				for ($l=1; $l<=3; $l++){
+					$slide = $_FILES['slideimage'.$l]['name'];
+					list($txt, $ext) = explode(".", $slide);
+					if(in_array($ext,$valid_formats)) {//check ext
+						if($slide!=""){
+							$temp = explode(".", $slide);
+							$newnamefile = "slide".$l.date("Y").date("m").date("d").round(microtime(true)).'.'.$ext;
+							if(file_exists("$partslide.$newnamefile")) unlink("$partslide.$newnamefile");
+							move_uploaded_file($_FILES['slideimage'.$l]["tmp_name"], $partslide . $newnamefile);
+							if (empty($slideimage)){
+								$slideimage=$newnamefile;
+							}else{
+								$slideimage = $slideimage.",".$newnamefile;
+							}
+						}
+					}
+				}
+			}
 			$arr = array(
 					'store_title'=>$data['store_title'],
 					'alias_store'=>$this->generateStoreAlias($client_id,$data['store_title']),
@@ -92,6 +112,7 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 					'font_color'=>$data['fontsscolor'],
 					'create_date'=>date("Y-m-d"),
 					'modify_date'=>date("Y-m-d"),
+					'images_slide'=>$slideimage
 					);
 			$this->_name="vd_client_store";
 			$this->insert($arr);
@@ -123,6 +144,28 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 				$newName = "store".date("Y").date("m").date("d").round(microtime(true)).$client_id.'.'.end($temp);
 				move_uploaded_file($_FILES["logo_image"]["tmp_name"], $part . $newName);
 			}
+			$slideimage='';
+			if ($data['templatess']!=2){
+				$partslide= PUBLIC_PATH.'/images/store/slide/';
+				for ($l=1; $l<=3; $l++){
+					$slide = $_FILES['slideimage'.$l]['name'];
+					list($txt, $ext) = explode(".", $slide);
+					if(in_array($ext,$valid_formats)) {//check ext
+						if($slide!=""){
+							$temp = explode(".", $slide);
+							$newnamefile = "slide".$l.date("Y").date("m").date("d").round(microtime(true)).'.'.$ext;
+							if(file_exists("$partslide.$newnamefile")) unlink("$partslide.$newnamefile");
+							move_uploaded_file($_FILES['slideimage'.$l]["tmp_name"], $partslide . $newnamefile);
+							if (empty($slideimage)){
+								$slideimage=$newnamefile;
+							}else{
+								$slideimage = $slideimage.",".$newnamefile;
+							}
+						}
+					}
+				}
+			}
+			
 			$arr = array(
 					'client_id'=>$client_id,
 					'template_id'=>$data['templatess'],

@@ -55,54 +55,26 @@
 						 <div class="navigation-banner-swiper">
                                 <div class="swiper-container" data-autoplay="5000" data-loop="1" data-speed="500" data-center="0" data-slides-per-view="1">
                                     <div class="swiper-wrapper">
+                                    <?php  $store['images_slide'];
+                                    	$temp = explode(",", $store['images_slide']);
+                                    	if (!empty($store['images_slide'])) foreach ($temp as $slide){
+                                    ?>
                                         <div class="swiper-slide active" data-val="0"> 
-                                            <div class="navigation-banner-wrapper light-text align-1" style="background-image: url(<?php echo $this->baseUrl();?>/images/borey.jpg);">
+                                            <div class="navigation-banner-wrapper light-text align-1" style="background-image: url(<?php echo $this->baseUrl()."/images/store/slide/".$slide;?>);">
                                                 <div class="navigation-banner-content">
-                                                    <div class="cell-view">
-                                                        <h2 class="subtitle">New special collection</h2>
-                                                        <h1 class="title">Earrings</h1>
-                                                        <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing  elit, sed do eiusmod tempor incididunt.</div>
-                                                        <div class="info">
-                                                            <a class="button style-1" href="#">Shop Now</a>
-                                                            <a class="button style-1" href="#">Features</a>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="clear"></div>
                                             </div>
                                         </div>
-                                        <div class="swiper-slide" data-val="1"> 
-                                            <div class="navigation-banner-wrapper light-text align-1" style="background-image: url(<?php echo $this->baseUrl();?>/images/borey.jpg);">
+                                     <?php }else{?>
+                                     <div class="swiper-slide active" data-val="0"> 
+                                            <div class="navigation-banner-wrapper light-text align-1" style="background-image: url(<?php echo $this->baseUrl()."/images/noslide.jpg";?>);">
                                                 <div class="navigation-banner-content">
-                                                    <div class="cell-view">
-                                                        <h2 class="subtitle">New special collection</h2>
-                                                        <h1 class="title">Wedding</h1>
-                                                        <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing  elit, sed do eiusmod tempor incididunt.</div>
-                                                        <div class="info">
-                                                            <a class="button style-1" href="#">Shop Now</a>
-                                                            <a class="button style-1" href="#">Features</a>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="clear"></div>
                                             </div>
                                         </div>
-                                        <div class="swiper-slide" data-val="2"> 
-                                            <div class="navigation-banner-wrapper light-text align-1" style="background-image: url(<?php echo $this->baseUrl();?>/images/borey.jpg);">
-                                                <div class="navigation-banner-content">
-                                                    <div class="cell-view">
-                                                        <h2 class="subtitle">New special collection</h2>
-                                                        <h1 class="title">Earrings</h1>
-                                                        <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing  elit, sed do eiusmod tempor incididunt.</div>
-                                                        <div class="info">
-                                                            <a class="button style-1" href="#">Shop Now</a>
-                                                            <a class="button style-1" href="#">Features</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                        </div>
+                                    <?php }?>
                                     </div>
                                     <div class="clear"></div>
                                     <div class="pagination"></div>

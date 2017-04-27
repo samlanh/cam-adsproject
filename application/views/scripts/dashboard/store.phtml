@@ -15,7 +15,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="UTF-8">
-	<title>Dashboard Management</title>	
+	<title><?php echo $title;?></title>	
 		<link rel="stylesheet" href="<?php echo $this->baseUrl();?>/template/colorpicker/css/colorpicker.css" type="text/css" />
 </head>
 <body  class="home page-template page-template-template-homepage-v1 page-template-template-homepage-v1-php page page-id-1291 single-author">
@@ -124,44 +124,68 @@
 					<?php 	if ($param['change']=="add"){?>
 					<form id="form-store-info" method="post" enctype="multipart/form-data" action='<?php echo $this->baseUrl();?>/dashboard/addstore' autocomplete="off">
 						<div class="tab-content">
-							
 							<div class="tab-pane store-temp active" id="template">
 								<div class="sub-template">
-									<div class="blog-store-color">
-										<div class="span-title">
-											<span>Template Color For Store : </span>
+									<div>
+										<div class="title">
+											<h4 class="sub-title"><?php echo $tr->translate("Click to set your template Store");?></h4>
 										</div>
-										<div class="span-value">
-											 <a onclick="showcolorbox(1);" ><span class="color" id="theme-olor"  style=" background: #2a328d;"></span></a>
+										<ul class="sub-template">
+										<?php if (!empty($this->template)) foreach($this->template as $rs){?>
+											<li class="list-thum">
+												<figure>
+													<a id="theme<?php echo $rs['id'];?>" onClick="selectTemplate(<?php echo $rs['id'];?>);" title="<?php echo $rs['template_title'];?>" <?php if ($rs['id']==1){echo 'class="active"';}?>><!--  <span class="name">Acidus</span> -->
+													<img class="template-image"  src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="Acidus Free Website Template" title="View the Acidus Template Details"> 
+													<span class="posted"><?php echo $rs['template_title'];?></span></a>
+													<input type="hidden" id="font-col<?php echo $rs['id'];?>" name="font-col<?php echo $rs['id'];?>" value="<?php echo $rs['template_main_color'];?>" />
+													<input type="hidden" id="them-col<?php echo $rs['id'];?>" name="them-col<?php echo $rs['id'];?>" value="<?php echo $rs['template_main_font_color'];?>" />
+													</figure>
+												<!--  <div class="thum-image">
+													<img class="template-image" src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="" />
+												</div>-->
+											</li>
+											<?php }?>
+										</ul>
+									</div>
+									<div>
+										<div class="title">
+											<h4 class="sub-title"><?php echo $tr->translate("Click to change color your template");?></h4>
+										</div>
+										<div class="blog-store-color">
+											<div class="span-title">
+												<span>Template Color For Store : </span>
+											</div>
+											<div class="span-value">
+												 <a onclick="showcolorbox(1);" ><span class="color" id="theme-olor"  style=" background: #2a328d;"></span></a>
+											</div>
+										</div>
+										<div class="blog-store-color">
+											<div class="span-title">
+												<span>Font Color For Store : </span>
+											</div>
+											<div class="span-value">
+												 <a onclick="showcolorbox(2);"><span class="color" id="fonts-color" style=" background: #2a328d;"></span></a>
+											</div>
 										</div>
 									</div>
-									<div class="blog-store-color">
-										<div class="span-title">
-											<span>Font Color For Store : </span>
-										</div>
-										<div class="span-value">
-											 <a onclick="showcolorbox(2);"><span class="color" id="fonts-color" style=" background: #2a328d;"></span></a>
-										</div>
-									</div>
-									<div class="title">
-										<h4 class="sub-title"><?php echo $tr->translate("Click to set your template Store");?></h4>
-									</div>
-									<ul class="sub-template">
-									<?php if (!empty($this->template)) foreach($this->template as $rs){?>
-										<li class="list-thum">
-											<figure>
-												<a id="theme<?php echo $rs['id'];?>" onClick="selectTemplate(<?php echo $rs['id'];?>);" title="<?php echo $rs['template_title'];?>" <?php if ($rs['id']==1){echo 'class="active"';}?>><!--  <span class="name">Acidus</span> -->
-												<img class="template-image"  src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="Acidus Free Website Template" title="View the Acidus Template Details"> 
-												<span class="posted"><?php echo $rs['template_title'];?></span></a>
-												<input type="hidden" id="font-col<?php echo $rs['id'];?>" name="font-col<?php echo $rs['id'];?>" value="<?php echo $rs['template_main_color'];?>" />
-												<input type="hidden" id="them-col<?php echo $rs['id'];?>" name="them-col<?php echo $rs['id'];?>" value="<?php echo $rs['template_main_font_color'];?>" />
-												</figure>
-											<!--  <div class="thum-image">
-												<img class="template-image" src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="" />
-											</div>-->
-										</li>
+									<div id="slide-blog">
+										<div class="title">
+												<h4 class="sub-title"><?php echo $tr->translate("Slide Image in store");?> (650 X 350px)</h4>
+											</div>
+										<div class="store-slide">
+										<?php for ($l=1; $l<=3; $l++){?>
+											<div class="row_form">
+												<div class="image_slidview">
+													<img id="slide_view<?php echo $l;?>" src="<?php echo $this->baseUrl();?>/images/blankslide.jpg"/>
+												</div>
+												<div class="button-browse-image">
+													<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
+													<input class="btn_borwse_image" type="file" id="slideimage<?php echo $l;?>" name="slideimage<?php echo $l;?>"  onchange="uploadbanner('<?php echo $l;?>')"/>
+												</div>
+											</div>
 										<?php }?>
-									</ul>
+										</div>
+									</div>
 								</div>
 								<input type="hidden" id="templatess" name="templatess" value="1" />
 							</div>
@@ -170,10 +194,10 @@
 								<div class="form-template-info">
 									<div class="form-row">
 										<div class="form-label">
-											<label><?php echo $tr->translate("Store Name");?> <!-- <span class="sign_req">*</span> --></label>
+											<label><?php echo $tr->translate("Store Name");?> <span class="sign_req">*</span></label>
 										</div>
 										<div class="form-value">
-											<input type="text" placeholder="Store Name"  value=""  name="store_title" id="store_title" class="form-control" style="    width: 500px;" />
+											<input type="text" placeholder="Store Name"  value="" required="required" name="store_title" id="store_title" class="form-control" style="    width: 500px;" />
 										</div>
 									</div>
 									<div class="form-row">
@@ -218,7 +242,10 @@
 												<input class="btn_borwse_image" type="file" id="logo_image" name="logo_image"  onchange="loadLogo(event)"/>
 										
 										</div>
-									</div>
+										<div>
+											<span>(220px X 100px)</span>
+										</div>
+								</div>
 							</div>
 							
 						</div>
@@ -233,42 +260,99 @@
 							<div class="tab-content">
 								<div class="tab-pane store-temp active" id="template">
 									<div class="sub-template">
-										<div class="blog-store-color">
-											<div class="span-title">
-												<span>Template Color For Store : </span>
+										<div>
+											<div class="title">
+												<h4 class="sub-title"><?php echo $tr->translate("Click to set your template Store");?></h4>
 											</div>
-											<div class="span-value">
-												 <a onclick="showcolorbox(1);" ><span class="color" id="theme-olor"  style=" background: <?php echo $this->store['template_color'];?>;"></span></a>
+											<ul class="sub-template">
+											<?php if (!empty($this->template)) foreach($this->template as $rs){?>
+												<li class="list-thum">
+													<figure>
+														<a id="theme<?php echo $rs['id'];?>" onClick="selectTemplate(<?php echo $rs['id'];?>);" title="<?php echo $rs['template_title'];?>" <?php if ($rs['id']==$this->store['template_id']){echo 'class="active"';}?>><!--  <span class="name">Acidus</span> -->
+														<img class="template-image"  src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="Acidus Free Website Template" title="View the Acidus Template Details"> 
+														<span class="posted"><?php echo $rs['template_title'];?></span></a>
+														<input type="hidden" id="font-col<?php echo $rs['id'];?>" name="font-col<?php echo $rs['id'];?>" value="<?php echo $rs['template_main_color'];?>" />
+														<input type="hidden" id="them-col<?php echo $rs['id'];?>" name="them-col<?php echo $rs['id'];?>" value="<?php echo $rs['template_main_font_color'];?>" />
+														</figure>
+													<!--  <div class="thum-image">
+														<img class="template-image" src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="" />
+													</div>-->
+												</li>
+												<?php }?>
+											</ul>
+										</div>
+										<div>
+											<div class="title">
+												<h4 class="sub-title"><?php echo $tr->translate("Click to change color your template");?></h4>
+											</div>
+											<div class="blog-store-color">
+												<div class="span-title">
+													<span>Template Color For Store : </span>
+												</div>
+												<div class="span-value">
+													 <a onclick="showcolorbox(1);" ><span class="color" id="theme-olor"  style=" background: <?php echo $this->store['template_color'];?>;"></span></a>
+												</div>
+											</div>
+											<div class="blog-store-color">
+												<div class="span-title">
+													<span>Font Color For Store : </span>
+												</div>
+												<div class="span-value">
+													 <a onclick="showcolorbox(2);"><span class="color" id="fonts-color" style=" background: <?php echo $this->store['font_color'];?>;"></span></a>
+												</div>
 											</div>
 										</div>
-										<div class="blog-store-color">
-											<div class="span-title">
-												<span>Font Color For Store : </span>
-											</div>
-											<div class="span-value">
-												 <a onclick="showcolorbox(2);"><span class="color" id="fonts-color" style=" background: <?php echo $this->store['font_color'];?>;"></span></a>
-											</div>
-										</div>
+										<div id="slide-blog" style="<?php if ($this->store['template_id']==2){ echo "display:none;";}?>">
 										<div class="title">
-											<h4 class="sub-title"><?php echo $tr->translate("Click to set your template Store");?></h4>
-										</div>
-										<ul class="sub-template">
-										<?php if (!empty($this->template)) foreach($this->template as $rs){?>
-											<li class="list-thum">
-												<figure>
-													<a id="theme<?php echo $rs['id'];?>" onClick="selectTemplate(<?php echo $rs['id'];?>);" title="<?php echo $rs['template_title'];?>" <?php if ($rs['id']==$this->store['template_id']){echo 'class="active"';}?>><!--  <span class="name">Acidus</span> -->
-													<img class="template-image"  src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="Acidus Free Website Template" title="View the Acidus Template Details"> 
-													<span class="posted"><?php echo $rs['template_title'];?></span></a>
-													<input type="hidden" id="font-col<?php echo $rs['id'];?>" name="font-col<?php echo $rs['id'];?>" value="<?php echo $rs['template_main_color'];?>" />
-													<input type="hidden" id="them-col<?php echo $rs['id'];?>" name="them-col<?php echo $rs['id'];?>" value="<?php echo $rs['template_main_font_color'];?>" />
-													</figure>
-												<!--  <div class="thum-image">
-													<img class="template-image" src="<?php echo $this->baseUrl()."/images/theme/".$rs['image_theme']; ?>" alt="" />
-												</div>-->
-											</li>
+												<h4 class="sub-title"><?php echo $tr->translate("Slide Image in store");?> (650 X 350px)</h4>
+											</div>
+										<div class="store-slide" >
+										<?php 
+										if (!empty($this->store['images_slide'])){
+											$slide= explode(",", $this->store['images_slide']);
+											$l=0;
+											foreach ($slide as $sli){$l++;
+											?>
+											<div class="row_form">
+												<div class="image_slidview">
+													<img id="slide_view<?php echo $l;?>" src="<?php echo $this->baseUrl()."/images/store/slide/".$sli;?>"/>
+												</div>
+												<div class="button-browse-image">
+													<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
+													<input class="btn_borwse_image" type="file" value="<?php echo $sli;?>" id="slideimage<?php echo $l;?>" name="slideimage<?php echo $l;?>"  onchange="uploadbanner('<?php echo $l;?>')"/>
+												</div>
+											</div>
 											<?php }?>
-										</ul>
+											<?php if (count($this->store['images_slide'])<3){  while($l<3){ $l++;?>
+												<div class="row_form">
+													<div class="image_slidview">
+														<img id="slide_view<?php echo $l;?>" src="<?php echo $this->baseUrl();?>/images/blankslide.jpg"/>
+													</div>
+													<div class="button-browse-image">
+														<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
+														<input class="btn_borwse_image" type="file" id="slideimage<?php echo $l;?>" name="slideimage<?php echo $l;?>"  onchange="uploadbanner('<?php echo $l;?>')"/>
+													</div>
+												</div>
+											<?php }
+											}?>
+										<?php 
+										}else{
+											for ($l=1; $l<=3; $l++){?>
+											<div class="row_form">
+												<div class="image_slidview">
+													<img id="slide_view<?php echo $l;?>" src="<?php echo $this->baseUrl();?>/images/blankslide.jpg"/>
+												</div>
+												<div class="button-browse-image">
+													<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
+													<input class="btn_borwse_image" type="file" id="slideimage<?php echo $l;?>" name="slideimage<?php echo $l;?>"  onchange="uploadbanner('<?php echo $l;?>')"/>
+												</div>
+											</div>
+										<?php }
+										}?>
+										</div>
 									</div>
+									</div>
+									
 									<input type="hidden" id="templatess" name="templatess" value="<?php echo $this->store['template_id'];?>" />
 								</div>
 								
@@ -387,8 +471,13 @@
 			$("#templatess").val(index);
 			$("#templatesscolor").val($("#them-col"+index).val());
 			$("#fontsscolor").val($("#font-col"+index).val());
-			 $("#theme-olor").css("background", $("#them-col"+index).val());
-			 $("#fonts-color").css("background", $("#font-col"+index).val());
+		 	$("#theme-olor").css("background", $("#them-col"+index).val());
+		 	$("#fonts-color").css("background", $("#font-col"+index).val());
+		 	if(index!=2){
+		 		$("#slide-blog").css("display", "block");
+		 	}else{
+		 		$("#slide-blog").css("display", "none");
+		 	}
 		}
 		function showcolorbox(index){
 			$("#choose-color-pop").css("display", "block");
@@ -425,6 +514,11 @@
 			}
 			 closecolorbox();
 		}
+		function uploadbanner (index) {
+		    	var output = document.getElementById('slide_view'+index);
+		    	output.src = URL.createObjectURL(event.target.files[0]);
+			
+	  }
 	</script>
 
 	<script type="text/javascript" src="<?php echo $this->baseUrl();?>/template/colorpicker/js/colorpicker.js"></script>
