@@ -404,7 +404,9 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		(SELECT vc.phone FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author_phone,
 		(SELECT title FROM `vd_category_detail` WHERE category_id= ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
 		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$lang_id LIMIT 1)  AS parent_category_name,
-		(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name
+		(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name,
+		(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_alias,
+			(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_title
 		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.user_id = $user_id ";
 		return $db->fetchAll($sql);
 	} 

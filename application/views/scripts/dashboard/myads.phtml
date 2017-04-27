@@ -105,7 +105,7 @@
 						<?php if(!empty($this->myads))foreach($this->myads as $key =>$rsad){?>
 						<div class="blog-wrapper <?php if(count($this->myads)==$key+1){echo"last_record";}?>">
 							<div class="ads-left">
-								<a class="ad-image box" href="#" title="Finance officer for hotel" >
+								<a class="ad-image box" href="#" title="<?php echo $rsad['ads_title'];?>" >
 										<?php if (!empty($rsad['images'])){?>
 											<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rsad['image_feature']; ?>" alt=""  />
 										<?php }else{?>
@@ -115,7 +115,7 @@
 							</div>
 							<div class="ads-description">
 								<div class="title-ads"><h4><a target="_blank" href="<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'detail','ads'=>$rsad['alias']));?>"><?php echo $rsad['ads_title'];?></a></h4></div>
-								<div class="categories-ads"><h5><a href="#"><?php echo $rsad['category_name']?></a></h5></div>
+								<div class="categories-ads"><h5><a href="#"><?php echo $rsad['category_name']?></a></h5><h5 class="store"><a href="<?php echo $this->baseUrl()."/store/index?store=".$rsad['store_alias'].".html";?>"><?php echo $rsad['store_title']?></a></h5></div>
 								<div class="description-ads"><p href="#">
 								<?php
 									$str1 = utf8_encode($rsad['description']);
@@ -147,6 +147,7 @@
 							</div>
 						</div>
 					<?php }?>
+					<?php  if ($this->countPages>1){?>
 					<div class="pager-section">
 							<ul class="pagination ">
 								<li <?php if($this->currentPage==1){echo 'class="disable"';}?> ><a  href="<?php echo $this->baseUrl()."/dashboard/myads/pages/".$this->previousPage;?>"><i class="fa fa-chevron-left"></i></a></li>
@@ -156,6 +157,7 @@
 								<li <?php if($this->countPages==$this->currentPage){echo 'class="disable"';}?>><a href="<?php echo $this->baseUrl()."/dashboard/myads/pages/".$this->nextPage;?>"><i class="fa fa-chevron-right"></i></a></li>
 							</ul>
 						</div><!-- pager-section -->
+					<?php }?>
 				</div>
 			</div>
 		</div>
