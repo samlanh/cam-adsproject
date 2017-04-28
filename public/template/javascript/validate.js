@@ -123,7 +123,7 @@ function rotateImage(index){
 		contentType: false,
 		cache: false,        
         success: function(data){
-			alert(data);
+	
 				/*jQuery("#ads-image"+index).val(data);*/
 			},
 			error: function(err) {
