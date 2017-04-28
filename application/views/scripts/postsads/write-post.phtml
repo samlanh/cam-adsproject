@@ -130,7 +130,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 								<?php $string=''; 
 								$imageview="";
 								$imageloadin = '<img src="'.$this->baseUrl().'/images/loader.gif" alt="Uploading...."/>';
-								for($i=0;$i<$this->rsallowimg;$i++){
+								for($i=0;$i<=$this->rsallowimg;$i++){
 								//for ($i=0; $i<=6; $i++){ 
 // 										$string.="
 // 										jQuery('#filePhoto$i').click(function(e){
@@ -157,20 +157,23 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 											}
 											else
 											{
-												var reader = new FileReader();
-												reader.readAsDataURL(this.files[0]);
+												jQuery('#indexcol').val($i);
+												uploadimageajax();
+												
 											}
-											jQuery('#index').val($i);
-											uploadimageajax();
-											});
+											
+										});
 									";
 									$imageview.="var loadFile$i = function(event) {
 									var output = document.getElementById('image_wiew$i');
 									output.src = URL.createObjectURL(event.target.files[0]);
+										$('#image_rotate$i').removeClass('hidden');
 									};";
 									?>
 									<li>
+									<a href="javascript:;" id="image_rotate<?php echo $i;?>" class="image_rotate hidden" data-img="17-03-10/148719-loan-system87-c.jpg" onClick="rotateImage('<?php echo $i;?>')" target="_self">R</a>
 										<div id="uploader<?php echo $i;?>" class="uploader">
+											
 											<div id='preview<?php echo $i;?>'></div>
 											<img id="image_wiew<?php echo $i;?>" src="<?php echo $this->baseUrl();?>/images/broweimage.png"/>
 											<input type="hidden" id="ads-image<?php echo $i;?>" name="ads-image<?php echo $i;?>" />
@@ -227,7 +230,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 								<label><?php echo $tr->translate("Contact Name");?><span class="sign_req">*</span></label>
 							</div>
 							<div class="col-md-3">
-								<input type="hidden"  name="index" id="index"  />
+								<input type="hidden"  name="indexcol" id="indexcol"  />
 								<input type="text" placeholder="Name" name="name" id="name" value="<?php echo $this->client_info['customer_name'];?>" class="form-control" />
 							</div>
 							<div class="col-md-2">
@@ -258,6 +261,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 						<div class="form-row">
 							<div class="col-md-2">
 								<label><?php echo $tr->translate("Address");?></label>
+								<input type="hidden"  name="rotates" id="rotates" value="0"  />
 							</div>
 							<div class="col-md-8">
 								<textarea id="adress" name="adress"  class="form-control " placeholder="Address..."><?php echo $this->client_info['address'];?></textarea>

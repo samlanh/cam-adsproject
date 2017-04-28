@@ -106,12 +106,12 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 				}
 				if(empty($data['ads-image'.$i])){continue;}
 					if($i==0){
-						$str_img.=$data['ads-image'.$i].',';
+						$str_img.=$data['ads-image'.$i];
 					}else{
 						$arr['images']=$data['ads-image'.$i];
 						$comma = ',';
-						if($i==6){$comma='';}
-						$str_img.=$data['ads-image'.$i].$comma;
+// 						if($i==6){$comma='';}
+						$str_img.=$comma.$data['ads-image'.$i];
 					}
 			}
 			$arr['images']=$str_img;
@@ -266,17 +266,48 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 	}
 
 	
+	function rotateImage($data){
+		$part= PUBLIC_PATH.'/images/adsimg/';
+		$filename = $data['ads-image'.$data['indexcol']];
+		if ($data['rotates']==90){
+			$degrees = -90;
+		}else{
+			$degrees = 90;
+		}
+		$uploadimage= $part.$filename;
+		$temp = explode(".", $filename);
+		$im = imagecreatefromjpeg($uploadimage);
+		if (end($temp) == 'jpg') {
+			$im = imagecreatefromjpeg($uploadimage);
+		} else
+			if (end($temp) == 'jpeg') {
+			$im = imagecreatefromjpeg($uploadimage);
+		} else
+			if (end($temp) == 'png') {
+			$im = imagecreatefrompng($uploadimage);
+		} else
+			if (end($temp) == 'gif') {
+			$im = imagecreatefromgif($uploadimage);
+		}
+		
+		$rotate = imagerotate($im, $degrees, 0);
+		
+		imagejpeg($rotate, $uploadimage, 50);
+// 		file_put_contents($uploadimage,$rotate);
+		return $data['rotates']." ".$degrees;
+	}
 	function uploadImageFirst($data){
 		$client_session=new Zend_Session_Namespace('client');
 		
 		$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
 		$part= PUBLIC_PATH.'/images/adsimg/';
-		$index = $data['index'];
+		$index = $data['indexcol'];
 // 		$name = $_FILES["filePhoto$index"]['name'];
 // 		$size = $_FILES["filePhoto$index"]['size'];
 		$photo = $_FILES["filePhoto$index"];
 			$temp = explode(".", $photo["name"]);
-			$newName = date("Y-m-d").round(microtime(true)).$client_session->client_id.'.'.end($temp);
+			$newName = date("Y").date("m").date("d").round(microtime(true)).$client_session->client_id.'.'.end($temp);
+			
 			move_uploaded_file($_FILES["filePhoto$index"]["tmp_name"], $part . $newName);
 			
 			
@@ -284,7 +315,10 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			
 			$percent = 0.5;
 			list($width, $height) = getimagesize($uploadimage);
-			if ($width<=400){
+			if ($width>1200){
+				$percent = 0.3;
+			}
+			if ($width<=500){
 				$new_width = $width;
 				$new_height = $height;
 			}else{
@@ -296,6 +330,7 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			// Resample
 			$image_p = imagecreatetruecolor($new_width, $new_height);
 			// Load the stamp and the photo to apply the watermark to
+			
 			if (end($temp) == 'jpg') {
 				$im = imagecreatefromjpeg($uploadimage);
 			} else
@@ -307,8 +342,10 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 			} else
 				if (end($temp) == 'gif') {
 				$im = imagecreatefromgif($uploadimage);
+			}else{
+				$im = imagecreatefromjpeg($uploadimage);
 			}
-			imagecopyresampled($image_p, $im, 0, 0, 0, 0, $new_width, $new_height, $width, $height);// resize image
+		$dds =	imagecopyresampled($image_p, $im, 0, 0, 0, 0, $new_width, $new_height, $width, $height);// resize image
 			
 			// Output
 			//imagejpeg($image_p, null, 100);

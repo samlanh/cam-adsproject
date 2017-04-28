@@ -170,6 +170,17 @@ class PostsadsController extends Zend_Controller_Action
     		exit();
     	}
     }
+    public function rotateImageAction(){
+    	if($this->getRequest()->isPost()){
+    		$data=$this->getRequest()->getPost();
+    		$client_session=new Zend_Session_Namespace('client');
+    		$data['id']= $client_session->client_id;
+    		$db = new Application_Model_DbTable_DbPostAds();
+    		$rs = $db->rotateImage($data);
+    		echo $rs;
+    		exit();
+    	}
+    }
     public function adsDetailAction(){ //get ads detail for display on popup
     	if($this->getRequest()->isPost()){
     		$data=$this->getRequest()->getPost();

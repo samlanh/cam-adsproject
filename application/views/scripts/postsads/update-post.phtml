@@ -118,25 +118,27 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 												var reader = new FileReader();
 												reader.readAsDataURL(this.files[0]);
 											}
-											jQuery('#index').val($i);
+											jQuery('#indexcol').val($i);
 											uploadimageajax();
 											});
 									";
 									$imageview.="var loadFile$i = function(event) {
 									var output = document.getElementById('image_wiew$i');
 									output.src = URL.createObjectURL(event.target.files[0]);
+										$('#image_rotate$i').removeClass('hidden');
 									};";
 									?>
 									<li>
-										<div id="uploader<?php echo $i;?>" class="uploader">
-											<div id='preview<?php echo $i;?>'></div>
-											<?php 
+										<?php 
 											$str_img='images/broweimage.png';
 											$image_name='';
 											if(!empty($image[$i])){
 												$image_name = $image[$i];
 												$str_img = "images/adsimg/".$image_name;
 											}?>
+										<a href="javascript:;" id="image_rotate<?php echo $i;?>" class="image_rotate <?php if (empty($image_name)){echo "hidden";}?>" data-img="" onClick="rotateImage('<?php echo $i;?>')" target="_self">R</a>
+										<div id="uploader<?php echo $i;?>" class="uploader">
+											<div id='preview<?php echo $i;?>'></div>
 											<img id="image_wiew<?php echo $i;?>" src="<?php echo $this->baseUrl()."/".$str_img;?> "/>
 											<input type="hidden" id="ads-image<?php echo $i;?>" name="ads-image<?php echo $i;?>" value="<?php echo $image_name;?>" />
 											<input class="filephoto" type="file" name="filePhoto<?php echo $i;?>"  id="filePhoto<?php echo $i;?>" accept="image/jpeg,image/gif,image/png" value='' onchange="loadFile<?php echo $i;?>(event)" />
@@ -192,7 +194,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 								<label><?php echo $tr->translate("Contact Name");?><span class="sign_req">*</span></label>
 							</div>
 							<div class="col-md-3">
-								<input type="hidden"  name="index" id="index"  />
+								<input type="hidden"  name="indexcol" id="indexcol"  />
 								<input type="text" placeholder="Name" name="name" id="name" value="<?php echo $rsads['contact_name'];?>" class="form-control" />
 							</div>
 							<div class="col-md-2">
@@ -222,6 +224,7 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 						<div class="form-row">
 							<div class="col-md-2">
 								<label><?php echo $tr->translate("Address");?></label>
+								<input type="hidden"  name="rotates" id="rotates" value="0"  />
 							</div>
 							<div class="col-md-8">
 								<textarea id="adress" name="adress"  class="form-control " placeholder="Address..."><?php echo $rsads['address'];?></textarea>
