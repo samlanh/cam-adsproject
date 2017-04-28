@@ -1295,6 +1295,26 @@ a.button i {
 /*-----------------------End Form  Popup-----------------------------------------------*/
 
 /*---------form post ads---------------*/
+a.image_rotate {
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    top: -6px;
+    left: -5px;
+    color: transparent;
+    z-index: 999;
+    padding: 5px;
+}
+a.image_rotate:after {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    background: url(../rotate.png) no-repeat center;
+}
 .alert.message {
     padding: 10px;
     background-color: #f4433699;
@@ -1408,6 +1428,7 @@ a.button i {
 			width: 100px;
 			height: 100px;
 			text-align: center;
+			position: relative;
 		}
 		li.highlight {
 			background: #FEE25F;

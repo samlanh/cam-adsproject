@@ -77,13 +77,12 @@ function uploadimageajax(){
 	var myform = document.getElementById("postads_form");
 	//var formData = jQuery(myform).serializeArray();
 	var formData = new FormData(myform);
-	index = jQuery("#index").val();
+	$("#load-wrapper").css("display", "block");
+	index = jQuery("#indexcol").val();
 	jQuery.ajax({
         url: baseurl+"/postsads/upload",
         type: "post",
         data: formData,		
-		cache: false,
-
 		 processData: false,
 		contentType: false,
 		cache: false,        
@@ -94,8 +93,46 @@ function uploadimageajax(){
 				alert(err);
 			}
 		});
+		 $("#load-wrapper").css("display", "none");
 }
-
+function rotateImage(index){
+	jQuery("#indexcol").val(index);
+	var rotatess = jQuery("#rotates").val();
+	var vas=0;
+	if(rotatess==0){
+		vas =90;
+	}else{
+		vas=0;
+	}
+	$("#rotates").val(vas);
+	$("#image_wiew"+index).css({
+        "-webkit-transform": "rotate("+vas+"deg)",
+        "-moz-transform": "rotate("+vas+"deg)",
+        "transform": "rotate("+vas+"deg)" /* For modern browsers(CSS3)  */
+    });
+	var myform = document.getElementById("postads_form");
+	//var formData = jQuery(myform).serializeArray();
+	var formData = new FormData(myform);
+	$("#load-wrapper").css("display", "block");
+	
+	jQuery.ajax({
+        url: baseurl+"/postsads/rotate-image",
+        type: "post",
+        data: formData,		
+		 processData: false,
+		contentType: false,
+		cache: false,        
+        success: function(data){
+			alert(data);
+				/*jQuery("#ads-image"+index).val(data);*/
+			},
+			error: function(err) {
+				alert(err);
+			}
+		});
+		 $("#load-wrapper").css("display", "none");
+	
+}
 /*jQuery("#postads_form").on('submit',(function(e) {
 	e.preventDefault();
 //	$("#message").empty();
