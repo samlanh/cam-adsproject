@@ -181,7 +181,7 @@
 														<span><?php echo $tr->translate("Phone");?> :</span> <?php echo $ads['author_phone'];?> 
 													<?php }?>
 												</p>
-												<p><?php echo $tr->translate("Visit Store");?></p>
+												<p><a  href="<?php echo $this->baseUrl()."/store/index?store=".$ads['store_alias'].".html";?>"><?php echo $tr->translate("Visit Store");?></a></p>
 											</div>
 										</div>
 									</div>

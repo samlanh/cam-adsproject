@@ -31,15 +31,27 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 		
 		
 	}
+	function generateAlias($title){
+		$adsid = $this->getLastAdsId();
+		$sepacial_char = array(
+				0=>" ",1=>".",2=>"?",3=>":",4=>",",5=>"/",6=>";",7=>"%",8=>"&",9=>"$",10=>"@",
+				11=>"!",12=>"#",13=>"^",14=>"*",15=>"(",16=>")",17=>"",18=>"=",19=>"+",20=>"[",
+				21=>"]",22=>"{",23=>"}",22=>"<",23=>">",
+		);
+		foreach($sepacial_char as $key => $rr){
+			$title = str_replace($rr,'',$title);
+		}
+		return $adsid.round(microtime(true)).$title;
+	}
 	function addPostsAds($data){
 		$client_session=new Zend_Session_Namespace('client');
 		$client_id = $client_session->client_id;
 		$db = $this->getAdapter();
 		$db->beginTransaction();
 		try{
-			$adsid = $this->getLastAdsId();
-			$adsidalias = $adsid.str_replace(" ",'', $data['title']);
-			
+			/* $adsid = $this->getLastAdsId();
+			$adsidalias = $adsid.str_replace(" ",'', $data['title']); */
+			$adsidalias = $this->generateAlias($data['title']);
 			$dbs = new Application_Model_DbTable_DbGlobalselect();
 			$rsstore = $dbs->getAllStoreByUser();
 			if(count($rsstore)>1){
