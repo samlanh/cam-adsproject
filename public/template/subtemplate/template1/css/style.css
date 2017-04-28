@@ -959,3 +959,9 @@ h2.logo_charecter.footer {
     width: 100%;
     height: 300px;
 }
+.product-description.detail-info-entry pre {
+    word-wrap: initial;
+    background: none;
+    overflow: hidden;
+	white-space: pre-wrap;
+}

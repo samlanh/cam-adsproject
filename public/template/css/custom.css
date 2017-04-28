@@ -4790,12 +4790,12 @@ b, strong {
 }
 
 pre {
-	background: #f5f5f5;
+	background: none;
 	color: #666;
 	font-size: 14px;
-	margin: 20px 0;
+	/*margin: 20px 0;*/
 	overflow: auto;
-	padding: 20px;
+	/*padding: 20px;*/
 	white-space: pre;
 	white-space: pre-wrap;
 	word-wrap: break-word;
