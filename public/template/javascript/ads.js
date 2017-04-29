@@ -26,7 +26,7 @@ function getAdsDetail(index){ /* get detail ads */
 			var year = date.getFullYear();
 			
 			document.getElementById('pop-titlebar').innerHTML =val.ads_title;
-			document.getElementById('pop-title').innerHTML ='<a class="ads-title" href="'+baseurl+'/listads/detail/ads/'+val.alias+'" >'+val.ads_title+'</a>';
+			document.getElementById('pop-title').innerHTML ='<a class="ads-title" href="'+baseurl+'/listads/detail/ads/'+val.alias+'.html" >'+val.ads_title+'</a>';
 			document.getElementById('pop-viewer').innerHTML = val.viewer;
 			document.getElementById('pop-date').innerHTML = c_day+" "+monthNames[monthIndex]+" "+year;
 			document.getElementById('pop-price').innerHTML = "$ "+parseFloat(val.price).toFixed(3);
