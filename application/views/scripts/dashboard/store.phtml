@@ -3,10 +3,11 @@
 <?php 	
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 	$param = $this->param;
+	$temp = explode(".", $param['page']);
 	$title='';
-	if ($param['change']=="add"){
+	if ($temp[0]=="add"){
 		$title = $tr->translate("Add New Store");
-	}else if ($param['change']=="edit"){
+	}else if ($temp[0]=="edit"){
 		$title = $tr->translate("Edite/Update Store");
 	}
 	
@@ -140,7 +141,7 @@
 							</ul>
 						</div>
 					</div>
-					<?php 	if ($param['change']=="add"){?>
+					<?php 	if ($temp[0]=="add"){?>
 					<form id="form-store-info" method="post" enctype="multipart/form-data" action='<?php echo $this->baseUrl();?>/dashboard/addstore' autocomplete="off">
 						<div class="tab-content">
 							<div class="tab-pane store-temp active" id="template">
@@ -274,7 +275,7 @@
 							<input type="submit" class="button" name="submit-bt" value="<?php echo $tr->translate("Save");?>" />
 						</div>
 					</form>
-					<?php }else if ($param['change']=="edit"){ ?>
+					<?php }else if ($temp[0]=="edit"){ ?>
 						<form id="form-store-info" method="post" enctype="multipart/form-data" action='<?php echo $this->baseUrl()."/dashboard/updatestore?store=".$param['store'];?>' autocomplete="off">
 							<div class="tab-content">
 								<div class="tab-pane store-temp active" id="template">

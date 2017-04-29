@@ -60,7 +60,7 @@ $db = new Application_Model_DbTable_DbVdGlobal();
 												if(!empty($link)){
 													$url = $this->url(array("module"=>'default','controller'=>'postsads','action'=>'update-post','adsid'=>$link),null,true);
 												}
-												else{ $url = $this->url(array("module"=>'default','controller'=>'postsads','action'=>'write-post','category'=>$cate['alias_category']));
+												else{ $url = $this->url(array("module"=>'default','controller'=>'postsads','action'=>'write-post','category'=>$cate['alias_category'].".html"));
 												}
 											?>
 											<li class="cate-list"><a href="<?php echo $url;//echo $this->baseUrl()."/postsads/write-post/category/".$cate['alias_category'];?>"><?php  echo $cate['name'];?></a></li>

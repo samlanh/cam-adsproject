@@ -153,7 +153,7 @@ if(empty($sess_search)){
 								<div class="blog-sub-categories-cener">
 									<ul class="menu-list-cate">
 										<?php if (!empty($menu_items)) foreach ($menu_items as $rs){?>
-										<li class="menu-list-cate"><a href="<?php echo $this->baseUrl()."/page/index?param=".$rs['alias_menu'];?>"><?php echo $rs['title'];?></a></li>
+										<li class="menu-list-cate"><a href="<?php echo $this->baseUrl()."/page/index?param=".$rs['alias_menu'].".html";?>"><?php echo $rs['title'];?></a></li>
 										<?php }?>
 										
 									 </ul>
@@ -203,7 +203,7 @@ if(empty($sess_search)){
 										<ul class="menu-list-cate"><!-- open 1 -->
 								<?php }
  								}?>
-									<li class="menu-list-cate"><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$rs['alias_category'];?>"><?php echo $rs['name'];?></a></li>
+									<li class="menu-list-cate"><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$rs['alias_category'].".html";?>"><?php echo $rs['name'];?></a></li>
 								<?php 
 								$parent=$rs['parent'];
 								}//end loop

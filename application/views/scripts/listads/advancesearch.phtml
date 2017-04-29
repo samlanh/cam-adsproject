@@ -151,8 +151,8 @@ var monthNames = [
 		<div class="breadcrumb">
 			<div class="container">
 				<ul class="breadcrumb">
-				  <li><a href="<?php echo $this->baseUrl()."/index"?>"><i class="fa fa-home"></i><?php echo $tr->translate("Home");?></a></li>
-				   <li><a href="<?php echo $this->baseUrl()."//listads/index"?>"><?php echo $tr->translate("All Categories");?></a></li>
+				  <li><a href="<?php echo $this->baseUrl().""?>"><i class="fa fa-home"></i><?php echo $tr->translate("Home");?></a></li>
+				   <li><a href="<?php echo $this->baseUrl()."/listads/index?all_category.html"?>"><?php echo $tr->translate("All Categories");?></a></li>
 				  <li><?php echo $tr->translate("Advance Search");?></li>
 				</ul>
 			</div>
@@ -181,7 +181,7 @@ var monthNames = [
 								    			<li class="item-wrap">
 									    				<div class="item ad-box ">
 																<div class="item-image">
-																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'];?>">
+																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'].".html";?>">
 																	<?php if (!empty($rs['images'])){?>
 																		<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rs['image_feature']; ?>" alt=""  />
 																	<?php }else{?>
@@ -201,7 +201,7 @@ var monthNames = [
 															<div class="item-description">
 																<div class="item-title">
 																	<h3>
-																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'];?>">
+																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'].".html";?>">
 																		<?php echo substr($rs['ads_title'],0,100);?>
 																	</a>
 																	</h3>

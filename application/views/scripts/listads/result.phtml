@@ -37,7 +37,7 @@
 								    			<li class="item-wrap">
 									    				<div class="item ad-box ">
 																<div class="item-image">
-																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'];?>">
+																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'].".html";?>">
 																	<?php if (!empty($rs['images'])){?>
 																		<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rs['image_feature']; ?>" alt=""  />
 																	<?php }else{?>
@@ -57,7 +57,7 @@
 															<div class="item-description">
 																<div class="item-title">
 																	<h3>
-																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'];?>">
+																	<a href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rs['alias'].".html";?>">
 																		<?php echo substr($rs['ads_title'],0,100);?>
 																	</a>
 																	</h3>

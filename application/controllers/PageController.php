@@ -6,8 +6,9 @@ class PageController extends Zend_Controller_Action
     {
 //     	$this->_helper->layout()->disableLayout();
     	$param = $this->getRequest()->getParam("param");
+    	$temp = explode(".", $param);
     	$db = new Application_Model_DbTable_DbGlobalselect();
-    	$this->view->menu_info = $db->getMenuItemsByAlias($param);
+    	$this->view->menu_info = $db->getMenuItemsByAlias($temp[0]);
     }
     function detailAction(){
 //     	$this->_helper->layout()->disableLayout();

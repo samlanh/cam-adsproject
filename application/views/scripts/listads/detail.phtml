@@ -31,13 +31,13 @@
 		<div class="breadcrumb">
 			<div class="container">
 				<ul class="breadcrumb">
-				  <li><a href="<?php echo $this->baseUrl()."/index"?>"><i class="fa fa-home"></i><?php echo $tr->translate("Home");?></a></li>
-				  <li><a href="<?php echo $this->baseUrl()."//listads/index"?>"><?php echo $tr->translate("All Categories");?></a></li>
+				  <li><a href="<?php echo $this->baseUrl().""?>"><i class="fa fa-home"></i><?php echo $tr->translate("Home");?></a></li>
+				  <li><a href="<?php echo $this->baseUrl()."/listads/index?all_category.html"?>"><?php echo $tr->translate("All Categories");?></a></li>
 				  <?php if (!empty($ads['parent_category_name'])){?>
-				  <li><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$ads['parent_alias_category'];?>"><?php echo $ads['parent_category_name'];?></a></li>
+				  <li><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$ads['parent_alias_category'].".html";?>"><?php echo $ads['parent_category_name'];?></a></li>
 				  <?php }?>
 				   <?php if (!empty($ads['category_name'])){?>
-				  <li><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$ads['alias_category'];?>"><?php echo $ads['category_name'];?></a></li>
+				  <li><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$ads['alias_category'].".html";?>"><?php echo $ads['category_name'];?></a></li>
 				  <?php }?>
 				</ul>
 			</div>
@@ -85,7 +85,7 @@
 												<span><i class="fa fa-calendar"></i><?php echo date("d-m-Y",strtotime($ads['date_modified']));?></span> 
 											</div>
 											<div class="social-share">
-												<div class="fb-share-button" data-href="<?php echo $this->baseUrl()."/listads/detail/ads/".$ads['alias'];?>" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2Fcam-adsproject%2Ftrunk%2Fpublic%2Flistads%2Fdetail%2Fads%2Fiphone-5s-64GB-for-sale-quality-99225&amp;src=sdkpreparse">Share</a></div>
+												<div class="fb-share-button" data-href="<?php echo $this->baseUrl()."/listads/detail/ads/".$ads['alias'].".html";?>" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2Fcam-adsproject%2Ftrunk%2Fpublic%2Flistads%2Fdetail%2Fads%2Fiphone-5s-64GB-for-sale-quality-99225&amp;src=sdkpreparse">Share</a></div>
 											</div>
 										</div>
 									</div><!-- item-info -->
@@ -131,7 +131,7 @@
 												</div>
 											</div>
 											<div class="ads-title">
-												<h4><a class="ads-title" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$relate['alias'];?>" ><?php echo $relate['ads_title'];?></a></h4>
+												<h4><a class="ads-title" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$relate['alias'].".html";?>" ><?php echo $relate['ads_title'];?></a></h4>
 											 </div>
 											 <div class="ads-price">
 												<h4><a class="ads-price" href="#" ><?php echo '$ '.number_format($relate['price'],2);?></a></h4>

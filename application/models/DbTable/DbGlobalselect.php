@@ -375,7 +375,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 				<div class='item ad-box'>
 				<div class='item-image'>";
 				$base_url=Zend_Controller_Front::getInstance()->getBaseUrl();
-				$str.='<a href="'.$base_url.'/listads/detail/ads/'.$rs["alias"].'">';
+				$str.='<a href="'.$base_url.'/listads/detail/ads/'.$rs["alias"].'.html">';
 					if (!empty($rs['image_feature'])){
 						$str.="<img src=".$base_url.'/images/adsimg/'.$rs['image_feature']." />";
 					}else{
@@ -385,7 +385,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 					$str.='<div class="additional-buttons">
 						<span class="quickview" onClick="getAdsDetail('.$alias.');" ><i class="fa fa-search-plus"></i>'.$tr->translate("Quickview").'</span>
 							<div class="sold-by-container">
-								<a title="'.$rs['store_title'].'" href="'.$base_url.'/store/index?store='.$rs['store_alias'].'"><span>'.$tr->translate("Store").'</span> : '.$rs['store_title'].'</a>
+								<a title="'.$rs['store_title'].'" href="'.$base_url.'/store/index?store='.$rs['store_alias'].'.html"><span>'.$tr->translate("Store").'</span> : '.$rs['store_title'].'</a>
 							</div>
 						</div>';
 					$str.='</div>
@@ -395,7 +395,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 						<div class="item-description">
 							<div class="item-title">
 								<h3>';
-								$str.='<a href="">'.substr($rs["ads_title"],0,100).'</a>
+								$str.='<a href="'.$base_url.'/listads/detail/ads/'.$rs["alias"].'.html">'.substr($rs["ads_title"],0,100).'</a>
 								</h3>
 							</div>';
 					$str.='<div class="item-info">

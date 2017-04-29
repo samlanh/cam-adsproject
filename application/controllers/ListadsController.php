@@ -6,12 +6,47 @@ class ListadsController extends Zend_Controller_Action
     {
     	//$this->_helper->layout()->disableLayout();
     	$id = $this->getRequest()->getParam("cateid");
+    	$temp = explode(".", $id);
     	$db = new Application_Model_DbTable_DbGlobalselect();
-    	if (!empty($id)){
-	    	$this->view->rsads = $db->getAllAdsByName($id);
-	    	$this->view->cate_info = $db->getCategoryInfo($id);
+    	if (!empty($temp[0])){
+	    	$adsd = $db->getAllAdsByName($temp[0]);
+	    	$this->view->cate_info = $db->getCategoryInfo($temp[0]);
     	}else{
-    		$this->view->rsads = $db->getAllAds();
+    		$adsd = $db->getAllAds();
+    	}
+    	//$this->view->rsads = $adsd;
+    	
+    	$paginator = Zend_Paginator::factory($adsd);
+    	$paginator->setDefaultItemCountPerPage(5);
+    	$allItems = $paginator->getTotalItemCount();
+    	$countPages= $paginator->count();
+    	$p = $this->getRequest()->getParam('pages');
+    	
+    	if(isset($p))
+    	{
+    		$paginator->setCurrentPageNumber($p);
+    	} else $paginator->setCurrentPageNumber(1);
+    	
+    	$currentPage = $paginator->getCurrentPageNumber();
+    	 
+    	$this->view->rsads = $paginator;
+    	$this->view->countItems = $allItems;
+    	$this->view->countPages = $countPages;
+    	$this->view->currentPage = $currentPage;
+    	
+    	if($currentPage == $countPages)
+    	{
+    		$this->view->nextPage = $countPages;
+    		$this->view->previousPage = $currentPage-1;
+    	}
+    	else if($currentPage == 1)
+    	{
+    		$this->view->nextPage = $currentPage+1;
+    		$this->view->previousPage = 1;
+    	}
+    	else {
+    		$this->view->nextPage = $currentPage+1;
+    		$this->view->previousPage = $currentPage-1;
     	}
     	
     	$dbform = new Application_Model_DbTable_DbDynamicFormPostAds();
@@ -25,12 +60,13 @@ class ListadsController extends Zend_Controller_Action
     function detailAction(){
 //     	$this->_helper->layout()->disableLayout();
     	$ads_alise = $this->getRequest()->getParam("ads");
+    	$temp = explode(".", $ads_alise);
     	$db = new Application_Model_DbTable_DbGlobalselect();
-    	$adsdetail = $db->getAdsDetail($ads_alise);
+    	$adsdetail = $db->getAdsDetail($temp[0]);
     	$this->view->adsDetail = $adsdetail;
     	$this->view->rsattr = $db->getAdsDetailById($adsdetail['id']);
     	$this->view->relate_pro = $db->getRelatedAds($adsdetail);
-    	$db->addCountView($ads_alise);
+    	$db->addCountView($temp[0]);
     }
     function resultAction(){
     	if($this->getRequest()->isPost()){

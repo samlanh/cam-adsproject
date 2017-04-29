@@ -39,7 +39,7 @@ $lang  = $session_lang->lang_id;
 			<div class="col-md-12 col-sm-12" >
 			<div class="block-title-cate">
 				<p class="b-title"><span><i class="fa <?php echo $cate['fontawsome_icon'];?>"></i><?php echo $cate['name']?></span></p>
-				<p class="label-show-all"><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$cate['alias_category'];?>"> <?php echo $tr->translate("Show All");?></a></p>
+				<p class="label-show-all"><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$cate['alias_category'].".html";?>"> <?php echo $tr->translate("Show All");?></a></p>
 			</div>
 			<div class="full">
 				<div class="pane">
@@ -49,7 +49,7 @@ $lang  = $session_lang->lang_id;
 						foreach($rsads as $rsad) {?>
 							<div class="ad-box ">
 								<div class="ads-img-wrapper">
-									<a class="ad-image box" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rsad['alias'];?>" title="<?php echo $rsad['ads_title'];?>" >
+									<a class="ad-image box" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rsad['alias'].".html";?>" title="<?php echo $rsad['ads_title'];?>" >
 									<?php if (!empty($rsad['image_feature'])){?>
 										<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rsad['image_feature']; ?>" alt=""  />
 									<?php }else{?>
@@ -64,11 +64,11 @@ $lang  = $session_lang->lang_id;
 									</div>
 								</div>
 								<div class="ads-title">
-									<h4><a class="ads-title" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rsad['alias'];?>" ><?php echo $rsad['ads_title'];?></a></h4>
+									<h4><a class="ads-title" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rsad['alias'].".html";?>" ><?php echo $rsad['ads_title'];?></a></h4>
 								 </div>
 							
 							 	 <div class="ads-price">
-									<h4><a class="ads-price" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rsad['alias'];?>" >$ <?php echo number_format($rsad['price']);?></a></h4>
+									<h4><a class="ads-price" href="<?php echo $this->baseUrl()."/listads/detail/ads/".$rsad['alias'].".html";?>" >$ <?php echo number_format($rsad['price']);?></a></h4>
 								 </div>
 								  <div class="item-info">
 									<ul>

@@ -52,9 +52,10 @@ class PostsadsController extends Zend_Controller_Action
     	$client_session=new Zend_Session_Namespace('client');
     	if(!empty($client_session->client_id)){ //check session has been have or not
 	    	$param = $this->getRequest()->getParam('category');
+	    	$temp = explode(".", $param);
 	    	$db = new Application_Model_DbTable_DbVdGlobal();
 	    	
-	    	$cate = $db->getCategoryIdbyAlias($param);
+	    	$cate = $db->getCategoryIdbyAlias($temp[0]);
 	    	$this->view->cate = $cate;
 	    	
 	    	$dbform = new Application_Model_DbTable_DbDynamicFormPostAds();

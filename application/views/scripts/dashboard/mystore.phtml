@@ -115,7 +115,7 @@
 			<div class="conten-body-center right">
 				<div class="tab-content">
 					<div class="title">
-						<h4><?php echo $tr->translate("My Store");?> <span class="right" ><a href="<?php echo $this->baseUrl()."/dashboard/store?change=add";?>" class="button right" title="Post Ads"><i class="fa fa-plus-circle" aria-hidden="true"></i><?php echo $tr->translate("Add More Store");?></a></span></h4>
+						<h4><?php echo $tr->translate("My Store");?> <span class="right" ><a href="<?php echo $this->baseUrl()."/dashboard/store?page=add.html";?>" class="button right" title="Post Ads"><i class="fa fa-plus-circle" aria-hidden="true"></i><?php echo $tr->translate("Add More Store");?></a></span></h4>
 					</div>
 						<?php if(!empty($this->mystore))foreach($this->mystore as $key =>$rsad){?>
 						<div class="blog-wrapper <?php //if(count($this->myads)==$key+1){echo"last_record";}?>">
@@ -143,7 +143,7 @@
 							
 							<div class="icon_menu-right" style="margin-top:-5px;">
 								<ul class="icon_menu">
-									<li><a href="<?php echo $this->baseUrl()."/dashboard/store?change=edit&store=".$rsad['alias_store'];?>" title="<?php echo $tr->translate('Change Theme');?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><?php echo $tr->translate('Change Theme');?></a></li>
+									<li><a href="<?php echo $this->baseUrl()."/dashboard/store?page=edit.html&store=".$rsad['alias_store'];?>" title="<?php echo $tr->translate('Change Theme');?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><?php echo $tr->translate('Change Theme');?></a></li>
 									<li><a href="<?php echo $this->baseUrl()."/store/index?store=".$rsad['alias_store'].".html";?>" title="<?php echo $tr->translate('View Store');?>"><i class="fa fa-paper-plane-o" aria-hidden="true"></i><?php echo $tr->translate('View Store');?></a></li>
 								</ul>
 							</div>
