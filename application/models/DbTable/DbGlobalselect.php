@@ -413,7 +413,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 					<div class="footerads" >
 							<ul>
 							   <li> <i class="fa fa-eye"></i>'.$rs['viewer'].' Views</li>
-							   <li> <i class="fa fa-clock-o"></i>'.date("M d, Y",strtotime($rs["publish_date"])).'</li>
+							   <li> <i class="fa fa-calendar"></i>'.date("M d, Y",strtotime($rs["publish_date"])).'</li>
 							</ul>
 					</div>
 					</div><!-- item -->

@@ -75,6 +75,7 @@ class DashboardController extends Zend_Controller_Action
 		
 	}	
 	function bannerAction(){
+		$this->_helper->layout()->disableLayout();
 		$client_session=new Zend_Session_Namespace('client');
 		$db = new Application_Model_DbTable_DbGlobalselect();
 		$store = $db->getAllStoreByClient($client_session->client_id);
@@ -144,7 +145,7 @@ class DashboardController extends Zend_Controller_Action
 		$this->view->mystore = $db->getMyStore($client_session->client_id);
 	}
 	function storeAction(){
-// 		$this->_helper->layout()->disableLayout();
+ 		$this->_helper->layout()->disableLayout();
 		$param = $this->getRequest()->getParams();
 		$this->view->param = $param;
 		

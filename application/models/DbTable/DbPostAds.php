@@ -292,7 +292,7 @@ class Application_Model_DbTable_DbPostAds extends Zend_Db_Table_Abstract
 		
 		$rotate = imagerotate($im, $degrees, 0);
 		
-		imagejpeg($rotate, $uploadimage, 50);
+		imagejpeg($rotate, $uploadimage);
 // 		file_put_contents($uploadimage,$rotate);
 		return $data['rotates']." ".$degrees;
 	}
