@@ -88,7 +88,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* Font Family */
 
 pre{
-	font-family: monospace;
+	font-family: 'Hanuman', sans-serif;
 }
 
 .featured-slider-3#featured-abs .ad-box .add-price span.add-price-icon{
@@ -4791,19 +4791,20 @@ b, strong {
 
 pre {
 	background: none;
-	color: #666;
+	color: #333;
 	font-size: 14px;
 	/*margin: 20px 0;*/
 	overflow: auto;
 	/*padding: 20px;*/
 	white-space: pre;
 	white-space: pre-wrap;
-	word-wrap: break-word;
-
+	word-break: normal;
+	text-align: initial;
 	border: none;
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
-	border-radius: 0px;
+	/* border-radius: 0px; */
+	padding: 0;
 }
 
 
