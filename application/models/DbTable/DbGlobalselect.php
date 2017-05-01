@@ -416,7 +416,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 							$str1 = utf8_encode($rs['description']);
 							$description = substr($str1, 0, 600);
 							 utf8_decode($description); 
-					$str.='</p>
+					$str.= $description.'</p>
 							<ul>
 							   <li >'.$rs['category_name'].'</li>'.$list.'
 							    <li class="province">'.$rs['province_name'].'</li>
@@ -427,6 +427,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 							<ul>
 							   <li> <i class="fa fa-eye"></i>'.$rs['viewer'].' Views</li>
 							   <li> <i class="fa fa-calendar"></i>'.date("M d, Y",strtotime($rs["publish_date"])).'</li>
+							   <li class="list_view right"><span class="label_title" >Store :</span> <a title="'.$rs['store_title'].'" href="'.$base_url.'/store/index?store='.$rs['store_alias'].'.html"><span>'.$tr->translate("Store").' </span> : '.$rs['store_title'].'</a></li>
 							</ul>
 					</div>
 					</div><!-- item -->

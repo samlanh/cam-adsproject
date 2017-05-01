@@ -228,6 +228,7 @@ var monthNames = [
 																	<ul >
 																	   <li> <i class="fa fa-eye"></i><?php echo $rs['viewer'];?> Views</li>
 																	   <li> <i class="fa fa-calendar"></i><?php echo date("M d, Y",strtotime($rs['publish_date']));?></li>
+																	   <li class="list_view right"><span class="label_title" >Store :</span> <a title="<?php echo $rs['store_title'];?>" href="<?php echo $this->baseUrl()."/store/index?store=".$rs['store_alias'].".html";?>"><span><?php echo $tr->translate("Store");?> </span> : <?php echo $rs['store_title'];?></a></li>
 																	</ul>
 															</div>
 														</div><!-- item -->
