@@ -1,5 +1,7 @@
 
-<?php $most_view = $this->myadsmostview;
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$most_view = $this->myadsmostview;
 	$feature = $this->myadsfeature;
 	$store = $this->store;
 	$param = $this->param;
@@ -45,6 +47,7 @@
 	  </div>
 	  <?php }else if($page[0]=="about-us"){?>
 	<?php }else{?>
+	
 	<title>Store | <?php echo $store['store_title'];?></title>
     <div id="content-block">
         <div class="content-center ">

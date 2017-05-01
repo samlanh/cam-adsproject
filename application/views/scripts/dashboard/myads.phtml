@@ -113,13 +113,49 @@
 			</div>
 			<div class="conten-body-center right">
 				<div class="tab-content">
-						<div class="title">
 						<div data-dismiss="alert" class="alert mar_b20 msg_err"><?php echo $tr->translate("Delete Error");?>	
-							<div class="close">
-							<span aria-hidden="true">×</span>
+								<div class="close">
+								<span aria-hidden="true">×</span>
+								</div>
 							</div>
+						<div class="title">
+							<h4><?php echo $tr->translate("My Ads");?> <span class="right" ><a href="<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'choose-category'));?>" class="button right" title="Post Ads"><i class="fa fa-plus-circle" aria-hidden="true"></i><?php echo $tr->translate("Post Ads");?></a></h4>
 						</div>
-						<h4><?php echo $tr->translate("My Ads");?> <span class="right" ><a href="<?php echo $this->url(array('module'=>'default','controller'=>'postsads','action'=>'choose-category'));?>" class="button right" title="Post Ads"><i class="fa fa-plus-circle" aria-hidden="true"></i><?php echo $tr->translate("Post Ads");?></a></h4></div>
+						<div class="box-search">
+					<div class="search-myads">
+						<form id="myadssearch" name="myadssearch" action="" method="post" enctype="multipart/form-data">
+							<div class="form-value" style="width: 100%;">
+								<div class="form-row" style="clear: both;">
+									<div class="box-form-value">
+										<input placeholder="<?php echo $tr->translate("keywork_search");?>..." type="text" id="keywork_search" name="keywork_search" value="<?php echo $this->search['keywork_search'];?>"  class="form-text">
+									</div>
+									<?php if (!empty($this->mystore)){ if (count($this->mystore)>1){?>
+									<div class="box-form-value">
+										<select id="my_store" name="my_store" class="form-select">
+											<option value="" selected="selected"><?php echo $tr->translate("Choose Store");?></option>
+											<?php foreach ($this->mystore as $rs){?>
+											<option value="<?php echo $rs['alias_store']?>" <?php if($this->search['my_store'] ==$rs['alias_store']){ echo'selected="selected"';}?>><?php echo $rs['store_title'];?></option>
+											<?php }?>
+										</select>
+									</div>
+									<?php }
+									}?>
+									<div class="box-form-value">
+										<select id="my_category" name="my_category" class="form-select">
+											<option value="" selected="selected"><?php echo $tr->translate("Choose Category");?></option>
+											<?php if (!empty($this->category)) foreach ($this->category as $ca){?>
+											<option value="<?php echo $ca['id'];?>" <?php if($this->search['my_category'] ==$ca['id']){ echo'selected="selected"';}?>><?php echo $ca['name'];?></option>
+											<?php }?>
+										</select>
+									</div>
+									<div class="box-form-value ">
+										<button type="submit"  class="btn btn-primary form-submit" id="btn_advsearch" name="btn_advsearch">&nbsp;<?php echo $tr->translate("Search Now");?>&nbsp;<i class="fa fa-search"></i></button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 						<?php if(!empty($this->myads))foreach($this->myads as $key =>$rsad){?>
 						<div class="blog-wrapper <?php if(count($this->myads)==$key+1){echo"last_record";}?>">
 							<div class="ads-left">
@@ -134,6 +170,7 @@
 							<div class="ads-description">
 								<div class="title-ads"><h4><a target="_blank" href="<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'detail','ads'=>$rsad['alias']));?>"><?php echo $rsad['ads_title'];?></a></h4></div>
 								<div class="categories-ads"><h5><a href="#"><?php echo $rsad['category_name']?></a></h5><h5 class="store"><a href="<?php echo $this->baseUrl()."/store/index?store=".$rsad['store_alias'].".html";?>"><?php echo $rsad['store_title']?></a></h5></div>
+								<div class="price"><h5 class="myprice"><?php echo "$ ".$rsad['price']?></h5></div>
 								<div class="description-ads"><p>
 								<?php
 									$str1 = utf8_encode($rsad['description']);
@@ -184,11 +221,7 @@
 	echo $this->render('sideright.phtml');
 	echo $this->render('frontbottom.phtml');
 ?>
-<script>
-	window.onload = function(e){ 
-		getBaseUrl('<?php echo $this->baseUrl();?>');
-	}
-</script>
+
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.bxslider.mine.js'></script> <!--form search-->

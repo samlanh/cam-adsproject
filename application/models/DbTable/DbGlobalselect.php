@@ -438,7 +438,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		}
 		return $db->fetchAll($sql);
 	}
-	function getAdsByUserid($user_id){
+	function getAdsByUserid($user_id,$search=null){
 	$this->_name='vd_ads';
 		$db = $this->getAdapter();
 		$lang_id = $this->getCurrentLang();
@@ -454,7 +454,29 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_alias,
 			(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_title
 		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.user_id = $user_id ";
-		return $db->fetchAll($sql);
+		$where='';
+		if(!empty($search['keywork_search'])){
+			$s_where = array();
+			$s_search = addslashes(trim($search['keywork_search']));
+			$s_where[] = " ads.ads_code LIKE '%{$s_search}%'";
+			$s_where[] = " ads.ads_title LIKE '%{$s_search}%'";
+			$s_where[] = " ads.price LIKE '%{$s_search}%'";
+			$where .=' AND ('.implode(' OR ',$s_where).')';
+		}
+		if(!empty($search['my_store'])){
+			$where.= " AND (SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) = '".$search['my_store']."'";
+		}
+		if(!empty($search['my_category'])){
+			
+			$parent = $this->checkCateparent($search['my_category']);
+			$cate=$search['my_category'];
+			if ($parent['parent']==0){
+				$where.=" AND (ads.category_id = $cate OR (SELECT c.`parent` FROM `vd_category` AS c WHERE c.`id` = ads.category_id LIMIT 1)  =  $cate )";
+			}else{
+				$where.= " AND ads.category_id = ".$search['my_category'];
+			}
+		}
+		return $db->fetchAll($sql.$where);
 	} 
 	function getMenuItems(){ //  for menu front
 		$db = $this->getAdapter();

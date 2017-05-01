@@ -98,12 +98,22 @@ class DashboardController extends Zend_Controller_Action
 		$client_session=new Zend_Session_Namespace('client');
 		
 		$db = new Application_Model_DbTable_DbGlobalselect();
-// 		$db->insertproductByCate();
+		$this->view->mystore = $db->getMyStore($client_session->client_id);
+		if($this->getRequest()->isPost()){
+			$data = $this->getRequest()->getPost();
+			$ads = $db->getAdsByUserid($client_session->client_id,$data);
+			$this->view->search= $data;
+		}else{
+			$ads = $db->getAdsByUserid($client_session->client_id);
+		}
 		
-		$ads = $db->getAdsByUserid($client_session->client_id);
+		$db_global = new Application_Model_DbTable_DbVdGlobal();
+		$rscate = $db_global->getCategory();
+		$this->view->category = $rscate;
 		
 		$paginator = Zend_Paginator::factory($ads);
 		$paginator->setDefaultItemCountPerPage(5);
+		
 		$allItems = $paginator->getTotalItemCount();
 		$countPages= $paginator->count();
 		$p = $this->getRequest()->getParam('pages');
@@ -114,7 +124,6 @@ class DashboardController extends Zend_Controller_Action
 		} else $paginator->setCurrentPageNumber(1);
 		 
 		$currentPage = $paginator->getCurrentPageNumber();
-		 
 		$this->view->myads = $paginator;
 		$this->view->countItems = $allItems;
 		$this->view->countPages = $countPages;
