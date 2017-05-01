@@ -2365,11 +2365,18 @@ p.quote-text {
 	width: 100%;
 	border-top: 1px solid #f1efef;
 }
-
-.footerads{    
-	border-top: 1px solid #e9e6e0;
-	background: #fcfbf9 none repeat scroll 0 0;
-	width: 100%;
+.tab-content.list-view-tab div.ad-box:hover .additional-buttons {
+    display: none;
+}
+li.list_view.right a {
+    color: #4282d4;
+    font-weight: bold;
+}
+.footerads {
+    border-top: 1px solid #e9e6e0;
+    background: #eeeff9 none repeat scroll 0 0;
+    width: 100%;
+    display: inline-block;
 }
 .footerads ul li{ display: inline-block; padding:5px 10px;}
 .footerads ul li i{ padding-right: 5px;}
