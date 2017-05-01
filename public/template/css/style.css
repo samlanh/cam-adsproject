@@ -981,7 +981,7 @@ span.regis-guid a:before {
 	}
 	.conten-body-left {
 		float:left;
-		margin-top: -6px;
+		/*margin-top: -6px;*/
 	}
 	.conten-body-center{
 		width:60%;
@@ -1035,6 +1035,29 @@ ul.tabs.horizontal li.active a {
     color: #ffffff !important;
 }
 	/*------Start My ads list Dashboard page--------------------*/
+		.box-search {
+		margin: 0 10px;
+		margin-bottom: 10px;
+		}
+		.search-myads {
+			border: 1px solid #ccc;
+			padding: 12px 2px;
+			width: 100%;
+			text-align: left;
+			vertical-align: top;
+		}
+		.box-form-value {
+			display: inline-block;
+		}
+		.box-form-value input {
+			background-color: #fff;
+			border-left: 0px;
+			padding: 10px 10px;
+			border: solid 1px #4183d7;
+		}
+		.box-form-value button {
+			margin-left: 10px;
+		}
 		div.title h4 {
 			margin: 0;
 			font-weight: bold;
@@ -1071,6 +1094,10 @@ ul.tabs.horizontal li.active a {
 			display: inline-block;
 			width: 60%;
 			margin-left: 15px;
+		}
+		h5.myprice {
+			margin: 0;
+			color: #cc0001;
 		}
 		div.categories-ads h5 a {
 			font-size: 14px;
