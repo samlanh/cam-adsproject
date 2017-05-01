@@ -2,8 +2,8 @@
   <?php 
   $tr = Application_Form_FrmLanguages::getCurrentlanguage();
   $ads = $this->adsDetail;
-  if (!empty($ads['author_photo'])){
-  	$image = $ads['author_photo'];
+  if (!empty($ads['logo_store'])){
+  	$image = "store/".$ads['logo_store'];
   }else{
   	$image = "profile.jpg";
   }
@@ -48,56 +48,71 @@
 					<div class="row">
 						<div class="col-md-8 col-sm-7">
 							<div class="item">
-		    				<div class="slide-content" style="max-width:100%;">
-					    		  <div class="blog-main-slide">
-					    		    <?php $images = explode(',', $ads['images']);
-									$k=0;
-								    foreach ($images as $i){$k++;
-								    ?>
-								    <img class="slides-detail" src="<?php echo $this->baseUrl()."/images/adsimg/".$i; ?>" >
-							       <?php }?>
-								  </div>
-								  <div class="thumnail-blog">
-								   
-								    <?php $images = explode(',', $ads['images']);
-									$k=0;
-								    foreach ($images as $i){$k++;
-								    ?>
-								     <div class="thumnail-image-slide">
-								      <img class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/".$i; ?>" style="width:100%" onclick="currentSlide(<?php echo $k;?>)">
-								    </div>
-								    <?php }?>
-								  </div>
-								   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-								  <a class="next" onclick="plusSlides(1)">&#10095;</a>
-								  <div class="item-price">
-									<span><?php echo '$ '.number_format($ads['price'],2);?></span>
+								<div class="item-info item-meta">
+									<div class="ad-title">
+										<h3><?php echo $ads['ads_title'];?></h3>
+									</div>
+									<div class="viewer">
+										<div class="item-post-date">
+											<span><i class="fa fa-calendar"></i><?php echo date("d-m-Y",strtotime($ads['date_modified']));?></span>
+											<span><i class="fa fa-eye"></i><?php echo $ads['viewer'];?> <?php echo $tr->translate("Views");?> </span> 
+										</div>
+										<div class="social-share">
+											<div class="fb-share-button" data-href="<?php echo $this->baseUrl()."/listads/detail/ads/".$ads['alias'].".html";?>" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2Fcam-adsproject%2Ftrunk%2Fpublic%2Flistads%2Fdetail%2Fads%2Fiphone-5s-64GB-for-sale-quality-99225&amp;src=sdkpreparse">Share</a></div>
+										</div>
+									</div>
+								</div><!-- item-info -->
+			    				<div class="slide-content" style="max-width:100%;">
+						    		  <div class="blog-main-slide">
+						    		    <?php $images = explode(',', $ads['images']);
+										$k=0;
+									    foreach ($images as $i){$k++;
+									    ?>
+									    <img class="slides-detail" src="<?php echo $this->baseUrl()."/images/adsimg/".$i; ?>" >
+								       <?php }?>
+									  </div>
+									  <div class="thumnail-blog">
+									   
+									    <?php $images = explode(',', $ads['images']);
+										$k=0;
+									    foreach ($images as $i){$k++;
+									    ?>
+									     <div class="thumnail-image-slide">
+									      <img class="images-thum" src="<?php echo $this->baseUrl()."/images/adsimg/".$i; ?>" style="width:100%" onclick="currentSlide(<?php echo $k;?>)">
+									    </div>
+									    <?php }?>
+									  </div>
+									   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+									  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+									  <div class="item-price">
+										<span><?php echo '$ '.number_format($ads['price'],2);?></span>
+									</div>
 								</div>
-							</div>
 								<div class="details-description">
-									<div class="item-info item-meta">
-										<div class="ad-title">
-											<h3><?php echo $ads['ads_title'];?></h3>
-										</div>
-										<div class="viewer">
-											<div class="item-post-date">
-												<span><i class="fa fa-eye"></i><?php echo $ads['viewer'];?> <?php echo $tr->translate("Views");?> </span> 
-												<span><i class="fa fa-calendar"></i><?php echo date("d-m-Y",strtotime($ads['date_modified']));?></span> 
-											</div>
-											<div class="social-share">
-												<div class="fb-share-button" data-href="<?php echo $this->baseUrl()."/listads/detail/ads/".$ads['alias'].".html";?>" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2Fcam-adsproject%2Ftrunk%2Fpublic%2Flistads%2Fdetail%2Fads%2Fiphone-5s-64GB-for-sale-quality-99225&amp;src=sdkpreparse">Share</a></div>
-											</div>
-										</div>
-									</div><!-- item-info -->
 									<div class="item-info">
 										<ul class="detail-ads">
+											<li><span class="field-title"><?php echo $tr->translate("Price");?></span> : <span class="field-value"><?php echo '$ '.number_format($ads['price'],2);?></span></li>
 											<?php if(!empty($this->rsattr))foreach ($this->rsattr as $attr){?>
 									 		<li><span class="field-title"><?php echo $attr['control_name'];?></span> : <span class="field-value"><?php echo $attr['control_value'];?></span></li>
 									 		<?php }?>
 									 	</ul>
 										<h4><?php echo $tr->translate("Description");?></h4>
-										<p><pre><?php echo $ads['description'];?></pre></p>
+										<pre><?php echo $ads['description'];?></pre>
 									</div><!-- item-info -->
+									<div class="item-info">
+										<h4><?php echo $tr->translate("Contacts");?></h4>
+										<ul class="detail-ads contact">
+									 		<li><span class="field-title"><?php echo $tr->translate("Contacts Name");?></span> : <span class="field-value"><?php echo $ads['contact_name'];?></span></li>
+									 		<li><span class="field-title"><?php echo $tr->translate("Phone");?></span> : <span class="field-value"><?php echo $ads['phone1']; if (!empty($ads['phone2'])){echo "/".$ads['phone2'];}?></span></li>
+									 		<li><span class="field-title"><?php echo $tr->translate("Location");?></span> : <span class="field-value"><?php echo empty($ads['district_name'])?'':$ads['district_name']." , "; echo empty($ads['commune_name'])?'':$ads['commune_name']." , "; echo $ads['province_name'];?></span></li>
+									 		<?php if (!empty($ads['address'])){?>
+									 		<li><span class="field-title"><?php echo $tr->translate("Address");?></span> : <span class="field-value"><?php echo $ads['address'];?></span></li>
+									 		<?php }?>
+									 	</ul>
+									</div>
+									<div class="box-contact">
+										<p><?php echo $tr->translate("Call to");?> <strong><?php echo $ads['phone1']; if (!empty($ads['phone2'])){echo "/".$ads['phone2'];}?></strong> for more information, don't forget to mention that you found this ad on Cam-App.com.</p>
+									</div>
 								</div>
 		    				</div><!-- item -->
 		    				<!--<div class="location-map">
@@ -155,7 +170,7 @@
 		    				</div>
 		    				<?php }?>
 						</div>
-						<div class="col-sm-5 col-md-4">
+						<div class="col-sm-5 col-md-4 detail-right">
 							<div class="side-bar">
 								<div class="item-author widget">
 									<h4><?php echo $tr->translate("Store Information");?></h4>
@@ -185,6 +200,12 @@
 												<p><a  href="<?php echo $this->baseUrl()."/store/index?store=".$ads['store_alias'].".html";?>"><?php echo $tr->translate("Visit Store");?></a></p>
 											</div>
 										</div>
+									</div>
+								</div>
+								<div class="safty widget">
+									<div class="safty">
+										<span class="title" style="border:none">សុវត្ថិភាពក្នុងការទិញទំនិញលើ cam-app.com៖</span>
+										<p style="margin-top:3px"><strong>រាល់ការទិញទំនិញមិនត្រូវធ្វើការផ្ញើប្រាក់ទៅមុនជាដាច់ខាត</strong> ត្រូវជួបអ្នកលក់នៅទីតាំងដែលមានសុវត្ថិភាព និងសូមពិនិត្យមើលទំនិញមុនពេលដែលបង់ប្រាក់។</p>
 									</div>
 								</div>
 								<div class="contact-seller widget">

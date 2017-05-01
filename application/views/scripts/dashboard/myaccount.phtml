@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <?php 	
+$session_lang=new Zend_Session_Namespace('lang');
+$currentlang = $session_lang->lang_id;
+
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 	$profile = $this->client_info;
 	if (!empty($profile['photo'])){
@@ -12,7 +15,8 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="UTF-8">
-	<title><?php echo $tr->translate("Dashboard Management");?></title>	
+	<title>Dashboard Management</title>	
+	
 	<script type='text/javascript' src="<?php echo $this->baseurl()."/js/jquery.min.js";?>"></script>
 	<link rel='stylesheet' id='boostrat-style-css'  href='<?php echo $this->baseUrl();?>/template/css/bootstrap.css' type='text/css' media='all' />
 	<link rel='stylesheet' id='awesomefont-style-css'  href='<?php echo $this->baseUrl();?>/template/css/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
@@ -46,7 +50,7 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'myaccount')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-user" aria-hidden="true"></i>
-										<?php echo $tr->translate("My Account");?>									
+										My Account									
 									</span>
 								</a>
 							</li>
@@ -54,7 +58,7 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'myads')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-cart-plus" aria-hidden="true"></i>
-										<?php echo $tr->translate("My Ads");?>									
+										My Ads									
 									</span>
 								</a>
 							</li>
@@ -62,7 +66,7 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'mystore')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-university" aria-hidden="true"></i>
-										 <?php echo $tr->translate("My Store");?>							
+										 My Store							
 									</span>
 								</a>
 							</li>
@@ -70,7 +74,7 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'mypage')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-bullhorn" aria-hidden="true"></i>
-										<?php echo $tr->translate("My Page");?>						
+										My Page						
 									</span>
 								</a>
 							</li>
@@ -78,7 +82,7 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'mypage')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-map-marker" aria-hidden="true"></i>
-										<?php echo $tr->translate("Contact Us");?>						
+										Contact Us					
 									</span>
 								</a>
 							</li>
@@ -87,7 +91,7 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'banner')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-picture-o" aria-hidden="true"></i>
-										 <?php echo $tr->translate("Manage Banner");?>							
+										 Manage Banner							
 									</span>
 								</a>
 							</li>
@@ -95,7 +99,7 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'policy')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-newspaper-o" aria-hidden="true"></i>
-										<?php echo $tr->translate("Policy");?>								
+										Policy								
 									</span>
 								</a>
 							</li>
@@ -103,7 +107,7 @@
 								<a href="<?php echo $this->url(array("module"=>'default','controller'=>'dashboard','action'=>'announce')); ?>">
 									<span class="dash-title">
 										<i class="fa fa-comment-o" aria-hidden="true"></i>
-										<?php echo $tr->translate("Anouncement");?>								
+										Anouncement								
 									</span>
 								</a>
 							</li>
@@ -119,30 +123,26 @@
 								<div class="data-info">
 									<div class="title">
 										<h4><?php echo $tr->translate("Account Information");?>
-										<span class="right" ><a class="button right" id="edit_account" title="<?php echo $tr->translate("EDIT");?>"><?php echo $tr->translate("EDIT");?></a>	</span>
 										</h4> 
+										<span class="right" ><a class="button right" id="edit_account" title="<?php echo $tr->translate("EDIT");?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><?php echo $tr->translate("EDIT");?></a></span>
 									</div>
-									<div class="row_data">
-										<div class="label_name"><label class="label"><?php echo $tr->translate("User Name");?> <span class="right">:</span> </label>	</div>
-										<div class="label_value"><label class="value" id="user_name_v"><?php echo $profile['user_name'];?></label></div>
-									</div>
-									<div class="row_data">
-										<div class="label_name"><label class="label"><?php echo $tr->translate("Email");?> <span class="right">:</span> </label></div>
-										<div class="label_value"><label class="value" id="email_v"><?php echo $profile['email'];?></label></div>
-									</div>
-									<div class="row_data">
-										<div class="label_name"><label class="label"><?php echo $tr->translate("Phone");?> <span class="right">:</span> </label>	</div>
-										<div class="label_value"><label class="value" id="phone_v"><?php echo $profile['phone'];?></label></div>
+									<div class="profile">
+										<ul class="profile list">
+											<li><span class="field-title"><?php echo $tr->translate("User Name");?></span> : <span class="field-value" id="user_name_v"><?php echo $profile['user_name'];?></span></li>
+											<li><span class="field-title"><?php echo $tr->translate("Email");?></span> : <span class="field-value" id="email_v"><?php echo $profile['email'];?></span></li>
+											<li><span class="field-title"><?php echo $tr->translate("Phone");?></span> : <span class="field-value" id="phone_v"><?php echo $profile['phone'];?></span></li>
+										</ul>
 									</div>
 									
-									<div class="title"><h4><?php echo $tr->translate("Additional Information");?> <span class="right" ><a class="button right" id="edit_additional" title="<?php echo $tr->translate("EDIT");?>"><?php echo $tr->translate("EDIT");?></a></span></h4></div>
-									<div class="row_data">
-										<div class="label_name"><label class="label"><?php echo $tr->translate("Address");?> <span class="right">:</span> </label>	</div>
-										<div class="label_value"><label class="value" id="address_v"><?php echo $profile['address'];?></label></div>
+									
+									<div class="title"><h4><?php echo $tr->translate("Additional Information");?> </h4>
+									<span class="right" ><a class="button right" id="edit_additional" title="<?php echo $tr->translate("EDIT");?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><?php echo $tr->translate("EDIT");?></a></span>
 									</div>
-									<div class="row_data">
-										<div class="label_name"><label class="label"><?php echo $tr->translate("Website");?> <span class="right">:</span> </label>	</div>
-										<div class="label_value"><label class="value" id="website_v"><?php echo $profile['website'];?></label></div>
+									<div class="profile">
+										<ul class="profile list">
+											<li><span class="field-title"><?php echo $tr->translate("Address");?></span> : <span class="field-value" id="address_v"><?php echo $profile['address'];?></span></li>
+											<li><span class="field-title"><?php echo $tr->translate("Website");?></span> : <span class="field-value" id="website_v"><?php echo $profile['website'];?></span></li>
+										</ul>
 									</div>
 								</div>
 								<div class="account-image">
@@ -152,7 +152,7 @@
 									<div class="button_browse">
 									<div id='preview'></div>	
 										<form id="image_upload_form" method="post" enctype="multipart/form-data" action='<?php echo $this->baseUrl();?>/dashboard/upload' utocomplete="off">
-											<span><?php echo $tr->translate("Upload");?> <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
+											<span>Upload <span ><i class="fa fa-camera" aria-hidden="true"></i></span></span>
 											<input class="btn_borwse_image" type="file" id="profile_image" name="profile_image"  onchange="loadFile(event)"/>
 										</form>
 									</div>
@@ -169,33 +169,33 @@
 	  <div class="pop-acc-info_content">
 	    <div class="pop-acc-info_header">
 	      <span id="close-acc-info" class="close">×</span>
-	      <h2>Edit Account Information</h2>
+	      <h2><?php echo $tr->translate("Edit Account Information");?></h2>
 	    </div>
 	    <div class="pop-acc-info_body">
 	     <form id="form-account-info" method="post">
      		<div class="form-row">
      			<div class="row_data">
 					<div>
-						<label>User Name <span class="sign_req">*</span></label>
+						<label><?php echo $tr->translate("User Name");?> <span class="sign_req">*</span></label>
 						<input type="text" placeholder="User Name"  name="user_name" id="user_name" value="<?php echo $profile['user_name'];?>" required="required" class="form-control custom" />
 					</div>
 				</div>
 				<div class="row_data">
 					<div>
-						<label>Email <span class="sign_req">*</span></label>
+						<label><?php echo $tr->translate("Email");?> <span class="sign_req">*</span></label>
 						<input type="text" placeholder="Email" readOnly="readOnly" name="email" id="email" value="<?php echo $profile['email'];?>"  required="required" class="form-control custom" />
 					</div>
 				</div>
 				<div class="row_data">
 					<div>
-						<label>Phone <span class="sign_req">*</span></label>
+						<label><?php echo $tr->translate("Phone");?> <span class="sign_req">*</span></label>
 						<input type="text" placeholder="Phone"  name="phone" id="phone" value="<?php echo $profile['phone'];?>" required="required" class="form-control custom" />
 					</div>
 				</div>
 			</div>
 	     </form>
 	     <div class="form-row botton">
-				<button class="loginBtn register" onclick="editAccountInfo();"> Submit</button>
+				<button class="loginBtn register" onclick="editAccountInfo();"> <?php echo $tr->translate("Submit");?></button>
 			</div>
 	    </div>
 	    <div class="popup_footer">
@@ -207,27 +207,27 @@
 	  <div class="pop-addtional_content">
 	    <div class="pop-addtional_header">
 	      <span id="close-pop-addtional" class="close">×</span>
-	      <h2>Edit Additional Information</h2>
+	      <h2><?php echo $tr->translate("Edit Additional Information");?></h2>
 	    </div>
 	    <div class="pop-addtional_body">
 	     <form id="form-pop-addtional" method="post">
      		<div class="form-row">
      			<div class="row_data">
 					<div>
-						<label>Address <span class="sign_req">*</span></label>
+						<label><?php echo $tr->translate("Address");?> <span class="sign_req">*</span></label>
 						<input type="text" placeholder="Address"  name="address" id="address" value="<?php echo $profile['address'];?>" required="required" class="form-control custom" />
 					</div>
 				</div>
 				<div class="row_data">
 					<div>
-						<label>Website <span class="sign_req">*</span></label>
+						<label><?php echo $tr->translate("Website");?> <span class="sign_req">*</span></label>
 						<input type="text" placeholder="Website" name="website" id="website" value="<?php echo $profile['website'];?>"  required="required" class="form-control custom" />
 					</div>
 				</div>
 			</div>
 	     </form>
 	     <div class="form-row botton">
-				<button class="loginBtn register" onclick="editAdditional();"> Submit</button>
+				<button class="loginBtn register" onclick="editAdditional();"> <?php echo $tr->translate("Submit");?></button>
 			</div>
 	    </div>
 	    <div class="popup_footer">
@@ -238,11 +238,24 @@
 	echo $this->render('sideright.phtml');
 	echo $this->render('frontbottom.phtml');
 ?>
-<script>
-	window.onload = function(e){ 
-		getBaseUrl('<?php echo $this->baseUrl();?>');
-	}
-</script>
+<script>		
+		<?php if ($currentlang==1){?>
+			var monthNames = [
+			                  "Jan", "Feb", "Mar",
+			                  "Apr", "May", "Jun", "Jul",
+			                  "Aug", "September", "Oct",
+			                  "Nov", "Dec"
+			                ];
+	      <?php }else{?>
+	      var monthNames = [
+		                  "មករា", "កុម្ភៈ", "មិនា",
+		                  "មេសា", "ឧសភា", "មិថុនា", "កក្កដា",
+		                  "សីហា", "កញ្ញា", "តុលា",
+		                  "វិច្ឆិការ", "ធ្នូ"
+		                ];
+	      <?php }?>
+	      var baseurl = '<?php echo $this->baseUrl();?>';
+	</script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.bxslider.mine.js'></script> <!--form search-->

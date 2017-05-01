@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <?php 	
+$session_lang=new Zend_Session_Namespace('lang');
+$currentlang = $session_lang->lang_id;
+
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 	$profile = $this->client_info;
 	if (!empty($profile['photo'])){
@@ -119,31 +122,27 @@
 							<div class="profile-info">
 								<div class="data-info">
 									<div class="title">
-										<h4>Account Information
-										<span class="right" ><a class="button right" id="edit_account" title="Edit">Edit</a>	</span>
+										<h4><?php echo $tr->translate("Account Information");?>
 										</h4> 
+										<span class="right" ><a class="button right" id="edit_account" title="<?php echo $tr->translate("EDIT");?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><?php echo $tr->translate("EDIT");?></a></span>
 									</div>
-									<div class="row_data">
-										<div class="label_name"><label class="label">User Name <span class="right">:</span> </label>	</div>
-										<div class="label_value"><label class="value" id="user_name_v"><?php echo $profile['user_name'];?></label></div>
-									</div>
-									<div class="row_data">
-										<div class="label_name"><label class="label">Email <span class="right">:</span> </label></div>
-										<div class="label_value"><label class="value" id="email_v"><?php echo $profile['email'];?></label></div>
-									</div>
-									<div class="row_data">
-										<div class="label_name"><label class="label">Phone <span class="right">:</span> </label>	</div>
-										<div class="label_value"><label class="value" id="phone_v"><?php echo $profile['phone'];?></label></div>
+									<div class="profile">
+										<ul class="profile list">
+											<li><span class="field-title"><?php echo $tr->translate("User Name");?></span> : <span class="field-value" id="user_name_v"><?php echo $profile['user_name'];?></span></li>
+											<li><span class="field-title"><?php echo $tr->translate("Email");?></span> : <span class="field-value" id="email_v"><?php echo $profile['email'];?></span></li>
+											<li><span class="field-title"><?php echo $tr->translate("Phone");?></span> : <span class="field-value" id="phone_v"><?php echo $profile['phone'];?></span></li>
+										</ul>
 									</div>
 									
-									<div class="title"><h4>Additional Information <span class="right" ><a class="button right" id="edit_additional" title="Edit">Edit</a></span></h4></div>
-									<div class="row_data">
-										<div class="label_name"><label class="label">Address <span class="right">:</span> </label>	</div>
-										<div class="label_value"><label class="value" id="address_v"><?php echo $profile['address'];?></label></div>
+									
+									<div class="title"><h4><?php echo $tr->translate("Additional Information");?> </h4>
+									<span class="right" ><a class="button right" id="edit_additional" title="<?php echo $tr->translate("EDIT");?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><?php echo $tr->translate("EDIT");?></a></span>
 									</div>
-									<div class="row_data">
-										<div class="label_name"><label class="label">Website <span class="right">:</span> </label>	</div>
-										<div class="label_value"><label class="value" id="website_v"><?php echo $profile['website'];?></label></div>
+									<div class="profile">
+										<ul class="profile list">
+											<li><span class="field-title"><?php echo $tr->translate("Address");?></span> : <span class="field-value" id="address_v"><?php echo $profile['address'];?></span></li>
+											<li><span class="field-title"><?php echo $tr->translate("Website");?></span> : <span class="field-value" id="website_v"><?php echo $profile['website'];?></span></li>
+										</ul>
 									</div>
 								</div>
 								<div class="account-image">
@@ -161,53 +160,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane" id="myAds">
-						<div class="title">
-						<div data-dismiss="alert" class="alert mar_b20 msg_err">Delete Error
-							<div class="close">
-							<span aria-hidden="true">×</span>
-							</div>
-						</div>
-						<h4>My Ads <span class="right" ><a class="button right" id="post-ads" title="Post Ads">Post Ads</a></h4></div>
-						<?php if(!empty($this->myads))foreach($this->myads as $key =>$rsad){?>
-						<div class="blog-wrapper">
-							<div class="ads-left">
-								<a class="ad-image box" href="#" title="Finance officer for hotel" >
-										<?php if (!empty($rsad['images'])){?>
-											<img src="<?php echo $this->baseUrl()."/images/adsimg/".$rsad['images']; ?>" alt=""  />
-										<?php }else{?>
-											<img src="<?php echo $this->baseUrl()."/images/noimagefound.jpg"; ?>" alt=""  />
-										<?php }?>
-								</a>
-							</div>
-							<div class="ads-description">
-								<div class="title-ads"><h4><a target="_blank" href="<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'detail','ads'=>$rsad['alias']));?>"><?php echo $rsad['ads_title'];?></a></h4></div>
-								<div class="categories-ads"><h5><a href="#"><?php echo $rsad['category_name']?></a></h5></div>
-								<div class="description-ads"><p href="#">
-								<?php
-									$str1 = utf8_encode($rsad['description']);
-									$description = substr($str1, 0, 600);
-									echo utf8_decode($description); 
-								?>
-								</p></div>
-								<div class="footer-ads">
-									<span><i class="fa fa-calendar" aria-hidden="true"></i></span>
-									<span class="value"><?php echo date("d, M Y",strtotime($rsad['publish_date']));?></span>
-									<span><i class="fa fa-eye" aria-hidden="true"></i> </span>
-									<span class="value"><?php echo $rsad['viewer']; ?> Views</span>
-								</div>
-							</div>
-							<div class="icon_menu-right">
-								<ul class="icon_menu">
-									<li class="delete_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'delete','adsid'=>$rsad['id']));?>" title="Delete" onclick="return confirm('<?php echo $tr->translate("Do you sure to delete this ads ?");?>');"><?php echo $tr->translate('DELETE');?></a></li>
-									<li class="edit_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'edit','adsid'=>$rsad['id']));?>" title="Edit"><?php echo $tr->translate('EDIT');?></a></li>
-									<li class="renew_icon"><a href="<?php echo $this->url(array('module'=>'default','controller'=>'dashboard','action'=>'renew','adsid'=>$rsad['id']));?>" title="Renew"><?php echo $tr->translate('RENEW');?></a></li>
-								</ul>
-							</div>
-						</div>
-						<?php }?>
-						
-					</div>
 				</div>
 			</div>
 		</div>
@@ -217,33 +169,33 @@
 	  <div class="pop-acc-info_content">
 	    <div class="pop-acc-info_header">
 	      <span id="close-acc-info" class="close">×</span>
-	      <h2>Edit Account Information</h2>
+	      <h2><?php echo $tr->translate("Edit Account Information");?></h2>
 	    </div>
 	    <div class="pop-acc-info_body">
 	     <form id="form-account-info" method="post">
      		<div class="form-row">
      			<div class="row_data">
 					<div>
-						<label>User Name <span class="sign_req">*</span></label>
+						<label><?php echo $tr->translate("User Name");?> <span class="sign_req">*</span></label>
 						<input type="text" placeholder="User Name"  name="user_name" id="user_name" value="<?php echo $profile['user_name'];?>" required="required" class="form-control custom" />
 					</div>
 				</div>
 				<div class="row_data">
 					<div>
-						<label>Email <span class="sign_req">*</span></label>
+						<label><?php echo $tr->translate("Email");?> <span class="sign_req">*</span></label>
 						<input type="text" placeholder="Email" readOnly="readOnly" name="email" id="email" value="<?php echo $profile['email'];?>"  required="required" class="form-control custom" />
 					</div>
 				</div>
 				<div class="row_data">
 					<div>
-						<label>Phone <span class="sign_req">*</span></label>
+						<label><?php echo $tr->translate("Phone");?> <span class="sign_req">*</span></label>
 						<input type="text" placeholder="Phone"  name="phone" id="phone" value="<?php echo $profile['phone'];?>" required="required" class="form-control custom" />
 					</div>
 				</div>
 			</div>
 	     </form>
 	     <div class="form-row botton">
-				<button class="loginBtn register" onclick="editAccountInfo();"> Submit</button>
+				<button class="loginBtn register" onclick="editAccountInfo();"> <?php echo $tr->translate("Submit");?></button>
 			</div>
 	    </div>
 	    <div class="popup_footer">
@@ -255,27 +207,27 @@
 	  <div class="pop-addtional_content">
 	    <div class="pop-addtional_header">
 	      <span id="close-pop-addtional" class="close">×</span>
-	      <h2>Edit Additional Information</h2>
+	      <h2><?php echo $tr->translate("Edit Additional Information");?></h2>
 	    </div>
 	    <div class="pop-addtional_body">
 	     <form id="form-pop-addtional" method="post">
      		<div class="form-row">
      			<div class="row_data">
 					<div>
-						<label>Address <span class="sign_req">*</span></label>
+						<label><?php echo $tr->translate("Address");?> <span class="sign_req">*</span></label>
 						<input type="text" placeholder="Address"  name="address" id="address" value="<?php echo $profile['address'];?>" required="required" class="form-control custom" />
 					</div>
 				</div>
 				<div class="row_data">
 					<div>
-						<label>Website <span class="sign_req">*</span></label>
+						<label><?php echo $tr->translate("Website");?> <span class="sign_req">*</span></label>
 						<input type="text" placeholder="Website" name="website" id="website" value="<?php echo $profile['website'];?>"  required="required" class="form-control custom" />
 					</div>
 				</div>
 			</div>
 	     </form>
 	     <div class="form-row botton">
-				<button class="loginBtn register" onclick="editAdditional();"> Submit</button>
+				<button class="loginBtn register" onclick="editAdditional();"> <?php echo $tr->translate("Submit");?></button>
 			</div>
 	    </div>
 	    <div class="popup_footer">
@@ -286,11 +238,24 @@
 	echo $this->render('sideright.phtml');
 	echo $this->render('frontbottom.phtml');
 ?>
-<script>
-	/*window.onload = function(e){ 
-		getBaseUrl('<?php echo $this->baseUrl();?>');
-	}*/
-</script>
+<script>		
+		<?php if ($currentlang==1){?>
+			var monthNames = [
+			                  "Jan", "Feb", "Mar",
+			                  "Apr", "May", "Jun", "Jul",
+			                  "Aug", "September", "Oct",
+			                  "Nov", "Dec"
+			                ];
+	      <?php }else{?>
+	      var monthNames = [
+		                  "មករា", "កុម្ភៈ", "មិនា",
+		                  "មេសា", "ឧសភា", "មិថុនា", "កក្កដា",
+		                  "សីហា", "កញ្ញា", "តុលា",
+		                  "វិច្ឆិការ", "ធ្នូ"
+		                ];
+	      <?php }?>
+	      var baseurl = '<?php echo $this->baseUrl();?>';
+	</script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/bootstrap.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
 	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/jquery.bxslider.mine.js'></script> <!--form search-->

@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <?php $menu_info = $this->menu_info; 
-
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 $db = new Application_Model_DbTable_DbGlobalselect();
 ?>
-<html lang="en">
+<html>
 <?php if ($menu_info['menu_type_id']==1){ //category blog?>
 <?php }else if ($menu_info['menu_type_id']==2){//category list
 	$article = $db->getArcticleByCate($menu_info['category_id']);
 	
 	
 ?>
+
     <div class="block-content-page">
+    	<div class="breadcrumb">
+			<div class="container">
+				<ul class="breadcrumb">
+				  <li><a href="<?php echo $this->baseUrl().""?>"><i class="fa fa-home"></i><?php echo $tr->translate("Home");?></a></li>
+				   <li><a href="<?php echo $this->baseUrl()."/page/index?param=".$menu_info['alias_menu'].".html";?>"><?php echo $menu_info['title_menu'];?></a></li>
+				  
+				</ul>
+			</div>
+		</div>
     	<div class="container clear">
         	<div class="row">
         	 <div class="col-sm-12 col-md-3 scrollspy">
@@ -24,7 +34,7 @@ $db = new Application_Model_DbTable_DbGlobalselect();
                         </ul>
                     </div>
                 </div>
-            	<div class="col-sm-12 col-md-9">
+            	<div class="col-sm-12 col-md-9 article-content">
             		<?php if (!empty($article)) foreach ($article as $ss){?>
                 	<!-- start div-->
                 	<div id="<?php echo $ss['alias_article'];?>">

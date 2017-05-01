@@ -141,6 +141,16 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 				"2"=>"province_kh_name"
 		);
 		$province = $province_field[$lang_id];
+		$district_field = array(
+				"1"=>"district_name",
+				"2"=>"district_namekh"
+		);
+		$district = $district_field[$lang_id];
+		$commune_field = array(
+				"1"=>"commune_name",
+				"2"=>"commune_namekh"
+		);
+		$commune = $commune_field[$lang_id];
 		$this->_name='vd_ads';
 		$sql="SELECT ads.*,
 			(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = ads.`user_id` LIMIT 1) AS author,
@@ -152,10 +162,13 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 			(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$lang_id LIMIT 1)  AS parent_category_name,
 			(select parent.alias_category from vd_category as parent  where parent.id = cat.`parent` LIMIT 1 ) AS parent_alias_category,
 			(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name,
+			(SELECT $district FROM `ln_district` WHERE dis_id=ads.district_id LIMIT 1) as district_name,
+			(SELECT $commune FROM `ln_commune` WHERE com_id=ads.commune_id) AS commune_name,
 			(SELECT cs.alias_store FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_alias,
 			(SELECT cs.store_address FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_address,
 			(SELECT cs.store_phone FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_phone,
-			(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_title
+			(SELECT cs.store_title FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS store_title,
+			(SELECT cs.logo_store FROM `vd_client_store` AS cs WHERE cs.id = ads.store_id LIMIT 1 ) AS logo_store
  		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.`alias`='$alias' LIMIT 1";
 		return $db->fetchRow($sql); 
 	}
@@ -488,7 +501,8 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 	}
 	function getMenuItemsByAlias($alias){ //  for Controler page index
 		$db = $this->getAdapter();
-		$sql="SELECT * FROM `vd_menu` AS m WHERE m.`alias_menu`='$alias' limit 1";
+		$lang_id = $this->getCurrentLang();
+		$sql="SELECT *,(SELECT vd.title FROM `vd_menu_detail` AS vd WHERE vd.menu_id=m.`id` AND vd.languageId=$lang_id LIMIT 1) AS title_menu FROM `vd_menu` AS m WHERE m.`alias_menu`='$alias' limit 1";
 		return $db->fetchRow($sql);
 	}
 	function getArcticleByCate($cateId){ //  for Controler page index
