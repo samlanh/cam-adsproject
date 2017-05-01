@@ -95,7 +95,6 @@ input:focus, textarea:focus, select:focus, .form-control:focus {
 .title {
 	line-height: 34px;
 	color: #ffffff;
-	font-family: 'Ubuntu', sans-serif;
 	font-weight: 700;
 }
 
@@ -1709,15 +1708,26 @@ transition: all 0.5s ease-in-out;
 
 .ad-details .ad-title h3 {
     margin-top: 5px;
-    color: #063863;
-    font-size: 24px;
+    color: #4692de;
+    font-size: 20px;
     font-weight: 600;
+    background: #f4f4f4;
+    padding: 10px;
 }
 
 .details-description {
 	background-color: #fff;
 	padding:30px;
 }
+.ad-details .item-info ul.detail-ads.contact li {
+    display: block;
+}
+ul.detail-ads li span.field-title,
+ul.detail-ads.contact li span.field-title {
+    min-width: 180px;
+    display: inline-block;
+}
+
 ul.detail-ads li span.field-title {
     color: #4282d4;
       /* border-bottom: solid 1px #4183d7;*/
@@ -1730,15 +1740,26 @@ ul.detail-ads li span.field-value {
     margin-top: 5px;
 }
 .details-description h4 {
-	color: #4692de;
+    color: #333;
     font-weight: 600;
-    display: initial;
+    display: block;
     margin: 0;
     margin-bottom: 10px;
-    /* text-transform: uppercase; 
-    border-bottom: solid 1px #4282d4;*/
+    padding: 10px 0;
+    border-bottom: solid 1px #ccc;
 }
-
+.box-contact {
+    border: solid 1px #4183d7;
+    padding: 10px;
+    background: rgba(65, 131, 215, 0.1);
+}
+.box-contact p {
+    margin: 0;
+}
+.ad-details .item-info pre {
+    line-height: 22px;
+    font-size: 16px;
+}
 .ad-details .item-info {
 	position: relative;
 	overflow: hidden;
@@ -1787,7 +1808,7 @@ ul.detail-ads li span.field-value {
 	margin-bottom: 10px;
 	/* padding-left: 20px; */
 	position: relative;
-	display: inline-block;
+	display: block;
 	padding-right: 10px;
 	list-style-type: none;
 }
@@ -1824,12 +1845,33 @@ ul.detail-ads li span.field-value {
 	height: 350px;
 	width: 100%;
 }
-
+.detail-right{
+	background-color: #f4f4f4;
+}
+.side-bar .safty.widget {
+    background-color: #ecf3fb;
+    border: 1px solid #4183d7;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+/*.side-bar .safty.widget {
+    background-color: #FFFBF6;
+    border: 1px solid #fcd8c1;
+    border-radius: 5px;
+    padding: 10px 15px;
+}*/
+.safty span.title {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 4px;
+	color:#4183d7;
+   /* color: #FF3500;*/
+}
 .side-bar .widget {
-	background-color: #fff;
+	background-color: #f4f4f4;
 	padding: 25px;
 	overflow: hidden;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 }
 
 .side-bar h4{
@@ -1845,9 +1887,12 @@ ul.detail-ads li span.field-value {
 .item-author .seller-image {
 	margin-bottom: 0px;
 }
+
 .seller-image img {
     border: solid 1px #999;
     border-radius: 50%;
+	    width: 150px;
+    height: 120px;
 }
 .side-bar .btn.btn-primary {
 	width:100%;

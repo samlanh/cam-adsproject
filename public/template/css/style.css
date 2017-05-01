@@ -992,6 +992,7 @@ span.regis-guid a:before {
 	.conten-body-center.right{
 		width:80%;
 		float:right;
+		min-height: 510px;
 	}
 	.conten-body-center.left{
 		width:80%;
@@ -1164,6 +1165,29 @@ ul.tabs.horizontal li.active a {
 		}
 	/*------End My ads list Dashboard page--------------------*/
 /*------End Dashboard page--------------------*/
+ul.profile.list {
+    padding-left: 15px;
+}
+ul.profile.list li {
+    display: block;
+    overflow: hidden;
+    margin: 10px 0;
+    margin-bottom: 10px;
+    position: relative;
+    display: block;
+    padding-right: 10px;
+    list-style-type: none;
+}
+li span.field-title {
+    min-width: 180px;
+    display: inline-block;
+    color: #4282d4;
+    font-weight: 600;
+}
+li span.field-value {
+    font-weight: 500;
+    margin-left: 30px;
+}
 .row_data {
     padding: 10px;
 }
@@ -1244,13 +1268,21 @@ input.btn_borwse_image {
     opacity: 0;
     cursor: pointer;
 }
+.data-info div.title {
+    background: #f4f4f4;
+    color: #4692de;
+    border-bottom: solid 1px #ccc;
+    margin: 10px 0 15px;
+	padding: 0;
+}
 .profile-info .data-info div.title h4 {
-	border-bottom: solid #294d7a 1px;
+	padding: 10px;
+    display: inline-block;
 }
 a.button {
     vertical-align: top;
     display: block;
-    padding: 5px 10px;
+    padding: 10px;
     text-align: center;
     color: #ffffff;
     background: rgba(249, 246, 246, 0.6);
@@ -1258,6 +1290,11 @@ a.button {
     font-size: 16px;
     cursor: pointer;
     background: #4183d7;
+}
+a.button:hover {
+    background: #ddd;
+    border: solid 1px #ccc;
+    color: #888;
 }
 a.button i {
     padding-right: 5px;
@@ -1317,8 +1354,8 @@ a.button i {
 .pop-addtional_header,
 .pop-acc-info_header{
 	padding: 10px 16px;
-	background-color: #F9F9F6;
-	color: #605f5f;
+	background-color: #555;
+    color: #ffffff;
 	vertical-align: top;
 	border-bottom: solid 1px #ccc;
 }
@@ -1783,7 +1820,7 @@ img.slides-detail {
 }
 .ad-details .item .viewer .item-post-date {
     display: inline-block;
-	color: #999;
+	color: #333;
 }
 .ad-details .item .ad-title {
     background: none;
@@ -1805,6 +1842,17 @@ img.slides-detail {
 }
 
 /*--pages---*/
+.block-content-page .breadcrumb {
+    background: none;
+    margin: 0;
+}
+.block-content-page .breadcrumb li a i {
+    padding-right: 5px;
+}
+.article-content{
+	    padding: 10px;
+    border: solid 2px #ccc;
+}
 .block-content-page {
     padding: 10px 0;
 }
@@ -1813,21 +1861,24 @@ img.slides-detail {
     top: 0;
     display: block;
     width: 270px;
+	z-index: 1;
 }
 .nav-left ul li {
-    border-bottom: solid 1px #4a66b6;
+    /* border-bottom: solid 1px #4a66b6; */
 }
 .nav-left ul li.active {
     background: #fff;
 }
 .nav-left ul li a{
-	padding:10px 0;
+	padding: 10px 15px;
+	border: 1px solid #ddd;
+	background: #fff;
 }
 .nav-left ul li a.active ,
 .nav-left ul li a:focus ,
 .nav-left ul li a:hover {
-    background: none;
-    color: #e2a736;
+    background: #4183d7;
+    color: #ffffff;
 }
 div.title-blog {
     text-align: center;
@@ -1837,8 +1888,8 @@ div.title-blog {
     margin: 0;
     font-size: 20px;
     font-weight: bold;
-    border-bottom: solid 1px #4a66b6;
-    color: #4183d7;
+    /*border-bottom: solid 1px #4a66b6;*/
+    color: #333;
     display: initial;
 }
 div.blog-content {
