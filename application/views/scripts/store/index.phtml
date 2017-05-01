@@ -12,7 +12,7 @@
 ?>	
 <?php if ($store['template_id']==1){ //check template?>
 	<?php if ($page[0]=="contacts-us"){?>
-	<title><?php echo "Contact | Store ".$store['alias_store'];?></title>
+	<title><?php echo "Contact | Store ".$store['store_title'];?></title>
 	  <div id="content-block">
 	  		<div class="content-center fixed-header-margin">
             <div class="content-push">
@@ -45,7 +45,7 @@
 	  </div>
 	  <?php }else if($page[0]=="about-us"){?>
 	<?php }else{?>
-	<title>Store | <?php echo $store['alias_store'];?></title>
+	<title>Store | <?php echo $store['store_title'];?></title>
     <div id="content-block">
         <div class="content-center ">
             <div class="content-push">

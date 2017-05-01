@@ -19,7 +19,10 @@ if(empty($sess_search)){
 	$request=Zend_Controller_Front::getInstance()->getRequest()->getParam("cateid");
 	$db = new Application_Model_DbTable_DbGlobalselect();
 	$maincatealia = $db->getCategoryInfo($request);
-	$parent_alia = $maincatealia['parent_alias_category'];
+	$parent_alia = $maincatealia['parent_alias_category']; 
+	
+	$session_lang=new Zend_Session_Namespace('lang');
+	$currentlang = $session_lang->lang_id;
 ?>
 <head>
 <meta charset="UTF-8">
@@ -243,7 +246,7 @@ if(empty($sess_search)){
 				}
 			});
 		}
-		<?php if ($lang==1){?>
+		<?php if ($currentlang==1){?>
 			var monthNames = [
 			                  "Jan", "Feb", "Mar",
 			                  "Apr", "May", "Jun", "Jul",
