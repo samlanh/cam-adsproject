@@ -358,7 +358,7 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 		(SELECT title FROM `vd_category_detail` WHERE category_id= ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
 		(SELECT catd.title FROM `vd_category_detail` AS catd WHERE catd.category_id = cat.`parent`  AND catd.languageId =$lang_id LIMIT 1)  AS parent_category_name,
 		(SELECT $province FROM `vd_province` WHERE id= ads.province_id ) as province_name
-		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.`user_id`=$client AND ads.`store_id`=$store_id AND ads.`category_id`=$category AND ads.id < $adsid  LIMIT 10";
+		FROM $this->_name AS ads, `vd_category` AS cat  WHERE cat.`id` = ads.`category_id` AND ads.`store_id`=$store_id AND ads.`category_id`=$category AND ads.id < $adsid  LIMIT 10";
 		return $db->fetchAll($sql);
 	}
 	

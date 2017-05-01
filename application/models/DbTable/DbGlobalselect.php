@@ -416,7 +416,7 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 							$str1 = utf8_encode($rs['description']);
 							$description = substr($str1, 0, 600);
 							 utf8_decode($description); 
-					$str.= $description.'</p>
+					$str.= utf8_decode($description).'</p>
 							<ul>
 							   <li >'.$rs['category_name'].'</li>'.$list.'
 							    <li class="province">'.$rs['province_name'].'</li>
