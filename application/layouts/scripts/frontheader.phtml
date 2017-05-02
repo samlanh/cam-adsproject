@@ -17,6 +17,7 @@ if(empty($sess_search)){
 	$location_search = $this->search['location_search'];
 }
 	$request=Zend_Controller_Front::getInstance()->getRequest()->getParam("cateid");
+	$request = str_replace( '.html', '', $request);
 	$db = new Application_Model_DbTable_DbGlobalselect();
 	$maincatealia = $db->getCategoryInfo($request);
 	$parent_alia = $maincatealia['parent_alias_category']; 
@@ -206,7 +207,7 @@ if(empty($sess_search)){
 										<ul class="menu-list-cate"><!-- open 1 -->
 								<?php }
  								}?>
-									<li class="menu-list-cate"><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$rs['alias_category'].".html";?>"><?php echo $rs['name'];?></a></li>
+									<li class="menu-list-cate <?php if($rs['alias_category']==$request){echo "active";}?>" ><a href="<?php echo $this->baseUrl()."/listads/index/cateid/".$rs['alias_category'].".html";?>"><?php echo $rs['name'];?></a></li>
 								<?php 
 								$parent=$rs['parent'];
 								}//end loop
