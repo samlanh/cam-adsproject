@@ -1,0 +1,17 @@
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+echo $this->headTitle($tr->translate("ARTICLE"));
+$frm = $this->frm;
+$url_delete =$this->url(array('module'=>'menu-manager','controller'=>'article','action'=>'delete'));
+?>
+<script>
+	dojo.require("dijit.form.DateTextBox");
+</script>
+<?php echo $this->list;?>
+<script type="text/javascript">
+	dojo.require("dijit.form.CheckBox"); 
+	dojo.require("dijit.form.NumberTextBox");
+	dojo.require("dijit.form.Textarea");
+	dojo.require("dijit.form.DateTextBox");
+	dojo.require("dijit.Dialog");
+</script> 

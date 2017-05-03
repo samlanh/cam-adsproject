@@ -25,19 +25,34 @@ dojo.require("dijit.form.DateTextbox");
 								<table width="100%" cellspacing="10">
 									<tr>
 										<td><?php echo $tr->translate("Store Name")?></td>
-										<td><input dojoType="dijit.form.TextBox" id="store_name" name="store_name" value="" type="text" class='fullside'></td>
+										<td><input dojoType="dijit.form.ValidationTextBox" required="1" id="store_name" name="store_name" value="" type="text" class='fullside'></td>
 										<td><?php echo $tr->translate("Client");?></td>
-									    <td><input dojoType="dijit.form.TextBox" id="client" name="client" value="" type="text" class='fullside'></td>
+									    <td>
+									    	<select dojoType="dijit.form.FilteringSelect" id="client" name="client" class='fullside'>
+									    		<?php if(!empty($this->rsclient))foreach($this->rsclient as $client){?>
+									    		<option value="<?php echo $client['id'];?>"><?php echo $client['customer_name'];?></option>
+									    		<?php }?>
+									    	</select>
 										<td><?php echo $tr->translate("Logo")?></td>
 										<td><input type="file" name="logo" id="logo" /></td>
 									</tr>
 									<tr>
 										<td><?php echo $tr->translate("Template Name")?></td>
-										<td><input dojoType="dijit.form.TextBox" id="template_id" name="template_id" value="" type="text" class='fullside'></td>
+										<td>
+											<select dojoType="dijit.form.FilteringSelect" id="template_id" name="template_id" class='fullside'>
+									    		<?php if(!empty($this->rstemp))foreach($this->rstemp as $rstemp){?>
+									    		<option value="<?php echo $rstemp['id'];?>"><?php echo $rstemp['template_title'];?></option>
+									    		<?php }?>
+									    	</select>
 										<td><?php echo $tr->translate("Store Phone")?></td>
-										<td><input dojoType="dijit.form.TextBox" id="client_id" name="client_id" value="" type="text" class='fullside'></td>
+										<td><input dojoType="dijit.form.TextBox" id="store_phone" name="store_phone" value="" type="text" class='fullside'></td>
 										<td><?php echo $tr->translate("Industry Type");?></td>
-									    <td><input dojoType="dijit.form.TextBox" id="store_industry_type" name="store_industry_type" value="" type="text" class='fullside'></td>
+									    <td>
+									    	<select dojoType="dijit.form.FilteringSelect" id="store_industry_type" name="store_industry_type" class='fullside'>
+									    		<?php if(!empty($this->rsindustry))foreach($this->rsindustry as $rsindustry){?>
+									    		<option value="<?php echo $rsindustry['id'];?>"><?php echo $rsindustry['title'];?></option>
+									    		<?php }?>
+									    	</select>
 									</tr>
 									<tr>
 										<td><?php echo $tr->translate("Banner Detail")?></td>
@@ -50,20 +65,21 @@ dojo.require("dijit.form.DateTextbox");
 									<tr>
 										<td><?php echo $tr->translate("Font Color")?></td>
 										<td><input dojoType="dijit.form.TextBox" id="font_color" name="font_color" value="" type="text" class='fullside'></td>
-										<td><?php echo $tr->translate("Store Phone")?></td>
-										<td><input dojoType="dijit.form.TextBox" id="store_phone" name="store_phone" value="" type="text" class='fullside'></td>
+										<td><?php echo $tr->translate("Social Media")?></td>
+										<td><input dojoType="dijit.form.TextBox" id="social_media" name="social_media" value="" type="text" class='fullside'>
+										</td>
 										<td><?php echo $tr->translate("Email Store");?></td>
 									    <td><input dojoType="dijit.form.TextBox" id="store_email" name="store_email" value="" type="text" class='fullside'></td>
 									</tr>
 									<tr>
 										<td><?php echo $tr->translate("Address")?></td>
 										<td colspan="5">
-											<textarea class='fullside' dojoType="dijit.form.Textarea" style='width:100%;min-height:100px; font-size:18px; font-family:"Kh Battambang"' ></textarea>
+											<textarea class='fullside' name="address" id="address" dojoType="dijit.form.Textarea" style='width:100%;min-height:100px; font-size:18px; font-family:"Kh Battambang"' ></textarea>
 										</td>
 									</tr>
 									<tr>
 										<td><?php echo $tr->translate("About")?></td>
-										<td colspan="5"><textarea rows="4" cols="4" dojoType="dijit.form.Textarea" style='width:100%;min-height:100px; font-size:18px; font-family:"Kh Battambang"'></textarea></td>
+										<td colspan="5"><textarea rows="4" name="about" id="about" cols="4" dojoType="dijit.form.Textarea" style='width:100%;min-height:100px; font-size:18px; font-family:"Kh Battambang"'></textarea></td>
 									</tr>
 									<tr>
 										<td colspan="6" align="center">

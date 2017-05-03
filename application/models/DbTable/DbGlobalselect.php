@@ -671,5 +671,19 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 		$rows=$db->fetchAll($sql);
 		return $rows;
 	}
+	function getAllClient(){
+		$db = $this->getAdapter();
+		$this->_name='vd_client';
+		$sql = "SELECT * FROM $this->_name AS c WHERE c.`status`=1 AND customer_name!='' ";
+		$rows=$db->fetchAll($sql);
+		return $rows;
+	}
+	function getIndustryType(){
+		$db = $this->getAdapter();
+		$this->_name='vd_industrytype';
+		$sql = "SELECT * FROM $this->_name WHERE `status`=1 AND title!='' ";
+		return $db->fetchAll($sql);
+	}
+	
 }
 ?>

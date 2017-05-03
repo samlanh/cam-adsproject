@@ -8,44 +8,37 @@ class MenuManager_StoreController extends Zend_Controller_Action {
 	}
 	private $sex=array(1=>'M',2=>'F');
 	public function indexAction(){
-		try{
-			$db = new MenuManager_Model_DbTable_Dbads();
+			$db = new MenuManager_Model_DbTable_Dbstore();
 			if($this->getRequest()->isPost()){
-				$data = $this->getRequest()->getPost();
-			}else{
-				$data = array(
-						'advance_search'=>'',
-						'province'=>-1,
-						'category_search'=>-1,
-						'province_id'=>-1,
-						'district'=>-1,
-						'commune'=>-1,
-						'status_used'=>-1,
-						'start_date'=>date("Y-m-d"),
-						'end_date'=>date("Y-m-d"),
-						
-				);
+				$formdata=$this->getRequest()->getPost();
 			}
-			$this->view->search= $data;
-			$this->view->rsads= $db->getAllAds($data);
+			else{
+				$search = array(
+						'branch_id'=>-1,
+						'adv_search' => '',
+						'status' => -1,
+						'show_all'=>'',
+						'start_date'=> date('Y-m-d'),
+						'customer_id'=>-1,
+						'end_date'=>date('Y-m-d'));
+			}
 			
-// 			$db = new Application_Model_DbTable_DbGlobalselect();
-// 			$this->view->rsads = $db->getAllAdvanceSearch($data);
-			
-			$dbg = new Application_Model_DbTable_DbVdGlobal();
-			$this->view->rscate = $dbg->getCategory();
-			
-			$dbl = new Application_Model_DbTable_DbGlobalselect();
-			$this->view->rslocation =$dbl->getAllLocation();
-			
-		}catch (Exception $e){
-			Application_Form_FrmMessage::message("Application Error");
-			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
-		}	
-		$frm = new MenuManager_Form_FrmMenu();
-		$frm_manager=$frm->FrmMenuManager();
-		Application_Model_Decorator::removeAllDecorator($frm_manager);
-		$this->view->frm = $frm_manager;
+			$rs_rows= $db->getAllStore($search);
+			$list = new Application_Form_Frmtable();
+			$collumns = array("Store Name","Customer Name","Socail","Email","Phone","Date","Status");
+			$link1 = array('module'=>'menu-manager','controller'=>'store','action'=>'edit',);
+			$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('store_title'=>$link1,'store_phone'=>$link1,'social_media'=>$link1,'name_kh'=>$link1,'name_en'=>$link1));
+	
+// 		$frm = new Application_Form_FrmAdvanceSearch();
+// 		$frm = $frm->AdvanceSearch();
+// 		Application_Model_Decorator::removeAllDecorator($frm);
+// 		$this->view->frm_search = $frm;
+		
+// 		$fm = new Group_Form_FrmClient();
+// 		$frm = $fm->FrmAddClient();
+// 		Application_Model_Decorator::removeAllDecorator($frm);
+// 		$this->view->frm_client = $frm;
+		
   }
   
   public function addAction(){
@@ -53,7 +46,17 @@ class MenuManager_StoreController extends Zend_Controller_Action {
   		$data = $this->getRequest()->getPost();
   		$db = new MenuManager_Model_DbTable_Dbstore();
   		$db->addNewstore($data);
+  		if(!empty($data['save_close'])){
+  			Application_Form_FrmMessage::Sucessfull("INSERT_SUCESS","/menu-manager/store");
+  		}else{
+  			Application_Form_FrmMessage::Sucessfull("INSERT_SUCESS","/menu-manager/store/add");
+  		}
   	}
+  	$db = new Application_Model_DbTable_DbGlobalselect();
+  	
+  	$this->view->rsclient = $db->getAllClient();
+  	$this->view->rstemp = $db->getAlltemplate();
+  	$this->view->rsindustry = $db->getIndustryType();
   }
   public function editAction(){
 //   	$id = $this->getRequest()->getParam('id');
