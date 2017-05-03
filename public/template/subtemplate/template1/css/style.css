@@ -679,7 +679,7 @@ header .line-entry{white-space: nowrap;}
 .product-sidebar .block-title{font-size: 18px;}
 .product-sidebar .inline-product-entry:last-child{border-bottom: none;}
 .production-logo{text-align: center; margin-bottom: 30px; padding-bottom: 15px;}
-.production-logo .background{background: #fafafa; margin-bottom: 15px;     padding: 10px 25px;}
+.production-logo .background{margin-bottom: 15px;     padding: 10px 25px;}
 .production-logo .logo{padding-bottom: 15px; border-bottom: 2px #e6e6e6 solid; margin-bottom: 12px;}
 .production-logo .logo img{max-width: 100%; height: auto; display: inline-block;}
 .production-logo a{font-size: 12px; line-height: 14px; color: #ca1515; font-weight: 600;}
@@ -964,4 +964,6 @@ h2.logo_charecter.footer {
     background: none;
     overflow: hidden;
 	white-space: pre-wrap;
+}.product-zoom-image {
+    border: solid 1px #eee;
 }
