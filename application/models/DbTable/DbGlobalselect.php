@@ -242,8 +242,15 @@ class Application_Model_DbTable_DbGlobalselect extends Zend_Db_Table_Abstract
 			$s_where[] = " street LIKE '%{$s_search}%'";
  			$where .=' AND ('.implode(' OR ',$s_where).')';
 		}*/
+		
 		if($search['category_search']>-1){
-			$sql.= " AND ad.category_id = ".$search['category_search'];
+			$category_id = $search['category_search'];
+			$parent = $this->checkCateparent($category_id);
+			if ($parent['parent']==0){
+				$sql.=" AND (ad.category_id=$category_id OR (SELECT c.`parent` FROM `vd_category` AS c WHERE c.`id` = ad.category_id LIMIT 1)  = $category_id)";
+			}else{
+				$sql.= " AND ad.category_id = ".$category_id;
+			}
 		}
 		if($search['location_search']>-1){
 			$sql.= " AND ad.province_id = ".$search['location_search'];
