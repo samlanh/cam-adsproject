@@ -1063,6 +1063,8 @@ ul.tabs.horizontal li.active a {
 			margin: 0;
 			font-weight: bold;
 			padding-bottom: 10px;
+			display: inline-block;
+			padding: 10px;	
 		}
 		div.title-ads h4 a {
 			color: #1870e0;

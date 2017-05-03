@@ -1,0 +1,123 @@
+.chosen-container {
+	background: #fff none no-repeat;
+	border-radius: 0px;
+	border: 1px solid #e7ecf0;
+	min-width: 200px !important;
+	margin-right:10px;
+}
+
+.chosen-container-single .chosen-single, .chosen-with-drop.chosen-with-drop .chosen-single, .chosen-container-active.chosen-with-drop.chosen-with-drop .chosen-single {
+	border-radius: 0px;
+	border-color: transparent;
+	line-height: 36px;
+	border-width: 0px;
+	color: #999;
+	background: #f7f8fc none no-repeat;
+}
+
+.chosen-container-single .chosen-single, .chosen-with-drop.chosen-with-drop .chosen-single, .chosen-container-active.chosen-with-drop.chosen-with-drop .chosen-single {
+	color: #999;
+}
+
+.chosen-container-single .chosen-single div, .chosen-container-active.chosen-with-drop .chosen-single div {
+	    background: #eee;
+    top: 0 !important;
+}
+.chosen-container .chosen-drop{
+	background:#fff !important;
+	border-radius:0px;
+}
+.chosen-container-active.chosen-with-drop .chosen-single div b {
+	background-position: -14px 5px;
+}
+
+.chosen-container .chosen-drop {
+	background-color: #f7f8fc;
+	border-width: 0px;
+}
+ .chosen-container {
+    width: 100% !important;
+	background: none;
+	text-align: left;
+	border-left: 1px solid #e1e1e1;
+	border:1px solid #6f93c7;
+	/*box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .075);*/
+	margin-left: 4px;
+}
+.chosen-container-single .chosen-single {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 0 0 0 8px;
+    height: 35px;
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: #ffcbcb;
+    background: none !important;
+    background-clip: padding-box;
+    box-shadow: none !important;
+    color: #444;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 24px;
+}
+
+.chosen-container-single .chosen-single {
+    line-height: 35px;
+    color: #999;
+}
+.chosen-container-active.chosen-with-drop .chosen-single div b {
+	background-position: -14px 5px;
+}
+.chosen-container-single .chosen-single div b:after {
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\f0d7";
+    position: absolute;
+    top: 56%;
+    left: 56%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    color: #333;
+    font-size: 11px;
+}
+body.style-12.loaded {
+    min-width: 1200px;
+}
+.controls {
+    display: inline-block;
+	vertical-align: top;
+}
+.controls.form {
+    width: 260px;
+    margin-right: 10px;
+}
+.controls.form input[type="text"] {
+    background-color: #fff;
+    border-left: 0px;
+    height: 37px;
+    padding: 5px 10px;
+    border: solid 1px #6f93c7;
+}
+.views-submit-button button {
+    border-radius: 0;
+}
+.views-submit-button button span i {
+    padding-left: 5px;
+}
+.main-header-store {
+    padding: 15px;
+}
+.blog-main-logo a img {
+    margin-bottom: 10px;
+    width: 175px;
+}
+.border-header {
+    border: solid 2px #063863;
+}

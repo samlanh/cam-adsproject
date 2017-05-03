@@ -68,7 +68,7 @@ $(function() {
 	/*==============================*/
 	/* 05 - function on page resize */
 	/*==============================*/
-	function resizeCall(){
+	/*function resizeCall(){
 		pageCalculations();
 
 		$('.navigation:not(.disable-animation)').addClass('disable-animation');
@@ -94,7 +94,7 @@ $(function() {
 		window.addEventListener("orientationchange", function() {
 			resizeCall();
 		}, false);
-	}
+	}*/
 
 	/*==============================*/
 	/* 06 - function on page scroll */

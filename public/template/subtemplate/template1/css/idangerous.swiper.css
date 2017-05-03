@@ -29,6 +29,9 @@ Basic Swiper Styles
 	z-index:1;
 	height: auto!important;
 }
+.navigation-banner-swiper .swiper-wrapper{
+	height: 350px !important;
+}
 .swiper-wrapper {
 	position:relative;
 	width:100%;
@@ -62,9 +65,8 @@ Basic Swiper Styles
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 
-	cursor:url(../img/drag.png) 16 9, ew-resize!important;
 	margin: 0 auto;
-	height: 350px !important;
+	height: auto !important;
 	float: left;
 }
 .pagination-hidden .swiper-wrapper{
