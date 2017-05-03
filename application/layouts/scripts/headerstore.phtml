@@ -33,6 +33,8 @@ if(empty($sess_search)){
 	}else{
 	
 	}
+	$client_session=new Zend_Session_Namespace('client');
+	$clentid = $client_session->client_id;
 ?>
 <html>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -40,6 +42,35 @@ if(empty($sess_search)){
 <link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
 <link rel='stylesheet'  href='<?php echo $this->baseUrl();?>/template/css/headerstore.css' type='text/css' media='all' />
 </head>
+	<div class="widget block block-static-block">
+    	<div class="float-bar hidden-xs hidden-sm hidden-md">
+			<div class="float-bar-content">
+				<ul class="items">
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/postsads/choose-category"><span class="fa fa-plus-square">&nbsp;</span><span><?php echo $tr->translate("Posts Ads");?></span></a></li>
+					<?php if (empty($clentid)){?>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/login"><span class="fa fa-sign-in">&nbsp;</span><span><?php echo $tr->translate("Login");?></span></a></li>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/register"><span class="fa fa-user">&nbsp;</span><span><?php echo $tr->translate("Register");?></span></a></li>
+					<?php }else{?>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/index/logoutclient/value/1"><span class="fa fa-sign-out">&nbsp;</span><span><?php echo $tr->translate("Logout");?></span></a></li>
+					<li class="item"><a href="<?php echo $this->baseUrl();?>/dashboard"><span class="fa fa-user">&nbsp;</span><span><?php echo $tr->translate("My Account");?></span></a></li>
+					
+					<?php }?>
+					<li class="item">
+					<?php if (!empty($lang)) foreach ($lang as $rs){ 
+					if ($session_lang->lang_id!=$rs['id']){
+					?>
+						<a href="" href="#" title="<?php echo $rs['title'];?>" onclick="changeLange(<?php echo $rs['id'];?>);" >
+							<img src="<?php echo $this->baseUrl();?>/images/<?php echo $rs['iconImage'];?>" > 
+						</a>
+					<?php }
+						}?>
+					</li>
+					<li class="item"><a href="#"><span class="fa fa-comments-o">&nbsp;</span><span><?php echo $tr->translate("Live Chat");?></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
 	<div class="main-header-store ">
 		<div class="col-md-3">
 			<div class="blog-main-logo">
