@@ -44,6 +44,23 @@ class StoreController extends Zend_Controller_Action
 	    		$page = explode(".", $param['page']);
 	    		if ($page[0]=="allads"){
 	    			 $store_ads = $dbadsstore->getAdsByUserid(null,null,$store['id']);
+	    		}else if ($page[0]=="result"){
+	    			if($this->getRequest()->isPost()){
+	    				$data = $this->getRequest()->getPost();
+	    			}else{
+	    				$data = array(
+	    						'keywork_search'=>'',
+	    						'category_search'=>-1,
+	    						'location_search'=>-1,
+	    				);
+	    			}
+	    			$sess_search=new Zend_Session_Namespace('homesearch');
+	    			$sess_search->keywork_search=empty($data['keywork_search'])?'':$data['keywork_search'];
+	    			$sess_search->category_search=empty($data['category_search'])?'':$data['category_search'];
+	    			$sess_search->location_search=empty($data['location_search'])?'':$data['location_search'];
+	    			$this->view-> search= $data;
+	    			
+	    			$store_ads = $dbadsstore->getAllAdsBySearch($data,$store['id']);
 	    		}else{
 	    			$store_ads = $dbadsstore->getAllAdsByName($page[0],$store['id']);
 	    		}

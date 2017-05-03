@@ -173,7 +173,7 @@ class Application_Model_DbTable_DbClient extends Zend_Db_Table_Abstract
     }
     function uploadProfile($data){
     	$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
-    	$part= PUBLIC_PATH.'/images/';
+    	$part= PUBLIC_PATH.'/images/directory/';
   
     	$session_id="";
     	$name = $_FILES['profile_image']['name'];

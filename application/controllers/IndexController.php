@@ -360,6 +360,9 @@ class IndexController extends Zend_Controller_Action
     		exit();
     	}
     }
+    function testsAction(){
+    	$this->_helper->layout()->disableLayout();
+    }
 }
 
 

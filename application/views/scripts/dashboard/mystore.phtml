@@ -115,7 +115,8 @@
 			<div class="conten-body-center right">
 				<div class="tab-content">
 					<div class="title">
-						<h4><?php echo $tr->translate("My Store");?> <span class="right" ><a href="<?php echo $this->baseUrl()."/dashboard/store?page=add.html";?>" class="button right" title="Post Ads"><i class="fa fa-plus-circle" aria-hidden="true"></i><?php echo $tr->translate("Add More Store");?></a></span></h4>
+						<h4><?php echo $tr->translate("My Store");?> </h4>
+						<span class="right" ><a href="<?php echo $this->baseUrl()."/dashboard/store?page=add.html";?>" class="button right" title="Post Ads"><i class="fa fa-plus-circle" aria-hidden="true"></i><?php echo $tr->translate("Add More Store");?></a></span>
 					</div>
 						<?php if(!empty($this->mystore))foreach($this->mystore as $key =>$rsad){?>
 						<div class="blog-wrapper <?php //if(count($this->myads)==$key+1){echo"last_record";}?>">

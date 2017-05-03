@@ -141,6 +141,7 @@
     </body>
 <?php }else{
 	if ($module=="default"  AND $controller=="store"){
+		echo $this->render('headerstore.phtml');
 		echo $this->render('subtemplateheader1.phtml');
 		echo $this->layout()->content;
 		echo $this->render('subtemplatefooter.phtml');

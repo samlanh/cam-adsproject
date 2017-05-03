@@ -7,7 +7,7 @@ $currentlang = $session_lang->lang_id;
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 	$profile = $this->client_info;
 	if (!empty($profile['photo'])){
-		$image = $profile['photo'];
+		$image = "directory/".$profile['photo'];
 	}else{
 		$image = "profile.jpg";
 	}

@@ -1,0 +1,130 @@
+<?php 
+$db = new Application_Model_DbTable_DbVdGlobal();
+$db_select = new Application_Model_DbTable_DbGlobalselect();
+$lang =$db->getLaguage();
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$menu_items = $db_select->getMenuItems();
+
+$sess_search=new Zend_Session_Namespace('homesearch');
+$keywork_search = $sess_search->keywork_search;
+
+if(empty($sess_search)){
+	$keywork_search= $sess_search->keywork_search='';
+	$category_search = $sess_search->category_search=-1;
+	$location_search = $sess_search->location_search=-1;
+}else{
+	$keywork_search=@$this->search['keywork_search'];
+	$category_search = $this->search['category_search'];
+	$location_search = $this->search['location_search'];
+}
+echo $category_search;
+	$request=Zend_Controller_Front::getInstance()->getRequest()->getParam("cateid");
+	$db = new Application_Model_DbTable_DbGlobalselect();
+	$maincatealia = $db->getCategoryInfo($request);
+	$parent_alia = $maincatealia['parent_alias_category']; 
+	
+	$session_lang=new Zend_Session_Namespace('lang');
+	$currentlang = $session_lang->lang_id;
+	
+	$request=Zend_Controller_Front::getInstance()->getRequest();
+	$param = $request->getParams();
+	if (!empty($param['store'])){
+		$temp = explode(".", $param['store']);
+		$store = $db->getMyStoreByAlias($temp[0]);
+	}else{
+	
+	}
+?>
+<html>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<link rel='stylesheet' id='boostrat-chosen-css'  href='<?php echo $this->baseUrl();?>/template/css/chosen.min.css' type='text/css' media='all' />
+<link rel='stylesheet'  href='<?php echo $this->baseUrl();?>/template/css/headerstore.css' type='text/css' media='all' />
+</head>
+	<div class="main-header-store ">
+		<div class="col-md-3">
+			<div class="blog-main-logo">
+				<a href="<?php echo $this->baseUrl();?>/index"><img src="<?php echo $this->baseUrl();?>/images/logo.png" alt="Logo"></a>
+			</div>
+			</div>
+			<div class="col-md-9">
+				<form id="form_search_header" name="form_search_header" action="" method="post" accept-charset="UTF-8">
+					<div class="controls form"> 
+						<input placeholder="<?php echo $tr->translate("Search your keyword here");?>..." type="text" id="keywork_search" name="keywork_search" value="<?php echo $keywork_search;?>" size="30" maxlength="128" class="form-text">
+					</div>
+					<div class="controls form"> 
+						<select name="category_search" class="form-select filterselect chosen">
+							<option value="-1" selected="selected"><?php echo $tr->translate("Choose Category");?></option>
+							<?php 
+								$db = new Application_Model_DbTable_DbVdGlobal();
+								$rscate = $db->getCategory();
+								if(!empty($rscate)){
+									foreach($rscate as $rsc){
+								?>
+									<option value="<?php echo $rsc['id'];?>"  <?php if($category_search==$rsc['id']){ echo 'selected="selected"'; } ?> ><?php echo $rsc['name'];?></option>
+								<?php }
+								} 
+							?>
+						</select>
+					</div>
+					<div class="controls">
+						<input type="hidden" name="location_search" value='-1'>
+						<div class="views-submit-button">
+							<button class="btn btn-primary form-submit" id="search_all" name="search_all" value="search_all" type="button" ><span><?php echo $tr->translate("Search");?><i class="fa fa-search"></i></span></button>
+						</div>
+					</div>
+					<div class="controls">
+						<div class="views-submit-button">
+							<button class="btn btn-primary form-submit" id="search_instore" name="search_instore" value="search_instore" type="button" ><span><?php echo $tr->translate("Search In Store");?><i class="fa fa-search"></i></span></button>
+						</div>
+					</div>
+				</form>
+			</div>
+	</div>
+	<div style="clear: both;"></div>
+	<div class="border-header"></div>
+	<div style="clear: both;"></div>
+	<script type='text/javascript' src="<?php echo $this->baseurl()."/js/jquery.min.js";?>"></script>
+   	<script type='text/javascript' src='<?php echo $this->baseUrl();?>/template/js/chosen.jquery.mine.js'></script>
+	<script>		
+	jQuery(document).ready(function(){
+		jQuery(".chosen").chosen();
+	});
+		$('#search_all').click(function(){
+			 $('form[name=form_search_header]').get(0).setAttribute('action','<?php echo $this->baseurl()."/listads/result"?>');
+		  $('form[name=form_search_header]').submit();
+		});
+		$('#search_instore').click(function(){
+			 $('form[name=form_search_header]').get(0).setAttribute('action','<?php echo $this->baseurl()."/store/ads?store=".$temp[0]."&page=result.html";?>');
+		  $('form[name=form_search_header]').submit();
+		});
+		var url_changelang = '<?php echo $this->url(array('module'=>'default','controller'=>'index','action'=>'changelange'));?> ';
+		function changeLange(lang){
+			$.ajax({
+				url: url_changelang,
+				type: "post",
+				data:{'lange':lang},
+				success: function(data){
+					location.reload();
+				},
+				error:function(err){
+				}
+			});
+		}
+		<?php if ($currentlang==1){?>
+			var monthNames = [
+			                  "Jan", "Feb", "Mar",
+			                  "Apr", "May", "Jun", "Jul",
+			                  "Aug", "September", "Oct",
+			                  "Nov", "Dec"
+			                ];
+	      <?php }else{?>
+	      var monthNames = [
+		                  "មករា", "កុម្ភៈ", "មិនា",
+		                  "មេសា", "ឧសភា", "មិថុនា", "កក្កដា",
+		                  "សីហា", "កញ្ញា", "តុលា",
+		                  "វិច្ឆិការ", "ធ្នូ"
+		                ];
+	      <?php }?>
+	      var baseurl = '<?php echo $this->baseUrl();?>';
+	</script>

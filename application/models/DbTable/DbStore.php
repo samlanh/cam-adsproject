@@ -270,6 +270,44 @@ class Application_Model_DbTable_DbStore extends Zend_Db_Table_Abstract
 		$order=' ORDER BY id DESC';
 		return $db->fetchAll($sql.$where.$order);
 	}
+	function  getAllAdsBySearch($search,$store_id){
+		$db = $this->getAdapter();
+		
+		$lang_id = $this->getCurrentLang();
+		$province_field = array(
+				"1"=>"province_en_name",
+				"2"=>"province_kh_name"
+		);
+		$province = $province_field[$lang_id];
+		$sql=" SELECT *,
+		(SELECT vc.customer_name FROM `vd_client` vc WHERE vc.id = `user_id` LIMIT 1) AS author,
+		(SELECT title FROM `vd_category_detail` WHERE category_id=vd_ads.category_id AND languageId=$lang_id LIMIT 1) as category_name,
+		(SELECT $province FROM `vd_province` WHERE id=vd_ads.province_id ) as province_name
+		FROM `vd_ads` WHERE store_id=$store_id ";
+		$where='';
+		if(!empty($search['keywork_search'])){
+			$s_where = array();
+			$s_search = addslashes(trim($search['keywork_search']));
+			$s_where[] = " ads_code LIKE '%{$s_search}%'";
+			$s_where[] = " ads_title LIKE '%{$s_search}%'";
+			$s_where[] = " price LIKE '%{$s_search}%'";
+			$where .=' AND ('.implode(' OR ',$s_where).')';
+		}
+		if($search['category_search']>-1){
+			//$category_id = $this->categoryIdByName($search['category_search']);
+			$category_id = $search['category_search'];
+			$parent = $this->checkCateparent($category_id);
+			if ($parent['parent']==0){
+				$where.=" AND (category_id=$category_id OR (SELECT c.`parent` FROM `vd_category` AS c WHERE c.`id` = category_id LIMIT 1)  = $category_id)";
+			}else{
+				$where.=" AND category_id=$category_id ";
+			}
+		}
+		
+		$where.=" AND STATUS =1 AND is_expired=0  ";
+		$order=' ORDER BY id DESC';
+		return $db->fetchAll($sql.$where.$order);
+	}
 	function checkCateparent($id){
 		$db = $this->getAdapter();
 		$sql=" SELECT c.`parent` FROM `vd_category` AS c WHERE c.`id` = $id  limit 1";

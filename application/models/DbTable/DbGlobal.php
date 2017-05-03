@@ -163,8 +163,8 @@ class Application_Model_DbTable_DbGlobal extends Zend_Db_Table_Abstract
 //    	return $session_name;   	
 //    }
    public function getAllProvince(){
-   	$this->_name='ln_province';
-   	$sql = " SELECT province_id,(province_kh_name) province_en_name FROM $this->_name WHERE status=1 AND province_en_name!='' ORDER BY province_id DESC";
+   	$this->_name='vd_province';
+   	$sql = " SELECT id,(province_kh_name) province_en_name FROM $this->_name WHERE status=1 AND province_en_name!='' ORDER BY id DESC";
    	$db = $this->getAdapter();
    	return $db->fetchAll($sql);
    }
