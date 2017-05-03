@@ -99,7 +99,7 @@ body.style-12.loaded {
     margin-right: 10px;
 }
 .controls.form input[type="text"] {
-    background-color: #fff;
+    background-color: transparent;
     border-left: 0px;
     height: 37px;
     padding: 5px 10px;
@@ -113,6 +113,8 @@ body.style-12.loaded {
 }
 .main-header-store {
     padding: 15px;
+	background-image: url(../header.png);
+	height: 100px;
 }
 .blog-main-logo a img {
     margin-bottom: 10px;
@@ -121,3 +123,4 @@ body.style-12.loaded {
 .border-header {
     border: solid 2px #063863;
 }
+    
