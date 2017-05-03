@@ -17,7 +17,6 @@ if(empty($sess_search)){
 	$category_search = $this->search['category_search'];
 	$location_search = $this->search['location_search'];
 }
-echo $category_search;
 	$request=Zend_Controller_Front::getInstance()->getRequest()->getParam("cateid");
 	$db = new Application_Model_DbTable_DbGlobalselect();
 	$maincatealia = $db->getCategoryInfo($request);
