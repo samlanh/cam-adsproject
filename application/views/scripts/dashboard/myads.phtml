@@ -171,7 +171,7 @@
 							<div class="ads-description">
 								<div class="title-ads"><h4><a target="_blank" href="<?php echo $this->url(array('module'=>'default','controller'=>'listads','action'=>'detail','ads'=>$rsad['alias']));?>"><?php echo $rsad['ads_title'];?></a></h4></div>
 								<div class="categories-ads"><h5><a href="#"><?php echo $rsad['category_name']?></a></h5><h5 class="store"><a href="<?php echo $this->baseUrl()."/store/index?store=".$rsad['store_alias'].".html";?>"><?php echo $rsad['store_title']?></a></h5></div>
-								<div class="price"><h5 class="myprice"><?php echo "$ ".$rsad['price']?></h5></div>
+								<div class="price"><h5 class="myprice"><?php echo "$ ".number_format($rsad['price'],2);?></h5></div>
 								<div class="description-ads"><p>
 								<?php
 									$str1 = utf8_encode($rsad['description']);
