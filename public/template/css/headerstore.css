@@ -1,3 +1,17 @@
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+    border: solid 1px #969696;
+	background: #ecf0f1;
+}
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    border: solid 1px #C0C0C0;
+    border-radius: 4px;
+}
 .chosen-container {
 	background: #fff none no-repeat;
 	border-radius: 0px;
