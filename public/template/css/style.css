@@ -1914,6 +1914,10 @@ ul.tabs.store-menu li a {
 ul.tabs.store-menu li.active a {
     color: #4183d7 !important;
 }
+.store_menu ul li.active a {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
 .sub-template {
     text-align: left;
 	padding-left: 0;
